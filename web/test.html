@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <title>빈시트 : pc방 자리찾기</title>
+    <style>
+        #viewSeat td {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+        }
+
+        #seatInfoText{
+            position: relative;
+            text-align: center;
+            padding: 0;
+            margin: 0 0 10px 0;
+            display: block;
+        }
+
+        .fullSeat {
+            border: solid 1px #ff7531;
+        }
+
+        .emptySeat {
+            border: solid 1px #5e64b1;
+        }
+
+        #viewSeat p {
+            padding: 0;
+            margin: 5px;
+        }
+        #viewSeat button {
+            padding: 0;
+            padding: 5px;
+            border: 0;
+            background-color: #5e64b1;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="viewSeat">
+        <p id="seatInfoText">
+            빈시트 : 00 꽉시트 : 00
+        </p>
+        <table>
+            
+        </table>
+    </div>
+
+    <script>
+
+        
+
+        $(function () {
+
+            $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
+            $(".fullSeat").append($("<p>").html("00:00"));
+
+            $(".emptySeat").append($("<p>").html("사용가능").css("color", "#5e64b1"));
+            $(".emptySeat").append($("<button>").html("예약하기"));
+        });
+    </script>
+</body>
+
+</html>

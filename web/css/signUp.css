@@ -1,0 +1,112 @@
+body {
+    font-family: "맑은고딕";
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: none;
+    background: rgb(218, 216, 216);
+}
+
+#userGender {
+    width: 25%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: block;
+    border: none;
+    background: rgb(218, 216, 216);
+}
+
+#birthyear {
+    width: 20%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: none;
+    background: rgb(218, 216, 216);
+}
+
+#pwok{
+    display: none;
+    color: blue;
+    font-weight: bolder;
+}
+
+#pwno{
+    display: none;
+    color: red;
+    font-weight: bolder;
+}
+
+.birthday {
+    width: 20%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: none;
+    background: rgb(218, 216, 216);
+}
+
+/* 입력란 누르면 진해짐 */
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: rgb(94, 100, 177);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+/* 버튼에 마우스 올리면 진해짐 */
+button:hover {
+    opacity: 1;
+}
+
+/* 취소버튼 스타일 */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: tomato;
+}
+
+/* 회원가입 버튼이랑 취소버튼 너비 맞추기 */
+.cancelbtn,
+.signupbtn {
+    float: left;
+    width: 50%;
+    font-size: 20px;
+}
+
+.container {
+    padding: 16px;
+}
+
+hr {
+    border: 2px solid rgb(94, 100, 177);
+    margin-bottom: 25px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

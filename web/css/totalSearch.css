@@ -1,0 +1,75 @@
+/* 검색결과 출력 창 */
+
+#searchResult{
+    position: relative;
+    /* border: solid 2px blue; */
+    margin-left: 150px;
+    width: 760px;
+    height: 3000px;
+}
+
+.result{
+    padding: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    /* border: solid 1px olivedrab; */
+    height: 150px;
+}
+
+.resultImg{
+    width: 150px;
+    float: left;
+    border: solid 1px red;
+}
+
+.resultText{
+    position: relative;
+    float: left;
+    margin-left: 15px;
+    height: 150px;
+    width: 570px;
+}
+
+.resultTitle{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 15px;
+    margin: 0px;
+}
+
+.resultContent{
+    margin: 0;
+    margin-bottom: 10px;
+
+}
+
+.resultTag{
+    position:absolute; 
+    bottom:0px;
+    color: rgb(167, 167, 167);
+    margin: 0;
+    vertical-align: bottom
+}
+
+
+
+/* 사이드 검색순위 */
+#rank{
+    position: relative;
+    float: right;
+    top: 50px;
+    /* left: 1100px; */
+    right: 150px;
+    height: 300px;
+    width: 250px;
+    border: solid 4px green;
+}
+
+/* 검색결과 쉐도우 효과 */
+.resultShadow:hover {
+    box-shadow: 3px 3px 3px rgb(240, 240, 240),
+    -3px -3px 3px rgb(240, 240, 240),
+    3px -3px 3px rgb(240, 240, 240),
+    -3px 3px 3px rgb(240, 240, 240);
+    cursor: pointer;
+}

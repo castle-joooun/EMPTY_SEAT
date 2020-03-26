@@ -1,0 +1,25 @@
+<!-- FAQwrite Style -->
+
+div#FAQwriteDiv{
+	position:absolute;
+	display:inline-block;
+	margin-top:200px;
+	margin-left:500px;
+	width:800px;
+}
+
+#FAQwriteDiv{
+	position:absolute;
+	display:inline-block;
+	margin-top:70px;
+	margin-left:400px;
+	width:800px;
+}
+
+
+
+
+
+#FAQwriteSubmit{
+	margin-left:230px;
+}

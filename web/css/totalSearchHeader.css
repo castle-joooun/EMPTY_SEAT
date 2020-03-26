@@ -1,0 +1,202 @@
+body{
+    width: 1366px;
+    height: auto;
+    margin: 0px;
+}
+
+#mainLogo{
+    position: absolute;
+    left:80px;
+    bottom: 15px;
+    z-index: 3;
+    cursor: pointer;
+}
+#transLogo{
+    position: absolute;
+    left:80px;
+    bottom: 15px;
+    z-index: 1;
+    cursor: pointer;
+}
+.hover:hover{
+    visibility: hidden;
+    cursor: pointer;
+    transform: 2s;
+}
+
+#popMenu{   /*팝메뉴 우측상단 고정*/
+    position: absolute;
+    bottom: 30px;
+    right: 150px;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+/* 입력창 스타일 */
+input[type=text],
+input[type=password] {
+    width: 100%;
+    height: 40px;
+    padding: 8px 16px;
+    margin: 15px 0 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+/* button {
+    background-color: rgb(94, 100, 177);
+    color: white;
+    font-size: 20px;
+    padding: 10px 10px ;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+} */
+
+button:hover {
+    opacity: 0.8;
+}
+
+#login {
+    text-align: center;
+}
+
+/* 취소버튼 스타일 */
+.buttonStyle{
+    width: 150px;
+    height: 40px;
+    background-color: tomato;
+    font-size: 17px;
+    border: none;
+    color: white;
+}
+
+/* 로그인 버튼 스타일 */
+.buttonStyle[type="submit"]{
+    background-color: rgb(94, 100, 177);
+    font-size: 17px;
+    color: white;
+}
+
+/* 회원가입 / 계정찾기 마우스 올리면 밑줄 */
+.link:hover{
+    text-decoration: underline;
+}
+
+a{
+    text-decoration: none;
+    float: left;
+    color: gray;
+}
+
+b{
+    float: left;
+}
+
+#msg{
+    display: inline-block;
+}
+
+
+hr {
+    border: 1px solid rgb(94, 100, 177);
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
+#inputData{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+
+/* 모달창 배경 */
+.modal {
+    /* 숨겨놓기 */
+    display: none;
+    position: fixed;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* 스크롤 자동 */
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달창 콘텐트 스타일 */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    /* 해상도 안맞춰봄 */
+    height: 400px;
+    width: 350px;
+    top: 150px;
+    padding-top: 15px;
+}
+
+
+/* openLogin */
+#openLogin {
+    width: 1366px;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* 메인 메뉴들 이름 바뀌주기 */
+/* #main { 
+    border-bottom: 2px solid #ff7531;
+    margin-bottom: 25px;
+} */
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+
+header{
+    position: relative;
+    height: 65px;
+    padding-bottom: 30px;
+    border-bottom: solid 1px lightsteelblue;
+}
+
+/* 검색하는 창과 버튼 */
+
+#searchBox{
+    position: relative;
+    width: 600px;
+    padding: 10px;
+    left: 35px;
+    top: 10px;
+    width: 600px;
+    /* text-align: center; */
+    border: solid 3px rgb(94, 100, 177);
+    z-index: 5;
+    box-shadow: 5px 5px 10px lightgray;
+    outline: none;
+}
+#searchBox+input[type="submit"] {
+    position: relative;
+    top: 11px;
+    right: 20px;
+    width: 50px;
+    height: 38px;
+    border: 0px;
+    background-color: rgb(94, 100, 177);
+    outline: none;
+    color: #ffffff;
+    z-index: 6;
+    cursor: pointer;
+}
+
+#searchBoxGra {
+    position: relative;
+    left: 260px;
+}
