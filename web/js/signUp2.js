@@ -31,7 +31,6 @@ $(function(){
 	})
 })
 
-
 //비밀번호 확인 
 function pswCheck() {
 	var pw1 = document.getElementById("pw1").value;
@@ -49,7 +48,6 @@ function pswCheck() {
 		}
 	}
 }
-
 //비밀번호 조건
 function pwCondition() {
 	var pw1 = document.getElementById("pw1").value;
@@ -72,7 +70,8 @@ function checkName() {
 	var nameCondition = document.getElementById("nameCondition");
 	var condition = /^[가-힣]{2,}$/;
 	if (condition.test(name)) {
-		nameCondition.innerHTML = "";
+		nameCondition.innerHTML = "유효한 이름입니다."
+			nameCondition.style.color = "blue";
 		return true;
 	} else {
 		nameCondition.innerHTML = "※한글이름 두글자 이상 입력하세요.";
@@ -81,6 +80,7 @@ function checkName() {
 	}
 }
 
+//이메일 유효성
 var flag2;
 $(function(){
 	$("#userEmail").keyup(function(){
@@ -139,10 +139,7 @@ function signUpPass() {
 	var uName = document.getElementById("userName").value;
 	var uEmail = document.getElementById("userEmail").value;
 	var uPhone = document.getElementById("userPhone").value;
-	var uAddress = document.getElementById("sample4_roadAddress").value;
-	var uAddress2 = document.getElementById("sample4_detailAddress").value;
-
-	if (uId != "" && uName != "" && uEmail != "" && uPhone != "" && uAddress != "" && uAddress != ""
+	if (uId != "" && uName != "" && uEmail != "" && uPhone != ""
 		&& flag1 == true && checkName == true && pswCheck == true && pwCondition == true && flag2 == true && phoneCondition == true) {
 		document.getElementById("myForm").submit();
 	} else if (pswCheck == false) {
@@ -151,10 +148,10 @@ function signUpPass() {
 		alert("비밀번호 조건을 확인하세요.");
 	} else if (flag1 == false) {
 		alert("아이디를 확인하세요.");
-	} else if (flag2 == false){
-		alert("이메일을 확인하세요.");
 	} else if (checkName == false) {
 		alert("이름을 확인하세요.")
+	} else if (flag2 == false) {
+		alert("이메일을 확인하세요.");
 	} else if (phoneCondition == false) {
 		alert("전화번호를 확인하세요.");
 	} else if (uId == "") {
@@ -165,14 +162,9 @@ function signUpPass() {
 		alert("이메일을 입력하세요.");
 	} else if (uPhone == "") {
 		alert("전화번호를 입력하세요.");
-	} else if (uAddress == "") {
-		alert("주소를 입력하세요.");
-	} else if (uAddress2 == ""){
-		alert("상세주소를 입력하세요.");
 	}
 }
 
-//이용약관 모달창
 var modal = document.getElementById('terms');
 
 window.onclick = function (event) {
