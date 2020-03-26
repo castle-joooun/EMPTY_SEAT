@@ -35,7 +35,7 @@
                             <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
                             <p id="mycash" class="mainHover"><a href="<%=request.getContextPath()%>/views/cash/mycash">CASH</a></p>
                             <p id="myPage" class="mainHover"><a href="myPage.html">MY PAGE</a></p>
-                            <p id="service" class="mainHover"><a href="service.html">SERVICE</a></p>
+                            <p id="service" class="mainHover"><a href="<%=request.getContextPath()%>/FAQMainSevlet">SERVICE</a></p>
                         </span>
                 </center>
 
