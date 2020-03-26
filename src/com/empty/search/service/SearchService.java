@@ -84,6 +84,13 @@ public class SearchService {
 		return url;
 	}
 	
+	public List[][] favoriteIndex(String userId) {
+		Connection conn = getConnection();
+		List[][] list = dao.favoriteIndex(conn, userId);
+		close(conn);
+		return list;
+	}
+	
 	
 	
 	

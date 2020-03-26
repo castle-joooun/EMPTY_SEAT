@@ -211,6 +211,25 @@ public class SearchDao {
 		
 	}
 	
+	public List favoriteIndex(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List list = new ArrayList();
+		String sql = prop.getProperty("favoriteIndex");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				List list2 = new ArrayList();
+				list2.add(rs.getString("store_id"))
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
 
 

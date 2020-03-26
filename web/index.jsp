@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=1" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
@@ -141,6 +141,8 @@
                 </div> -->
                 <div id="favoriteLine">
                     <div class="favoritePc">
+                    	<img class="favoriteLogo" src="">
+                    	<span class="favoriteName"></span>
                     </div>
                     <div class="favoritePc">
                     </div>
@@ -174,10 +176,34 @@
         </ul>
     </div>
 
-
-
-
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/index.js"></script>
+    
+    <script>
+    // 처음 뜨면 로그인 멤버 검사해서
+    // 로그인 안되있으면 즐겨찾기 화살표 없애기
+    
+    
+		// 즐겨찾기 불러오기
+		<%-- $(function() {
+			$.ajax({
+				url:"<%=request.getContextPath()%>/index/favorite",
+				type:"post",
+				data:{"userId":"<%=loginMember.getUserId()%>"},
+				success:function(data) {
+					for(let i=0; i<data.length; i++) {
+						if(data[i] != null) {
+							console.log("즐겨찾기 값 있음!" + (i+1));
+							$(".favoriteLogo").index(i).attr("src",data[i][0]);
+							$(".favoriteName").index(i).html(data[i][1]);
+						} else {
+							console.log("즐겨찾기 값 없음!");
+							break;
+						}
+					}
+				}
+			})
+		}) --%>
+    </script>
 </body>
 
 </html>
