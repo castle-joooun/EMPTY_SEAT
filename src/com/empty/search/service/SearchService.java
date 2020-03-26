@@ -61,7 +61,7 @@ public class SearchService {
 	
 	public int storeFavoriteDelete(String userId, String storeId) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteInsert(conn, userId, storeId);
+		int result = dao.storeFavoriteDelete(conn, userId, storeId);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -70,7 +70,19 @@ public class SearchService {
 		return result;
 	}
 	
-	
+	public String storeFavoriteCheck(String userId, String storeId) {
+		Connection conn = getConnection();
+		int result = dao.storeFavoriteCheck(conn, userId, storeId);
+		String url = "";
+		if(result>0) {
+			url = "image/favorite-use.png";
+		} else {
+			url = "image/favorite-empty.png";
+		}
+		
+		close(conn);
+		return url;
+	}
 	
 	
 	

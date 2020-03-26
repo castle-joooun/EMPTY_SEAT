@@ -4,11 +4,11 @@ var mainLogo = document.getElementById("mainLogo");
 
 transLogo.addEventListener("mouseover", trans);
 function trans() { //바뀜
-    mainLogo.setAttribute("src", "image/빈시트500-1.png");
+    mainLogo.setAttribute("src", "image/binseat500-1.png");
 }
 transLogo.addEventListener("mouseleave", leave);
 function leave() { //돌아옴
-    mainLogo.setAttribute("src", "image/빈시트500-2.png");
+    mainLogo.setAttribute("src", "image/binseat500-2.png");
 }
 
 // 메인메뉴 클릭 -> 서브메뉴 나타나게
@@ -19,15 +19,23 @@ menubarMain.onclick = function () {
     mainSub.toggle
 }
 
-
-// 모달창 띄우기
-var modal = document.getElementById('id01');
-
-// 모달창 바깥 아무데나 누르면 꺼짐
-window.onclick = function (event) {
+// 모달창 바깥 아무데나 누르면 꺼짐  안됨;
+document.onclick = function (event) {
+	var modal = document.getElementById('openLogin');
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+// 로그인
+function checkMember(){
+	if(document.getElementById("uId").value != "" && document.getElementById("pw").value != ""){
+		document.getElementById("loginData").submit();
+	}else if(document.getElementById("uId").value == ""){
+		alert("아이디를 입력하세요");
+	}else if(document.getElementById("pw").value == ""){
+		alert("비밀번호를 입력하세요");
+	}
 }
 
 

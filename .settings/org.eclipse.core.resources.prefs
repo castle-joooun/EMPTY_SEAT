@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
-encoding//web/noneSearch.jsp=UTF-8
-encoding//web/test3.jsp=UTF-8
+encoding//web/css/base2.css=UTF-8
+encoding//web/css/login.css=UTF-8
+encoding//web/views/search/noneSearch.jsp=UTF-8
+encoding/<project>=UTF-8

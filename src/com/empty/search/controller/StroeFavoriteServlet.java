@@ -38,6 +38,8 @@ public class StroeFavoriteServlet extends HttpServlet {
 		
 		int result = 0;
 
+		System.out.println("check : " + check);
+		
 		if(check.equals("true")) {
 			result = new SearchService().storeFavoriteInsert(userId, storeId);
 		} else if(check.equals("false")){
