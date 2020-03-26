@@ -42,7 +42,7 @@
 		<center>
 			<div id="storeTitleBox">
 				<p id="storeTitle"><%=s.getStoreName()%></p>
-				<img src="image/favorite-empty.png" alt="" id="favorite">
+				<img src="<%=request.getAttribute("url") %>" alt="" id="favorite">
 			</div>
 		</center>
 		<!-- <img > -->

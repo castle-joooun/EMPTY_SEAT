@@ -186,6 +186,31 @@ public class SearchDao {
 		
 		return result;
 	}
+	
+	public int storeFavoriteCheck(Connection conn, String userId, String storeId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("storeFavoriteCheck");
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, storeId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 }
 
 
