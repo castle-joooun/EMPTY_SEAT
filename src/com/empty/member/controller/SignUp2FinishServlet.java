@@ -36,10 +36,10 @@ public class SignUp2FinishServlet extends HttpServlet {
 		String loc = "";
 		
 		if(result > 0) {
-			msg = "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+			msg = "íšŒì›ê°€ìž…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 			loc = "/";
 		}else {
-			msg = "È¸¿ø°¡ÀÔÀ» ½ÇÆÐÇÏ¿´½À´Ï´Ù.";
+			msg = "íšŒì›ê°€ìž…ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 			loc = "/signUp2";
 		}
 		request.setAttribute("msg", msg);

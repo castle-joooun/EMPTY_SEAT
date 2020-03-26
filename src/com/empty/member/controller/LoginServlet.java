@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		String msg = "";
 		
 		if(m != null) {
-			msg = "·Î±×ÀÎ ¼º°ø";
+			msg = "ë¡œê·¸ì¸ ì„±ê³µ";
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
 			Cookie mem = new Cookie("loginMember", userId);
@@ -41,19 +41,16 @@ public class LoginServlet extends HttpServlet {
 			String saveId = request.getParameter("saveId");
 			System.out.println("saveId : " + saveId);
 			if(saveId != null) {
-				// ¾ÆÀÌµğ¸¦ ÄíÅ°¿¡ ÀúÀåÇÏ°ÔÇÔ
 				Cookie c = new Cookie("saveId", userId);
-				//ÄíÅ°ÀÇ À¯È¿±â°£ ¼³Á¤
 				c.setMaxAge(7*24*60*60);
 				response.addCookie(c);
 			}else {
-				// ÀúÀåµÈ cookie°ª Áö¿ì°í checkµÈ°Í ÇØÁ¦
 				Cookie c = new Cookie("saveId", userId);
 				c.setMaxAge(0);
 				response.addCookie(c);
 			}
 		}else {
-			msg = "·Î±×ÀÎ ½ÇÆĞ";
+			msg = "ë¡œê·¸ì¸ ì‹¤íŒ¨";
 		}
 		
 		request.setAttribute("msg", msg);

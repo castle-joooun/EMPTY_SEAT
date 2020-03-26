@@ -33,10 +33,10 @@ public class UpdatePasswordServlet extends HttpServlet {
 		String loc = ""; 
 		
 		if(result > 0) {
-			msg = "��й�ȣ�� ����Ǿ����ϴ�.";
+			msg = "비밀번호가 변경되었습니다.";
 			loc = "/";
 		}else {
-			msg = "��й�ȣ ���濡 �����Ͽ����ϴ�.";
+			msg = "비밀번호 변경에 실패하였습니다.";
 			loc = "/";
 		}
 		request.setAttribute("msg", msg);
