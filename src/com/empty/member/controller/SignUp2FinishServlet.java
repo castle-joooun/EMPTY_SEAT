@@ -33,7 +33,8 @@ public class SignUp2FinishServlet extends HttpServlet {
 		int result = new MemberService().insertOwnerMember(m);
 
 		String msg = ""; 
-		String loc = ""; 
+		String loc = "";
+		
 		if(result > 0) {
 			msg = "회원가입이 완료되었습니다.";
 			loc = "/";

@@ -30,6 +30,7 @@ public class LoginServlet extends HttpServlet {
 		Member m = new MemberService().login(userId, password);
 		System.out.println(m);
 		String msg = "";
+		
 		if(m != null) {
 			msg = "로그인 성공";
 			HttpSession session = request.getSession();

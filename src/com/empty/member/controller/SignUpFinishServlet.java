@@ -35,6 +35,7 @@ public class SignUpFinishServlet extends HttpServlet {
 		System.out.println("ㅋㅋㅋㅋ");
 		String msg = ""; 
 		String loc = ""; 
+		
 		if(result > 0) {
 			msg = "회원가입이 완료되었습니다.";
 			loc = "/";
