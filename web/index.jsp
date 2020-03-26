@@ -104,23 +104,16 @@
                 </div> -->
                 <div id="favoriteLine">
                     <div class="favoritePc">
-                        <br><br>
-                        <a href="http://www.naver.com">1번 pc방</a>
                     </div>
                     <div class="favoritePc">
-                        <br><br>2번 pc방
                     </div>
                     <div class="favoritePc">
-                        <br><br>3번 pc방
                     </div>
                     <div class="favoritePc">
-                        <br><br>4번 pc방
                     </div>
                     <div class="favoritePc">
-                        <br><br>5번 pc방
                     </div>
                     <div class="favoritePc">
-                        <br><br>6번 pc방
                     </div>
                 </div>
             </li>
@@ -134,6 +127,7 @@
                         <img id="moniter" src="image/main-test.png" alt="">
                     </center>
                 </form>
+                
                 
             </li>
             <li class="slideAttr"> <!-- 지역검색 -->

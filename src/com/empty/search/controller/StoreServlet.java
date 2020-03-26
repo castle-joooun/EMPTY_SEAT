@@ -49,12 +49,16 @@ public class StoreServlet extends HttpServlet {
 		StoreSeat ss = new SearchService().storeSeat(id);
 		System.out.println("storeSeat : " + ss);
 		
+		// 즐겨찾기 되어 있는지 확인
+		String favoriteUrl = new SearchService().storeFavoriteCheck(id, store.getStoreId());
+		
 		if (store != null && ss != null) {
 			System.out.println("스토어 " + store);
 			request.setAttribute("store", store);
 			request.setAttribute("imgs", imgs);
 			request.setAttribute("storeSeat", ss);
 			request.setAttribute("searchText", searchText);
+			request.setAttribute("url", favoriteUrl);
 			request.getRequestDispatcher("/store.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/noneSearch.jsp").forward(request, response);
