@@ -5,19 +5,9 @@ body {
 
 }
 
-#checkIdBtn{
-    float:right;
-    left: 360px;
-    cursor: pointer;
-    border-radius: 1 1 1 1 ;
-}
-
-.postNum{
-	border: none;
-    background: rgb(218, 216, 216);
-}
-
-.enrollInput {
+input[type=text],
+input[type=password],
+input[type=email] {
     width: 100%;
     padding: 10px;
     margin: 5px 0 15px 0;
@@ -26,17 +16,9 @@ body {
     background: rgb(218, 216, 216);
 }
 
-#userGender {
-    width: 25%;
-    padding: 10px;
-    margin: 5px 0 15px 0;
-    display: block;
-    border: none;
-    background: rgb(218, 216, 216);
-}
-
 /* 입력란 누르면 진해짐 */
-.enrollInput:focus {
+input[type=text]:focus,
+input[type=password]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -61,10 +43,14 @@ button:hover {
 
 /* 이용약관 버튼 */
 #termsCheck{
-    border: none;
-    background-color: white;
-    color: blue;
+    margin: 0;
     text-decoration: underline;
+    color: blue;
+    border: none;
+    outline: 0;
+    background-color: white;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 /* 취소버튼 스타일 */
