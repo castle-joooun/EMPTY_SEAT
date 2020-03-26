@@ -59,9 +59,9 @@ public class StoreServlet extends HttpServlet {
 			request.setAttribute("storeSeat", ss);
 			request.setAttribute("searchText", searchText);
 			request.setAttribute("url", favoriteUrl);
-			request.getRequestDispatcher("/store.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/search/store.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/noneSearch.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/search/noneSearch.jsp").forward(request, response);
 		}
 
 	}

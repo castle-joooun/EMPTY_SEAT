@@ -48,14 +48,14 @@ public class TotalSearchServlet extends HttpServlet {
 		try {
 			list = new SearchService().totalSearch(searchBox);
 		} catch(NullPointerException e) {
-			request.getRequestDispatcher("/noneSearch.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/search/noneSearch.jsp").forward(request, response);
 		}
 		
 		System.out.println("서블릿 " + list);
 
 		request.setAttribute("list", list);
 		request.setAttribute("searchText", searchBox);
-		request.getRequestDispatcher("/totalSearch.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/search/totalSearch.jsp").forward(request, response);
 	}
 
 	/**
