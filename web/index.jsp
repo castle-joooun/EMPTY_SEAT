@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page
+	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String userId = (String) session.getAttribute("uname");
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			String key = c.getName();
+			String value = c.getValue();
+			if (key.equals("saveId")) {
+				saveId = value;
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +26,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
     <link rel="stylesheet" href="css/index.css" type="text/css">
-    <link rel="stylesheet" href="css/choiceSignUp.css" type="text/css">
-    <link rel="stylesheet" href="css/signUp_terms.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
     <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap" rel="stylesheet">
-    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/base.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
     <script>
         onchange
     </script>
@@ -41,40 +60,58 @@
             </center>
 
             <!-- 팝메뉴 -->
-            <img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu"
-                src="image/pop-test.png" width="30px">
+		<!-- ----------로그인---------- -->
+		
+			
+			<%
+				if(loginMember != null){ 
+			%>
+				<button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button>
+			<%
+				}else{
+			%>
+				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/pop-test.png"
+					width="30px">
+			<%
+				}
+			%>
 
-            <div id="openLogin" class="modal">
-                <center>
-                    <form class="modal-content" action="/action_page.php" method="post">
-                        <div id="login">
-                            <h1>로그인</h1>
-                        </div>
-                        <hr>
-                        <!-- 아이디 / 비번 입력창  -->
-                        <div id="inputData" class="container">
-                            <label for="uname"><b>아이디</b></label>
-                            <input class="input" type="text" placeholder="아이디" name="uname" required>
-                            <label for="psw"><b>비밀번호</b></label>
-                            <input class="input" type="password" placeholder="비밀번호" name="psw" required>
-                        </div>
-
-                        <!-- 로그인 / 취소 버튼 -->
-                        <button type="submit" class="buttonStyle">로그인</button>
-                        <button type="button" class="buttonStyle"
-                            onclick="document.getElementById('openLogin').style.display='none'">
-                            취소
-                        </button>
-                        <!-- 회원가입 / 계정찾기 링크 -->
-                        <div class="container">
-                            <ul>
-                                <li style="list-style: none;"><a class="link" href="signUp.jsp">회원가입</a></li><br>
-                                <li style="list-style: none;"><a class="link" href="#">아이디/비밀번호 찾기</a></li>
-                            </ul>
-                        </div>
-                    </form>
-                </center>
-            </div>
+	</header>
+	<div id="openLogin" class="modal">
+		<center>
+			<div class="modal-content" id="login">
+			    <span onclick="document.getElementById('openLogin').style.display='none'" class="close" title="Close Modal">&times;</span>
+				<h1>로그인</h1>
+				<hr>
+				<!-- 아이디 / 비번 입력창  -->
+				<form id="loginData" action="<%=request.getContextPath()%>/login" method="post">
+					<div id="inputData" class="container">
+						<b>아이디</b><input class="input" type="text" placeholder="아이디" name="uname" id="uId" value="<%=saveId != null ? saveId : ""%>">
+						<b>비밀번호</b><input class="input" type="password" placeholder="비밀번호" name="psw" id="pw">
+					</div>
+					<div class="checkBox">
+						<input type="checkbox" name="saveId" id="saveId" <%=saveId != null ? "Checked" : ""%>>
+						<label for="saveId">아이디저장&nbsp;&nbsp;</label><br>
+					</div>
+				</form>
+			<!-- 로그인 / 취소 버튼 -->
+			<button type="button" class="buttonStyle" id="loginBtn" onclick="checkMember()">로그인</button>
+			<button type="button" class="buttonStyle" onclick="document.getElementById('openLogin').style.display='none'">취소</button>
+			<!-- 회원가입 / 계정찾기 링크 -->
+			<div class="container">
+				<ul>
+					<li style="list-style: none;">
+						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+					</li>
+					<br>
+					<li style="list-style: none;">
+						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+					</div>
+				</ul>
+			</div>
+		</center>
+	</div>
 
             <!-- 미들바 지움!! -->
 
@@ -146,7 +183,7 @@
 
 
 
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/index.js"></script>
 </body>
 
 </html>
