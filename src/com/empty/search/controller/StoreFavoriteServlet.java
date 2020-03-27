@@ -15,13 +15,13 @@ import com.empty.search.service.SearchService;
  * Servlet implementation class StroeFavoriteServlet
  */
 @WebServlet("/favorite")
-public class StroeFavoriteServlet extends HttpServlet {
+public class StoreFavoriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StroeFavoriteServlet() {
+    public StoreFavoriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

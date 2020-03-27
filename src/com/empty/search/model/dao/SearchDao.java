@@ -224,8 +224,9 @@ public class SearchDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				List list2 = new ArrayList();
-				list2.add(rs.getString("store_logo"));
-				list2.add(rs.getString("store_id"));
+				rs.getString("USER_ID");
+				list2.add(rs.getString("STORE_LOGO"));
+				list2.add(rs.getString("STORE_NAME"));
 				list.add(list2);
 			}
 		} catch(SQLException e) {

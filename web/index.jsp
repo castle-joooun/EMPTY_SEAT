@@ -141,8 +141,6 @@
                 </div> -->
                 <div id="favoriteLine">
                     <div class="favoritePc">
-                    	<img class="favoriteLogo" src="">
-                    	<span class="favoriteName"></span>
                     </div>
                     <div class="favoritePc">
                     </div>
@@ -183,30 +181,30 @@
 	    // 처음 뜨면 로그인 멤버 검사해서
 	    // 로그인 안되있으면 즐겨찾기 화살표 없애기
 	    
-	    
 			// 즐겨찾기 불러오기
 			$(function() {
 				
 				console.log("된다");
 				
-				if(<%=loginMember.getUserId()%> != null) {
+				if(<%=loginMember.getUserId()!=null%>) {
 					
 					$.ajax({
 						url:"<%=request.getContextPath()%>/index/favorite",
 						type:"post",
 						data:{"userId":"<%=loginMember.getUserId()%>"},
+						dataType:"json",
 						success:function(data) {
-							console.log("된다잉~");
-		/* 					for(let i=0; i<data.length; i++) {
-								if(data[i] != null) {
+		 					for(let i=0; i<data.length; i++) {
+ 								if(data[i].length != 0) {
 									console.log("즐겨찾기 값 있음!" + (i+1));
-									$(".favoriteLogo").index(i).attr("src",data[i][0]);
-									$(".favoriteName").index(i).html(data[i][1]);
+									const img = $("<img>");
+									img.attr({"class":"favoriteLogo", "src":data[i][0], "alt":data[i][1]});
+									$(".favoritePc").eq(i).append(img);
 								} else {
 									console.log("즐겨찾기 값 없음!");
 									break;
 								}
-							} */
+							}
 						}
 					})
 				}
