@@ -34,6 +34,7 @@ html {
 	position: absolute;
 	float: right;
 	/* position: absolute;
+
     right:200px;*/
 	/* top:-40px; */
 	left: 1100px;
@@ -68,7 +69,6 @@ html {
 	font-size: 15px;
 	display: inline-block;
 	cursor: pointer;
-}
 
 #middle {
 	position: relative;
@@ -99,6 +99,7 @@ html {
 	top: -22px;
 	color: white;
 	width: 400px;
+
 }
 
 #mainSub>span>a {
@@ -158,7 +159,7 @@ html {
 	box-sizing: border-box;
 }
 
-/* 버튼 스타일 */
+/* 踰꾪듉 �뒪���씪 */
 /* button {
     background-color: rgb(94, 100, 177);
     color: white;
@@ -241,7 +242,6 @@ html {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* 모달창 콘텐트 스타일 */
 .modal-content {
 	position: relative;
 	background-color: #fefefe;
@@ -397,6 +397,7 @@ html {
 }
 
 /* --------------------------------------------------------------- */
+
 
 /* 즐겨찾기 */
 #favorite {
