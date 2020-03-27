@@ -39,17 +39,17 @@ public class FAQService {
 		return result;
 	}
 	
-	public FAQ selectFAQ(int no) {
+	public FAQ selectFAQ(int no,boolean hasRead) {
 		Connection conn=getConnection();
-		FAQ f=dao.selectFAQ(conn,no);
-//		if(f!=null) {
-//			int result=dao.updateCount(conn, no);
-//			if(result>0) {
-//				f.setCount(dao.selectFAQ(conn, no).getCount());
-//				commit(conn);
-//			}
-//			else rollback(conn);
-//		}
+		FAQ f=dao.selectFAQ(conn,no,hasRead);
+		if(f!=null&&!hasRead) {
+			int result=dao.updateCount(conn, no);
+			if(result>0) {
+				f.setCount(dao.selectFAQ(conn, no,hasRead).getCount());
+				commit(conn);
+			}
+			else rollback(conn);
+		}
 		close(conn);
 		return f;
 	}

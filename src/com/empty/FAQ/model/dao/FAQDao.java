@@ -87,7 +87,7 @@ private Properties prop=new Properties();
 		}return result;
 	}
 	
-	public FAQ selectFAQ(Connection conn,int no) {
+	public FAQ selectFAQ(Connection conn,int no,boolean hasRead) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("selectFAQ");
@@ -114,7 +114,7 @@ private Properties prop=new Properties();
 	
 	public int updateCount(Connection conn,int no) {
 		PreparedStatement pstmt=null;
-				int result=0;
+		int result=0;
 		String sql=prop.getProperty("updateCount");
 		try {
 			pstmt=conn.prepareStatement(sql);
