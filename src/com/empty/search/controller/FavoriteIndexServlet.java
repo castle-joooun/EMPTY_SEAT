@@ -35,7 +35,7 @@ public class FavoriteIndexServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		
-		 List[][] ftList = new SearchService().favoriteIndex(userId);
+		 List ftList = new SearchService().favoriteIndex(userId);
 		
 		if(ftList != null) {
 			System.out.println(userId + "는 즐겨찾기 있어!");

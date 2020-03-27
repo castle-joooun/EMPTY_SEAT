@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.empty.search.model.vo.Store;
 import com.empty.search.service.SearchService;
 
 /**
@@ -35,15 +36,20 @@ public class StroeFavoriteServlet extends HttpServlet {
 		String check = request.getParameter("check");
 		String userId = request.getParameter("userId");
 		String storeId = request.getParameter("storeId");
+		Store store = new SearchService().store(storeId);
+		
+		System.out.println("storeName은?? : " + store.getStoreName());
 		
 		int result = 0;
+		
+		System.out.println("즐겨찾기 서블릿 userId : " + userId);
 
 		System.out.println("check : " + check);
 		
 		if(check.equals("true")) {
 			result = new SearchService().storeFavoriteInsert(userId, storeId);
 		} else if(check.equals("false")){
-			result = new SearchService().storeFavoriteDelete(userId, storeId);
+			result = new SearchService().storeFavoriteDelete(userId, store.getStoreName());
 		}
 		
 		if(result>0) {

@@ -50,6 +50,8 @@
 						<p class="resultContent"><%=s.getStoreInfo()%></p>
 						<p class="resultTag">
 							<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
+							<input type="hidden" name="storeName" value="<%=s.getStoreName()%>">
+							<input type="hidden" name="userId" value="ooze"> <!-- 유저아이디 수정하기!!!!!!!!!!!!!!!!!11 -->
 							<input type="hidden" name="searchText" value="<%=request.getAttribute("searchText") %>">
 							<%for(String str : tags) {%>
 								#<%=str %> 

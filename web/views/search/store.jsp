@@ -3,7 +3,11 @@
 
 <%@ include file="storeBaseTop.jsp"%>
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
-<%@ page import="com.empty.search.model.vo.StoreSeat"%>
+<%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
+
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+%>
 
 <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356"></script> -->
 
@@ -161,9 +165,12 @@
 	    		}
 	    	}
 	    	
+	    	
 	    	request.open("post", "<%=request.getContextPath()%>/favorite");
 	    	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
-	    	request.send("check=" + check + "&userId=SYSTEM&storeId=<%=s.getStoreId()%>");
+	    	// 여기 userId 고치기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	    	<%-- request.send("check=" + check + "&userId=<%=loginMember.getUserId()%>&storeId=<%=s.getStoreId()%>"); --%>
+	    	request.send("check=" + check + "&userId=ooze&storeId=<%=s.getStoreId()%>");
 
     })
     
