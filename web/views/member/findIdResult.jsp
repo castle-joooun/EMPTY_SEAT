@@ -31,7 +31,7 @@
 			<%}else{ %>
 			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/views/member/signUpChoice.jsp'">회원가입</button>
 			<%} %>
-			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/views/member/main.jsp'">홈으로</button>
+			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>'">홈으로</button>
 		</div>
 	</div>
 </div>

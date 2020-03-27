@@ -59,7 +59,7 @@
 			onclick="location.href='<%=request.getContextPath()%>/views/member/findId.jsp'">아이디
 			찾기</button>
 		<button class="findBtn" type="button"
-			onclick="location.href='<%=request.getContextPath()%>/views/member/main.jsp'">홈으로</button>
+			onclick="location.href='<%=request.getContextPath()%>'">홈으로</button>
 		<%
 			}
 		%>

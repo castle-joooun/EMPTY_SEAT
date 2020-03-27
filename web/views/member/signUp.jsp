@@ -39,7 +39,7 @@
                 <input type="text" class="enrollInput" placeholder="이름" id="userName" name="name" onchange="checkName();">
 
                 <label for="email"><b>*이메일</b><span class="span" id="emailCondition"></span></label>
-                <input type="email" class="enrollInput" placeholder="이메일" id="userEmail" name="email" onchange="emailCondition();">
+                <input type="email" class="enrollInput" placeholder="이메일" id="userEmail" name="email">
 
                 <label for="phone"><b>*전화번호</b><span class="span" id="phoneCondition"></span></label>
                 <input type="text" class="enrollInput" placeholder="'-' 없이 입력해주세요" id="userPhone" name="phone" onchange="phoneCondition();">

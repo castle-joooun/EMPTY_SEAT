@@ -1,8 +1,8 @@
 package com.empty.member.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -30,10 +30,9 @@ public class LoginServlet extends HttpServlet {
 		Member m = new MemberService().login(userId, password);
 		System.out.println(m);
 		String msg = "";
+		HttpSession session = request.getSession();
 		
 		if(m != null) {
-			msg = "로그인 성공";
-			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", m);
 			Cookie mem = new Cookie("loginMember", userId);
 			mem.setMaxAge(7*24*60*60);
@@ -50,7 +49,11 @@ public class LoginServlet extends HttpServlet {
 				response.addCookie(c);
 			}
 		}else {
-			msg = "로그인 실패";
+			msg = URLEncoder.encode("입력하신 정보가 없습니다.", "UTF-8");
+			System.out.println("로그인 실패");
+			Cookie cookies = new Cookie("loginFail", msg);
+			cookies.setMaxAge(60);
+			response.addCookie(cookies);
 		}
 		
 		request.setAttribute("msg", msg);
