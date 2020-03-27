@@ -35,6 +35,7 @@ public class AdminService {
 		return list;
 		
 	}
+	
 	public int memberCount(String type,String keyword) {
 		Connection conn = getConnection();
 		int result = dao.memberCount(conn,type,keyword);

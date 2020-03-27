@@ -1,4 +1,4 @@
-
+//검색타입 설정시 변하는 효과
 function choiceType(){
 	let type  = $("#searchType").val();
 	let username = $("#search-username");
@@ -27,14 +27,15 @@ function choiceType(){
 //	})
 //	$("#searchType").trigger("change");
 //})
+//전체선택, 전체해제에 관한 설정
 $(function(){
     $("#allCheck").click(function(){
         allCheckFunc($(this));
-        console.log("gd1");
+        
     })
     $(".chkone").each(function(){
         $(this).click(function(){
-        	console.log("gd2");
+        	
             oneCheckFunc($(this));
         })
     })
@@ -60,4 +61,27 @@ function oneCheckFunc(obj){
        allObj.prop("checked",false);
    }
 
-}               
+}   
+//관리자-유저페이지 들어오면실행되는것
+$(function(){
+	requestData(1,10);
+})
+$(function(){
+$("#numPerPage").change(function(){
+	var cPage = $("#cPage").val();
+	var numPerPage = $(this).val();
+	requestData(cPage,numPerPage);
+})
+})
+
+//검색타입 설정후 검색했을 때
+
+$(function(){
+	$(".search-btn").click(function(){
+		var key = $(event.target).siblings("[name='searchKeyword']").val();
+		var type = $(event.target).siblings("[name='searchType']").val();
+		var numPerPage = $("#numPerPage").val();
+		searchKeyType(type,key,1,numPerPage);
+		console.log("유형:"+type+" 검색어: "+key);
+	})
+})
