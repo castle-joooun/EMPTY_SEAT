@@ -1,0 +1,23 @@
+#FAQ-section{
+	position: relative;
+	margin-left: 370px;
+	margin-top: 50px;
+	width: 700px;
+}
+
+#FAQ-table tr th,td{
+	border:1px solid lightgray;
+}
+
+#FAQ-table tr th{
+	width:100px;
+}
+
+#FAQ-table tr td{
+	width:500px;
+}
+
+#FAQ-table tr:nth-child(5){
+	height:300px;
+}
+
