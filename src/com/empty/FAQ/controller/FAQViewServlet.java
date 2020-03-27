@@ -33,30 +33,30 @@ public class FAQViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int no=Integer.parseInt(request.getParameter("no"));
-//		Cookie[] cookies=request.getCookies();
-//		String cookieVal="";
-//		boolean hasRead=false;
-//		if(cookies!=null) {
-//			for(Cookie c:cookies) {
-//				String name=c.getName();
-//				String value=c.getValue();
-//				if("FAQCookie".equals(name)) {
-//					cookieVal=value;
-//					if(value.contains("|"+no+"|")) {
-//						hasRead=true;
-//						break;
-//					}
-//				}
-//			}
-//		}
-//		
-//		if(!hasRead) {
-//			Cookie c=new Cookie("FAQCookie",cookieVal+"|"+no+"|");
-//			c.setMaxAge(-1);
-//			response.addCookie(c);
-//		}
+		Cookie[] cookies=request.getCookies();
+		String cookieVal="";
+		boolean hasRead=false;
+		if(cookies!=null) {
+			for(Cookie c:cookies) {
+				String name=c.getName();
+				String value=c.getValue();
+				if("FAQCookie".equals(name)) {
+					cookieVal=value;
+					if(value.contains("|"+no+"|")) {
+						hasRead=true;
+						break;
+					}
+				}
+			}
+		}
 		
-		FAQ f=new FAQService().selectFAQ(no);
+		if(!hasRead) {
+			Cookie c=new Cookie("FAQCookie",cookieVal+"|"+no+"|");
+			c.setMaxAge(-1);
+			response.addCookie(c);
+		}
+		
+		FAQ f=new FAQService().selectFAQ(no,hasRead);
 		request.setAttribute("FAQ", f);
 		
 		

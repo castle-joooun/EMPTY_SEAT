@@ -7,7 +7,7 @@
 
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/FAQmain.css?ver=2" type="text/css" />
+	href="<%=request.getContextPath()%>/css/FAQ/FAQmain.css?ver=2" type="text/css" />
 	
 
 <body>
@@ -59,12 +59,14 @@
 			<%=request.getAttribute("pageBar")%>
 		</div>
 
+		<%if (loginMember!=null&&loginMember.getUserId().equals("admin")) {%>
 		<div id="btnDiv">
-			
-				<input type=button value="글쓰기"
-					onclick="location.replace('<%=request.getContextPath()%>/FAQwrite')" id="writeBtn">
-			
+			<input type=button value="글쓰기"
+				onclick="location.replace('<%=request.getContextPath()%>/FAQwrite')"
+				id="writeBtn">
 		</div>
+		<%} %>
+		
 	</div>
 
 

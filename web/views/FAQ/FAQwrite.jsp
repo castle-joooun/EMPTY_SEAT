@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ include file="/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/FAQwrite.css" type="text/css" >
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/FAQ/FAQwrite.css" type="text/css" >
 
 <body>
 	<div id="FAQwriteDiv">
