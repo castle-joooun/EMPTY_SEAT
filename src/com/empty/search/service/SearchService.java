@@ -59,9 +59,9 @@ public class SearchService {
 		return result;
 	}
 	
-	public int storeFavoriteDelete(String userId, String storeId) {
+	public int storeFavoriteDelete(String userId, String storeName) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteDelete(conn, userId, storeId);
+		int result = dao.storeFavoriteDelete(conn, userId, storeName);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -70,9 +70,9 @@ public class SearchService {
 		return result;
 	}
 	
-	public String storeFavoriteCheck(String userId, String storeId) {
+	public String storeFavoriteCheck(String userId, String storeName) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteCheck(conn, userId, storeId);
+		int result = dao.storeFavoriteCheck(conn, userId, storeName);
 		String url = "";
 		if(result>0) {
 			url = "image/favorite-use.png";
@@ -82,6 +82,20 @@ public class SearchService {
 		
 		close(conn);
 		return url;
+	}
+	
+	public List favoriteIndex(String userId) {
+		Connection conn = getConnection();
+		List list = dao.favoriteIndex(conn, userId);
+		close(conn);
+		return list;
+	}
+	
+	public Store storeName(String storeName) {
+		Connection conn = getConnection();
+		Store store = dao.storeName(conn, storeName);
+		close(conn);
+		return store;
 	}
 	
 	

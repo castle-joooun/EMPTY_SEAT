@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
+<%-- <%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String userId = (String) session.getAttribute("uname");
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			String key = c.getName();
+			String value = c.getValue();
+			if (key.equals("saveId")) {
+				saveId = value;
+			}
+		}
+	}
+%> --%>
 <!DOCTYPE html>
 <html lang="en">
 
