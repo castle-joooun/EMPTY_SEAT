@@ -240,6 +240,39 @@ public class SearchDao {
 		
 	}
 	
+	public Store storeName(Connection conn, String storeName) {
+		PreparedStatement pstmt = null;
+		Store s = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("storeName");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, storeName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo")
+						);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return s;
+	}
+	
 }
 
 

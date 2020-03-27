@@ -409,7 +409,7 @@ html {
 #favoriteLine {
 	position: relative;
 	width: 380px;
-	top: -305px;
+	top: -325px;
 	left: 165px;
 }
 
@@ -420,15 +420,24 @@ html {
 	margin: 5px;
 	display: inline-block;
 	float: left;
-	border: solid 1px red;
 	border-radius: 10px;
 	text-align: center;
+	box-shadow: 3px 3px 7px lightgray;
+	margin-bottom:20px;
 }
 
 .favoriteLogo {
 	position: relative;
 	width: 110px;
 	border-radius: 10px;
+}
+
+.favoriteNone{
+	position:relative;
+	font-size:15px;
+	color: #5e64b1;
+	text-align: center;
+	top:35px;
 }
 
 

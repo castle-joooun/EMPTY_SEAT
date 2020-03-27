@@ -91,6 +91,13 @@ public class SearchService {
 		return list;
 	}
 	
+	public Store storeName(String storeName) {
+		Connection conn = getConnection();
+		Store store = dao.storeName(conn, storeName);
+		close(conn);
+		return store;
+	}
+	
 	
 	
 	
