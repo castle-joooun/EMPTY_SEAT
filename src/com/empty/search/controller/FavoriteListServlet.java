@@ -17,14 +17,14 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class FavoriteIndexServlet
  */
-@WebServlet("/index/favorite")
-public class FavoriteIndexServlet extends HttpServlet {
+@WebServlet("/favorite/favoriteList")
+public class FavoriteListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FavoriteIndexServlet() {
+	public FavoriteListServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,7 +41,7 @@ public class FavoriteIndexServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		System.out.println("즐겨찾기 인덱스 id : " + userId);
 
-		List ftList = new SearchService().favoriteIndex(userId);
+		List ftList = new SearchService().favoriteList(userId);
 		System.out.println("ftList : " + ftList);
 
 		JSONObject jo = new JSONObject();

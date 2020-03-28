@@ -43,6 +43,9 @@ public class StoreServlet extends HttpServlet {
 		System.out.println("storeId : " + storeId);
 		Store store = new SearchService().store(storeId);
 		String searchText = request.getParameter("searchText");
+		
+		// getParameter로 받는거 3개.
+		// storeId, userId, searchText
 	    
 		List<String> imgs = new SearchService().storeImgs(storeId);
 		System.out.println("imgs : " + imgs);
@@ -51,7 +54,7 @@ public class StoreServlet extends HttpServlet {
 		System.out.println("storeSeat : " + ss);
 		
 		// 즐겨찾기 되어 있는지 확인
-		String favoriteUrl = new SearchService().storeFavoriteCheck(userId, store.getStoreName());
+		String favoriteUrl = new SearchService().storeFavoriteCheck(userId, storeId);
 		if(favoriteUrl.equals("image/favorite-use.png")) {
 			System.out.println("해당 스토어에 즐겨찾기 등록되어 있음");			
 		} else {

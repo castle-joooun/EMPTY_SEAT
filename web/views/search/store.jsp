@@ -152,7 +152,24 @@
 	        	check = false;
 	        }
 	
-	    	var request = new XMLHttpRequest();
+	        
+	        $.ajax({
+	        	url:"<%=request.getContextPath()%>/favorite",
+	        	type:"post",
+	        	data:{"check":check, "userId":"ooze", "storeId":"<%=s.getStoreId()%>"},
+	        	success:function(data) {
+	        		console.log(data);
+	        		if(data==6) {
+	        			alert("!즐겨찾기 최대개수(6개) 도달! : 즐겨찾기를 삭제 후 추가해주세요.");
+	        		} else if(data<6) {
+	        			$("#favorite").attr("src","image/favorite-use.png");
+	        		} else {
+	        			$("#favorite").attr("src","image/favorite-empty.png");
+	        		}
+	        	}
+	        })
+	        
+	    	<%-- var request = new XMLHttpRequest();
 	    	request.onreadystatechange = function() {
 	    		if(request.readyState == 4) {
 	    			if(request.status == 200) {
@@ -169,8 +186,8 @@
 	    	request.open("post", "<%=request.getContextPath()%>/favorite");
 	    	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;");
 	    	// 여기 userId 고치기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	    	<%-- request.send("check=" + check + "&userId=<%=loginMember.getUserId()%>&storeId=<%=s.getStoreId()%>"); --%>
-	    	request.send("check=" + check + "&userId=ooze&storeId=<%=s.getStoreId()%>");
+	    	request.send("check=" + check + "&userId=<%=loginMember.getUserId()%>&storeId=<%=s.getStoreId()%>");
+	    	request.send("check=" + check + "&userId=ooze&storeId=<%=s.getStoreId()%>"); --%>
 
     })
     

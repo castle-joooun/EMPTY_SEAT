@@ -38,33 +38,6 @@ $("#searchBoxGra input[type='submit']").click(function() {
     }
 })
 
-
-
-
-
-// 슬라이드 기능
-var slidePosition = 2;
-var slideWidth = 100;
-$("#next").click(function() {
-
-    if(slidePosition < 3) {
-        slidePosition++;
-        slideWidth+=100;
-        $("#slideMove").css("marginLeft",("-" + slideWidth+"%"));
-        $("#pos"+slidePosition).prop('checked', true);
-    }
-    console.log(1);
-})
-$("#back").click(function() {
-    if(slidePosition > 1) {
-        slidePosition--;
-        slideWidth-=100;
-        $("#slideMove").css("marginLeft",("-" + slideWidth+"%"));
-        $("#pos"+slidePosition).prop('checked', true);
-    }
-    console.log(2);
-})
-
 // 시계
 var clockTarget = document.getElementById("clock");
 
@@ -79,4 +52,24 @@ function clock() {
 
 setInterval(clock, 1000);
 
+// 슬라이드 기능
+var slidePosition = 2;
+var slideWidth = 100;
+$("#next").click(function() {
+
+    if(slidePosition < 3) {
+        slidePosition++;
+        slideWidth+=100;
+        $("#slideMove").css("marginLeft",("-" + slideWidth+"%"));
+        $("#pos"+slidePosition).prop('checked', true);
+    }
+})
+$("#back").click(function() {
+    if(slidePosition > 1) {
+        slidePosition--;
+        slideWidth-=100;
+        $("#slideMove").css("marginLeft",("-" + slideWidth+"%"));
+        $("#pos"+slidePosition).prop('checked', true);
+    }
+})	
 

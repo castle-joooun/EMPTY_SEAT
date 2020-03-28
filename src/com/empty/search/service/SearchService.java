@@ -22,7 +22,6 @@ public class SearchService {
 		Connection conn = getConnection();
 		List<Store> list = dao.totalSearch(conn, searchBox);
 		close(conn);
-		System.out.println("서비스" + list);
 		return list;
 	}
 	
@@ -30,7 +29,6 @@ public class SearchService {
 		Connection conn = getConnection();
 		Store s = dao.store(conn, id);
 		close(conn);
-		System.out.println("스토어 : " + s);
 		return s;
 	}
 	
@@ -48,9 +46,9 @@ public class SearchService {
 		return ss;
 	}
 	
-	public int storeFavoriteInsert(String userId, String storeId) {
+	public int storeFavoriteInsert(String userId, String storeLogo, String storeId, String storeName) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteInsert(conn, userId, storeId);
+		int result = dao.storeFavoriteInsert(conn, userId, storeLogo, storeId, storeName);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -59,9 +57,9 @@ public class SearchService {
 		return result;
 	}
 	
-	public int storeFavoriteDelete(String userId, String storeName) {
+	public int storeFavoriteDelete(String userId, String storeId) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteDelete(conn, userId, storeName);
+		int result = dao.storeFavoriteDelete(conn, userId, storeId);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -70,11 +68,13 @@ public class SearchService {
 		return result;
 	}
 	
-	public String storeFavoriteCheck(String userId, String storeName) {
+	public String storeFavoriteCheck(String userId, String storeId) {
 		Connection conn = getConnection();
-		int result = dao.storeFavoriteCheck(conn, userId, storeName);
+		int result = dao.storeFavoriteCheck(conn, userId, storeId);
+		int favoriteSize = dao.favoriteSize(conn, userId);
 		String url = "";
-		if(result>0) {
+		System.out.println(favoriteSize);
+		if(favoriteSize!=6 && result>0) {
 			url = "image/favorite-use.png";
 		} else {
 			url = "image/favorite-empty.png";
@@ -84,20 +84,19 @@ public class SearchService {
 		return url;
 	}
 	
-	public List favoriteIndex(String userId) {
+	public List favoriteList(String userId) {
 		Connection conn = getConnection();
-		List list = dao.favoriteIndex(conn, userId);
+		List list = dao.favoriteList(conn, userId);
 		close(conn);
 		return list;
 	}
-	
-	public Store storeName(String storeName) {
+
+	public int favoriteSize(String userId) {
 		Connection conn = getConnection();
-		Store store = dao.storeName(conn, storeName);
+		int favoriteSize = dao.favoriteSize(conn, userId);
 		close(conn);
-		return store;
+		return favoriteSize;
 	}
-	
 	
 	
 	
