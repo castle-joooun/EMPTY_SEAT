@@ -169,14 +169,16 @@ public class SearchDao {
 		return result;
 	}
 	
-	public int storeFavoriteDelete(Connection conn, String userId, String storeId) {
+	public int storeFavoriteDelete(Connection conn, String userId, String storeName) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("storeFavoriteDelete");
+		System.out.println("즐겨찾기 userID : " + userId);
+		System.out.println("즐겨찾기 storeID : " + storeName);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, storeId);
+			pstmt.setString(2, storeName);
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -187,7 +189,7 @@ public class SearchDao {
 		return result;
 	}
 	
-	public int storeFavoriteCheck(Connection conn, String userId, String storeId) {
+	public int storeFavoriteCheck(Connection conn, String userId, String storeName) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("storeFavoriteCheck");
@@ -195,7 +197,7 @@ public class SearchDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, storeId);
+			pstmt.setString(2, storeName);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = 1;
@@ -209,6 +211,66 @@ public class SearchDao {
 		
 		return result;
 		
+	}
+	
+	public List favoriteIndex(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List list = new ArrayList();
+		String sql = prop.getProperty("favoriteIndex");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				List list2 = new ArrayList();
+				rs.getString("USER_ID");
+				list2.add(rs.getString("STORE_LOGO"));
+				list2.add(rs.getString("STORE_NAME"));
+				list.add(list2);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public Store storeName(Connection conn, String storeName) {
+		PreparedStatement pstmt = null;
+		Store s = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("storeName");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, storeName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo")
+						);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return s;
 	}
 	
 }

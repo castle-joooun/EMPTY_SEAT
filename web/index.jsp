@@ -31,7 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=2" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
@@ -195,18 +195,30 @@
                     추가하기
                 </div> -->
                 <div id="favoriteLine">
-                    <div class="favoritePc">
-                    </div>
-                    <div class="favoritePc">
-                    </div>
-                    <div class="favoritePc">
-                    </div>
-                    <div class="favoritePc">
-                    </div>
-                    <div class="favoritePc">
-                    </div>
-                    <div class="favoritePc">
-                    </div>
+                	<form action="storeName" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
+                	<form action="/storeName" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
+                    <form action="/storeName" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
+                    <form action="/storeName" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
+                    <form action="/storeName" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
+                    <form action="/store" method="post" onclick="submit()">
+	                    <div class="favoritePc">
+	                    </div>
+                    </form>
                 </div>
             </li>
             <li class="slideAttr"> <!-- 메인검색 -->
@@ -229,8 +241,51 @@
         </ul>
     </div>
 
-
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/index.js"></script>
+    
+    <%if(loginMember != null)  {%>
+	    <script>
+	    // 처음 뜨면 로그인 멤버 검사해서
+	    // 로그인 안되있으면 즐겨찾기 화살표 없애기
+	    
+			// 즐겨찾기 불러오기
+			$(function() {
+				
+				console.log("된다");
+				
+				if(<%=loginMember.getUserId()!=null%>) {
+					
+					$.ajax({
+						url:"<%=request.getContextPath()%>/index/favorite",
+						type:"post",
+						data:{"userId":"<%=loginMember.getUserId()%>"},
+						dataType:"json",
+						success:function(data) {
+							let num = 0;
+		 					for(let i=0; i<data.length; i++) {
+ 								if(data[i].length != 0) {
+ 									num++;
+									console.log("즐겨찾기 값 있음!" + (i+1));
+									const img = $("<img>");
+									img.attr({"class":"favoriteLogo", "src":data[i][0], "alt":data[i][1]});
+									$(".favoritePc").eq(i).append(img);
+									
+									$(".favoritePc").eq(i).append($("<input>").attr({"name":"storeName", "type":"hidden"}));
+									$(".favoritePc").eq(i).append($("<input>").attr({"userId":"<%=loginMember.getUserId()%>", "type":"hidden"}));
+								} else {
+									console.log("즐겨찾기 값 없음!");
+									break;
+								}
+							}
+		 					for(let i=num; i<6; i++) {
+		 						$(".favoritePc").eq(i).append($("<span>").attr("class","favoriteNone").html("즐겨찾기를\n추가해주세요."));
+		 					}
+						}
+					})
+				}
+			})
+	    </script>
+	<%} %>
 </body>
 
 </html>
