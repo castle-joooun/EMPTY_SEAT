@@ -16,6 +16,8 @@
 			}
 		}
 	}
+	
+	int slideNum = 0;
 %>
 
 <!DOCTYPE html>
@@ -124,7 +126,7 @@
     style="position: absolute; top: 0px; left: 0px; width: 1366px; height: 768px; z-index: -2; overflow: hidden;">
         <source src="image/main.mp4">
     </video>
-
+    
     <img src="image/back.png" alt="" id="back" width="30px">
     <img src="image/next.png" alt="" id="next" width="30px">
 
@@ -187,7 +189,7 @@
         </ul>
     </div>
 
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/index.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/index.js?ver=1"></script>
     
     <%if(loginMember != null)  {%>
 	    <script>
@@ -242,7 +244,34 @@
 				}
 			})
 	    </script>
+	<%} else { %>
+		<script>
+				// 슬라이드 기능 제한적 이용하게 하기
+				
+				// 강사님한테 물어보기
+				var slideNum = 0;
+				
+				$("#next").click(function() {
+					slideNum = 1;
+					console.log(slideNum);
+				})
+				$("#back").click(function() {
+					slideNum = 0;
+					console.log(slideNum);
+				})
+				
+				$(function() {
+					if(slideNum==0) {
+						$("#back").css("visibility","hidden");
+					} 
+					if(slideNum==1) {
+						$("#back").css("visibility","visible");
+					}
+					
+				})
+		</script>
 	<%} %>
+	
 </body>
 
 </html>

@@ -233,6 +233,28 @@ public class SearchDao {
 		
 	}
 	
+	public int favoriteSize(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("favoriteList");
+		int favoriteSize = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				favoriteSize++;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return favoriteSize;
+	}
+ 	
 }
 
 

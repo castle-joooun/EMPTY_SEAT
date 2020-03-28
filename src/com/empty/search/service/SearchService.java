@@ -71,8 +71,10 @@ public class SearchService {
 	public String storeFavoriteCheck(String userId, String storeId) {
 		Connection conn = getConnection();
 		int result = dao.storeFavoriteCheck(conn, userId, storeId);
+		int favoriteSize = dao.favoriteSize(conn, userId);
 		String url = "";
-		if(result>0) {
+		System.out.println(favoriteSize);
+		if(favoriteSize!=6 && result>0) {
 			url = "image/favorite-use.png";
 		} else {
 			url = "image/favorite-empty.png";
@@ -89,7 +91,12 @@ public class SearchService {
 		return list;
 	}
 
-	
+	public int favoriteSize(String userId) {
+		Connection conn = getConnection();
+		int favoriteSize = dao.favoriteSize(conn, userId);
+		close(conn);
+		return favoriteSize;
+	}
 	
 	
 	

@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.empty.search.model.vo.Store;
 import com.empty.search.service.SearchService;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class StroeFavoriteServlet
@@ -50,19 +53,34 @@ public class StoreFavoriteServlet extends HttpServlet {
 
 		System.out.println("check : " + check);
 		
-		if(check.equals("true")) {
-			result = new SearchService().storeFavoriteInsert(userId, store.getStoreLogo(), storeId, store.getStoreName());
-		} else if(check.equals("false")){
-			result = new SearchService().storeFavoriteDelete(userId, storeId);
-		}
+		// 즐겨찾기 갯수 제한하기
+		int favoriteSize = new SearchService().favoriteSize(userId);
+		System.out.println("즐겨찾기 최대개수 : " + favoriteSize);
 		
-		if(result>0) {
-			System.out.println("즐겨찾기 추가/삭제 성공");
+		if(favoriteSize>=6) {
+			
+			System.out.println("즐겨찾기 최대개수 도달 오류!");
+			
 		} else {
-			System.out.println("즐겨찾기 추가 실패");
+			
+			if(check.equals("true")) {
+				result = new SearchService().storeFavoriteInsert(userId, store.getStoreLogo(), storeId, store.getStoreName());
+			} else if(check.equals("false")){
+				result = new SearchService().storeFavoriteDelete(userId, storeId);
+			}
+			
+			
+			if(result>0) {
+				System.out.println("즐겨찾기 추가/삭제 성공");
+			} else {
+				System.out.println("즐겨찾기 추가 실패");
+			}
 		}
 		
-		request.setAttribute("result", result);
+		JSONObject jo = new JSONObject();
+		jo.put("result", favoriteSize);
+		new Gson().toJson(favoriteSize,response.getWriter());
+		
 		
 		
 	}
