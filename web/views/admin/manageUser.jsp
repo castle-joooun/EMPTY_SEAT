@@ -55,28 +55,28 @@
 					</select>
 					
 					<div class="searchBoxGra" id="search-username">
-						<form action ="<%=request.getContextPath()%>/admin/searchMemberType">
+						<%-- <form action ="<%=request.getContextPath()%>/admin/searchMemberType"> --%>
 							<input type="hidden" name="searchType" value="userName"/>
 							<input class="searchBox" type="text" name="searchKeyword" placeholder="이름 검색하기" > 
-							<input type="submit" value="검색" class="search-btn">
-						</form>
+							<input type="button" value="검색" class="search-btn" onclick="doSearch()">
+						<!-- </form> -->
 					</div>
 					<div class="searchBoxGra" id="search-gender">
-						<form action ="<%=request.getContextPath()%>/admin/searchMemberType">
+						
 							<select name="searchKeyword" class="searchBox">
 								<option value="남">남자</option>
 								<option value="여">여자</option>
 							</select>
 							<input type="hidden" name="searchType" value="gender"/>
-							<input type="submit" value="검색" class="search-btn">
-						</form>
+							<input type="submit" value="검색" class="search-btn" onclick="doSearch()">
+						
 					</div>
 					<div class="searchBoxGra" id="search-phone">
-						<form action ="<%=request.getContextPath()%>/admin/searchMemberType">
+						
 							<input class="searchBox" type="text" name="searchKeyword"placeholder="전화번호 검색하기" > 
 							<input type="hidden" name="searchType" value="phone"/>
-							<input type="submit" value="검색" class="search-btn">
-						</form>
+							<input type="submit" value="검색" class="search-btn" onclick="doSearch()">
+						
 					</div>
 				</div>
 
@@ -149,59 +149,7 @@
 
 
 	<!-- content end -->
-	<script>
-            $(function(){
-            	requestData(1,10);
-		})
-		$(function(){
-			$("#numPerPage").change(function(){
-				var cPage = $("#cPage").val();
-				var numPerPage = $(this).val();
-				requestData(cPage,numPerPage);
-			})
-		})
-		function requestData(cPage,numPerPage){
-            	$.ajax({
-            		url:"<%=request.getContextPath()%>/admin/ajaxPaging",
-				dataType : "json",
-				type : "get",
-				data : {"cPage" :cPage,"numPerPage" :numPerPage},
-				success : function(data) {
-
-					const attach = $("#tbody");
-				
-					for (let i = 0; i < data.length-1; i++) {
-						const tr = $("<tr>");
-						tr.append($("<td>").append($("<input>").attr({name:"dataid",type : "checkbox",class :"chkone",value : data[i]['userid']})));
-						tr.append($("<td>").html(data[i]['userid']).addClass('userid_'));
-						tr.append($("<td>").html(data[i]['username']).addClass('username_'));
-						tr.append($("<td>").html(data[i]['userdiv']).addClass('userdiv_'));
-						tr.append($("<td>").html(data[i]['gender']).addClass('gender_'));
-						tr.append($("<td>").html(data[i]['phone']).addClass('phone_'));
-						tr.append($("<td>").html(data[i]['email']).addClass('email_'));
-						tr.append($("<td>").html(data[i]['address']).addClass('addr_'));
-						tr.append($("<td>").html(data[i]['enrolldate']).addClass('enrolldate_'));
-						i==0?attach.html(tr):attach.append(tr);
-
-					}
-					
-					$(".paging").html(data[data.length-1]['pageBar']);
-					
-					
-				},
-				error : function(request, status, error) {
-					console.log(request, status, error);
-					if (request.status == 404)
-						//$("#content").append(request.status);
-						$("#tbody").append("페이지를 찾을 수 없습니다.");
-				}
-
-			})
-
-            }
-		
-	</script>
-
+	
 
 
 </section>
@@ -209,6 +157,103 @@
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/base.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/adminPage/manageUser.js"></script>
+<script>
+           
+		function requestData(cPage,numPerPage){
+			console.log("기본 페이징처리");
+            	$.ajax({
+            	url:"<%=request.getContextPath()%>/admin/ajaxPaging",
+				dataType : "json",
+				type : "get",
+				data : {"cPage" :cPage,"numPerPage" :numPerPage},
+				success : function(data) {
+					console.log("성공했을때");
+					if(data.length>1){
+						const attach = $("#tbody");
+						
+						for (let i = 0; i < data.length-1; i++) {
+							const tr = $("<tr>");
+							tr.append($("<td>").append($("<input>").attr({name:"dataid",type : "checkbox",class :"chkone",value : data[i]['userid']})));
+							tr.append($("<td>").html(data[i]['userid']).addClass('userid_'));
+							tr.append($("<td>").html(data[i]['username']).addClass('username_'));
+							tr.append($("<td>").html(data[i]['userdiv']).addClass('userdiv_'));
+							tr.append($("<td>").html(data[i]['gender']).addClass('gender_'));
+							tr.append($("<td>").html(data[i]['phone']).addClass('phone_'));
+							tr.append($("<td>").html(data[i]['email']).addClass('email_'));
+							tr.append($("<td>").html(data[i]['address']).addClass('addr_'));
+							tr.append($("<td>").html(data[i]['enrolldate']).addClass('enrolldate_'));
+							i==0?attach.html(tr):attach.append(tr);
+
+						}
+						
+						$(".paging").html(data[data.length-1]['pageBar']);
+						
+					}else{
+						$(".paging").html(data[0]['msg']);
+					}
+					
+					
+				},
+				error : function(request, status, error) {
+					//console.log(request, status, error);
+					if (request.status == 404)
+						//$("#content").append(request.status);
+						console.log("페이지를 찾을 수 없습니다.");
+						$(".paging").append("페이지를 찾을 수 없습니다.");
+				}
+
+			})
+
+            }
+		function searchKeyType (type,key,cPage,numPerPage){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/admin/searchType",
+				dataType : "json",
+				type : "get",
+				data : {"searchType":type,"searchKeyword":key,"cPage" :cPage,"numPerPage" :numPerPage},
+				success : function(data) {
+						const attach = $("#tbody");
+					if(data.length>1){
+						
+						for (let i = 0; i < data.length-1; i++) {
+							const tr = $("<tr>");
+							tr.append($("<td>").append($("<input>").attr({name:"dataid",type : "checkbox",class :"chkone",value : data[i]['userid']})));
+							tr.append($("<td>").html(data[i]['userid']).addClass('userid_'));
+							tr.append($("<td>").html(data[i]['username']).addClass('username_'));
+							tr.append($("<td>").html(data[i]['userdiv']).addClass('userdiv_'));
+							tr.append($("<td>").html(data[i]['gender']).addClass('gender_'));
+							tr.append($("<td>").html(data[i]['phone']).addClass('phone_'));
+							tr.append($("<td>").html(data[i]['email']).addClass('email_'));
+							tr.append($("<td>").html(data[i]['address']).addClass('addr_'));
+							tr.append($("<td>").html(data[i]['enrolldate']).addClass('enrolldate_'));
+							i==0?attach.html(tr):attach.append(tr);
+
+						}
+						
+						$(".paging").html(data[data.length-1]['pageBar']);
+						//$("#numPerPage>option[value="+numPerPage+"]").prop("selected",true);안됨
+						
+					}else{
+						attach.html("");
+						$(".paging").html(data[0]['msg']);
+					}
+				
+					
+					
+				},
+				error : function(request, status, error) {
+						console.log(request, status, error);
+						if (request.status == 404)
+							//$("#content").append(request.status);
+							$("#tbody").append("페이지를 찾을 수 없습니다.");
+				}
+				
+
+			})
+		}
+		
+	</script>
+
 </body>
 
 </html>
