@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css?ver=2" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=3" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
@@ -141,7 +141,7 @@
                     추가하기
                 </div> -->
                 <div id="favoriteLine">
-                	<form action="storeName" method="post" onclick="submit()">
+                	<form action="store" method="post" onclick="submit()">
 	                    <div class="favoritePc">
 	                    </div>
                     </form>
@@ -202,7 +202,7 @@
 				if(<%=loginMember.getUserId()!=null%>) {
 					
 					$.ajax({
-						url:"<%=request.getContextPath()%>/index/favorite",
+						url:"<%=request.getContextPath()%>/favorite/favoriteList",
 						type:"post",
 						data:{"userId":"<%=loginMember.getUserId()%>"},
 						dataType:"json",
@@ -213,11 +213,22 @@
  									num++;
 									console.log("즐겨찾기 값 있음!" + (i+1));
 									const img = $("<img>");
-									img.attr({"class":"favoriteLogo", "src":data[i][0], "alt":data[i][1]});
+									img.attr({"class":"favoriteLogo", "src":data[i][0], "alt":data[i][2]});
 									$(".favoritePc").eq(i).append(img);
 									
-									$(".favoritePc").eq(i).append($("<input>").attr({"name":"storeName", "type":"hidden"}));
-									$(".favoritePc").eq(i).append($("<input>").attr({"userId":"<%=loginMember.getUserId()%>", "type":"hidden"}));
+									// getParameter로 받는거 3개.
+									// storeId, userId, searchText
+									// 만들어줘야함 -> hidden
+									
+									$(".favoritePc").eq(i).append($("<input>").attr({"name":"userId", "type":"hidden", "value":"<%=loginMember.getUserId()%>"}));
+									$(".favoritePc").eq(i).append($("<input>").attr({"name":"storeId", "type":"hidden", "value":data[i][1]}));
+									$(".favoritePc").eq(i).append($("<input>").attr({"name":"searchText", "type":"hidden", "value":data[i][2]}));
+									console.log(data[i][1]);
+									
+									// list2.add(rs.getString("STORE_LOGO")); --> logo 0
+									// list2.add(rs.getString("STORE_ID")); --> storeId 1
+									// list2.add(rs.getString("STORE_NAME")); --> storeName 2
+									
 								} else {
 									console.log("즐겨찾기 값 없음!");
 									break;

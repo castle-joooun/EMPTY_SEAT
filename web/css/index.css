@@ -431,6 +431,7 @@ html {
 	position: relative;
 	width: 110px;
 	border-radius: 10px;
+	cursor: pointer;
 }
 
 .favoriteNone{

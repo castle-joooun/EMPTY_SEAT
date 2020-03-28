@@ -40,16 +40,20 @@ public class StoreFavoriteServlet extends HttpServlet {
 		
 		System.out.println("storeName은?? : " + store.getStoreName());
 		
-		int result = 0;
+		// store_id, store_name, user_id, check(true, false) 다 있음!
 		
-		System.out.println("즐겨찾기 서블릿 userId : " + userId);
+		int result = 0;
+//		
+//		System.out.println("즐겨찾기 서블릿 userId : " + userId);
+//		System.out.println("즐겨찾기 서블릿 storeId : "  + store.getStoreId());
+//		System.out.println("즐겨찾기 서블릿 storeName : " + store.getStoreName());
 
 		System.out.println("check : " + check);
 		
 		if(check.equals("true")) {
-			result = new SearchService().storeFavoriteInsert(userId, storeId);
+			result = new SearchService().storeFavoriteInsert(userId, store.getStoreLogo(), storeId, store.getStoreName());
 		} else if(check.equals("false")){
-			result = new SearchService().storeFavoriteDelete(userId, store.getStoreName());
+			result = new SearchService().storeFavoriteDelete(userId, storeId);
 		}
 		
 		if(result>0) {

@@ -52,8 +52,6 @@ public class SearchDao {
 						rs.getString("store_logo")
 						);
 				
-				System.out.println("스토어 아이디" + rs.getString("store_id"));
-				
 				list.add(s);
 			}
 		} catch(SQLException e) {
@@ -62,7 +60,6 @@ public class SearchDao {
 			close(rs);
 			close(stmt);
 		}
-		System.out.println("다오 " + list);
 		return list;
 	}
 	
@@ -124,7 +121,6 @@ public class SearchDao {
 		StoreSeat ss = null;
 		ResultSet rs = null;
 		String sql = prop.getProperty("storeSeat");
-		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -135,7 +131,6 @@ public class SearchDao {
 				ss.setCol(rs.getInt("store_col"));
 				ss.setRow(rs.getInt("store_row"));
 				ss.setStoreCheck(rs.getString("store_check"));
-				System.out.println("다오에 있니? ");
 			}
 			
 		} catch(SQLException e) {
@@ -148,17 +143,34 @@ public class SearchDao {
 		return ss;
 	}
 	
-	public int storeFavoriteInsert(Connection conn, String userId, String storeId) {
+	public int storeFavoriteInsert(Connection conn, String userId, String storeLogo, String storeId, String storeName) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("storeFavoriteInsert");
-		System.out.println("userID : " + userId);
-		System.out.println("storeID : " + storeId);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, storeLogo);
+			pstmt.setString(3, storeId);
+			pstmt.setString(4, storeName);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int storeFavoriteDelete(Connection conn, String userId, String storeId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("storeFavoriteDelete");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, storeId);
-			pstmt.setString(3, storeId);
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -169,27 +181,7 @@ public class SearchDao {
 		return result;
 	}
 	
-	public int storeFavoriteDelete(Connection conn, String userId, String storeName) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = prop.getProperty("storeFavoriteDelete");
-		System.out.println("즐겨찾기 userID : " + userId);
-		System.out.println("즐겨찾기 storeID : " + storeName);
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			pstmt.setString(2, storeName);
-			result = pstmt.executeUpdate();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-	
-	public int storeFavoriteCheck(Connection conn, String userId, String storeName) {
+	public int storeFavoriteCheck(Connection conn, String userId, String storeId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("storeFavoriteCheck");
@@ -197,7 +189,7 @@ public class SearchDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, storeName);
+			pstmt.setString(2, storeId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = 1;
@@ -213,11 +205,11 @@ public class SearchDao {
 		
 	}
 	
-	public List favoriteIndex(Connection conn, String userId) {
+	public List favoriteList(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List list = new ArrayList();
-		String sql = prop.getProperty("favoriteIndex");
+		String sql = prop.getProperty("favoriteList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -226,6 +218,7 @@ public class SearchDao {
 				List list2 = new ArrayList();
 				rs.getString("USER_ID");
 				list2.add(rs.getString("STORE_LOGO"));
+				list2.add(rs.getString("STORE_ID"));
 				list2.add(rs.getString("STORE_NAME"));
 				list.add(list2);
 			}
@@ -238,39 +231,6 @@ public class SearchDao {
 		
 		return list;
 		
-	}
-	
-	public Store storeName(Connection conn, String storeName) {
-		PreparedStatement pstmt = null;
-		Store s = null;
-		ResultSet rs = null;
-		String sql = prop.getProperty("storeName");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, storeName);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				s = new Store(
-						rs.getString("store_id"),
-						rs.getString("store_name"),
-						rs.getString("store_phone"),
-						rs.getString("store_time"),
-						rs.getString("store_info"),
-						rs.getString("store_facility"),
-						rs.getString("store_address"),
-						rs.getString("store_logo")
-						);
-			}
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return s;
 	}
 	
 }
