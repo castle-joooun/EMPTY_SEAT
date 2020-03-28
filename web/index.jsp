@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page
@@ -6,6 +7,7 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String userId = (String) session.getAttribute("uname");
 	Cookie[] cookies = request.getCookies();
+	String msg = null;
 	String saveId = null;
 	if (cookies != null) {
 		for (Cookie c : cookies) {
@@ -13,6 +15,9 @@
 			String value = c.getValue();
 			if (key.equals("saveId")) {
 				saveId = value;
+			}else if(key.equals("loginFail")){
+				msg = URLDecoder.decode(c.getValue(), "UTF-8");
+				System.out.println(msg);
 			}
 		}
 	}
@@ -52,7 +57,7 @@
                 <!-- 상단고정 메뉴바 -->
                 <div id="menubar">
                     <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
-                    <p id="main"><a href="main.html" style="color: white">MAIN</a></p>
+                    <p id="main"><a href="<%=request.getContextPath() %>" style="color: white">MAIN</a></p>
                     <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
                     <p id="notice" class="mainHover"><a href="notice.html">NOTICE</a></p>
                     <p id="myPage" class="mainHover"><a href="myPage.html">MY PAGE</a></p>
@@ -66,7 +71,7 @@
 			
 			<%
 				if(loginMember != null){ 
-			%>
+			%>	
 				<button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button>
 			<%
 				}else{
@@ -78,6 +83,7 @@
 			%>
 
 	</header>
+	<%if(loginMember == null && msg == null) {%>
 	<div id="openLogin" class="modal">
 		<center>
 			<div class="modal-content" id="login">
@@ -88,7 +94,7 @@
 				<form id="loginData" action="<%=request.getContextPath()%>/login" method="post">
 					<div id="inputData" class="container">
 						<b>아이디</b><input class="input" type="text" placeholder="아이디" name="uname" id="uId" value="<%=saveId != null ? saveId : ""%>">
-						<b>비밀번호</b><input class="input" type="password" placeholder="비밀번호" name="psw" id="pw">
+						<b>비밀번호</b><input class="input" type="password" onkeyup="enterkey();" placeholder="비밀번호" name="psw" id="pw">
 					</div>
 					<div class="checkBox">
 						<input type="checkbox" name="saveId" id="saveId" <%=saveId != null ? "Checked" : ""%>>
@@ -113,6 +119,54 @@
 			</div>
 		</center>
 	</div>
+	<%}else if(loginMember == null && msg != null) {%>
+		<div id="openLogin" class="modal">
+		<center>
+			<div class="modal-content" id="login">
+			    <span onclick="document.getElementById('openLogin').style.display='none'" class="close" title="Close Modal">&times;</span>
+				<h1>로그인</h1>
+				<hr>
+				<!-- 아이디 / 비번 입력창  -->
+				<form id="loginData" action="<%=request.getContextPath()%>/login" method="post">
+					<div id="inputData" class="container">
+						<b>아이디</b><input class="input" type="text" placeholder="아이디" name="uname" id="uId" value="<%=saveId != null ? saveId : ""%>">
+						<b>비밀번호</b><input class="input" type="password" onkeyup="enterkey();" placeholder="비밀번호" name="psw" id="pw">
+					</div>
+					<div class="checkBox">
+						<input type="checkbox" name="saveId" id="saveId" <%=saveId != null ? "Checked" : ""%>>
+						<label for="saveId">아이디저장&nbsp;&nbsp;</label><span style="color:red"><%=msg %></span><br>
+					</div>
+				</form>
+			<!-- 로그인 / 취소 버튼 -->
+			<button type="button" class="buttonStyle" id="loginBtn" onclick="checkMember()">로그인</button>
+			<button type="button" class="buttonStyle" onclick="document.getElementById('openLogin').style.display='none'">취소</button>
+			<!-- 회원가입 / 계정찾기 링크 -->
+			<div class="container">
+				<ul>
+					<li style="list-style: none;">
+						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+					</li>
+					<br>
+					<li style="list-style: none;">
+						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+					</div>
+				</ul>
+			</div>
+		</center>
+	</div>
+	<script>
+		$(function(){
+			var v = document.getElementById('openLogin');
+			v.style.display = "block";
+		})
+	</script>
+	<%
+		Cookie ck = new Cookie("loginFail", null);
+		ck.setMaxAge(0);
+		response.addCookie(ck);
+	%>
+	<%} %>
 
             <!-- 미들바 지움!! -->
 

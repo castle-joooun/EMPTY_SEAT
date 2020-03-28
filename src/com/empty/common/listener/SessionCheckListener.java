@@ -26,12 +26,10 @@ public class SessionCheckListener implements HttpSessionListener, HttpSessionAtt
     }
 
     public void attributeAdded(HttpSessionBindingEvent arg0)  { 
-    	System.out.println("사용자 로그인");
     	sessionCount++;
     }
 
     public void attributeRemoved(HttpSessionBindingEvent arg0)  { 
-    	System.out.println("사용자 로그아웃");
     	sessionCount--;
     }
 

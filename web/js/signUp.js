@@ -129,6 +129,53 @@ function phoneCondition() {
 	}
 }
 
+function enterkeyup(){
+	var pswCheck = this.pswCheck();
+	var pwCondition = this.pwCondition();
+	var checkName = this.checkName();
+	var phoneCondition = this.phoneCondition();
+	var uId = document.getElementById("userId").value;
+	var uName = document.getElementById("userName").value;
+	var uEmail = document.getElementById("userEmail").value;
+	var uPhone = document.getElementById("userPhone").value;
+	var uAddress = document.getElementById("sample4_roadAddress").value;
+	var uAddress2 = document.getElementById("sample4_detailAddress").value;
+	var gender = document.getElementById("userGender").value;
+
+	if(window.event.keyCode == 13){
+		if (uId != "" && uName != "" && uEmail != "" && uPhone != "" && uAddress != "" && uAddress != "" && gender != ""
+			&& flag1 == true && checkName == true && pswCheck == true && pwCondition == true && flag2 == true && phoneCondition == true) {
+			document.getElementById("myForm").submit();
+		} else if (pswCheck == false) {
+			alert("비밀번호와 비밀번호 확인이 서로 다릅니다.");
+		} else if (pwCondition == false) {
+			alert("비밀번호 조건을 확인하세요.");
+		} else if (flag1 == false) {
+			alert("아이디를 확인하세요.");
+		} else if (flag2 == false){
+			alert("이메일을 확인하세요.");
+		} else if (checkName == false) {
+			alert("이름을 확인하세요.")
+		} else if (phoneCondition == false) {
+			alert("전화번호를 확인하세요.");
+		} else if (uId == "") {
+			alert("아이디를 입력하세요.");
+		} else if (uName == "") {
+			alert("이름을 입력하세요.");
+		} else if (uEmail == "") {
+			alert("이메일을 입력하세요.");
+		} else if (uPhone == "") {
+			alert("전화번호를 입력하세요.");
+		} else if (uAddress == "") {
+			alert("주소를 입력하세요.");
+		} else if (uAddress2 == ""){
+			alert("상세주소를 입력하세요.");
+		} else if(gender == "성별"){
+			alert("성별을 입력하세요.");
+		}
+	}
+}
+
 //회원가입조건 만족시 다음 / 아니면 얼럿
 function signUpPass() {
 	var pswCheck = this.pswCheck();
@@ -141,8 +188,9 @@ function signUpPass() {
 	var uPhone = document.getElementById("userPhone").value;
 	var uAddress = document.getElementById("sample4_roadAddress").value;
 	var uAddress2 = document.getElementById("sample4_detailAddress").value;
+	var gender = document.getElementById("userGender").value;
 
-	if (uId != "" && uName != "" && uEmail != "" && uPhone != "" && uAddress != "" && uAddress != ""
+	if (uId != "" && uName != "" && uEmail != "" && uPhone != "" && uAddress != "" && uAddress != "" && gender != "성별" 
 		&& flag1 == true && checkName == true && pswCheck == true && pwCondition == true && flag2 == true && phoneCondition == true) {
 		document.getElementById("myForm").submit();
 	} else if (pswCheck == false) {
@@ -169,8 +217,11 @@ function signUpPass() {
 		alert("주소를 입력하세요.");
 	} else if (uAddress2 == ""){
 		alert("상세주소를 입력하세요.");
+	} else if(gender == "성별"){
+		alert("성별을 입력하세요.");
 	}
 }
+
 
 //이용약관 모달창
 var modal = document.getElementById('terms');

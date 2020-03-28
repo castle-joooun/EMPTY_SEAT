@@ -27,7 +27,7 @@
                 <label for="id">
                     <b>*아이디</b><span class="span" id="idCondition"></span>
                 </label>
-                <input type="text" placeholder="한글 제외 5자 이상 15자 이내" id="userId" name="id" onchange="idCheck();">
+                <input type="text" placeholder="한글 제외 5자 이상 15자 이내" id="userId" name="id">
 
                 <label for="psw"><b>*비밀번호</b><span class="span" id="pwCondition"></span></label>
                 <input type="password" placeholder="영어와 숫자, 특수문자(!@#$%^&*)만 사용 가능합니다" id="pw1" name="psw"
@@ -40,10 +40,10 @@
                 <input type="text" placeholder="이름" id="userName" name="name" onchange="checkName();">
 
                 <label for="email"><b>*이메일</b><span class="span" id="emailCondition"></span></label>
-                <input type="email" placeholder="이메일" id="userEmail" name="email" onchange="emailCondition();">
+                <input type="email" placeholder="이메일" id="userEmail" name="email">
 
                 <label for="phone"><b>*전화번호</b><span class="span" id="phoneCondition"></span></label>
-                <input type="text" placeholder="'-' 없이 입력해주세요" id="userPhone" name="phone" onchange="phoneCondition();">
+                <input type="text" placeholder="'-' 없이 입력해주세요" id="userPhone" name="phone" onkeyup="enterkeyup();" onchange="phoneCondition();">
 
 
                 <p>계정 생성 시 이용약관에 동의하는 것으로 간주됩니다.<button type="button" id="termsCheck"
