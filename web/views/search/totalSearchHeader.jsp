@@ -29,7 +29,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/totalSearch.css" type="text/css">
+<link rel="stylesheet" href="css/totalSearch.css?ver=1" type="text/css">
 
 <script src="js/jquery-3.4.1.min.js"></script>
 <script>

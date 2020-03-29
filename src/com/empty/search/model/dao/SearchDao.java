@@ -10,8 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
@@ -255,6 +261,34 @@ public class SearchDao {
 		return favoriteSize;
 	}
  	
+//	public List crawl() {
+//		
+//		List list = new ArrayList();
+//		
+//		String url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=게임검색";
+//		Document doc = null;
+//		
+//		try {
+//			doc = Jsoup.connect(url).get();
+//			
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		// 가져올 태그를 가져온다
+//		Elements element = doc.select("ol.realtime_srch");
+//		
+//		Iterator<Element> ie1 = element.select("em.num").iterator();
+//		Iterator<Element> ie2 = element.select("span.tit").iterator();
+//		
+//		while(ie1.hasNext()) {
+//			list.add(ie1.next().text() + "\t" + ie2.next().text());
+//			System.out.println(list.add(ie1.next().text() + "\t" + ie2.next().text()));
+//		}
+//		
+//		return list;
+//	}
+	
 }
 
 
