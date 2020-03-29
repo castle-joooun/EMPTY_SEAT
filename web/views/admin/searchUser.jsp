@@ -7,7 +7,9 @@
 	List<Member> list = (List) request.getAttribute("list");
 	int cPage =request.getParameter("cPage")==null?1:Integer.parseInt(request.getParameter("cPage"));
 	int numPerPage = request.getParameter("numPerPage")==null?10:Integer.parseInt(request.getParameter("numPerPage")); 
-	
+	String searchType = request.getParameter("searchType");
+	String keyword = request.getParameter("searchKeyword");
+	System.out.println(keyword);
 %>
 
 
@@ -15,7 +17,17 @@
 
 <section>
 
-
+	<!-- 관리자 서브메뉴 -->
+	<!-- <div id="adminSubMenu">
+               <ul>
+                   <li><a href="#"><span class="text-item">Connect Us</span></a></li>
+                   <li><a href="#"><span class="text-item">회사소개</span></a></li>
+                   <li><a href="#"><span class="text-item">자주묻는 질문</span></a></li>
+                   <li><a href="#"><span class="text-item">Q&A</span></a></li>
+                   <li><a href="#"><span class="text-item">1:1 문의</span></a></li>
+               </ul>
+                          
+            </div> -->
 	<div class="list_btn_area">
 		
 		
@@ -38,44 +50,45 @@
 				<div class="selectSearchType">
 					<select id="searchType" onchange="choiceType()">
 
-						<option value="username">이름 검색</option>
-						<option value="gender">성별 검색</option>
-						<option value="phone">전화번호 검색</option>
+						<option value="username" <%=searchType.equals("username")?"selected":""%>)>이름 검색</option>
+						<option value="gender" <%=searchType.equals("gender")?"selected":"" %>>성별 검색</option>
+						<option value="phone" <%=searchType.equals("phone")?"selected":"" %>>전화번호 검색</option>
 
 					</select>
 					
 					<div class="searchBoxGra" id="search-username">
-						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
+						
+							<input class="searchBox" type="text" name="searchKeyword" placeholder="이름 검색하기" value="<%=searchType.equals("username")?keyword:""%>"> 
 							<input type="hidden" name="searchType" value="username"/>
-							<input class="searchBox" type="text" name="searchKeyword" placeholder="이름 검색하기" > 
-							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
-						</form>
+							<input type="button" value="검색" class="search-btn" onclick="searchAjax()">
+						
 					</div>
 					<div class="searchBoxGra" id="search-gender">
-						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
+						
 							<select name="searchKeyword" class="searchBox" >
-								<option value="남">남자</option>
-								<option value="여">여자</option>
+								<option  value="남" <%=searchType.equals("gender")&&keyword.equals("남")?"selected":""%>>남자</option>
+								<option value="여" <%=searchType.equals("gender")&&keyword.equals("여")?"selected":""%>>여자</option>
 							</select>
 							<input type="hidden" name="searchType" value="gender"/>
-							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
-						</form>
+							<input type="submit" value="검색" class="search-btn" onclick="searchAjax()">
+						
 					</div>
 					<div class="searchBoxGra" id="search-phone">
-						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
-							<input class="searchBox" type="text" name="searchKeyword"placeholder="전화번호 검색하기" > 
+						
+							<input class="searchBox" type="text" name="searchKeyword"placeholder="전화번호 검색하기"  value="<%=searchType.equals("phone")?keyword:""%>"> 
 							<input type="hidden" name="searchType" value="phone"/>
-							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
-						</form>
+							<input type="submit" value="검색" class="search-btn" onclick="searchAjax()">
+						
 					</div>
 				</div>
 
 			</div>
-			
+			<!-- <div class="suggest"> -->
+			<!-- <input type="text" value="" name="" size="22" autocomplete="off" class="inputText"/><button type="submit" class="searchBtn">검색하기</button> -->
 			<div>
 				<form>
 					<input type="hidden" name="cPage" value="<%=cPage%>" id="cPage">
-					<select name="numPerPage" id="numPerPage">
+					<select name="numPerPage" id="numPerPageSearch">
 						<option value="10" <%=numPerPage==10?"selected":"" %>>목록 10개</option>
 						<option value="20"<%=numPerPage==20?"selected":"" %>>목록 20개</option>
 						<option value="30"<%=numPerPage==30?"selected":"" %>>목록 30개</option>
@@ -147,21 +160,23 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/base.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/adminPage/manageUser.js"></script>
 <script>
-		//관리자-유저페이지 들어오면실행되는것
-		$(function(){
-			requestData(1,10);
-		})
-		function requestData(cPage,numPerPage){
-			console.log("기본 페이징처리");
-            	$.ajax({
-            	url:"<%=request.getContextPath()%>/admin/store/ajaxPaging",
+           
+        $(function(){
+        	choiceType();//검색창 유지하기 
+         	searchKeyType('<%=searchType%>','<%=keyword%>',1,10);
+        	console.log("검색창유지,ajax보내기");
+        })
+		
+
+		function searchKeyType (type,key,cPage,numPerPage){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/admin/searchTypeAjax",
 				dataType : "json",
 				type : "get",
-				data : {"cPage" :cPage,"numPerPage" :numPerPage},
+				data : {"searchType":type,"searchKeyword":key,"cPage" :cPage,"numPerPage" :numPerPage},
 				success : function(data) {
-					console.log("성공했을때");
-					if(data.length>1){
 						const attach = $("#tbody");
+					if(data.length>1){
 						
 						for (let i = 0; i < data.length-1; i++) {
 							const tr = $("<tr>");
@@ -179,25 +194,26 @@
 						}
 						
 						$(".paging").html(data[data.length-1]['pageBar']);
+						//$("#numPerPage>option[value="+numPerPage+"]").prop("selected",true);안됨
 						
 					}else{
+						attach.html("");
 						$(".paging").html(data[0]['msg']);
 					}
+				
 					
 					
 				},
 				error : function(request, status, error) {
-					//console.log(request, status, error);
-					if (request.status == 404)
-						//$("#content").append(request.status);
-						console.log("페이지를 찾을 수 없습니다.");
-						$(".paging").html("페이지를 찾을 수 없습니다.");
+						//console.log(request, status, error);
+						if (request.status == 404)
+							//$("#content").append(request.status);
+							$(".paging").html("페이지를 찾을 수 없습니다.");
 				}
+				
 
 			})
-
-            }
-	
+		}
 		
 	</script>
 

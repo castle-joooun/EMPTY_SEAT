@@ -2,6 +2,8 @@ package com.empty.admin.model.service;
 
 import static com.empty.common.JDBCTemplate.close;
 import static com.empty.common.JDBCTemplate.getConnection;
+import static com.empty.common.JDBCTemplate.commit;
+import static com.empty.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -41,6 +43,28 @@ public class AdminService {
 		int result = dao.memberCount(conn,type,keyword);
 		close(conn);
 		return result;
+	}
+	public List selectRequestStore(int cPage,int numPerPage) {
+		Connection conn = getConnection();
+		List <Member> list = dao.selectRequestStore(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+		
+	}
+	public int requestStoreCount() {
+		Connection conn = getConnection();
+		int result = dao.requestStoreCount(conn);
+		close(conn);
+		return result;
+	}
+	public int updateAppr(String userId) {
+		Connection conn = getConnection();
+		int result = dao.updateAppr(conn,userId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
 	}
 	
 	
