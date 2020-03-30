@@ -1,4 +1,4 @@
-package com.semi.cash.controller;
+package com.empty.cash.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
-import com.semi.model.service.VinService;
-import com.semi.model.vo.VinUser;
+import com.empty.cash.model.service.VinService;
+import com.empty.member.model.vo.Member;
 
 /**
  * Servlet implementation class Test111111111
@@ -33,10 +33,11 @@ public class ChargeMoneyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		VinUser v = new VinUser();
-		v = new VinService().selectUser(v);
+		Member m = new Member();
+		m = new VinService().selectUser(m);
 		int money = Integer.parseInt(request.getParameter("key"));
-		int result = new VinService().insertCash(money, v);
+		new VinService().payCharge(m, money);
+		int result = new VinService().insertCash(money, m);
 		System.out.println("");
 		
 	}
