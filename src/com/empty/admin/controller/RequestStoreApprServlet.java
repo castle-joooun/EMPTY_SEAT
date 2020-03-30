@@ -37,6 +37,10 @@ public class RequestStoreApprServlet extends HttpServlet {
 		}else {
 			System.out.println("등록 실패");
 		}
+		request.setAttribute("msg", userId+" 유저의 스토어 승인이 완료되었습니다.");
+		request.setAttribute("loc", "/admin/store/requestStoreList");
+		request.setAttribute("locstr", "목록으로");
+		request.getRequestDispatcher("/views/admincommon/msg.jsp").forward(request, response);
 		
 	}
 

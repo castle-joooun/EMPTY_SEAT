@@ -170,7 +170,7 @@
 
 		function searchKeyType (type,key,cPage,numPerPage){
 			$.ajax({
-				url:"<%=request.getContextPath()%>/admin/searchTypeAjax",
+				url:"<%=request.getContextPath()%>/admin/user/searchTypeAjax",
 				dataType : "json",
 				type : "get",
 				data : {"searchType":type,"searchKeyword":key,"cPage" :cPage,"numPerPage" :numPerPage},

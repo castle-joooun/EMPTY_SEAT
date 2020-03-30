@@ -154,7 +154,7 @@
 		function requestData(cPage,numPerPage){
 			console.log("기본 페이징처리");
             	$.ajax({
-            	url:"<%=request.getContextPath()%>/admin/store/ajaxPaging",
+            	url:"<%=request.getContextPath()%>/admin/user/ajaxPaging",
 				dataType : "json",
 				type : "get",
 				data : {"cPage" :cPage,"numPerPage" :numPerPage},
