@@ -4,27 +4,37 @@
 
 <div class="alldiv clearl">
 		<div class="cashTop">
-            <p class="myname"></p>
-            <p class="mycash">My bin Cash :</p> 
+            <p class="myname">이진혁 님의</p>
+            <p class="mycash">My bin Cash : </p>
+            <p class="mywon">1000000원</p> 
         </div>
        		 
        	<form method="post" class="whatcharge"> 
-		   	 <h3>충전하기</h3>
-		     <p>충전금액</p>
-			     <select name="thisismoney" id="thisismoney">
-			         <option value="1000" class="thisismoney">1000원</option>
-			         <option value="3000" class="thisismoney">3000원</option>
-			         <option value="5000" class="thisismoney">5000원</option>
-			         <option value="10000" class="thisismoney">10000원</option>
-			         <option value="50000" class="thisismoney">50000원</option>
-			         
-			     </select>
-		     <h3>충전 수단</h3>
-		     
-		     <p>핸드폰결제</p><input type="radio" value="phone" name="pay">
-		     <p>계좌이체</p><input type="radio" value="trans" name="pay">
-		     <p>카드결제</p><input type="radio" value="card" name="pay">
-		     <p>가상계좌</p><input type="radio" value="vbank" name="pay">
+		   	 <h2>충전하기</h2>
+		   	 <div class="moneybox">
+			     <p class="chargingmoney">충전금액</p>
+				     <select name="thisismoney" id="thisismoney">
+				         <option value="1000" class="thisismoney">1000원</option>
+				         <option value="3000" class="thisismoney">3000원</option>
+				         <option value="5000" class="thisismoney">5000원</option>
+				         <option value="10000" class="thisismoney">10000원</option>
+				         <option value="50000" class="thisismoney">50000원</option>
+				     </select>
+			 </div>
+		     <h2>충전 수단</h2>
+			     <label>
+			     	<p class="paytag">핸드폰결제</p><input type="radio" value="phone" name="pay" class="pay">
+			     </label>
+			     <label>
+			     	<p class="paytag">계좌이체</p><input type="radio" value="trans" name="pay" class="pay">
+			     </label>
+			     <label>
+			 	 	<p class="paytag">카드결제</p><input type="radio" value="card" name="pay" class="pay">
+			     </label>
+			     <label>
+			   	 	<p class="paytag">가상계좌</p><input type="radio" value="vbank" name="pay" class="pay">
+			     </label>
+			     
 		     <img width="480px" src="https://t1.daumcdn.net/cfile/tistory/2132884156B056EE15" alt="" class="robot">
 		     <input type="button" class="gomoney" value="충전하기">
     </form> 
