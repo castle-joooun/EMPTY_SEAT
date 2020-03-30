@@ -61,7 +61,7 @@
 					<a href="notice.html">NOTICE</a>
 				</p>
 				<p id="myPage" class="mainHover">
-					<a href="myPage.html">MY PAGE</a>
+					<a href="<%=request.getContextPath()%>/views/mypage/mypage.jsp">MY PAGE</a>
 				</p>
 				<p id="service" class="mainHover">
 					<a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a>

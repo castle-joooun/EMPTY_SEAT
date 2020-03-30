@@ -71,7 +71,9 @@ $(".gomoney").click(function () {
 	$.ajax({
 		type:"post",
 		url:"<%=request.getContextPath()%>/test.do",
-		data:{"key":rsp.paid_amount},
+		data:{"key1":rsp.paid_amount,
+			  "key2":pay	
+		},
 		dataType:"json",
 		success:function(data){
 		}

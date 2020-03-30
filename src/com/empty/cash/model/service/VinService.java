@@ -28,8 +28,12 @@ public class VinService {
 		close(conn);
 		return m;
 	}
-	public int payCharge(Member m, int money) {
+	public int payCharge(Member m, int money, String sudan) {
 		Connection conn=getConnection();
-		int result = vd.payCharge(conn, m, money);
+		int result = vd.payCharge(conn, m, money, sudan);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }
