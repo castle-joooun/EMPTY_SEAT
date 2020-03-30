@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트 : pc방 자리찾기</title>
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/adminPage/base.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/adminPage/admin.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap" rel="stylesheet">
-    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js"></script>
     <script>
         onchange
     </script>
@@ -29,11 +29,11 @@
             <!-- 상단고정 메뉴바 -->
             <span id="menubar">
                 <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
-                <p id="main"><a href="main.html" style="color: #ff7531">MAIN</a></p>
-                <p id="introduce" class="mainHover"><a href="<%=request.getContextPath()%>/admin/manageUser">USER</a></p>
-                <p id="notice" class="mainHover"><a href="notice.html">STORE</a></p>
-                <p id="service" class="mainHover"><a href="service.html">NOTICE</a></p>
-                <p id="myPage" class="mainHover"><a href="myPage.html">COMMUNICATION</a></p>
+                <p id="main" class="mainHover"><a href="<%=request.getContextPath() %>/admin" style="color: #ff7531">MAIN</a></p>
+                <p id="userPage" class="mainHover"><a href="<%=request.getContextPath()%>/admin/manageUser">USER</a></p>
+                <p id="storePage" class="mainHover"><a href="<%=request.getContextPath()%>/admin/manageStore">STORE</a></p>
+                <p id="noticePage" class="mainHover"><a href="service.html">NOTICE</a></p>
+                <p id="" class="mainHover"><a href="myPage.html">COMMUNICATION</a></p>
              
             </span>
         </center>
@@ -82,4 +82,3 @@
             세상의 모든 자리 찾기
         </p>
     </nav>
-</header>

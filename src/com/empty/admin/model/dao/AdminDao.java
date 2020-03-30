@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.empty.member.model.vo.Member;
-import com.empty.search.model.dao.SearchDao;
 
 public class AdminDao {
 	Properties prop = new Properties();
@@ -143,4 +142,77 @@ public class AdminDao {
 		System.out.println("검색카운트다오 " + result);
 		return result;
 	}
+	
+	public List<Member> selectRequestStore(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Member> list = new ArrayList();
+		String sql = prop.getProperty("selectReqeustStore");
+		try {
+			pstmt= conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Member m = new Member();
+				m.setUserId(rs.getString("USER_ID"));
+				m.setUserName(rs.getString("user_name"));
+				m.setPhone(rs.getString("phone"));
+				m.setEmail(rs.getString("email"));
+				m.setAddress(rs.getString("address"));
+				m.setEnrollDate(rs.getDate("enrolldate"));
+				list.add(m);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+				
+		return list;
+	}
+
+	public int requestStoreCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("requestStoreCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+				
+		return result;
+	}
+
+	public int updateAppr(Connection conn, String userId) {
+		PreparedStatement pstmt= null;
+		int result = 0;
+		String sql = prop.getProperty("updateAppr");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		System.out.println("updateAppr: "+result);
+		return result;
+	}
+	
 }
