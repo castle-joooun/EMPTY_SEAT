@@ -43,10 +43,11 @@ public class FindPwServlet extends HttpServlet {
 			String to = email;
 			String subject = "빈시트 비밀번호 찾기 인증 메일입니다.";
 			String sha256 = SHA256.getSHA256(to);
-			String content = "<div style='width:300px;'>"
+			String content = "<div style='width:400px;'>"
 					+ "<div>다음 링크에 접속하시면 비밀번호 변경 페이지로 이동합니다.</br></div>"
 					+ "<div>"
-					+ "<a href='" + host + "checkEmailAuthentication?code=" + sha256 + "&email=" + email + "&userId=" + userId +"' + >이메일 인증하기</a>"
+					+ "<img src='https://postfiles.pstatic.net/MjAyMDAzMzBfMiAg/MDAxNTg1NTcwOTEzOTg0.B1AVBwL55DSqoaZyYb-gJx16ZEwllIzwUJcqJ4RrIH8g.7HvnqufTa1oa48HZRDcJjEYSfvieZt2wOadudYk1IJ8g.PNG.pdh4713/%EB%B9%88%EC%8B%9C%ED%8A%B8500-1.png?type=w773' width='200px'><br>"
+					+ "<a style='font-size=15px' font-weight='border'; href='" + host + "checkEmailAuthentication?code=" + sha256 + "&email=" + email + "&userId=" + userId +"' + >이메일 인증하기</a>"
 					+ "</div>"
 					+ "</div>";
 
@@ -87,7 +88,7 @@ public class FindPwServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("views/common/msg.jsp");
 			rd.forward(request, response);
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/member/findPwResult.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("views/member/failFindPw.jsp");
 			rd.forward(request, response);
 		}
 
