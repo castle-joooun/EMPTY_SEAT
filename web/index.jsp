@@ -62,7 +62,7 @@
                     <p id="main"><a href="<%=request.getContextPath() %>" style="color: white">MAIN</a></p>
                     <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
                     <p id="notice" class="mainHover"><a href="notice.html">NOTICE</a></p>
-                    <p id="myPage" class="mainHover"><a href="myPage.html">MY PAGE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a></p>
                     <p id="service" class="mainHover"><a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a></p>
                 </div>
             </center>

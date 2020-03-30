@@ -13,6 +13,7 @@
 <body>
 
 	<div id="board">
+	<h2>FAQ</h2>
 		<table>
 			<thead>
 				<tr>
