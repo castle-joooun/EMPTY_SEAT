@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.empty.admin.model.dao.AdminDao;
 import com.empty.member.model.vo.Member;
+import com.empty.search.model.vo.Store;
 
 public class AdminService {
 
@@ -65,6 +66,34 @@ public class AdminService {
 		close(conn);
 		return result;
 		
+	}
+	public int updateAppr(String[] userid) {
+		Connection conn = getConnection();
+		int result = dao.updateAppr(conn,userid);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public List<Store> selectStore(int cPage,int numPerPage) {
+		Connection conn = getConnection();
+		List<Store> list = dao.selectStore(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	public int selectStore() {
+		Connection conn = getConnection();
+		int result = dao.selectStore(conn);
+		close(conn);
+		return result;
+		
+	}
+	public int deleteStore(String id) {
+		Connection conn = getConnection();
+		int result = dao.deleteStore(conn,id);
+		if (result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	

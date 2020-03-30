@@ -10,8 +10,9 @@
 
 		<div id="storeSubMenu">
 			<ul>
-				<li><a href="#"><span class="text-item">스토어 이용현황</span></a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/manageStore"><span class="text-item">스토어 이용현황</span></a></li>
 				<li><a href="<%=request.getContextPath()%>/admin/store/requestStoreList"><span class="text-item">스토어 신청현황</span></a></li>
+				<li><a href="#"><span class="text-item">스토어 매출보기</span></a></li>
 			</ul>
 		</div>
 		
@@ -23,8 +24,8 @@
 		<div>
 			<span id="totalSearch"></span>
 			<form>
-				<input type="hidden" name="cPage" value="" id="cPage"> <select
-					name="numPerPage" id="numPerPage">
+				<input type="hidden" name="cPage" value="" id="cPage"> 
+				<select name="numPerPage" id="numPerPage">
 					<option value="10">목록 10개</option>
 					<option value="20">목록 20개</option>
 					<option value="30">목록 30개</option>
@@ -52,7 +53,11 @@
 			</tbody>
 		</table>
 		<!-- end bbsList -->
-		<button>수락하기</button>
+		<form action="<%=request.getContextPath()%>/admin/store/requestStoreListAppr" method="post" id="apprSubmit">
+			<input id="submitIds" type="hidden" name="userid">
+			<button type="button" id="allAppr" onclick="idPlus();">수락하기</button>
+			
+		</form>
 	</div>
 	<!-- paging -->
 	<div class="list_btn_area">
@@ -82,7 +87,7 @@
 					
 					for(let i = 0;i<data.length-2;i++){
 						const tr =$("<tr>");
-					 	tr.append($("<td>").append($("<input>").attr({name:"dataid",type:"checkbox",class:"chkone",value:data[i]['userId']})));	
+					 	tr.append($("<td>").append($("<input>").attr({name:"dataid",type:"checkbox",class:"chkone",value:data[i]['userId'],onclick:"oneCheck();"})));	
 						tr.append($("<td>").html(data[i]['userId']).addClass("userid_"));
 						tr.append($("<td>").html(data[i]['userName']).addClass("username_"));
 						tr.append($("<td>").html(data[i]['phone']).addClass("phone_"));
@@ -95,6 +100,8 @@
 					}
 					$(".paging").html(data[data.length-1]);//페이지바
 					$("#totalSearch").html("검색 결과: "+data[data.length-2]+ "개 입니다.");//총검색결과
+					
+				  
 				}else{
 					$(".paging").html(data[0]);
 				}

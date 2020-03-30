@@ -1,0 +1,29 @@
+#msgContainer{
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin: 100px 10%;
+    border: 3px solid  rgb(242,242,242);
+    height: 200px;
+}
+#msgContainer>div:first-child{
+    margin-top:50px;
+}
+#msgContainer>div:nth-child(2){
+    margin-top:30px;
+}
+#msgContainer>div>h4{
+    font-size: 20px;
+    font-weight: normal;
+}
+#msgContainer button{
+    border: none;
+    width:140px;
+    height: 38px;
+    outline: none;
+    border: none;
+    background-color: black;
+    color: white;
+    
+    
+}
