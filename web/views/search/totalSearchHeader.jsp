@@ -93,7 +93,7 @@
 		<!-- 검색창 -->
 		<form action="totalSearch" method="get">
 			<div id="searchBoxGra">
-				<input id="searchBox" type="text" name="searchBox" placeholder="빈시트 검색" onchange="change()" value="<%=request.getAttribute("searchText")%>"> 
+				<input id="searchBox" type="text" name="searchBox" placeholder="빈시트 검색" onchange="change()" value="<%=request.getAttribute("searchText")!=null?request.getAttribute("searchText"):""%>"> 
 					<input type="submit" value="검색">
 			</div>
 		</form>
