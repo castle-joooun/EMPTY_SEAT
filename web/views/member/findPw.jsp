@@ -40,9 +40,7 @@
 			</div>
 		</form>
 		<div>
-			<button class="findBtn"
-				onclick="find();">비밀번호
-				찾기</button>
+			<button class="findBtn" onclick="find();">비밀번호 찾기</button>
 		</div>
 	</div>
 	<hr class="line">

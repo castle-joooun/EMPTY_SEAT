@@ -7,6 +7,7 @@
 	href="<%=request.getContextPath()%>/css/withdrawal.css" type="text/css">
 <%
 	userId = (String) request.getAttribute("userId");
+	userId =  request.getParameter("userId");
 %>
 
 <div id="findTitle">
