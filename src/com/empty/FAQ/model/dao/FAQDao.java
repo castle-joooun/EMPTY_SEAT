@@ -126,4 +126,69 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return result;
 	}
+	
+	public int updateFAQ(Connection conn,int no,String title,String content) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateFAQ");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public FAQ selectFAQ(Connection conn,int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFAQ");
+		FAQ f=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				f=new FAQ();
+				f.setNo(rs.getInt("faq_no"));
+				f.setTitle(rs.getString("faq_title"));
+				f.setContent(rs.getString("faq_content"));
+				f.setTime(rs.getDate("faq_time"));
+				f.setCount(rs.getInt("faq_count"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return f;
+	}
+	
+	
+	public int deleteFAQ(Connection conn,int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteFAQ");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

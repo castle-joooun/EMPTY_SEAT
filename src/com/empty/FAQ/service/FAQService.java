@@ -53,4 +53,30 @@ public class FAQService {
 		close(conn);
 		return f;
 	}
+	
+	public int updateFAQ(int no,String title,String content) {
+		Connection conn=getConnection();
+		int result=dao.updateFAQ(conn,no, title,content);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public FAQ selectFAQ(int no) {
+		Connection conn=getConnection();
+		FAQ f=dao.selectFAQ(conn, no);
+		close(conn);
+		return f;
+		
+	}
+	
+	public int deleteFAQ(int no) {
+		Connection conn=getConnection();
+		int result=dao.deleteFAQ(conn,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
