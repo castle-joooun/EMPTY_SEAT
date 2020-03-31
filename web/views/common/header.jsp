@@ -58,7 +58,7 @@
 					<a href="introduce.html">INTRODUCE</a>
 				</p>
 				<p id="notice" class="mainHover">
-					<a href="notice.html">NOTICE</a>
+					<a href="<%=request.getContextPath()%>/notice">NOTICE</a>
 				</p>
 				<p id="myPage" class="mainHover">
 					<a href="myPage.html">MY PAGE</a>
