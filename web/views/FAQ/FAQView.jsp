@@ -14,6 +14,7 @@
 
 <section id="FAQ-section">
 	<div id="FAQ-container">
+	<h2><%=f.getTitle() %></h2>
 		<table id="FAQ-table">
 			<tr>
 				<th>글번호</th>

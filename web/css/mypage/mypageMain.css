@@ -1,0 +1,70 @@
+section#mypageMainSection{
+	margin-top:30px;
+	margin-left:350px;
+	width:800px;
+}
+
+table#mypageMainTable{
+	border:1px solid black;
+	border-collapse:collapse;
+	width:700px;
+}
+
+table#mypageMainTable tr{
+	height:40px;
+	border-bottom: 1px solid black;
+}
+
+table#mypageMainTable th{
+	width:150px;
+	text-align:center;
+}
+
+table#mypageMainTable td{
+	text-align:center;
+}
+
+.mypageHeaderDiv{
+	width:680px;
+	padding:10px;
+	background-color:rgb(176,196,222);
+	margin-bottom:15px;
+	margin-top:15px;
+	cursor:pointer;
+}
+
+#mypagePayTable{
+	border:1px solid black;
+	border-collapse:collapse;
+	width:700px;
+}
+
+table#mypagePayTable tr{
+	height:40px;
+	border-bottom: 1px solid black;
+}
+
+table#mypagePayTable td{
+	width:150px;
+	text-align:center;
+}
+
+.mypageHeaderBtn{
+	float:right;
+}
+
+#mypageUseTable{
+	border:1px solid black;
+	border-collapse:collapse;
+	width:700px;
+}
+
+table#mypageUseTable tr{
+	height:40px;
+	border-bottom: 1px solid black;
+}
+
+table#mypageUseTable td{
+	width:150px;
+	text-align:center;
+}

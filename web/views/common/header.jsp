@@ -29,7 +29,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>빈시트 : pc방 자리찾기</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/base2.css?ver=1.5" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/base2.css?ver=2" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap">
@@ -52,7 +52,7 @@
 			<!-- 상단고정 메뉴바 -->
 			<span id="menubar"> <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
 				<p id="main">
-					<a href="<%=request.getContextPath() %>" style="color: #ff7531">MAIN</a>
+					<a href="<%=request.getContextPath() %>">MAIN</a>
 				</p>
 				<p id="introduce" class="mainHover">
 					<a href="introduce.html">INTRODUCE</a>
@@ -61,7 +61,7 @@
 					<a href="<%=request.getContextPath()%>/notice">NOTICE</a>
 				</p>
 				<p id="myPage" class="mainHover">
-					<a href="myPage.html">MY PAGE</a>
+					<a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a>
 				</p>
 				<p id="service" class="mainHover">
 					<a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a>
@@ -176,10 +176,10 @@
 	<nav id="middle">
 		<p id="middleText">세상의 모든 자리 찾기</p>
 		<div id="subMenu">
-			<span id="mainSub"> <!-- main페이지이면 main subMenu의 subHover을 빼준다! ------------------------------------------------------------------->
+<!-- 			<span id="mainSub"> main페이지이면 main subMenu의 subHover을 빼준다! -----------------------------------------------------------------
 				<span id="baseSubMenu"><a href="main.html"
 					style="color: #ff7531">통합검색</a></span> <span class="subHover"><a
 					href="">지역검색</a></span> <span class="subHover"><a href="">즐겨찾기</a></span>
-			</span>
+			</span> -->
 		</div>
 	</nav>
