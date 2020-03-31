@@ -5,10 +5,7 @@
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
 <%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
-<%
-	Member loginMember = (Member) session.getAttribute("loginMember");
-%>
-<link rel="stylesheet" href="css/store.css?ver=0" type="text/css">
+<link rel="stylesheet" href="css/store.css?ver=1" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
 <img src="image/next.png" alt="" id="next" width="20px">
@@ -19,8 +16,9 @@
 	String[] info = s.getStoreInfo().split(", ");
 	List<String> imgs = (List) request.getAttribute("imgs");
 	StoreSeat ss = (StoreSeat) request.getAttribute("storeSeat");
-	String[] check = ss.getStoreCheck().split("");
-	int seatNum = 0;
+	String[] seatCheck = ss.getSeatNum().split(",");
+	String[] useCheck = ss.getSeatCheck().split(",");
+	int seatNum = 1;
 %>
 
 
@@ -64,9 +62,10 @@
 				</div>
 				<div id="storePc">
 					<span class="storeInfoBasicMajor">PC정보 : </span>
-					<sapn class="storeInfoBasicMinor"> <%
- 	for (String str : info) {
- %>
+					<sapn class="storeInfoBasicMinor"> 
+					<%
+ 						for (String str : info) {
+ 					%>
 					<%=str%><br>
 					<%
 						}
@@ -92,35 +91,23 @@
 		</p>
 		<center>
 			<table>
-				<%
-					for (int i = 1; i <= ss.getRow(); i++) {
-				%>
-				<tr>
-					<%
-						for (int j = 1; j <= ss.getCol(); j++) {
-					%>
-					<%
-						if (check[seatNum].equals("1")) {
-					%>
-					<td class="emptySeat"></td>
-					<%
-						} else {
-					%>
-					<td></td>
-					<%
-						}
-					%>
-					<%
-						seatNum++;
-					%>
-					<%
-						}
-					%>
-				</tr>
-				<%
-					}
-				%>
+				<%for(int i=1; i<=ss.getRow(); i++) {%>
+					<tr>
+						<%
+						for(int n=1; n<=ss.getCol(); n++) {
+							if(seatCheck[(seatNum-1)].equals("0")) {
+						%>
+								<td></td>
+						<%	} else { %>
+								<td class="emptySeat seat"></td>
+						<% 	}
+							seatNum++;
+						} 
+						%>
+					</tr>
+				<%} %>
 			</table>
+
 		</center>
 	</div>
 
@@ -137,39 +124,102 @@
 		</table>
 	</div>
 
+	<div id="reservation">
+		<p id="storeReInfo">매장 : <strong><%=s.getStoreName() %></strong></p>
+		<p id="userInfo">
+			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			빈캐시 : <strong><%=loginMember.getCash() %></strong>
+		</p>
+		<div id="underLine"></div>
+		
+		<center>
+			<div id="reView">
+				<span>이용시간 선택</span>
+				<span>예약내역 확인</span>
+				<span>예약</span>
+			</div>
+			
+			<div class="reStep">
+				<div class="reStepTitle">
+					<span>이용시간 선택</span>
+					<span id="reStepMini">(1시간당 1,000원)</span>
+				</div>
+				<div class="reStepContent">
+					<label>
+						<input type="radio" name="time" value="1시간">1시간
+					</label>
+					<label>
+						<input type="radio" name="time" value="2시간">2시간
+					</label>
+					<label>
+						<input type="radio" name="time" value="3시간">3시간
+					</label>
+					<label>
+						<input type="radio" name="time" id="ectTime"><input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
+					</label>
+				</div>
+			</div>
+			<%-- <div class="reStep">
+				<div class="reStepTitle">
+					예약내역확인
+				</div>
+				<div id="reStepCon">
+					<span>매장 : <%=s.getStoreName() %></span>
+					<span>매장주소 : <%=s.getStoreAddress() %></span>
+					<span>이용시간 : 0 시간</span>
+					<span>이용금액 : <%=1*1000 %>원</span>
+					<span>결재 후 빈캐시 : 0 빈캐시</span>
+				</div>
+			</div>
+		</center> --%>
+		
+		<div id="reBtns">
+			<button id="reCan">취소</button>
+			<button id="reOk">다음</button>
+		</div>
+	</div>
+
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
 	  //즐겨찾기
 	    $("#favorite").click(function () {
 	    	
-	    	var check;
 	    	
-	        if($("#favorite").attr("src") == "image/favorite-empty.png"){
-	        	check = true;
-	        } else {
-	        	check = false;
-	        }
-	
-	        
-	        $.ajax({
-	        	url:"<%=request.getContextPath()%>/favorite",
-	        	type:"post",
-	        	data:{"check":check, "userId":"ooze", "storeId":"<%=s.getStoreId()%>"},
-	        	success:function(data) {
-	        		console.log(data);
-	        		if(data==6) {
-	        			alert("!즐겨찾기 최대개수(6개) 도달! : 즐겨찾기를 삭제 후 추가해주세요.");
-	        		} else if(data<6) {
-	        			if($("#favorite").attr("src")==("image/favorite-use.png")) {
-	        				$("#favorite").attr("src","image/favorite-empty.png");	     
-	        			} else {
-	        				$("#favorite").attr("src","image/favorite-use.png");	        				
-	        			}
-	        		}
-	        	}
-	        })
+	    	if(<%=loginMember!=null%>) {
+	    		
+		    	var check;
+		    	
+		        if($("#favorite").attr("src") == "image/favorite-empty.png"){
+		        	check = true;
+		        } else {
+		        	check = false;
+		        }
+		
+		        
+		        $.ajax({
+		        	url:"<%=request.getContextPath()%>/favorite",
+		        	type:"post",
+		        	data:{"check":check, "userId":"<%=loginMember!=null?loginMember.getUserId():""%>", "storeId":"<%=s.getStoreId()%>"},
+		        	success:function(data) {
+		        		console.log(data);
+		        		if(data==6) {
+		        			alert("!즐겨찾기 최대개수(6개) 도달! : 즐겨찾기를 삭제 후 추가해주세요.");
+		        		} else if(data<6) {
+		        			if($("#favorite").attr("src")==("image/favorite-use.png")) {
+		        				$("#favorite").attr("src","image/favorite-empty.png");	     
+		        			} else {
+		        				$("#favorite").attr("src","image/favorite-use.png");	        				
+		        			}
+		        		}
+		        	}
+		        })
+	    	} else {
+	    		alert("로그인을 해주세요!");
+	    	}
     })
     
+    
+    // 지도 API
     $(function() {
     	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
@@ -210,7 +260,9 @@
     })
     </script>
 
+</div>
 
-
-
-	<%@ include file="storeBaseBottom.jsp"%>
+<script src="js/store.js?ver=1"></script>
+<script type="text/javascript" src="js/totalSearch.js"></script>
+</body>
+</html>

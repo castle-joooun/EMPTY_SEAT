@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
-<%-- <%
+<%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String userId = (String) session.getAttribute("uname");
 	Cookie[] cookies = request.getCookies();
@@ -16,7 +16,9 @@
 			}
 		}
 	}
-%> --%>
+	
+	int slideNum = 0;
+%>
 <!DOCTYPE html>
 <html lang="en">
 

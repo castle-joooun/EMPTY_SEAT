@@ -134,11 +134,11 @@ public class SearchDao {
 			if(rs.next()) {
 				ss = new StoreSeat();
 				ss.setStoreId(rs.getString("store_id"));
-				ss.setCol(rs.getInt("store_col"));
-				ss.setRow(rs.getInt("store_row"));
-				ss.setStoreCheck(rs.getString("store_check"));
+				ss.setCol(rs.getInt("seat_col"));
+				ss.setRow(rs.getInt("seat_row"));
+				ss.setSeatNum(rs.getString("seat_num"));
+				ss.setSeatCheck(rs.getString("seat_check"));
 			}
-			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

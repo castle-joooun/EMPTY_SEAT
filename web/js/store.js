@@ -132,7 +132,7 @@ $("#viewSeatBtn").click(function () {
 })
 
 // 버튼 누르면 열림
-$("#storeTitleBox").click(function() {
+$("#storeTitle").click(function() {
 
 	// 닫혔는지 알아보는 기능
     $("#onOff").attr("value","1");
@@ -156,6 +156,17 @@ $(function () {
     $(".fullSeat").append($("<p>").html("00:00"));
 
     $(".emptySeat").append($("<p>").html("사용가능").css("color", "#5e64b1"));
-    $(".emptySeat").append($("<button>").html("예약하기"));
+    $(".emptySeat").append($("<button>").html("예약하기").addClass("reservationBtn").attr("type","button"));
 });
 
+
+// 예약하기 띄우기
+$(".reservationBtn").click(function() {
+	console.log("눌린다");
+	$("#reservation").toggle();
+})
+
+// 예약하기 넘기기
+$("#reCan").click(function() {
+	$("#reservation").toggle();
+})
