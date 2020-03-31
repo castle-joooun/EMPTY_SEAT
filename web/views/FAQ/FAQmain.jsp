@@ -71,7 +71,6 @@
 	</div>
 
 
-	<script type="text/javascript" src="js/service.js"></script>
 	<script>
 		function fn_link(no){
 			$("#linkF>input").val(no);

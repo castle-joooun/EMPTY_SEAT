@@ -19,14 +19,14 @@ import com.empty.member.model.vo.Member;
 /**
  * Servlet implementation class AdminSearchTypeServlet
  */
-@WebServlet("/admin/searchType")
-public class AdminSearchTypeServlet extends HttpServlet {
+@WebServlet("/admin/user/searchTypeAjax")
+public class AdminSearchTypeAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminSearchTypeServlet() {
+    public AdminSearchTypeAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

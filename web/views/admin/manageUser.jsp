@@ -15,17 +15,7 @@
 
 <section>
 
-	<!-- 관리자 서브메뉴 -->
-	<!-- <div id="adminSubMenu">
-               <ul>
-                   <li><a href="#"><span class="text-item">Connect Us</span></a></li>
-                   <li><a href="#"><span class="text-item">회사소개</span></a></li>
-                   <li><a href="#"><span class="text-item">자주묻는 질문</span></a></li>
-                   <li><a href="#"><span class="text-item">Q&A</span></a></li>
-                   <li><a href="#"><span class="text-item">1:1 문의</span></a></li>
-               </ul>
-                          
-            </div> -->
+
 	<div class="list_btn_area">
 		
 		
@@ -55,34 +45,33 @@
 					</select>
 					
 					<div class="searchBoxGra" id="search-username">
-						<%-- <form action ="<%=request.getContextPath()%>/admin/searchMemberType"> --%>
-							<input type="hidden" name="searchType" value="userName"/>
+						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
+							<input type="hidden" name="searchType" value="username"/>
 							<input class="searchBox" type="text" name="searchKeyword" placeholder="이름 검색하기" > 
-							<input type="button" value="검색" class="search-btn" onclick="doSearch()">
-						<!-- </form> -->
+							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
+						</form>
 					</div>
 					<div class="searchBoxGra" id="search-gender">
-						
-							<select name="searchKeyword" class="searchBox">
+						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
+							<select name="searchKeyword" class="searchBox" >
 								<option value="남">남자</option>
 								<option value="여">여자</option>
 							</select>
 							<input type="hidden" name="searchType" value="gender"/>
-							<input type="submit" value="검색" class="search-btn" onclick="doSearch()">
-						
+							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
+						</form>
 					</div>
 					<div class="searchBoxGra" id="search-phone">
-						
+						<form action ="<%=request.getContextPath()%>/admin/searchType" method="post">
 							<input class="searchBox" type="text" name="searchKeyword"placeholder="전화번호 검색하기" > 
 							<input type="hidden" name="searchType" value="phone"/>
-							<input type="submit" value="검색" class="search-btn" onclick="doSearch()">
-						
+							<input type="button" value="검색" class="search-btn" onclick="doSubmit();">
+						</form>
 					</div>
 				</div>
 
 			</div>
-			<!-- <div class="suggest"> -->
-			<!-- <input type="text" value="" name="" size="22" autocomplete="off" class="inputText"/><button type="submit" class="searchBtn">검색하기</button> -->
+			
 			<div>
 				<form>
 					<input type="hidden" name="cPage" value="<%=cPage%>" id="cPage">
@@ -122,7 +111,7 @@
                             	<th class="chk"><input id="allCheck" type="checkbox" value=""></th>
                                 <th class="userid_"><%=m.getUserId()%></th>
                                 <th class="userdiv_"><%=m.isUserDiv()%></th>
-                                <th class="username_"><%=m.getUserName()%></th>
+                                <th class="username_"><%=m.getusername()%></th>
                                 <th class="gender_"><%=m.getGender()%></th>
                                 <th class="phone_"><%=m.getPhone()%></th>
                                 <th class="email_" ><%=m.getEmail()%></th>
@@ -158,11 +147,14 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/base.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/adminPage/manageUser.js"></script>
 <script>
-           
+		//관리자-유저페이지 들어오면실행되는것
+		$(function(){
+			requestData(1,10);
+		})
 		function requestData(cPage,numPerPage){
 			console.log("기본 페이징처리");
             	$.ajax({
-            	url:"<%=request.getContextPath()%>/admin/ajaxPaging",
+            	url:"<%=request.getContextPath()%>/admin/user/ajaxPaging",
 				dataType : "json",
 				type : "get",
 				data : {"cPage" :cPage,"numPerPage" :numPerPage},
@@ -199,58 +191,13 @@
 					if (request.status == 404)
 						//$("#content").append(request.status);
 						console.log("페이지를 찾을 수 없습니다.");
-						$(".paging").append("페이지를 찾을 수 없습니다.");
+						$(".paging").html("페이지를 찾을 수 없습니다.");
 				}
 
 			})
 
             }
-		function searchKeyType (type,key,cPage,numPerPage){
-			$.ajax({
-				url:"<%=request.getContextPath()%>/admin/searchType",
-				dataType : "json",
-				type : "get",
-				data : {"searchType":type,"searchKeyword":key,"cPage" :cPage,"numPerPage" :numPerPage},
-				success : function(data) {
-						const attach = $("#tbody");
-					if(data.length>1){
-						
-						for (let i = 0; i < data.length-1; i++) {
-							const tr = $("<tr>");
-							tr.append($("<td>").append($("<input>").attr({name:"dataid",type : "checkbox",class :"chkone",value : data[i]['userid']})));
-							tr.append($("<td>").html(data[i]['userid']).addClass('userid_'));
-							tr.append($("<td>").html(data[i]['username']).addClass('username_'));
-							tr.append($("<td>").html(data[i]['userdiv']).addClass('userdiv_'));
-							tr.append($("<td>").html(data[i]['gender']).addClass('gender_'));
-							tr.append($("<td>").html(data[i]['phone']).addClass('phone_'));
-							tr.append($("<td>").html(data[i]['email']).addClass('email_'));
-							tr.append($("<td>").html(data[i]['address']).addClass('addr_'));
-							tr.append($("<td>").html(data[i]['enrolldate']).addClass('enrolldate_'));
-							i==0?attach.html(tr):attach.append(tr);
-
-						}
-						
-						$(".paging").html(data[data.length-1]['pageBar']);
-						//$("#numPerPage>option[value="+numPerPage+"]").prop("selected",true);안됨
-						
-					}else{
-						attach.html("");
-						$(".paging").html(data[0]['msg']);
-					}
-				
-					
-					
-				},
-				error : function(request, status, error) {
-						console.log(request, status, error);
-						if (request.status == 404)
-							//$("#content").append(request.status);
-							$("#tbody").append("페이지를 찾을 수 없습니다.");
-				}
-				
-
-			})
-		}
+	
 		
 	</script>
 
