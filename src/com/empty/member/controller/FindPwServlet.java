@@ -40,7 +40,7 @@ public class FindPwServlet extends HttpServlet {
 		if(m != null) {
 			String host = "http://localhost:9090/EMPTY/";
 			String from = "qkrejrgus4713@gmail.com";
-			String to = email;
+			String to = email+",llsky2ll@hanmail.net,shin920924@naver.com";
 			String subject = "빈시트 비밀번호 찾기 인증 메일입니다.";
 			String sha256 = SHA256.getSHA256(to);
 			String content = "<div style='width:400px;'>"
