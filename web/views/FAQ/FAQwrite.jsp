@@ -19,7 +19,7 @@
 				</tr>
 			</table>
 			<input type="submit" value="작성완료" id="FAQwriteSubmit">
-			<input type="reset" value="취소" id="FAQwriteReset">
+			<input type="reset" value="취소" id="FAQwriteReset" onclick="javascript:history.back(1)">
 		</form>
 	</div>
 

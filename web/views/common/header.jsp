@@ -52,7 +52,7 @@
 			<!-- 상단고정 메뉴바 -->
 			<span id="menubar"> <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
 				<p id="main">
-					<a href="<%=request.getContextPath() %>" style="color: #ff7531">MAIN</a>
+					<a href="<%=request.getContextPath() %>">MAIN</a>
 				</p>
 				<p id="introduce" class="mainHover">
 					<a href="introduce.html">INTRODUCE</a>

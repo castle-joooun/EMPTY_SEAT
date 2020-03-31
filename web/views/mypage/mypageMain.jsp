@@ -5,7 +5,7 @@
 	Member m=(Member) request.getAttribute("Member");
 %>
 	
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/mypageMain.css?ver=1" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/mypageMain.css?ver=2" type="text/css">
 <%@ include file="/views/common/header.jsp"%>
 
 <section id="mypageMainSection">
@@ -13,36 +13,53 @@
 	<h1>MY PAGE</h1>
 	<div class="mypageHeaderDiv">
 		<span class="mypageHeader">개인정보</span>
-		<input class="mypageHeaderBtn" type="button" value="수정하기">
+		<input id="infoReviseBtn" class="mypageHeaderBtn" type="button" value="수정하기" onclick="infoRevise()">
 	</div>
 		<table id="mypageMainTable">
 			<tr>
 				<th>아이디</th>
 				<td><%=loginMember.getUserId() %></td>
+				<td style="width:50px"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td>***********</td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>이름</th>
 				<td><%=loginMember.getUserName() %></td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td><%=loginMember.getEmail() %></td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
 				<td><%= loginMember.getPhone()%></td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
 				<td><%=loginMember.getAddress() %></td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>성별</th>
 				<td><%=loginMember.getGender() %></td>
+				<td style="width:50px"></td>
 			</tr>
 			<tr>
 				<th>가입일</th>
 				<td><%=loginMember.getEnrollDate() %></td>
+				<td style="width:50px"></td>
+			</tr>
+			<tr>
+				<th>빈캐시</th>
+				<td>50,000</td>
+				<td style="width:50px"><input type="button" value="충전하기" onclick=""></td>
 			</tr>
 		</table>
 	</div>
@@ -99,4 +116,25 @@ $(function(){
       }
       });         
    });
+   
+   $(function(){
+	   $("#infoReviseBtn").click(function(){
+		   $.ajax({
+			   url:"<%=request.getContextPath()%>/myInfoUpdate",
+			   type:"post",
+			   dataType:"html",
+			   success:function(data){
+				   console.log(data);
+				   $("#mypageMainDiv").html("");
+				   $("#mypageMainDiv").html(data);
+			   }
+		   })
+	   })
+   })
+   
+   function infoUpdateBackBtn(){
+	   location.replace("<%=request.getContextPath()%>/mypageMain");
+   }
+   
+
 </script>

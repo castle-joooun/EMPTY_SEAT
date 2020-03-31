@@ -30,6 +30,7 @@ table#mypageMainTable td{
 	background-color:rgb(176,196,222);
 	margin-bottom:15px;
 	margin-top:15px;
+	cursor:pointer;
 }
 
 #mypagePayTable{
