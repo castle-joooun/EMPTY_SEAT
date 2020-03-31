@@ -333,7 +333,7 @@
 .emptySeat {
     border: solid 1px #5e64b1;
 }
-.reservationBtn {
+.emptySeat button {
     padding: 0;
     padding: 5px;
     border: 0;
@@ -447,4 +447,39 @@
 #reStepMini{
 	font-size:10px;
 	color:rgb(80,80,80);
+}
+
+#reStep2{
+	display: none;
+}
+
+#reStep2 p {
+	position:relative;
+	font-size: 15px;
+}
+
+#viewSeat2{
+    display: block;
+    position: relative;
+    /* top: -43px; */
+    margin: 10px;
+    padding: 0;
+    border: solid 1px #dbdbdb;
+    /* border-top: solid 6px #5e64b1; */
+    /* padding: 15px; */
+    /* margin-left: 15px; */
+    width: 956px;
+    overflow: auto;
+}
+
+#viewSeat2 td p {
+    padding: 0;
+    margin: 5px;
+}
+
+#viewSeat2 td {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    text-align: center;
 }
