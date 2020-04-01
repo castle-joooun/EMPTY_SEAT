@@ -77,12 +77,12 @@ public class SearchDao {
 		List <Store> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,keyword);
-			pstmt.setString(2,keyword);
-			pstmt.setString(3,keyword);
-			pstmt.setString(4,keyword);
-			pstmt.setInt(5,cPage);
-			pstmt.setInt(6,numPerPage);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
+			pstmt.setInt(5,(cPage-1)*numPerPage+1);
+			pstmt.setInt(6,cPage*numPerPage);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Store s = new Store(
@@ -105,20 +105,21 @@ public class SearchDao {
 			close(rs);
 			close(pstmt);
 		}
+		
 		return list;
 	}
 
 	public int dataCount(Connection conn, String keyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("countData");
+		String sql = prop.getProperty("dataCount");
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,keyword);
-			pstmt.setString(2,keyword);
-			pstmt.setString(3,keyword);
-			pstmt.setString(4,keyword);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
