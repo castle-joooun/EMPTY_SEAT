@@ -5,14 +5,17 @@
 	List<Notice> list = (List) request.getAttribute("list");
 %>
 <%@ include file="/views/common/header.jsp"%>
-	<div>
-			<%
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/notice/noticeList.css" type="text/css">
+	<div id="listDiv">
+		<h1>공지사항</h1>
+		<%
 			if(loginMember != null && loginMember.getUserId().equals("admin")){
 		%>
 		<div>
-			<input type="button" value="공지사항 작성" onclick="location.replace('<%=request.getContextPath()%>/noticeWrite')">
+			<button type="button" id="noticeWriteBtn" onclick="location.replace('<%=request.getContextPath()%>/noticeWrite')">공지사항 작성</button>
 		</div>
 		<%} %>
+		<hr>
 		<table>
 			<thead>
 				<tr>
@@ -21,7 +24,7 @@
 					<th>작성자</th>
 					<th>등록일</th>
 					<th>조회수</th>
-				</tr>
+				</tr> 
 			</thead>
 			<tbody>
 				<%
@@ -54,13 +57,15 @@
 				%>
 			</tbody>
 		</table>
-				<form action="<%=request.getContextPath()%>/notice/View" id="linkF">
-			<input type="hidden" name="no">
-		</form>
-		<div id="pageBar">
-			<%=request.getAttribute("pageBar")%>
-		</div>
-
+			<form action="<%=request.getContextPath()%>/notice/noticeView" id="linkF">
+				<input type="hidden" name="no">
+			</form>
+		<center>
+			<div id="pageBar">
+				<%=request.getAttribute("pageBar")%>
+			</div>
+		</center>
+	<hr>
 	</div>
 		<script>
 		function link(no){

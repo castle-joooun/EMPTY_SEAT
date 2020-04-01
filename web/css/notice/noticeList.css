@@ -1,0 +1,25 @@
+body{
+	width: 1366px;
+}
+
+#listDiv{
+	width: 1000px;
+	height: 700px;
+	text-align: center;
+}
+
+#noticeWriteBtn{
+	background-color: #5e64b1;
+	color: white;
+	border-radius: 5px;
+	height: 30px;
+	font-size: 15px;
+	text-align: left;
+	font-weight: bolder;
+	margin-left: 850px;
+}
+
+table{
+	text-align: center;
+	
+}

@@ -21,9 +21,9 @@
                 <tr>
                     <td style="border: white double 1px;color: navy;">회원유형</td>
                     <td><button class="choice" style="background-color: rgb(96, 99, 138);"
-                            onclick="location.href='signUp.jsp'">사용자용 회원가입</button></td>
+                            onclick="location.href='<%=request.getContextPath()%>/userSignUp'">사용자용 회원가입</button></td>
                     <td><button class="choice" style="background-color: rgb(94, 100, 177)"
-                            onclick="location.href='signUp2.jsp'">업주용 회원가입</button></td>
+                            onclick="location.href='<%=request.getContextPath()%>/ownerSignUp'">업주용 회원가입</button></td>
                 </tr>
             </table>
         </div>
