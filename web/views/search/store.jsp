@@ -127,7 +127,7 @@
 			</tr>
 		</table>
 	</div>
-
+	<%if(loginMember!=null){ %>
 	<div id="reservation">
 		<p id="storeReInfo">
 			매장 : <strong><%=s.getStoreName() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -219,7 +219,7 @@
 			<button id="reOk">다음</button>
 		</div>
 	</div>
-
+	<%} %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
 		let selectPcRow = 0;
@@ -306,6 +306,7 @@
 	    $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
 	    $(".fullSeat").append($("<p>").html("00:00"));
     
+	    <% if(loginMember!=null){%>
 	    
 	 	// 예약하기 띄우기
 	    $(".reservationBtn").click(function() {
@@ -325,6 +326,11 @@
 	    	$("#reservation").toggle();
 	    })
 	    
+	    <%}else{%>
+	    $(".reservationBtn").click(function() {
+	    	alert('로그인이 필요합니다!');
+	    })
+	    <%}%>
 	    
 	    // 다음/예약하기 버튼 바꾸기
 	 	var checkOk=0;
