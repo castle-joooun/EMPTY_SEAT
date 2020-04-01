@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
-<%-- <%
+<%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String userId = (String) session.getAttribute("uname");
 	Cookie[] cookies = request.getCookies();
@@ -16,7 +16,9 @@
 			}
 		}
 	}
-%> --%>
+	
+	int slideNum = 0;
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +31,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/totalSearch.css" type="text/css">
+<link rel="stylesheet" href="css/totalSearch.css?ver=1" type="text/css">
 
 <script src="js/jquery-3.4.1.min.js"></script>
 <script>
@@ -93,7 +95,7 @@
 		<!-- 검색창 -->
 		<form action="totalSearch" method="get">
 			<div id="searchBoxGra">
-				<input id="searchBox" type="text" name="searchBox" placeholder="빈시트 검색" onchange="change()" value="<%=request.getAttribute("searchText")%>"> 
+				<input id="searchBox" type="text" name="searchBox" placeholder="빈시트 검색" onchange="change()" value="<%=request.getAttribute("searchText")!=null?request.getAttribute("searchText"):""%>"> 
 					<input type="submit" value="검색">
 			</div>
 		</form>

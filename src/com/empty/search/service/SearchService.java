@@ -24,7 +24,20 @@ public class SearchService {
 		close(conn);
 		return list;
 	}
+	public List<Store> totalSearch(String keyword,int cPage,int numPerPage){
+		Connection conn = getConnection();
+		List<Store> list = dao.totalSearch(conn, keyword,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
 	
+	
+	public int dataCount(String keyword) {
+		Connection conn = getConnection();
+		int result = dao.dataCount(conn,keyword);
+		close(conn);
+		return result;
+	}
 	public Store store(String id) {
 		Connection conn = getConnection();
 		Store s = dao.store(conn, id);
@@ -97,7 +110,13 @@ public class SearchService {
 		close(conn);
 		return favoriteSize;
 	}
+
 	
+	
+//	public List crawl() {
+//		List list = dao.crawl();
+//		return list;
+//	}
 	
 	
 	

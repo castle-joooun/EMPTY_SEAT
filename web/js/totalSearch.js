@@ -51,5 +51,4 @@ function searchClick() {
 // 만들때 id="resultNum" + resultNum 같은 식으로 넘겨서 고유번호로 할 것
 $("#store").click(function() {
    $(this).submit();
-   console.log($(this));
 })

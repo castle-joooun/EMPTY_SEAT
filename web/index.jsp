@@ -33,7 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css?ver=3" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=0" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
@@ -62,7 +62,7 @@
                     <p id="main"><a href="<%=request.getContextPath() %>" style="color: white">MAIN</a></p>
                     <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
                     <p id="notice" class="mainHover"><a href="<%=request.getContextPath()%>/notice">NOTICE</a></p>
-                    <p id="myPage" class="mainHover"><a href="myPage.html">MY PAGE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a></p>
                     <p id="service" class="mainHover"><a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a></p>
                 </div>
             </center>

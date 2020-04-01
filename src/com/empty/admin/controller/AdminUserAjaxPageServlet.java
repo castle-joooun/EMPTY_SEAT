@@ -19,7 +19,7 @@ import com.empty.member.model.vo.Member;
 /**
  * Servlet implementation class AdminUserAjaxPageServlet
  */
-@WebServlet("/admin/ajaxPaging")
+@WebServlet("/admin/user/ajaxPaging")
 public class AdminUserAjaxPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
