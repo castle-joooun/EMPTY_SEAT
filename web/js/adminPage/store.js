@@ -1,7 +1,9 @@
 function storeAppr(){
-		var id = $(event.target).val();
+		var value = $(event.target).val().split("|");
+		var id = value[0]; 
+		var email = value[1];
 		
-		location.href="/EMPTY/admin/store/requestAppr?userId="+id;
+		location.href="/EMPTY/admin/store/requestAppr?userId="+id+"&email="+email;
 	}
 $(function(){
     $("#allCheck").click(function(){
@@ -40,7 +42,7 @@ function oneCheckFunc(obj){
    }
 
 }   
-
+//전체선택후 승인시 보내는 로직
 function idPlus(){
 	var str = "";
 	$(".chkone").each(function(){

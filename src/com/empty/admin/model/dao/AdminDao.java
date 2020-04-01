@@ -217,26 +217,26 @@ public class AdminDao {
 		return result;
 	}
 
-	public int updateAppr(Connection conn, String[] userid) {
-		PreparedStatement pstmt= null;
-		int result = 0;
-		String sql = prop.getProperty("updateAppr");
-		for(String s : userid) {
-			try {
-				
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, s);
-				result+=pstmt.executeUpdate();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-			}
-		}
-		
-		System.out.println("updateAppr: "+result);
-		return result;
-	}
+//	public int updateAppr(Connection conn, String[] userid) {
+//		PreparedStatement pstmt= null;
+//		int result = 0;
+//		String sql = prop.getProperty("updateAppr");
+//		for(String s : userid) {
+//			try {
+//				
+//				pstmt=conn.prepareStatement(sql);
+//				pstmt.setString(1, s);
+//				result+=pstmt.executeUpdate();
+//			}catch(SQLException e) {
+//				e.printStackTrace();
+//			}finally {
+//				close(pstmt);
+//			}
+//		}
+//		
+//		System.out.println("updateAppr: "+result);
+//		return result;
+//	}
 
 	public List<Store> selectStore(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
@@ -297,16 +297,26 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
-		String sql = prop.getProperty("deleteStore");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
+		
+		for(int i =0;i<3;i++) {
+			String sql = "";
+			try {
+				switch(i) {
+				case 0 :sql=prop.getProperty("deleteStoreImg");break;
+				case 1:sql=prop.getProperty("deleteStoreSeat");break;
+				case 2:sql= prop.getProperty("deleteStore");break;
+				//나중에 user_comment테이블에서도 삭제 해야함
+				}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				result += pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
 		}
+		System.out.println(result);
 		return result;
 	}
 	
