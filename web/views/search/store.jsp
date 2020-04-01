@@ -4,6 +4,7 @@
 <%@ include file="storeBaseTop.jsp"%>
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
 <%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
+<%@ page import="com.empty.comment.model.vo.Comment,java.util.List"%>
 
 <link rel="stylesheet" href="css/store.css?ver=1" type="text/css">
 
@@ -19,7 +20,14 @@
 	String[] seatCheck = ss.getSeatNum().split(",");
 	String[] useCheck = ss.getSeatCheck().split(",");
 	int seatNum = 1;
+	
+	List<Comment> list = (List)request.getAttribute("commentList");
 %>
+<!-- 댓글 css -->
+	<link rel="stylesheet"`
+	href="<%=request.getContextPath()%>/css/storeComment/storeComment.css?ver=2" type="text/css" />
+<!-- 댓글 css -->
+
 
 
 <div id="imgBox">
@@ -111,21 +119,93 @@
 		</center>
 	</div>
 
+<!-- 댓글 -->
 	<div id="comment">
+	<form action="<%=request.getContextPath() %>/comment/storeCommentInsert" method="post">
+		
+		
 		<table>
 			<tr>
+			
 				<th>댓글</th>
-				<td><button id="refresh">새로고침</button></td>
+		
 			</tr>
 			<tr>
-				<td><textarea id="commentInput"></textarea></td>
-				<td><button id="commentBtn">등록</button></td>
-			</tr>
+			<form action="<%=request.getContextPath() %>/comment/storeCommentInsert" method="post">
+				<td><input type="text" id="commentInput" name="userComment"/></td>
+				<td><button id="commentBtn"  name="commentBtn" onclick="fn_comment_btn">등록</button></td>
+				<td><input type="hidden" name="commentWriter" value="<%=loginMember !=null?loginMember.getUserId():""%>"/>
+				<td><input type="hidden" name="commentLevel"	 value="1"/>
+		</tr>
+
+			</form>
+	</table>
+
+		<% if(list!=null && !list.isEmpty()){ 
+				for(Comment c : list) {
+					if(c.getCommentLevel()==1){
+				%>
+		<table class="userTable">	
+				<tr>
+					<td>
+						<th ><%=c.getCommentWriter()%></th>
+						<td class="userDate"><%=c.getCommentDate() %></td>
+						<br/>
+						<%=c.getUserComment() %>
+					</td>
+		
+				</tr>
+		</table>		
+			<%	}else{%>
+		<table class="storeTable">	
+				<tr>
+					<td>
+						<th><%=c.getCommentWriter() %></th>
+						<td ><%=c.getCommentDate() %></td>
+						<br/>
+						<%=c.getUserComment() %>
+					</td>
+					<td></td>
+				</tr>
+			<%	}
+			   }//for
+			 }//if %>  
 		</table>
-	</div>
+
+
+	</div>     
+			</div> 
+ <!-- 댓글 -->
+ 
+ <!--  뎃글 페이징  -->
+ 
+ 	<div id='pageBar'>
+			<%=request.getAttribute("pageBar") %>
+		</div>
+
+ <!--  뎃글 페이징  -->
+
+ <script>
+ 
+ $(function(){
+		$("#commentInput").focus(function(){
+			if(<%=loginMember==null%>){
+				alert("로그인 후 이용하세요");
+				$("#userId").focus();
+			}
+		})
+	});
+
+//댓글기능
+
+	 
+ </script>
+
+<!-- 댓글 -->
 
 	<div id="reservation">
-		<p id="storeReInfo">매장 : <strong><%=s.getStoreName() %></strong></p>
+		<p id="storeReInfo">매장 : <strong><%=s.getStoreName() 
+		%></strong></p>
 		<p id="userInfo">
 			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			빈캐시 : <strong><%=loginMember.getCash() %></strong>

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.empty.comment.model.service.CommentService;
+import com.empty.comment.model.vo.Comment;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 import com.empty.search.service.SearchService;
@@ -37,7 +39,57 @@ public class StoreServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
+	//댓글 페이징	
+		int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+			
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int numPerPage=5;
+		List<Comment> commentList= new CommentService().selectComment();
+		List<Comment> list = new CommentService().searchComment(cPage,numPerPage);
+		int totalStore=new CommentService().commentCount();
+		int totalPage=(int)Math.ceil((double)totalStore/numPerPage);
+		
+		//페이지 바 만들기 
+		
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		String pageBar="";
+		
+		if(pageNo==1) {
+		 	pageBar+="<span>[이전]</span>";
+		 	
+	}else {
+		pageBar+="<a href='"+request.getContextPath()+"/store?cPage="+(pageNo-1)+"'>[이전]</a>";
+				
+	}
+	
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+					pageBar+="<a href='"+request.getContextPath()+"/store?cPage="+(pageNo)+"'>"+pageNo+"</a>";
+					
+			}
+			pageNo++;
+		}
+		
+		//다음
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()+"/store?cPage="+(pageNo)+"'>[다음]</a>";
+		}
+		request.setAttribute("commentList", commentList);
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("list", list);
+		
+//댓글 페이징	
 		String storeId = request.getParameter("storeId");
 		String userId = request.getParameter("userId");
 		System.out.println("storeId : " + storeId);
@@ -68,11 +120,14 @@ public class StoreServlet extends HttpServlet {
 			request.setAttribute("storeSeat", ss);
 			request.setAttribute("searchText", searchText);
 			request.setAttribute("url", favoriteUrl);
+			
+	
+
 			request.getRequestDispatcher("/views/search/store.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/views/search/noneSearch.jsp").forward(request, response);
 		}
-
+		
 	}
 
 	/**
