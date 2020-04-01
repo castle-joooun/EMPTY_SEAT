@@ -149,24 +149,16 @@ $("#storeTitle").click(function() {
     
 })
 
-// 자리보여주기
-$(function () {
 
-    $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
-    $(".fullSeat").append($("<p>").html("00:00"));
+// 현재시간 표시
+var clockTarget = document.getElementById("clock");
 
-    $(".emptySeat").append($("<p>").html("사용가능").css("color", "#5e64b1"));
-    $(".emptySeat").append($("<button>").html("예약하기").addClass("reservationBtn").attr("type","button"));
-});
+function clock() {
+    var date = new Date();
 
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
 
-// 예약하기 띄우기
-$(".reservationBtn").click(function() {
-	console.log("눌린다");
-	$("#reservation").toggle();
-})
-
-// 예약하기 넘기기
-$("#reCan").click(function() {
-	$("#reservation").toggle();
-})
+    clockTarget.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes }`  : minutes }`;
+}
+setInterval(clock, 1000);

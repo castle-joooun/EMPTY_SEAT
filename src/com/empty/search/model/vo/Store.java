@@ -12,12 +12,21 @@ public class Store {
 	private String storeLogo;
 	private String email;
 	private String enrollDate;
+	private int storePrice;
 	
 	
-	
-
 	public Store() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	public int getStorePrice() {
+		return storePrice;
+	}
+
+	public void setStorePrice(int storePrice) {
+		this.storePrice = storePrice;
 	}
 
 	public String getStoreId() {
@@ -99,6 +108,14 @@ public class Store {
 	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+	
+	public int getStorePrice() {
+		return storePrice;
+	}
+
+	public void setStorePrice(int storePrice) {
+		this.storePrice = storePrice;
+	}
 
 	@Override
 	public String toString() {
@@ -108,7 +125,7 @@ public class Store {
 	}
 
 	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
-			String storeFacility, String storeAddress, String storeLogo) {
+			String storeFacility, String storeAddress, String storeLogo,int storePrice) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -118,6 +135,7 @@ public class Store {
 		this.storeFacility = storeFacility;
 		this.storeAddress = storeAddress;
 		this.storeLogo = storeLogo;
+		this.storePrice = storePrice;
 	}
 	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
 			String storeFacility, String storeAddress, String storeLogo, String email, String enrollDate) {
@@ -132,6 +150,23 @@ public class Store {
 		this.storeLogo = storeLogo;
 		this.email = email;
 		this.enrollDate = enrollDate;
+	}
+
+	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
+			String storeFacility, String storeAddress, String storeLogo, String email, String enrollDate,
+			int storePrice) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeTime = storeTime;
+		this.storeInfo = storeInfo;
+		this.storeFacility = storeFacility;
+		this.storeAddress = storeAddress;
+		this.storeLogo = storeLogo;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.storePrice = storePrice;
 	}
 	
 	

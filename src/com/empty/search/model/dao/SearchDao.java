@@ -55,7 +55,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 				
 				list.add(s);
@@ -67,6 +68,69 @@ public class SearchDao {
 			close(stmt);
 		}
 		return list;
+	}
+	
+	public List<Store> totalSearch(Connection conn, String keyword, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("totalSearch");
+		List <Store> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,keyword);
+			pstmt.setString(2,keyword);
+			pstmt.setString(3,keyword);
+			pstmt.setString(4,keyword);
+			pstmt.setInt(5,cPage);
+			pstmt.setInt(6,numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Store s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
+						);
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int dataCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("countData");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,keyword);
+			pstmt.setString(2,keyword);
+			pstmt.setString(3,keyword);
+			pstmt.setString(4,keyword);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public Store store(Connection conn, String id) {
@@ -88,7 +152,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 			}
 			
@@ -260,6 +325,8 @@ public class SearchDao {
 		
 		return favoriteSize;
 	}
+
+	
  	
 //	public List crawl() {
 //		
