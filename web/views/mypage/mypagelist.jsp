@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="myinfobox">
+<%@ page
+	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+%>
+			<div class="myinfobox">
 			<table>
 				<tr>
 					<td>
@@ -20,20 +25,62 @@
 						<td>
 							아이디
 						</td>
+						<td colspan='3'>
+							<%=loginMember.getUserId() %>
+						</td>
 					</tr>
 					<tr>
 						<td>
-							닉네임
+							이름
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getUserName() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							이메일
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getEmail() %>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							핸드폰
 						</td>
+						<td colspan='3'> 
+							<%=loginMember.getPhone() %>
+						</td>
 					</tr>
 					<tr>
 						<td>
 							주소
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getAddress() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							성별
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getGender() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							캐시
+						</td>
+						<td>
+							<%=loginMember.getCash() %>
+						</td>
+						<td>
+							원
+						</td>
+						<td>
+							<button class="outmoney">출금</button>
 						</td>
 					</tr>
 				</table>
@@ -41,7 +88,17 @@
 			
 			
 			<div class="myinfobox">
-				매장정보
+				<table>
+					<tr>
+						<td>
+							매장정보
+						</td>
+						<td>
+							<button class="enrollstore">매장등록</button>
+						</td>
+					</tr>
+				</table>
+				
 			</div>
 			<div class="upzooinfobox">
 				<table class="upzoomyinfo2">
@@ -84,3 +141,44 @@
 				</table>
 			</div>
 		</div>
+		
+		<script>
+		$(function(){
+		$(".crystal").click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/crystal.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	
+	$(function(){
+		$(".outmoney").click(function(){  //출금으로
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/outmoney.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	
+	$(function(){
+		$(".enrollstore").click(function(){  //매장등록
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/enrollstore.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	</script>

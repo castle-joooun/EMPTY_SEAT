@@ -25,20 +25,16 @@ public class VinDao {
 			e.printStackTrace();
 		}
 	}
-	public int insertCash(Connection conn, int money, Member m) {
+	public int insertCash(Connection conn, int amount, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql="UPDATE VINUSER SET CASH =? WHERE USER_ID='fgsdhi'"; 
-		String sql2="UPDATE MEMBER" + 
-				"   SET (CASH) = (SELECT CASH+?" + 
-				"                   FROM MEMBER" + 
-				"                  WHERE USER_ID='fgsdhi')" + 
-				" WHERE USER_ID='fgsdhi'";
+		String sql = prop.getProperty("insertCash");
 		try {
-			pstmt=conn.prepareStatement(sql2);
-			pstmt.setInt(1, money);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, amount);
+			pstmt.setString(2, m.getUserId());
+			pstmt.setString(3, m.getUserId());
 			result=pstmt.executeUpdate();
-//			System.out.println(v.getCash()+money);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -47,17 +43,24 @@ public class VinDao {
 		return result;
 	}
 	
-	public Member selectUser(Connection conn, Member m) {
+	public Member selectUser(Connection conn, Member m, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
-		String sql="SELECT * FROM Member WHERE USER_ID = '?'";
+		String sql = prop.getProperty("selectUser");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m=new Member();
-				m.setUserId(rs.getString("user_id"));
-				m.setCash(rs.getInt("cash"));
+				m.setUserId(rs.getString("USER_ID"));
+				m.setUserName(rs.getString("USER_NAME"));
+				m.setEmail(rs.getString("EMAIL"));
+				m.setPhone(rs.getString("PHONE"));
+				m.setAddress(rs.getString("ADDRESS"));
+				m.setGender(rs.getString("GENDER"));
+				m.setCash(rs.getInt("CASH"));
+				m.setEnrollDate(rs.getDate("ENROLLDATE"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -68,23 +71,42 @@ public class VinDao {
 		return m;
 	}
 	
-	public int payCharge(Connection conn, Member m, int money, String sudan) {
+	public int payCharge(Connection conn, Member m, int amount, String pay) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		String sql = prop.getProperty("payCharge");
-		String sudany="";
-		switch(sudan) {
-			case "phone" :sudany="핸드폰결제";break;
-			case "trans" :sudany="계좌이체";break;
-			case "card" :sudany="카드결제";break;
-			case "vbank" :sudany="가상계좌";break;
+		String payday="";
+		switch(pay) {
+			case "phone" :payday="핸드폰결제";break;
+			case "trans" :payday="계좌이체";break;
+			case "card" :payday="카드결제";break;
+			case "vbank" :payday="가상계좌";break;
 		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getUserId());
-			pstmt.setInt(2, money);
-			pstmt.setString(3, sudany);
+			pstmt.setInt(2, amount);
+			pstmt.setString(3, payday);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int minusCash(Connection conn, Member m, int money) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql = prop.getProperty("minusCash");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, money);
+			pstmt.setString(2, m.getUserId());
+			pstmt.setString(3, m.getUserId());
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

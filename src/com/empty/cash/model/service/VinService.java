@@ -14,26 +14,34 @@ public class VinService {
 	
 	private VinDao vd=new VinDao();
 	
-	public int insertCash(int money, Member m) {
+	public int insertCash(int amount, Member m) {
 		Connection conn=getConnection();
-		int result = vd.insertCash(conn, money, m);
+		int result = vd.insertCash(conn, amount, m);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
-	public Member selectUser(Member m) {
+	public Member selectUser(Member m, String userId) {
 		Connection conn=getConnection();
-		m = vd.selectUser(conn,m);
+		m = vd.selectUser(conn, m, userId);
 		close(conn);
 		return m;
 	}
-	public int payCharge(Member m, int money, String sudan) {
+	public int payCharge(Member m, int amount, String pay) {
 		Connection conn=getConnection();
-		int result = vd.payCharge(conn, m, money, sudan);
+		int result = vd.payCharge(conn, m, amount, pay);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public void minusCash(Member m, int money) {
+		Connection conn=getConnection();
+		int result = vd.minusCash(conn, m, money);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
 	}
 }

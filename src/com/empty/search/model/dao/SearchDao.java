@@ -209,7 +209,7 @@ public class SearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List list = new ArrayList();
-		String sql = prop.getProperty("favoriteList");
+		String sql = prop.getProperty("store"); //aaaaa
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);

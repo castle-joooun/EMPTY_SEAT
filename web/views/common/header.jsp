@@ -29,10 +29,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>빈시트 : pc방 자리찾기</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/base2.css?ver=2.0" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/base2.css?ver=2.4" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap">
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="<%=request.getContextPath()%>/js/base.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 <script>

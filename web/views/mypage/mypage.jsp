@@ -28,20 +28,62 @@
 						<td>
 							아이디
 						</td>
+						<td colspan='3'>
+							<%=loginMember.getUserId() %>
+						</td>
 					</tr>
 					<tr>
 						<td>
-							닉네임
+							이름
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getUserName() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							이메일
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getEmail() %>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							핸드폰
 						</td>
+						<td colspan='3'> 
+							<%=loginMember.getPhone() %>
+						</td>
 					</tr>
 					<tr>
 						<td>
 							주소
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getAddress() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							성별
+						</td>
+						<td colspan='3'>
+							<%=loginMember.getGender() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							캐시
+						</td>
+						<td>
+							<%=loginMember.getCash() %>
+						</td>
+						<td>
+							원
+						</td>
+						<td>
+							<button class="outmoney">출금</button>
 						</td>
 					</tr>
 				</table>
@@ -49,7 +91,17 @@
 			
 			
 			<div class="myinfobox">
-				매장정보
+				<table>
+					<tr>
+						<td>
+							매장정보
+						</td>
+						<td>
+							<button class="enrollstore">매장등록</button>
+						</td>
+					</tr>
+				</table>
+				
 			</div>
 			<div class="upzooinfobox">
 				<table class="upzoomyinfo2">
@@ -93,29 +145,6 @@
 			</div>
 		</div>
 	
-		<div class="comeonyo">
-		
-		
-		
-		
-		
-		
-		
-		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -125,14 +154,14 @@
 	
 	<script>
 	$(function(){
-		$(".mypagemain2").click(function(){
+		$(".mypagemain2").click(function(){ //사용내역으로
 			$.ajax({
 				url:"<%=request.getContextPath()%>/mypage/myUse.do", 
 				type:"get",
 				dataType:"html",
 				success:function(data){
 					$(".alldiv").html(data);	
-					$(".mypagemain2").css({"font-size":"30px"});
+					$(".mypagemain2").css({"font-size":"22px"});
 					$(".mypagemain1").css({"font-size":"1.17em"});
 				}
 			})
@@ -140,19 +169,60 @@
 	});
 	
 	$(function(){
-		$(".mypagemain1").click(function(){
+		$(".mypagemain1").click(function(){  //내정보로
 			$.ajax({
 				url:"<%=request.getContextPath()%>/mypage/myPageList",
 				type:"get",
 				dataType:"html",
 				success:function(data){
 					$(".alldiv").html(data);		
-					$(".mypagemain1").css({"font-size":"30px"});
+					$(".mypagemain1").css({"font-size":"22px"});
 					$(".mypagemain2").css({"font-size":"1.17em"});
 				}
 			})
 		});			
 	});
+	
+	
+	$(function(){
+		$(".crystal").click(function(){  //개인정보수정으로
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/crystal.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	
+	$(function(){
+		$(".outmoney").click(function(){  //출금으로
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/outmoney.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	
+	$(function(){
+		$(".enrollstore").click(function(){  //매장등록
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/enrollstore.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	
 	</script>
 </body>
 </html>

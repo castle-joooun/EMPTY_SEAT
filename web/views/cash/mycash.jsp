@@ -39,13 +39,12 @@
 		     <input type="button" class="gomoney" value="충전하기">
     </form> 
 </div>
-<!-- <p>아임 서포트 결제 모듈 테스트 해보기</p>
-<button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button> -->
 <script>
 
 $(".gomoney").click(function () {
 	var thisismoney=parseInt($('#thisismoney option:selected').val()); //선택된 결제금액의 값
 	var pay=$('input[name="pay"]:checked').val(); //선태된 결제방법의 값
+	var userId="<%=loginMember.getUserId()%>";
 	var IMP = window.IMP; 
 	IMP.init('imp94500117'); //가맹점 식별코드
 	IMP.request_pay({
@@ -71,8 +70,9 @@ $(".gomoney").click(function () {
 	$.ajax({
 		type:"post",
 		url:"<%=request.getContextPath()%>/test.do",
-		data:{"key1":rsp.paid_amount,
-			  "key2":pay	
+		data:{"amount":rsp.paid_amount,
+			  "pay":pay,
+			  "userId":userId
 		},
 		dataType:"json",
 		success:function(data){
