@@ -100,9 +100,37 @@ public class AdminService {
 	}
 	public int deleteStore(String id) {
 		Connection conn = getConnection();
-		int result = dao.deleteStore(conn,id);
-		if (result>0) commit(conn);
-		else rollback(conn);
+		int result = dao.deleteStoreImg(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);	
+		}
+		result =dao.deleteStoreSeat(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		//result =dao.deleteStoreComment(conn,id);
+//		if (result>0) {
+//			commit(conn);
+//			
+//		}
+//		else {
+//			rollback(conn);
+//			close(conn);
+//			return result;
+//		}
+		result=dao.deleteStore(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}

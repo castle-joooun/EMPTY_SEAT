@@ -157,7 +157,8 @@
             	url:"<%=request.getContextPath()%>/admin/user/ajaxPaging",
 				dataType : "json",
 				type : "get",
-				data : {"cPage" :cPage,"numPerPage" :numPerPage},
+				data : {
+					"cPage" :cPage,"numPerPage" :numPerPage},
 				success : function(data) {
 					console.log("성공했을때");
 					if(data.length>1){

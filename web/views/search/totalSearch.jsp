@@ -7,7 +7,11 @@
 <%@ page import="java.util.ArrayList" %>
 
 <!--------------------------------------------------------------------------------------------------->
+<%
+	String keyword = request.getParameter("searchBox");
 
+
+%>
 <body>
 
 	<!-- 오른쪽 실시간 검색결과 -->
@@ -67,6 +71,33 @@
 		</div>
 
 	<script type="text/javascript" src="js/totalSearch.js?ver=0"></script>
+	<script>
+		$(function(){
+			requestData(1,10,<%=keyword%>);
+		})
+		function requestData(cPage,numPerPage,keyword){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/totalSearch/ajaxPaging",
+				dataType : "json",
+				type:"get",
+				data:{"cPage":cPage,"numPerPage":numPerPage,"keyword":keyword},
+				success:function(data){
+					
+				},
+				error:function(request,status,error){
+					if (request.status == 404)
+						console.log("페이지를 찾을 수 없습니다.");
+						$(".paging").html("페이지를 찾을 수 없습니다.");
+				}
+				}
+			})
+		}
+	
+	
+	</script>
+	
+	
+	
 </body>
 
 </html>

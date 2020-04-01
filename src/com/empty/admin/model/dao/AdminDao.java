@@ -292,32 +292,81 @@ public class AdminDao {
 		return result;
 	}
 
-	public int deleteStore(Connection conn, String id) {
+	public int deleteStoreImg(Connection conn, String id) {
 
 		PreparedStatement pstmt = null;
-		
+		String sql = prop.getProperty("deleteStoreImg");
 		int result = 0;
-		
-		for(int i =0;i<3;i++) {
-			String sql = "";
-			try {
-				switch(i) {
-				case 0 :sql=prop.getProperty("deleteStoreImg");break;
-				case 1:sql=prop.getProperty("deleteStoreSeat");break;
-				case 2:sql= prop.getProperty("deleteStore");break;
-				//나중에 user_comment테이블에서도 삭제 해야함
-				}
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, id);
-				result += pstmt.executeUpdate();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-			}
+
+		try {
+			//나중에 user_comment테이블에서도 삭제 해야함
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result= pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
-		System.out.println(result);
+		System.out.println("사진삭제"+result);
 		return result;
 	}
-	
+
+
+	public int deleteStoreSeat(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteStoreSeat");
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println("시트삭제"+result);
+		return result;
+	}
+	//유저코멘트 완성되면 이것도 추가해야함
+//	public int deleteStoreComment(Connection conn, String id) {
+//		PreparedStatement pstmt = null;
+//		String sql = prop.getProperty("deleteStoreComment");
+//		int result = 0;
+//
+//		try {
+//			
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, id);
+//			result = pstmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(pstmt);
+//		}
+//		return result;
+//	}
+
+	public int deleteStore(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteStore");
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println("스토어삭제"+result);
+		return result;
+	}
+
+
+
 }
