@@ -1,11 +1,12 @@
 package com.empty.admin.model.service;
 
 import static com.empty.common.JDBCTemplate.close;
-import static com.empty.common.JDBCTemplate.getConnection;
 import static com.empty.common.JDBCTemplate.commit;
+import static com.empty.common.JDBCTemplate.getConnection;
 import static com.empty.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.empty.admin.model.dao.AdminDao;
@@ -67,13 +68,23 @@ public class AdminService {
 		return result;
 		
 	}
-	public int updateAppr(String[] userid) {
-		Connection conn = getConnection();
-		int result = dao.updateAppr(conn,userid);
-		if(result>0)commit(conn);
-		else rollback(conn);
-		return result;
-	}
+//	public int updateAppr(String[] userid) {
+//		Connection conn = getConnection();
+//		int result=0;
+//		for(String s: userid) {
+//			int i=0;
+//			i = dao.updateAppr(conn,s);
+//			if(i>0) {
+//				commit(conn);
+//				result+=i;
+//			}
+//			else {
+//				rollback(conn);
+//			}
+//		}
+//		
+//		return result;
+//	}
 	public List<Store> selectStore(int cPage,int numPerPage) {
 		Connection conn = getConnection();
 		List<Store> list = dao.selectStore(conn,cPage,numPerPage);
@@ -89,12 +100,41 @@ public class AdminService {
 	}
 	public int deleteStore(String id) {
 		Connection conn = getConnection();
-		int result = dao.deleteStore(conn,id);
-		if (result>0) commit(conn);
-		else rollback(conn);
+		int result = dao.deleteStoreImg(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);	
+		}
+		result =dao.deleteStoreSeat(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		//result =dao.deleteStoreComment(conn,id);
+//		if (result>0) {
+//			commit(conn);
+//			
+//		}
+//		else {
+//			rollback(conn);
+//			close(conn);
+//			return result;
+//		}
+		result=dao.deleteStore(conn,id);
+		if (result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
+	
 	
 	
 }
