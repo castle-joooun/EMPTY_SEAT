@@ -56,6 +56,6 @@ $("#store").click(function() {
 
 //페이지 더보기 클릭시 버튼 사라지기
 $("button[name='moreSearch']").click(function(){
-	console.log("되냐");
+	
 	 $(event.target).hide();
 })

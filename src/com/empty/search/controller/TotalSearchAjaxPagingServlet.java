@@ -52,7 +52,12 @@ public class TotalSearchAjaxPagingServlet extends HttpServlet {
 			list.add(pageBar);
 			list.add(totalData);
 		}else {
-			pageBar="검색결과가 없습니다.";
+			pageBar="<img src='/EMPTY/image/searchicon.png'style='witdh:25px;height:25px;'><p>&nbsp;&nbsp;검색된 결과가 없습니다.</p>"+
+					"<ul>"
+					+ "<li>단어의 철자가 정확한지 확인해 보세요.</li>"
+					+ "<li>검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.</li>"
+					+ "<li>검색 옵션을 변경해서 다시 검색해 보세요.</li>"
+					+ "</ul>";
 			list.add(pageBar);
 		}
 		response.setContentType("application/json;charset=UTF-8");
