@@ -1,4 +1,4 @@
-package com.empty.notice.model.dao;
+package com.empty.event.model.dao;
 
 import static com.empty.common.JDBCTemplate.close;
 
@@ -12,43 +12,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.empty.event.model.vo.Event;
 import com.empty.notice.model.vo.Notice;
 
-public class NoticeDao {
+public class EventDao {
 
 	private Properties prop = new Properties();
 
-	public NoticeDao() {
+	public EventDao() {
 		try {
-			String path = NoticeDao.class.getResource("/sql/notice/notice.properties").getPath();
+			String path = EventDao.class.getResource("/sql/event/event.properties").getPath();
 			prop.load(new FileReader(path));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<Notice> searchNotice(Connection conn, int cPage, int numPerPage){
+	public List<Event> searchEvent(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("searchNotice");
-		List<Notice> list = new ArrayList();
+		String sql = prop.getProperty("searchEvent");
+		List<Event> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
 			pstmt.setInt(2, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Notice n = new Notice();
-				n.setNoticeNo(rs.getInt("NOTICE_NO"));
-				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
-				n.setNoticeWriter(rs.getString("NOTICE_WRITER"));
-				n.setNoticeContent(rs.getString("NOTICE_CONTENT"));
-				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
-				n.setNoticeCount(rs.getInt("NOTICE_COUNT"));
-				list.add(n);
+				Event e = new Event();
+				e.setEventNo(rs.getInt("EVENT_NO"));
+				e.setEventTitle(rs.getString("EVENT_TITLE")); 
+				e.setEventWriter(rs.getString("EVENT_WRITER"));
+				e.setEventContent(rs.getString("EVENT_CONTENT"));
+				e.setEventDate(rs.getDate("EVENT_DATE"));
+				e.setEventCount(rs.getInt("EVENT_COUNT"));
+				list.add(e);
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(SQLException q) {
+			q.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
@@ -56,11 +57,11 @@ public class NoticeDao {
 		return list;
 	}
 
-	public int noticeCount(Connection conn) {
+	public int eventCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
-		String sql = prop.getProperty("noticeCount");
+		String sql = prop.getProperty("eventCount");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -74,74 +75,74 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int insertNotice(Connection conn, Notice n) {
+	public int insertEvent(Connection conn, Event e) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("insertNotice");
+		String sql = prop.getProperty("insertEvent");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setString(1, e.getEventTitle());
+			pstmt.setString(2, e.getEventContent());
 			result = pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(SQLException q) {
+			q.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
 		return result;
 	}
 
-	public Notice selectNotice(Connection conn, int no) {
+	public Event selectEvent(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("selectNotice");
-		Notice n = null;
+		String sql = prop.getProperty("selectEvent");
+		Event e = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				n = new Notice();
-				n.setNoticeNo(rs.getInt("NOTICE_NO"));
-				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
-				n.setNoticeWriter(rs.getString("NOTICE_WRITER"));
-				n.setNoticeContent(rs.getString("NOTICE_CONTENT"));
-				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
-				n.setNoticeCount(rs.getInt("NOTICE_COUNT"));
+				e = new Event();
+				e.setEventNo(rs.getInt("EVENT_NO"));
+				e.setEventTitle(rs.getString("EVENT_TITLE")); 
+				e.setEventWriter(rs.getString("EVENT_WRITER"));
+				e.setEventContent(rs.getString("EVENT_CONTENT"));
+				e.setEventDate(rs.getDate("EVENT_DATE"));
+				e.setEventCount(rs.getInt("EVENT_COUNT"));
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(SQLException q) {
+			q.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		return n;
+		return e;
 	}
 
-	public Notice selectNotice(Connection conn, int no, boolean hasRead) {
+	public Event selectEvent(Connection conn, int no, boolean hasRead) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("selectNotice");
-		Notice n = null;
+		String sql = prop.getProperty("selectEvent");
+		Event e = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				n = new Notice();
-				n.setNoticeNo(rs.getInt("NOTICE_NO"));
-				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
-				n.setNoticeWriter(rs.getString("NOTICE_WRITER"));
-				n.setNoticeContent(rs.getString("NOTICE_CONTENT"));
-				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
-				n.setNoticeCount(rs.getInt("NOTICE_COUNT"));
+				e = new Event();
+				e.setEventNo(rs.getInt("EVENT_NO"));
+				e.setEventTitle(rs.getString("EVENT_TITLE")); 
+				e.setEventWriter(rs.getString("EVENT_WRITER"));
+				e.setEventContent(rs.getString("EVENT_CONTENT"));
+				e.setEventDate(rs.getDate("EVENT_DATE"));
+				e.setEventCount(rs.getInt("EVENT_COUNT"));
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(SQLException q) {
+			q.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return n;
+		}return e;
 	}
 
 	public int updateCount(Connection conn, int no) {
@@ -160,10 +161,10 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int updateNotice(Connection conn, int no, String title, String content) {
+	public int updateEvent(Connection conn, int no, String title, String content) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("updateNotice");
+		String sql = prop.getProperty("updateEvent");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
@@ -178,10 +179,10 @@ public class NoticeDao {
 		return result;
 	}
 	
-	public int deleteNotice(Connection conn, int no) {
+	public int deleteEvent(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("deleteNotice");
+		String sql = prop.getProperty("deleteEvent");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
