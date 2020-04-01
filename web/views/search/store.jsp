@@ -20,7 +20,6 @@
 	String[] useCheck = ss.getSeatCheck().split(",");
 	int seatNum = 1;
 	int seatNum2 = 1;
-	String selectPc = "";
 %>
 
 
@@ -131,7 +130,8 @@
 
 	<div id="reservation">
 		<p id="storeReInfo">
-			매장 : <strong><%=s.getStoreName() %></strong>
+			매장 : <strong><%=s.getStoreName() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			선택자리 : <strong><span id="selectedSeatText"></span></strong>
 		</p>
 		<p id="userInfo">
 			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -153,16 +153,17 @@
 				</div>
 				<div class="reStepContent">
 					<label>
-						<input type="radio" name="time" value="1시간">1시간
+						<input type="radio" name="time" value="1">1시간
 					</label>
 					<label>
-						<input type="radio" name="time" value="2시간">2시간
+						<input type="radio" name="time" value="2">2시간
 					</label>
 					<label>
-						<input type="radio" name="time" value="3시간">3시간
+						<input type="radio" name="time" value="3">3시간
 					</label>
 					<label>
-						<input type="radio" name="time" id="ectTime"><input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
+						<input type="radio" name="time" id="ectTime">
+						<input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
 					</label>
 				</div>
 			</div>
@@ -172,20 +173,20 @@
 				</div>
 				<div style="position:realtive; display:inline-block; margin-top:15px">
 					<div style="position:relative; display:inline-block; float:left; text-align:right;">
-						<p>매장 : </p>
-						<p>매장운영시간 : </p>
-						<p>현재시간 : <p>
-						<p>이용시간 : </p>
-						<p>이용금액 : </p>
-						<p>결제 후 빈캐시 : </p>
+						<p>매장 :&nbsp;</p>
+						<p>매장운영시간 :&nbsp;</p>
+						<p>현재시간 : &nbsp;<p>
+						<p>이용시간 : &nbsp;</p>
+						<p>이용금액 : &nbsp;</p>
+						<p>결제 후 빈캐시 : &nbsp;</p>
 					</div>
 					<div style="position:relative; display:inline-block; float:left; text-align:left;">
 						<p> <strong><%=s.getStoreName() %></strong></p>
 						<p> <strong><%=s.getStoreTime() %></strong></p>
 						<p> <strong><span id="clock"></span></strong></p>
-						<p> <strong>0 시간</strong></p>
-						<p> <strong><%=1*1000 %>원</strong></p> <!-- 스토어프라이스로 넣어주기 -->
-						<p> <strong>0 빈캐시</strong></p>
+						<p> <strong><span id="willUseTime"></span> 시간</strong></p>
+						<p> <strong><span id="willPayMoney"></strong> 원</p> <!-- 스토어프라이스로 넣어주기 -->
+						<p> <strong><%=loginMember.getCash() %> 빈캐시</strong></p>
 					</div>
 					<div style="position:relative; display:inline-block; float:left; text-align:right;">
 						<p>매장 주소 : <strong><%=s.getStoreAddress() %></strong></p>
@@ -194,15 +195,21 @@
 				</div>
 					
 				<div id="viewSeat2">
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- 여기에 자리 들어가야댐!!!!!!!!!!! -->
-					<!-- css는 거의 다 했고, 반복문 들어가면 오류남. 왜그런지 해결하자. -->
+					<p id="reTitleSeat">선택하신 자리</p>
+					<table>
+						<%for(int i=1; i<=ss.getRow(); i++) { %>
+							<tr>
+							<%for(int n=1; n<=ss.getCol(); n++) { %>
+								<%if(!seatCheck[seatNum2-1].equals("0")) {%>
+									<td class="reSeat" value="<%=seatNum2%>"></td>
+								<%}else { %>
+									<td></td>
+								<%} %>
+								<%seatNum2++; %>
+							<%} %>
+							</tr>
+						<%} %>
+					</table>
 				</div>
 			</div>
 		</center>
@@ -215,6 +222,9 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
+		let selectPcRow = 0;
+		let selectPcCol = 0;
+	
 	  //즐겨찾기
 	    $("#favorite").click(function () {
 	    	
@@ -299,6 +309,19 @@
 	    
 	 	// 예약하기 띄우기
 	    $(".reservationBtn").click(function() {
+	    	$("#selectedSeatText").html($(this).val());
+	    	
+	    	selectPcRow = Math.floor($(this).val() / <%=ss.getCol()%>);
+	    	selectPcCol = $(this).val() % <%=ss.getCol()%>;
+	    	if(selectPcCol == 0) {
+	    		selectPcRow -= 1;
+	    		selectPcCol = <%=ss.getCol()%>;
+	    	}
+	    	
+	    	console.log("로우 : " + selectPcRow + ", 컬 : " + selectPcCol);
+	    	
+	    	$("#viewSeat2").children().eq(1).children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("selectSeat");
+	    	$(".selectSeat").html("선택");
 	    	$("#reservation").toggle();
 	    })
 	    
@@ -313,7 +336,15 @@
 	    		$("#reStep1").toggle();
 	    		$("#reStep2").toggle();
 	    		
-	    		$("#reservation").height("1000px");
+				console.log($('input:radio[name="time"]:checked').val());
+				
+				let usePcTime = $('input:radio[name="time"]:checked').val();
+				let usePcMoney = <%=s.getStorePrice()%> * usePcTime;
+				
+				$("#willUseTime").html(usePcTime);
+				$("#willPayMoney").html(usePcMoney);
+	    		
+	    		$("#reservation").height("750px");
 	    		
 	    		// 예약하기에서 다시 실행
 	    	    var mapContainer = document.getElementById('map2'), // 지도를 표시할 div 
@@ -364,6 +395,12 @@
 	    })
 		$("#reCan").click(function() {
 			if(checkOk==0) {
+				$(".reSeat").each(function() {
+					if($(this).hasClass("selectSeat")) {
+						$(this).html("");
+						$(this).removeClass("selectSeat");
+					}
+				})
 				$("#reservation").toggle();
 			} else {
 				$("#reStep1").toggle();
@@ -371,12 +408,15 @@
 				$("#reOk").html("다음");
 				$("#reCan").html("취소");
 				$("#reservation").height("310px");
+				
 				checkOk = 0;
 			}
 		})
     })
 	  
-	
+    $("#ectNum").change(function() {
+    	$("#ectTime").val($(this).val());
+    })
     </script>
 
 	
