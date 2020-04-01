@@ -55,7 +55,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 				
 				list.add(s);
@@ -88,7 +89,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 			}
 			

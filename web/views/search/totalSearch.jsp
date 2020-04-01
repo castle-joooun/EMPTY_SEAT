@@ -102,7 +102,7 @@ org.jsoup.select.Elements"%>
 		%>
 	</div>
 
-	<script type="text/javascript" src="js/totalSearch.js?ver=0"></script>
+	<script type="text/javascript" src="js/totalSearch.js?ver=2"></script>
 </body>
 
 </html>

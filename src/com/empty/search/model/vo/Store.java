@@ -12,12 +12,21 @@ public class Store {
 	private String storeLogo;
 	private String email;
 	private String enrollDate;
+	private int storePrice;
 	
 	
-	
-
 	public Store() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	public int getStorePrice() {
+		return storePrice;
+	}
+
+	public void setStorePrice(int storePrice) {
+		this.storePrice = storePrice;
 	}
 
 	public String getStoreId() {
@@ -108,7 +117,7 @@ public class Store {
 	}
 
 	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
-			String storeFacility, String storeAddress, String storeLogo) {
+			String storeFacility, String storeAddress, String storeLogo,int storePrice) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -118,6 +127,7 @@ public class Store {
 		this.storeFacility = storeFacility;
 		this.storeAddress = storeAddress;
 		this.storeLogo = storeLogo;
+		this.storePrice = storePrice;
 	}
 	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
 			String storeFacility, String storeAddress, String storeLogo, String email, String enrollDate) {
