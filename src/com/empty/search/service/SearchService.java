@@ -113,6 +113,10 @@ public class SearchService {
 
 	
 	
+//	public List crawl() {
+//		List list = dao.crawl();
+//		return list;
+//	}
 	
 	
 	

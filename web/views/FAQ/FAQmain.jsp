@@ -7,12 +7,13 @@
 
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/FAQ/FAQmain.css?ver=2" type="text/css" />
+	href="<%=request.getContextPath()%>/css/FAQ/FAQmain.css?ver=0" type="text/css" />
 	
 
 <body>
 
 	<div id="board">
+	<h2>FAQ</h2>
 		<table>
 			<thead>
 				<tr>
@@ -70,7 +71,6 @@
 	</div>
 
 
-	<script type="text/javascript" src="js/service.js"></script>
 	<script>
 		function fn_link(no){
 			$("#linkF>input").val(no);

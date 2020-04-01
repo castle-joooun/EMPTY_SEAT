@@ -29,10 +29,16 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="content" cols=51 rows=10 required></textarea></td>
+				<td><textarea name="content" cols=51 rows=10 required><%=f.getContent() %></textarea></td>
 			</tr>
 		</table>
 		<input type="submit" value="수정완료" id="FAQupdateSubmitBtn">
-		<input type="reset" value="취소">
+		<input type="button" value="취소" onclick="javascript:history.back(-1)">
 	</form>
 </section>
+
+<script>
+	function updateResetBtn(){
+		location.replace("<%=request.getContextPath()%>/")
+	}
+</script>
