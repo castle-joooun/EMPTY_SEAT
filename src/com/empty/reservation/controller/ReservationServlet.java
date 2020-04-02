@@ -34,8 +34,8 @@ public class ReservationServlet extends HttpServlet {
 		int seat = Integer.parseInt(request.getParameter("seat")) -1;
 		int pay = Integer.parseInt(request.getParameter("pay"));
 		
-		int userPay = new ReservationService().userPay(userId, pay);
-		if(userPay>0) {
+		Member m = new ReservationService().userPay(userId, pay);
+		if(m != null) {
 			System.out.println("유저 돈 깍임!");			
 		}
 		
@@ -49,7 +49,11 @@ public class ReservationServlet extends HttpServlet {
 		String tranSeats = "";
 		
 		for(int i=0; i<list.length; i++) {
-			tranSeats += list[i] + ",";
+			if(i == list.length-1) {
+				tranSeats += list[i];
+			} else {
+				tranSeats += list[i] + ",";
+			}
 		}
 		
 		int useSeat = new ReservationService().inputSeat(storeId, tranSeats);
@@ -58,6 +62,10 @@ public class ReservationServlet extends HttpServlet {
 		}
 		
 		System.out.println("실행됐어!!");
+		
+		
+		
+		//response.getWriter().print("성공");
 	}
 
 	/**

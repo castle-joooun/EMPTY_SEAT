@@ -406,18 +406,29 @@
 	    		$("#reservation").toggle();
 	    		console.log("토글이 닫혀서 되는거");
 	    		if(reservationCheck) {
-	    			$.ajax({
+ 	    			$.ajax({
 	    				url:"<%=request.getContextPath()%>/reservation.do",
 	    				type:"post",
-	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
 	    					"seat":selectedPcSeat, "pay":usePcMoney},
-	    					success:function(data) {
-	    					alert("성공적으로 예약이 되었습니다.");
-	    	    			$("#viewSeat").children().eq(1).children().children().eq(selectPcRow).children().children().eq(selectPcCol-1).addClass("fullSeat");
-	    	    			$(".fullSeat").removeClass("emptySeat");	 
-	    	    			$(".fullSeat").html("사용중");
-	    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+	    				success:function(data) {
+		    					alert("성공적으로 예약이 되었습니다.");
+		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("fullSeat");
+		    	    			$(".fullSeat").removeClass("emptySeat");	 
+		    	    			$(".fullSeat").html("사용중");
+		    	    			$(".reSeat").removeClass("selectSeat");
+		    	    			$(".reSeat").html("");
+		    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+		    	    			$("#reOk").html("다음");
+		    					$("#reCan").html("취소");
+		    	    			$("#reStep1").toggle();
+		    		    		$("#reStep2").toggle();
+		    					$("#reservation").height("310px");
+		    					console.log(<%=loginMember.getCash()%>);
+	    				},error:(r,e,m)=>{
+	    					console.log(r);
+	    					console.log(e);
+	    					console.log(m);
 	    				}
 	    			})
 	    		} else {

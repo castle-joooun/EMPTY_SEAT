@@ -25,13 +25,13 @@ public class ReservationService {
 	}
 	
 	public String seatList(String storeId) {
-		Connection conn = null;
+		Connection conn = getConnection();
 		String seats = dao.seatList(conn, storeId);
 		return seats;
 	}
 	
 	public int inputSeat(String storeId, String seats) {
-		Connection conn = null;
+		Connection conn = getConnection();
 		int result = dao.inputSeat(conn, storeId, seats);
 		if(result>0) commit(conn);
 		else rollback(conn);
