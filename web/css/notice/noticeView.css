@@ -1,0 +1,79 @@
+body{
+   width: 1366px;
+}
+
+#noticeViewDiv{
+
+   height: auto;
+   text-align: center;
+   margin-top: 70px;
+}
+
+#noticeViewHead{
+   color: #5e64b1;
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+}
+
+#noticeWriteBtn{
+   background-color: #5e64b1;
+   color: white;
+   border-radius: 5px;
+   height: 30px;
+   font-size: 18px;
+   text-align: left;
+   font-weight: bolder;
+   margin-left: 850px;
+   margin-bottom: 5px;
+}
+
+
+
+thead>tr>th{
+   border-bottom: 1px solid #e6e8eb;
+}
+
+tbody>tr>td{
+   padding: 10px 7px;
+   border-bottom: 1px solid #e6e8eb;
+}
+
+.noticeViewTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
+
+}
+
+
+.noticeContent{
+	height: 300px;
+}
+#noticeTitleTd{
+	width:60%;
+}
+
+#noticeUpdateBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  rgb(94, 100, 177);
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+#noticeDeleteBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  tomato;
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+
