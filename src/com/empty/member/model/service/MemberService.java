@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import com.empty.member.model.dao.MemberDao;
 import com.empty.member.model.vo.Member;
+import com.empty.search.model.vo.Store;
 
 public class MemberService {
 	
@@ -71,6 +72,11 @@ public class MemberService {
 		boolean flag = dao.selectCheckEmail(conn, email);
 		close(conn);
 		return flag;
+	}
+	
+	public int insertStore(Store s) {
+		Connection conn = getConnection();
+		int result = dao.insertStore(conn,s);
 	}
 
 }

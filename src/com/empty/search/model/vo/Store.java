@@ -10,9 +10,24 @@ public class Store {
 	private String storeFacility;
 	private String storeAddress;
 	private String storeLogo;
+	private String storePrice;
 	
 	public Store() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
+			String storeFacility, String storeAddress, String storeLogo, int storePrice) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeTime = storeTime;
+		this.storeInfo = storeInfo;
+		this.storeFacility = storeFacility;
+		this.storeAddress = storeAddress;
+		this.storeLogo = storeLogo;
+		this.storePrice = storePrice;
 	}
 
 	public String getStoreId() {
@@ -79,24 +94,12 @@ public class Store {
 		this.storeLogo = storeLogo;
 	}
 
-	@Override
-	public String toString() {
-		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storePhone=" + storePhone + ", storeTime="
-				+ storeTime + ", storeInfo=" + storeInfo + ", storeFacility=" + storeFacility + ", storeAddress="
-				+ storeAddress + ", storeLogo=" + storeLogo + "]";
+	public String getStorePrice() {
+		return storePrice;
 	}
 
-	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
-			String storeFacility, String storeAddress, String storeLogo) {
-		super();
-		this.storeId = storeId;
-		this.storeName = storeName;
-		this.storePhone = storePhone;
-		this.storeTime = storeTime;
-		this.storeInfo = storeInfo;
-		this.storeFacility = storeFacility;
-		this.storeAddress = storeAddress;
-		this.storeLogo = storeLogo;
+	public void setStorePrice(String storePrice) {
+		this.storePrice = storePrice;
 	}
 	
 	

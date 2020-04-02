@@ -206,4 +206,10 @@ public class MemberDao {
 		return flag;
 	}
 	
+	public int insertStore(Connection conn, Store s) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("insertStore");
+	}
+	
 }

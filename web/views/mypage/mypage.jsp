@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57f292cf81a06c030ca86c61e79b1b56"></script>
+	
+	
 <body>
 	<h3 class="mypagemain1">MY PAGE</h3>
 	<h3 class="mypagemain2">USE</h3>

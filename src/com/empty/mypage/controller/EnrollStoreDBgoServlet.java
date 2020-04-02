@@ -1,11 +1,16 @@
 package com.empty.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.empty.member.model.service.MemberService;
+import com.empty.search.model.vo.Store;
+
 
 /**
  * Servlet implementation class EnrollStoreDBgoServlet
@@ -33,9 +38,13 @@ public class EnrollStoreDBgoServlet extends HttpServlet {
 		String storeTimeclose = request.getParameter("storeTimeclose");
 		String storeInfo = request.getParameter("storeInfo");
 		String storeAddress = request.getParameter("storeAddress");
+		//int storePrice = Integer.parseInt(request.getParameter("storePrice"));
 		String storePrice = request.getParameter("storePrice");
-		String storeFacirity =request.getParameter("storeFacirity");
+		//String storeFacirity =request.getParameter("storeFacirityData");
 		String userId = request.getParameter("userId");
+		String[] storeFacirity = request.getParameterValues("storeFacirity");
+		String fileupload = request.getParameter("fileupload");
+		System.out.println(fileupload);
 		System.out.println(storeName);
 		System.out.println(storePhone);
 		System.out.println(storeTimestart);
@@ -43,8 +52,24 @@ public class EnrollStoreDBgoServlet extends HttpServlet {
 		System.out.println(storeInfo);
 		System.out.println(storeAddress);
 		System.out.println(storePrice);
-		System.out.println(storeFacirity);
 		System.out.println(userId);
+		String storeFaciritys="";
+		for(int i=0;i<storeFacirity.length;i++) {
+			storeFaciritys +=storeFacirity[i]+",";
+		}
+		Store s = new Store();
+		s.setStoreName(storeName);
+		s.setStorePhone(storePhone);
+		s.setStoreTime(storeTimestart+" ~ "+storeTimeclose);
+		s.setStoreInfo(storeInfo);
+		s.setStoreAddress(storeAddress);
+		s.setStorePrice(storePrice);
+		s.setStoreId(userId);
+		s.setStoreFacility(storeFaciritys);
+		new MemberService().insertStore(s);
+	             
+
+
 	}
 
 	/**
