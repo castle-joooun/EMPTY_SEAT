@@ -12,7 +12,7 @@
 	<div>
 		<table>
 			<tr>
-				<th>글번호</th>
+				<th>번 호</th>
 				<td><%=n.getNoticeNo()%></td>
 			</tr>
 			<tr>
@@ -20,7 +20,7 @@
 				<td><%=n.getNoticeWriter()%></td>
 			</tr>
 			<tr>
-				<th>제목</th>
+				<th>제 목</th>
 				<td><%=n.getNoticeTitle()%></td>
 			</tr>
 			<tr>
@@ -29,10 +29,10 @@
 			</tr>
 			<tr>
 				<th>조회수</th>
-				<td><%=n.getNoticeContent()%></td>
+				<td><%=n.getNoticeCount()%></td>
 			</tr>
 			<tr>
-				<th>내용</th>
+				<th>내 용</th>
 				<td><%=n.getNoticeContent()%></td>
 			</tr>
 		</table>

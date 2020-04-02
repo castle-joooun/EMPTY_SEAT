@@ -12,7 +12,6 @@
 
 
 
-    <div class="alldiv clearl">
         <div id="signUpTitle">
             <h1>빈시트 <span style="color: rgb(94, 100, 177);">회원가입</span>을 환영합니다.</h1>
         </div>
@@ -293,7 +292,6 @@
 
 
 
-    </div>
     </body>
     <script src="<%=request.getContextPath()%>/js/signUpTerms.js"></script>
    

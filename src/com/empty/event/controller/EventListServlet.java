@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.empty.event.model.vo.Event;
 import com.empty.event.service.EventService;
+import com.empty.member.model.vo.Member;
 
 @WebServlet("/event")
 public class EventListServlet extends HttpServlet {
@@ -21,6 +23,11 @@ public class EventListServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member m = (Member) session.getAttribute("loginMember");
+		String id = m.getUserId();
+		boolean flag = new EventService().selectStoreId(id);
+		
 		int cPage;
 
 		try {
@@ -63,7 +70,8 @@ public class EventListServlet extends HttpServlet {
 		}else {
 			pageBar += "<a href='"+request.getContextPath() + "/event?cPage=" + (pageNo) + "'>[다음]</a>";					
 		}
-
+		
+		request.setAttribute("flag", flag);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/event/eventList.jsp").forward(request, response);

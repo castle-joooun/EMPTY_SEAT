@@ -3,18 +3,27 @@
 <%@ page import="java.sql.*,java.util.*,com.empty.event.model.vo.Event"%>
 <%
 	List<Event> list = (List) request.getAttribute("list");
+	boolean flag = (boolean)request.getAttribute("flag");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/event/eventList.css" type="text/css">
-	<div>
+<center>
+<section>
+	<div id="eventListDiv">
+		<p id="eventHead">이벤트 게시판</p>
+		<%
+			if(loginMember != null && flag){
+		%>
 		<div>
-			<button type="button" onclick="location.replace('<%=request.getContextPath()%>/eventWrite')">이벤트 작성</button>
+			<button type="button" id="eventWriteBtn" onclick="location.replace('<%=request.getContextPath()%>/eventWrite')">이벤트 작성</button>
 		</div>
-		<table>
+		<%} %>
+		<hr class="hr">
+		<table class="eventListTbl">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
+					<th>번 호</th>
+					<th>제 목</th>
 					<th>작성자</th>
 					<th>등록일</th>
 					<th>조회수</th>
@@ -32,9 +41,9 @@
 						for(Event e : list){
 				%>
 				<tr>
-					<td><%=e.getEventNo() %></td>
+					<td style="color: blue"><%=e.getEventNo() %></td>
 					<td>
-						<span onclick="link(<%=e.getEventNo()%>)">
+						<span class="innerContent" onclick="link(<%=e.getEventNo()%>)">
 							<%=e.getEventTitle() %>
 							<form action="<%=request.getContextPath()%>/event/eventView">
 								<input type="hidden" name="no" value="<%=e.getEventNo() %>">
@@ -54,11 +63,15 @@
 			<form action="<%=request.getContextPath()%>/event/eventView" id="linkF">
 				<input type="hidden" name="no">
 			</form>
-		<div id="pageBar">
-			<%=request.getAttribute("pageBar")%>
-		</div>
-
+		<hr class="hr">
+		<center>
+			<div id="pageBar">
+				<%=request.getAttribute("pageBar")%>
+			</div>
+		</center>
 	</div>
+</section>
+</center>
 		<script>
 		function link(no){
 			$("#linkF>input").val(no);

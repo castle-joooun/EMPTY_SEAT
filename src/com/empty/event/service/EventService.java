@@ -77,5 +77,17 @@ public class EventService {
 		return result;
 	}
 	
+	public boolean selectStoreId(String id) {
+		Connection conn = getConnection();
+		List list = dao.selectStoreId(conn, id);
+		boolean flag = false;
+		if(list.size() > 0) {
+			flag = true;
+		}
+		close(conn);
+		return flag;
+		
+	}
+	
 	
 }
