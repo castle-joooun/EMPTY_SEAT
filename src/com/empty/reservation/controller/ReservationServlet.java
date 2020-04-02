@@ -34,8 +34,8 @@ public class ReservationServlet extends HttpServlet {
 		int seat = Integer.parseInt(request.getParameter("seat")) -1;
 		int pay = Integer.parseInt(request.getParameter("pay"));
 		
-		Member m = new ReservationService().userPay(userId, pay);
-		if(m != null) {
+		int userPay = new ReservationService().userPay(userId, pay);
+		if(userPay>0) {
 			System.out.println("유저 돈 깍임!");			
 		}
 		
