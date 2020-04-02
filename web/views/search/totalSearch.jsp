@@ -16,7 +16,10 @@ org.jsoup.nodes.Element,
 org.jsoup.select.Elements"%>
 
 <!--------------------------------------------------------------------------------------------------->
+<%
 
+
+%>
 <body>
 
 	<!-- 오른쪽 실시간 검색결과 -->
@@ -56,21 +59,20 @@ org.jsoup.select.Elements"%>
 	</div>
 
 	<%
-		List<Store> list = (List) request.getAttribute("list");
-		int i = 1;
+		String searchBox = request.getParameter("searchBox");
+		System.out.println(searchBox);
 	%>
+	
 	<div id="searchResult">
-		<%
-			if (list.isEmpty()) {
-		%>
-		<h2>검색된 결과가 없습니다.</h2>
-		<%
+	<div id="dataCount"></div>
+	<div id="noneResult"></div>	
+		<%-- <%
 			} else {
 				for (Store s : list) {
 					String[] tags = s.getStoreFacility().split(", ");
-		%>
+		% --%>
 
-		<form action="store" method="post" onclick="submit()">
+		<%-- <form action="store" method="post" onclick="submit()">
 			<div class="result resultShadow" id="store"
 				onclick="location.href='<%=request.getContextPath()%>/store'">
 				<img src="image/퓨리.jpg" alt="" class="resultImg">
@@ -95,14 +97,82 @@ org.jsoup.select.Elements"%>
 					</p>
 				</div>
 			</div>
-		</form>
-		<%
-			}
-			}
-		%>
+		 </form>--%>
+		
 	</div>
 
 	<script type="text/javascript" src="js/totalSearch.js?ver=2"></script>
+	<script>
+		$(function(){
+			 requestData('<%=searchBox%>',1,5);
+			
+		})
+		function requestData(keyword,cPage,numPerPage){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/totalSearch/ajaxPaging",
+				dataType:"json",
+				type:"post",
+				data:{"keyword":keyword,"cPage":cPage,"numPerPage":numPerPage},
+				success:function(data){
+					console.log(data[data.length-1]);
+					
+					if(data.length>1){
+					
+						if(cPage==1){
+							$("#dataCount").html("총 검색결과 "+data[data.length-1]+"개 입니다.");
+						}else{
+								
+								$(".btnContainer").hide();
+							
+						}
+					
+						for(let i = 0; i<data.length-2;i++){
+							
+							console.log(data[i]['storeFacility']);
+							var tags = data[i]['storeFacility'].split(", ");
+							var str = "";
+							for(let j=0;j<tags.length;j++){
+								str+="#"+tags[j]+" ";
+							}
+							console.log(str);
+							$("#searchResult").append('<form action="store" method="post" onclick="submit()">'+
+									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/store">'+
+										'<img src="'+data[i]["storeLogo"]+'" alt="" class="resultImg">'+
+										'<div class="resultText">'+
+											'<p class="resultTitle">'+data[i]['storeName']+'</p>'+
+											'<p class="resultContent">'+data[i]['storeInfo']+'</p>'+
+											'<p class="resultTag">'+
+												'<input type="hidden" name="storeId" value="'+data[i]['storeId']+'">'+
+												'<input type="hidden" name="storeName" value="'+data[i]['storeName']+'">'+
+												'<input type="hidden" name="userId" value="'+data[i]["storeId"]+'">'+
+												'<input type="hidden" name="searchText" value="<%=searchBox%>">'+
+												str+
+											'</p>'+
+											'</div>'+
+											'</div>');
+									
+						}
+						$("#searchResult").append(data[data.length-2]);
+					}else{
+						
+						$(".btnContainer").hide();
+						if(cPage==1){
+							$("#noneResult").append(data[0]);
+								
+						}
+						
+					}
+					
+				}
+					
+					
+			})
+			
+		}
+		
+		
+	
+	</script>
 </body>
 
 </html>

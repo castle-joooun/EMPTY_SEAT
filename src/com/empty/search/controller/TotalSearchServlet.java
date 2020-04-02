@@ -35,26 +35,8 @@ public class TotalSearchServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
-		String searchBox = request.getParameter("searchBox");
-		List<Store> list = null;
-		
-		/* 검색어가 비어있으면 안넘기는거 연구하기
-		 * if(searchBox.equals("") && searchBox==null) {
-		 * request.getRequestDispatcher("/noneSearch.jsp").forward(request, response); }
-		 */
-		
-		
-		try {
-			list = new SearchService().totalSearch(searchBox);
-		} catch(NullPointerException e) {
-			request.getRequestDispatcher("/views/search/noneSearch.jsp").forward(request, response);
-		}
-		
-		System.out.println("서블릿 " + list);
-
-		request.setAttribute("list", list);
-		request.setAttribute("searchText", searchBox);
+		String searchText = request.getParameter("searchBox");
+		request.setAttribute("searchText", searchText);
 		request.getRequestDispatcher("/views/search/totalSearch.jsp").forward(request, response);
 	}
 

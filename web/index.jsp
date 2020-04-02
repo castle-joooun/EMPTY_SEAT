@@ -49,6 +49,7 @@
     <header>
         <div>
             <a href="<%=request.getContextPath()%>">
+
                 <!--로고 변하게 하기 -->
                 <img id="mainLogo" src="image/로고-test.png" width="150px"> <!-- 원래 로고 -->
                 <!-- <img id="transLogo" src="image/빈시트500-1-test.png" width="150px"> -->
@@ -110,12 +111,12 @@
 			<div class="container">
 				<ul>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+						<a class="link" href="<%=request.getContextPath()%>/signUpChoice">회원가입</a>
 					</li>
 					<br>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+						<a class="link" href="<%=request.getContextPath()%>/findIdView">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/findPwView">&nbsp;비밀번호 찾기</a></li>
 					</div>
 				</ul>
 			</div>

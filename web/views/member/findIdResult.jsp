@@ -16,10 +16,11 @@
 	<hr class="line">
 </div>
 
+<center>
 <div class="tabContainer">
-	<div id="tab-1" class="tab-content current">
-		<div class="textInfor">
-			<h3 class="h3">
+	<div>
+		<div>
+			<h3>
 			<%if(userId != null){ %>
 				<span>회원님의 아이디는 [<span style="color: rgb(94, 100, 177);"><%=userId%></span>]입니다.</span>
 			<%}else{ %>
@@ -27,14 +28,15 @@
 			<%} %>
 			</h3>
 			<%if(userId != null){ %>
-			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/views/member/findPw.jsp'">비밀번호 찾기</button>
+			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/findPwView'">비밀번호 찾기</button>
 			<%}else{ %>
-			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/views/member/signUpChoice.jsp'">회원가입</button>
+			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/signUpChoice'">회원가입</button>
 			<%} %>
-			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>'">홈으로</button>
+			<button class="findBtn" type="button" onclick="location.href='<%=request.getContextPath()%>/home'">홈으로</button>
 		</div>
 	</div>
 </div>
+</center>
 <hr class="line">
 
 <script type="text/javascript"

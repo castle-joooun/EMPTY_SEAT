@@ -43,16 +43,19 @@
 <body>
 	<header style="height: 123px;">
 		<div>
-			<!--로고 변하게 하기 -->
-			<img id="mainLogo" class="hover" src="<%=request.getContextPath()%>/image/빈시트500-2.png" width="150px">
-			<!-- 원래 로고 -->
-			<img id="transLogo" src="<%=request.getContextPath()%>/image/빈시트500-1.png" width="150px">
+			<a href="<%=request.getContextPath()%>/home">
+				<!--로고 변하게 하기 -->
+				<img id="mainLogo" class="hover" src="<%=request.getContextPath()%>/image/빈시트500-2.png" width="150px">
+				<!-- 원래 로고 -->
+				<img id="transLogo" src="<%=request.getContextPath()%>/image/빈시트500-1.png" width="150px">
+			</a>
 		</div>
 		<center>
 			<!-- 상단고정 메뉴바 -->
 			<span id="menubar"> <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
-				<p id="main">
-					<a href="<%=request.getContextPath() %>">MAIN</a>
+				<p id="main" class="mainHover">
+					<a href="<%=request.getContextPath() %>" >MAIN</a>
+
 				</p>
 				<p id="introduce" class="mainHover">
 					<a href="introduce.html">INTRODUCE</a>
@@ -111,12 +114,12 @@
 			<div class="container">
 				<ul>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+						<a class="link" href="<%=request.getContextPath()%>/signUpChoice">회원가입</a>
 					</li>
 					<br>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+						<a class="link" href="<%=request.getContextPath()%>/findIdView">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/findPwView">&nbsp;비밀번호 찾기</a></li>
 					</div>
 				</ul>
 			</div>
@@ -147,12 +150,12 @@
 			<div class="container">
 				<ul>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+						<a class="link" href="<%=request.getContextPath()%>/signUpChoice">회원가입</a>
 					</li>
 					<br>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+						<a class="link" href="<%=request.getContextPath()%>/findIdView">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/findPwView">&nbsp;비밀번호 찾기</a></li>
 					</div>
 				</ul>
 			</div>
@@ -175,17 +178,3 @@
 	<!-- 미들 바 -->
 	<nav id="middle">
 		<p id="middleText">세상의 모든 자리 찾기</p>
-		<div id="subMenu">
-				<span id="mainSub">
-					<span id="baseSubMenu">
-						<a href="main.html" style="color: #ff7531">통합검색</a>
-					</span> 
-					<span class="subHover">
-						<a href="">지역검색</a>
-					</span>
-					<span class="subHover">
-						<a href="">즐겨찾기</a>
-					</span>
-				</span>
-		</div>
-	</nav>
