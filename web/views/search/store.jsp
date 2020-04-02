@@ -21,7 +21,7 @@
 	String[] useCheck = ss.getSeatCheck().split(",");
 	int seatNum = 1;
 	
-	List<Comment> list = (List)request.getAttribute("commentList");
+	List<Comment> list = (List)request.getAttribute("list");
 %>
 <!-- 댓글 css -->
 	<link rel="stylesheet"`
@@ -119,89 +119,126 @@
 		</center>
 	</div>
 
-<!-- 댓글 -->
+
+	<!-- 댓글 -->
 	<div id="comment">
-	<form action="<%=request.getContextPath() %>/comment/storeCommentInsert" method="post">
-		
-		
-		<table>
-			<tr>
-			
-				<th>댓글</th>
-		
-			</tr>
-			<tr>
-			<form action="<%=request.getContextPath() %>/comment/storeCommentInsert" method="post">
-				<td><input type="text" id="commentInput" name="userComment"/></td>
-				<td><button id="commentBtn"  name="commentBtn" onclick="fn_comment_btn">등록</button></td>
-				<td><input type="hidden" name="commentWriter" value="<%=loginMember !=null?loginMember.getUserId():""%>"/>
-				<td><input type="hidden" name="commentLevel"	 value="1"/>
-		</tr>
+	
 
-			</form>
-	</table>
+					<th>댓글</th>
 
-		<% if(list!=null && !list.isEmpty()){ 
-				for(Comment c : list) {
-					if(c.getCommentLevel()==1){
-				%>
-		<table class="userTable">	
-				<tr>
-					<td>
-						<th ><%=c.getCommentWriter()%></th>
-						<td class="userDate"><%=c.getCommentDate() %></td>
-						<br/>
-						<%=c.getUserComment() %>
-					</td>
-		
 				</tr>
-		</table>		
-			<%	}else{%>
-		<table class="storeTable">	
 				<tr>
-					<td>
-						<th><%=c.getCommentWriter() %></th>
-						<td ><%=c.getCommentDate() %></td>
-						<br/>
-						<%=c.getUserComment() %>
-					</td>
-					<td></td>
+					<form
+						action="<%=request.getContextPath()%>/comment/storeCommentInsert"
+						method="post">
+						<td><input type="text" id="commentInput" name="userComment" /></td>
+						<td><button id="commentBtn" name="commentBtn"
+								onclick="fn_comment_btn">등록</button></td>
+						<td><input type="hidden" name="commentWriter"
+							value="<%=loginMember != null ? loginMember.getUserId() : ""%>" />
+						<td><input type="hidden" name="commentLevel" value="1" />
 				</tr>
-			<%	}
-			   }//for
-			 }//if %>  
-		</table>
-
-
-	</div>     
-			</div> 
- <!-- 댓글 -->
- 
- <!--  뎃글 페이징  -->
- 
- 	<div id='pageBar'>
-			<%=request.getAttribute("pageBar") %>
-		</div>
-
- <!--  뎃글 페이징  -->
-
- <script>
- 
+				</form>
+</div>
+	<script>
+//댓글 스크립트 
  $(function(){
 		$("#commentInput").focus(function(){
-			if(<%=loginMember==null%>){
+			if(<%=loginMember == null%>){
 				alert("로그인 후 이용하세요");
 				$("#userId").focus();
 			}
-		})
+		});
 	});
+</script>
+		<table class="userTable">
+				<%
+					if (list != null && !list.isEmpty()) {
+						for (Comment c : list) {
+							if (c.getCommentLevel() == 1) {
+				%>
+			
+					<tr>
+						<sub><%=c.getCommentWriter()%></sub>
 
-//댓글기능
+								<div style="text-align: right;">
+									<sub><%=c.getCommentDate()%></sub>
+								</div> 
+								<%=c.getUserComment()%>
 
-	 
+								<div style="text-align: right;">
+
+									<button class="recommentBtn" value="<%=c.getCommentNo()%>">답글</button>
+
+									<form
+										action="<%=request.getContextPath()%>/comment/storeCommentUpdate"
+										method="post">
+										<button class="recommentBtn">수정</button>
+									</form>
+
+									<form
+										action="<%=request.getContextPath()%>/comment/storeCommentDelete"
+										method="post">
+										<button class="recommentBtn">삭제</button>
+									</form>
+								</div>
+					</tr>
+
+				</table>
+
+
+				<%
+					} else {
+				%>
+
+				<table class="storeTable">
+					<tr>
+						<td>
+						<th><%=c.getCommentWriter()%></th>
+						<td><%=c.getCommentDate()%></td>
+						<br />
+						<%=c.getUserComment()%>
+						</td>
+						<td></td>
+					</tr>
+					<%
+						}
+							} //for
+						} //if
+					%>
+				</table>
+			</table>
+	
+
+
+	<!-- 댓글 -->
+
+	<!--  뎃글 페이징  -->
+
+	<div id='pageBar'>
+		<%=request.getAttribute("pageBar")%>
+	</div>
+
+	<!--  뎃글 페이징  -->
+
+
+
+
+<script>
+
+	 	$(".recommentBtn").click(function(){
+				if(<%=loginMember != null%>){
+					const tr=$("<tr>");
+					const td=$("<td>").css({
+						"display":"none","text-align":"left"
+					}).attr("colspan",2);
+					const form=$("<form>").attr({
+						"action":"<%=request.getContextPath()%>/comment/storeCommentInsert",
+						"method":"post"
+					});
  </script>
 
-<!-- 댓글 -->
+	<!-- 댓글 -->
 
 	<div id="reservation">
 		<p id="storeReInfo">매장 : <strong><%=s.getStoreName() 

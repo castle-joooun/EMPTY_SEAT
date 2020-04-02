@@ -47,8 +47,17 @@ public class StoreServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
+		
+		
 		int numPerPage=5;
-		List<Comment> commentList= new CommentService().selectComment();
+		
+		try {
+			cPage=Integer.parseInt(request.getParameter("numPerPage"));
+			
+		}catch(NumberFormatException e) {
+			 numPerPage=5;
+		}
+//		List<Comment> commentList= new CommentService().selectComment();
 		List<Comment> list = new CommentService().searchComment(cPage,numPerPage);
 		int totalStore=new CommentService().commentCount();
 		int totalPage=(int)Math.ceil((double)totalStore/numPerPage);
@@ -68,7 +77,6 @@ public class StoreServlet extends HttpServlet {
 		pageBar+="<a href='"+request.getContextPath()+"/store?cPage="+(pageNo-1)+"'>[이전]</a>";
 				
 	}
-	
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
@@ -85,7 +93,7 @@ public class StoreServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getContextPath()+"/store?cPage="+(pageNo)+"'>[다음]</a>";
 		}
-		request.setAttribute("commentList", commentList);
+//		request.setAttribute("commentList", commentList);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("list", list);
 		

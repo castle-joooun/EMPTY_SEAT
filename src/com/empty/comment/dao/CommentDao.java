@@ -42,14 +42,13 @@ public class CommentDao {
 			rs=pstmt.executeQuery();
 	
 			while(rs.next()) {
-					Comment c = new Comment();
-//					
-//					c.(rs.getInt("NUM"));
-//					
-//					c.setUserComment(rs.getString("USER_COMMENT"));
-//					c.setCommnet_Date(rs.getDate("COMMENT_DATE "));
-//					list.add(c);
-					
+				Comment comment =new Comment();
+				comment.setCommentNo(rs.getInt("COMMENT_NO"));
+				comment.setCommentLevel(rs.getInt("COMMENT_LEVEL"));
+				comment.setCommentWriter(rs.getString("COMMENT_WRITER"));
+				comment.setUserComment(rs.getString("USER_COMMENT"));
+				comment.setCommentDate(rs.getDate("COMMENT_DATE"));
+				list.add(comment);
 			}
 			
 		}catch(SQLException e) {
@@ -128,6 +127,39 @@ public class CommentDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateComment(Connection conn, int no, String userComment) {
+		 PreparedStatement pstmt=null;
+		 int result=0;
+		 String sql=prop.getProperty("updateComment");
+		 
+		 try {
+			 pstmt=conn.prepareStatement(sql);
+			 pstmt.setInt(1, no);
+			 result=pstmt.executeUpdate();
+		 }catch(SQLException e) {
+			 e.printStackTrace();
+		 }finally {
+			 close(pstmt);
+		 }
+		return result;
+	}
+
+	public int delectComment(Connection conn, String commentWriter) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		String sql=prop.getProperty("deleteComment");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, commentWriter);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	}

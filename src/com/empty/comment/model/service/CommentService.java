@@ -40,6 +40,23 @@ public List<Comment> selectComment() {
 	 close(conn);
 	return list;
 }
+public int updateComment(int no, String userComment) {
+	Connection conn = getConnection();
+	int result=dao.updateComment(conn,no,userComment);
+	if(result>0) commit(conn);
+	else rollback(conn);
+	close(conn);
+	return result;
+}
+public int deleteComment(String commentWriter) {
+	 Connection conn = getConnection();
+	 int result = dao.delectComment(conn,commentWriter);
+	 if(result>0) commit(conn);
+	 else rollback(conn);
+	 close(conn);
+	
+	return result;
+}
 
 
 }
