@@ -5,7 +5,7 @@
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
 <%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
-<link rel="stylesheet" href="css/store.css?ver=0" type="text/css">
+<link rel="stylesheet" href="css/store.css?ver=2" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
 <img src="image/next.png" alt="" id="next" width="20px">
@@ -135,21 +135,19 @@
 		</p>
 		<p id="userInfo">
 			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			빈캐시 : <strong><%=loginMember.getCash() %></strong>
+			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash() %> </span></strong>원
 		</p>
 		<div id="underLine"></div>
 		
 		<center>
 			<div id="reView">
-				<span>이용시간 선택</span>
-				<span>예약내역 확인</span>
-				<span>예약</span>
+				<img id="stepImg" src="image/step1.png" alt="">
 			</div>
 			
 			<div id="reStep1" class="reStep">
 				<div class="reStepTitle">
 					<span>이용시간 선택</span>
-					<span id="reStepMini">(1시간당 1,000원)</span> <!-- 스토어프라이스로 넣어주기 -->
+					<span id="reStepMini">(1시간당 <%=s.getStorePrice() %>원)</span> <!-- 스토어프라이스로 넣어주기 -->
 				</div>
 				<div class="reStepContent">
 					<label>
@@ -186,7 +184,7 @@
 						<p> <strong><span id="clock"></span></strong></p>
 						<p> <strong><span id="willUseTime"></span> 시간</strong></p>
 						<p> <strong><span id="willPayMoney"></strong> 원</p> <!-- 스토어프라이스로 넣어주기 -->
-						<p> <strong><%=loginMember.getCash() %> 빈캐시</strong></p>
+						<p> <strong><span id="afterMoney"></span> 빈캐시</strong></p>
 					</div>
 					<div style="position:relative; display:inline-block; float:left; text-align:right;">
 						<p>매장 주소 : <strong><%=s.getStoreAddress() %></strong></p>
@@ -307,9 +305,14 @@
 	    $(".fullSeat").append($("<p>").html("00:00"));
     
 	    
+	    var checkOk=0;
+	    var selectedPcSeat;
+	    
 	 	// 예약하기 띄우기
 	    $(".reservationBtn").click(function() {
+	    	checkOk=0;
 	    	$("#selectedSeatText").html($(this).val());
+	    	selectedPcSeat = $(this).val();
 	    	
 	    	selectPcRow = Math.floor($(this).val() / <%=ss.getCol()%>);
 	    	selectPcCol = $(this).val() % <%=ss.getCol()%>;
@@ -322,14 +325,19 @@
 	    	
 	    	$("#viewSeat2").children().eq(1).children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("selectSeat");
 	    	$(".selectSeat").html("선택");
+	    	$("#stepImg").attr("src","image/step1.png");
 	    	$("#reservation").toggle();
 	    })
 	    
 	    
 	    // 다음/예약하기 버튼 바꾸기
-	 	var checkOk=0;
+	 	
+	 	let reservationCheck = false;
+	 	let usePcMoney;
 	    $("#reOk").click(function() {
-	    	if(checkOk == 0) {
+	    	if(typeof $('input:radio[name="time"]:checked').val() == 'undefined') {
+	    		alert("이용시간을 선택해주세요.");
+	    	} else if(checkOk == 0 && typeof $('input:radio[name="time"]:checked').val() != 'undefined') {
 	    		$("#reOk").html("예약하기");
 	    		$("#reCan").html("이전");
 	    		
@@ -339,11 +347,19 @@
 				console.log($('input:radio[name="time"]:checked').val());
 				
 				let usePcTime = $('input:radio[name="time"]:checked').val();
-				let usePcMoney = <%=s.getStorePrice()%> * usePcTime;
+				usePcMoney = <%=s.getStorePrice()%> * usePcTime;
+				let afterMoney = <%=loginMember.getCash()%> - usePcMoney;
 				
 				$("#willUseTime").html(usePcTime);
 				$("#willPayMoney").html(usePcMoney);
+				$("#afterMoney").html(afterMoney);
+				
+				if(afterMoney>=0) {
+					reservationCheck = true;
+				}
 	    		
+				$("#stepImg").attr("src","image/step2.png");
+				
 	    		$("#reservation").height("750px");
 	    		
 	    		// 예약하기에서 다시 실행
@@ -386,12 +402,40 @@
 	    		
 	    		checkOk++;
 	    	} else {
-	    		
-	    		// ajax연결
-	    		
 	    		checkOk = 0;
 	    		$("#reservation").toggle();
-	    	}
+	    		console.log("토글이 닫혀서 되는거");
+	    		if(reservationCheck) {
+	    			$.ajax({
+	    				url:"<%=request.getContextPath()%>/reservation.do",
+	    				type:"post",
+	    				dataType:"json",
+	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
+	    					"seat":selectedPcSeat, "pay":usePcMoney},
+	    					success:function(data) {
+	    					alert("성공적으로 예약이 되었습니다.");
+	    	    			$("#viewSeat").children().eq(1).children().children().eq(selectPcRow).children().children().eq(selectPcCol-1).addClass("fullSeat");
+	    	    			$(".fullSeat").removeClass("emptySeat");	 
+	    	    			$(".fullSeat").html("사용중");
+	    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+	    				}
+	    			})
+	    		} else {
+	    			alert("예약실패(빈캐시부족) : 충전후 이용해주세요.")
+	    			$("#reStep1").toggle();
+		    		$("#reStep2").toggle();
+		    		$("#reOk").html("다음");
+					$("#reCan").html("취소");
+					$("#reservation").height("310px");
+					$(".reSeat").each(function() {
+						if($(this).hasClass("selectSeat")) {
+							$(this).html("");
+							$(this).removeClass("selectSeat");
+						}
+					})
+	    		}
+	    		
+	    	} 
 	    })
 		$("#reCan").click(function() {
 			if(checkOk==0) {
@@ -407,6 +451,7 @@
 	    		$("#reStep2").toggle();
 				$("#reOk").html("다음");
 				$("#reCan").html("취소");
+				$("#stepImg").attr("src","image/step1.png");
 				$("#reservation").height("310px");
 				
 				checkOk = 0;

@@ -19,16 +19,6 @@ public class Store {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public int getStorePrice() {
-		return storePrice;
-	}
-
-	public void setStorePrice(int storePrice) {
-		this.storePrice = storePrice;
-	}
-
 	public String getStoreId() {
 		return storeId;
 	}

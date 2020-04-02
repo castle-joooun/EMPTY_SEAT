@@ -176,10 +176,16 @@
 	<nav id="middle">
 		<p id="middleText">세상의 모든 자리 찾기</p>
 		<div id="subMenu">
-<!-- 			<span id="mainSub"> main페이지이면 main subMenu의 subHover을 빼준다! -----------------------------------------------------------------
-				<span id="baseSubMenu"><a href="main.html"
-					style="color: #ff7531">통합검색</a></span> <span class="subHover"><a
-					href="">지역검색</a></span> <span class="subHover"><a href="">즐겨찾기</a></span>
-			</span> -->
+				<span id="mainSub">
+					<span id="baseSubMenu">
+						<a href="main.html" style="color: #ff7531">통합검색</a>
+					</span> 
+					<span class="subHover">
+						<a href="">지역검색</a>
+					</span>
+					<span class="subHover">
+						<a href="">즐겨찾기</a>
+					</span>
+				</span>
 		</div>
 	</nav>
