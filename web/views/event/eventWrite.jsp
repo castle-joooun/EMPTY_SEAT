@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%@ include file="/views/common/header.jsp" %>
 
+
 	<div>
 		<h2>이벤트</h2>
 		<form action="<%=request.getContextPath()%>/eventWriteEnd" method="post">
@@ -11,6 +12,7 @@
 					<th>제목</th>
 					<td>
 						<input type="text" name="title" id="eventTitle" size="50">
+						<input type="hidden" name="writer" value="<%=loginMember.getUserId() %>">
 					</td>
 				</tr>
 				<tr>

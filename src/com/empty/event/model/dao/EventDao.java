@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.empty.event.model.vo.Event;
-import com.empty.notice.model.vo.Notice;
+import com.empty.search.model.vo.Store;
 
 public class EventDao {
 
@@ -82,7 +82,8 @@ public class EventDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, e.getEventTitle());
-			pstmt.setString(2, e.getEventContent());
+			pstmt.setString(2, e.getEventWriter());
+			pstmt.setString(3, e.getEventContent());
 			result = pstmt.executeUpdate();
 		}catch(SQLException q) {
 			q.printStackTrace();
@@ -178,7 +179,7 @@ public class EventDao {
 		}
 		return result;
 	}
-	
+
 	public int deleteEvent(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -194,4 +195,40 @@ public class EventDao {
 		}
 		return result;
 	}
+
+	public List<Store> selectStoreId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List list = new ArrayList();
+		Store s = null;
+		String sql = prop.getProperty("selectStoreId");
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
+						);
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+
+	}
+
+
 }
