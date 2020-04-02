@@ -178,5 +178,3 @@
 	<!-- 미들 바 -->
 	<nav id="middle">
 		<p id="middleText">세상의 모든 자리 찾기</p>
-
-	</nav>

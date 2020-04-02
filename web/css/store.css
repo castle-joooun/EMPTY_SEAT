@@ -328,6 +328,8 @@
 
 .fullSeat {
     border: solid 1px #ff7531;
+    color: #ff7531;
+    font-weight: bold;
 }
 
 .emptySeat {
@@ -400,7 +402,7 @@
 
 .reStep {
 	position: relative;
-	top:90px;
+	top:60px;
 	margin: 0 10px 10px 10px;
 	padding: 0;
 	border: solid 1px lightgray;
@@ -504,4 +506,10 @@
 	color: white;
 	font-size: 15px;
 	font-weight: bold;
+}
+
+#stepImg {
+	position: relative;
+	width:500px;
+	top:-15px;
 }

@@ -48,7 +48,8 @@
 <body>
     <header>
         <div>
-            <a href="<%=request.getContextPath()%>/home">
+            <a href="<%=request.getContextPath()%>">
+
                 <!--로고 변하게 하기 -->
                 <img id="mainLogo" src="image/로고-test.png" width="150px"> <!-- 원래 로고 -->
                 <!-- <img id="transLogo" src="image/빈시트500-1-test.png" width="150px"> -->

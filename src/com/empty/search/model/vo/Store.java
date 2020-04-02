@@ -19,9 +19,7 @@ public class Store {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-
+  
 	public String getStoreId() {
 		return storeId;
 	}
