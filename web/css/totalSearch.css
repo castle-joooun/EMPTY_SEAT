@@ -5,12 +5,15 @@
     /* border: solid 2px blue; */
     margin-left: 150px;
     width: 760px;
-    height: 3000px;
+    display: inline-block;
+    padding-right: 20px;
+    border-right: solid 1px lightsteelblue;
+    top: 10px;
 }
 
 .result{
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     /* border: solid 1px olivedrab; */
     height: 150px;
@@ -56,13 +59,15 @@
 /* 사이드 검색순위 */
 #rank{
     position: relative;
+    display: inline-block;
     float: right;
-    top: 50px;
+    top: 20px;
     /* left: 1100px; */
     right: 150px;
-    height: 300px;
     width: 250px;
-    border: solid 4px green;
+    margin: 5px;
+    padding-left: 30px;
+    border-left: solid 1px lightsteelblue;
 }
 
 /* 검색결과 쉐도우 효과 */
@@ -73,3 +78,12 @@
     -3px 3px 3px rgb(240, 240, 240);
     cursor: pointer;
 }
+
+.rankP{
+	position: relative;
+	left: 15px;
+	margin: 0 0 8px 0;
+	padding: 0;
+}
+
+

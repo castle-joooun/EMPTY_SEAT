@@ -3,6 +3,13 @@ section{
     position: relative;
     
 }
+ol, ul {
+     list-style: none;
+     
+ }
+ a{
+ 	text-decoration: none;
+ }
 /* 관리자 서브 메뉴 목록 
 #adminSubMenu{
     position: relative;
@@ -40,29 +47,20 @@ div#adminSubMenu>ul>li>a>span::after{
 .searchDiv form{
 	display:inline;
 }
-.searchBox{
-    position: relative;
-    padding: 10px;
-    width: 400px;
-    /* text-align: center; */
-    border: solid 3px rgb(94, 100, 177);
-    z-index: 5;
-    box-shadow: 5px 5px 10px lightgray;
-    outline: none;
-}
-.searchDiv div:first-child{
+
+.searchDiv>div:first-child{
 	float:left;
 	display:inline-block;
 	margin-right:50px;
 }
-.searchDiv div:nth-child(2){
+.searchDiv>div:nth-child(2){
 	display:inline;
 	display:inline-block;
 }
-.searchDiv div:nth-child(2) select{
+.searchDiv>div:nth-child(2) select{
 	margin-right:10px;
 }
-.searchDiv div:nth-child(3){
+.searchDiv>div:nth-child(3){
 	right:0px;
 	display:inline-block;
 	float:right;
@@ -116,6 +114,19 @@ div#search-phone{display:none;}
     margin-left: 5px;
     outline: none;
 }
+.searchBox{
+    position: relative;
+    padding: 10px;
+    width: 400px;
+    border: solid 3px rgb(94, 100, 177);
+    z-index: 5;
+    box-shadow: 5px 5px 10px lightgray;
+    outline: none;
+}
+select.searchBox{
+	height:39px;
+	border: solid 3px rgb(94, 100, 177);
+}
 
 /* 관리자테이블 */
 #primaryContent{
@@ -123,7 +134,7 @@ div#search-phone{display:none;}
     height: 100%;
     /* border-top:   rgb(220,224,229) solid 1px; */
     margin-top: 23px;
-    padding-top: 100px;
+    padding-top: 50px;
     margin: 0 15%;
 
 }
@@ -163,7 +174,7 @@ div#search-phone{display:none;}
 
 }
 .contentTable>thead tr{
-	background-color:#ff7531;
+	background-color:#e6e8eb;
 }
 .contentTable th{
 	border-left:none;

@@ -98,6 +98,10 @@ public class SearchService {
 		return favoriteSize;
 	}
 	
+//	public List crawl() {
+//		List list = dao.crawl();
+//		return list;
+//	}
 	
 	
 	

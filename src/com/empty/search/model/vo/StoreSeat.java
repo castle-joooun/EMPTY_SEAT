@@ -5,10 +5,20 @@ public class StoreSeat {
 	private String storeId;
 	private int col;
 	private int row;
-	private String storeCheck;
+	private String seatNum;
+	private String seatCheck;
 	
 	public StoreSeat() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public StoreSeat(String storeId, int col, int row, String seatNum, String seatCheck) {
+		super();
+		this.storeId = storeId;
+		this.col = col;
+		this.row = row;
+		this.seatNum = seatNum;
+		this.seatCheck = seatCheck;
 	}
 
 	public String getStoreId() {
@@ -35,26 +45,26 @@ public class StoreSeat {
 		this.row = row;
 	}
 
-	public String getStoreCheck() {
-		return storeCheck;
+	public String getSeatNum() {
+		return seatNum;
 	}
 
-	public void setStoreCheck(String storeCheck) {
-		this.storeCheck = storeCheck;
+	public void setSeatNum(String seatNum) {
+		this.seatNum = seatNum;
 	}
 
-	public StoreSeat(String storeId, int col, int row, String storeCheck) {
-		super();
-		this.storeId = storeId;
-		this.col = col;
-		this.row = row;
-		this.storeCheck = storeCheck;
+	public String getSeatCheck() {
+		return seatCheck;
+	}
+
+	public void setSeatCheck(String seatCheck) {
+		this.seatCheck = seatCheck;
 	}
 
 	@Override
 	public String toString() {
-		return "StoreSeat [storeId=" + storeId + ", col=" + col + ", row=" + row + ", storeCheck=" + storeCheck + "]";
+		return "StoreSeat [storeId=" + storeId + ", col=" + col + ", row=" + row + ", seatNum=" + seatNum
+				+ ", seatCheck=" + seatCheck + "]";
 	}
-	
 	
 }
