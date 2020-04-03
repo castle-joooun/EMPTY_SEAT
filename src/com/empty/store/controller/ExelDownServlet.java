@@ -1,7 +1,6 @@
 package com.empty.store.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -113,12 +112,11 @@ public class ExelDownServlet extends HttpServlet {
 	        row = sheet.createRow(rowNo++);
 	        cell = row.createCell(0);
 	        cell.setCellStyle(bodyStyle);
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
-	        cell.setCellValue(sdf.format(vo.getEnDate()));
+	        cell.setCellValue(vo.getEnDate());
 	        
 	        cell = row.createCell(1);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(Character.toString(vo.getDayOfWeek()));
+	        cell.setCellValue(vo.getDayOfWeek());
 	        
 	        cell = row.createCell(2);
 	        cell.setCellStyle(bodyStyle);
@@ -145,10 +143,9 @@ public class ExelDownServlet extends HttpServlet {
 	    row = sheet.createRow(rowNo++);
 	    
 	    //셀 병합
-	    sheet.addMergedRegion(new CellRangeAddress((rowNo-1),(rowNo-1),0,1)); 
+	    sheet.addMergedRegion(new CellRangeAddress(0,1,rowNo,rowNo)); 
 	    //열시작, 열종료, 행시작, 행종료 (자바배열과 같이 0부터 시작)
 	    cell = row.createCell(0);
-	    cell.setCellStyle(headStyle);
 	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("합계");
 	    cell = row.createCell(1);
@@ -170,7 +167,7 @@ public class ExelDownServlet extends HttpServlet {
 
 	    // 컨텐츠 타입과 파일명 지정
 	    response.setContentType("ms-vnd/excel");
-	    response.setHeader("Content-Disposition", "attachment;filename=sales.xls");
+	    response.setHeader("Content-Disposition", "attachment;filename=매출.xls");
 
 	    // 엑셀 출력
 	    wb.write(response.getOutputStream());
