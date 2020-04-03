@@ -7,29 +7,59 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-   
-<section>
-   <h2>공지사항 수정</h2>
-   <form action="<%=request.getContextPath()%>/notice/noticeUpdateEnd" method="post">
-      <table>
-         <tr>
-            <th>번 호</th>
-            <td><input type="text" name="no" value="<%=n.getNoticeNo() %>" size="50" readonly></td>
-         </tr>
-         <tr>
-            <th>제 목</th>
-            <td><input type="text" name="title" value="<%=n.getNoticeTitle() %>" size="50"></td>
-         </tr>
-         <tr>
-            <th>작성일</th>
-            <td><input type="text" name="time" value="<%=n.getNoticeDate() %>" size="50" readonly></td>
-         </tr>
-         <tr>
-            <th>내 용</th>
-            <td><textarea name="content" cols=51 rows=10 required><%=n.getNoticeContent() %></textarea></td>
-         </tr>
-      </table>
-      <input type="submit" value="수정">
-      <button type="button" onclick="location.href='<%=request.getContextPath()%>/notice'">취소</button>
-   </form>
-</section>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/notice/noticeUpdate.css" type="text/css">
+	<center>
+		<section>
+			<div id="noticeUpdateDiv">
+				<div>
+					<p class="noticeUpdateHead">공지사항 수정</p>
+				</div>
+				<form id="noticeUpdateForm" action="<%=request.getContextPath()%>/notice/noticeUpdateEnd" method="post">
+					<input type="hidden" name="time" value="<%=n.getNoticeDate() %>">
+					<input type="hidden" name="no" value="<%=n.getNoticeNo() %>">
+					<table id="noticeUpdateTbl">
+						<tr>
+						   <td><input type="text" name="title" id="noticeUpdateTitle" value="<%=n.getNoticeTitle() %>" size="50"></td>
+						</tr>
+						<tr>
+						<td>
+							<textarea name="content" id="noticeUpdateContent" cols="50" rows="10" style="resize: none;"><%=n.getNoticeContent() %></textarea>
+						</td>
+						</tr>
+					</table>
+					<div>
+						<button type="button" id="noticeUpdateEndBtn" onclick="noticeUpdateFn();">수 정</button>
+						<button type="button" id="noticeUpdateCencleBtn" onclick="noticeUpdateCencleFn();">취 소</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</center>
+	
+	<script>
+		function noticeUpdateFn(){
+			var updateTitle = document.getElementById("noticeUpdateTitle").value;
+			var updateContent = document.getElementById("noticeUpdateContent").value;
+			if(updateTitle != "" && updateContent != ""){
+				if(confirm("게시물을 수정하시겠습니까?")){
+					document.getElementById("noticeUpdateForm").submit();
+				}else{
+					window.close();
+				}
+			}else if(updateTitle == ""){
+				alert("제목을 입력하세요.");
+			}else if(updateContent == ""){
+				alert("내용을 입력하세요.");
+			}
+		}
+		
+		function noticeUpdateCencleFn(){
+			if(confirm("게시물 수정을 중단하시겠습니까?")){
+				location.href='<%=request.getContextPath()%>/notice';
+			}else{
+				window.close();
+			}
+		}
+	</script>
+</body>
+</html>

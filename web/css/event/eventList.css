@@ -3,17 +3,29 @@ body{
 }
 
 #eventListDiv{
-   width: 1000px;
-   height: 700px;
+   height: auto;
    text-align: center;
    margin-top: 70px;
 }
 
-#eventHead{
+.noticeHead{
    color: #5e64b1;
    margin-bottom: 40px;
    font-size: 40px;
    font-weight: bolder;
+   text-decoration: none;
+}
+
+#noticeBoard:hover,
+#eventBoard:hover{
+	color: tomato;
+}
+
+.headDiv{
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+   text-decoration: none;
 }
 
 #eventWriteBtn{
@@ -23,18 +35,19 @@ body{
    height: 30px;
    font-size: 18px;
    text-align: left;
-   font-weight: bolder;
    margin-left: 850px;
-   margin-bottom: 5px;
+   margin-bottom: 10px;
+   border: none;
 }
 
-.hr{
-   margin-bottom: 30px; 
-   margin-top: 30px;
+#eventHeadDiv{
+	text-align: left;
 }
+
 
 thead>tr>th{
    border-bottom: 1px solid #e6e8eb;
+   padding: 10px 7px;
 }
 
 tbody>tr>td{
@@ -42,8 +55,8 @@ tbody>tr>td{
    border-bottom: 1px solid #e6e8eb;
 }
 
-section{
-    position: relative;
+#eventTitleTh{
+	width:60%;
 }
 
 .innerContent{
@@ -54,3 +67,11 @@ section{
    cursor: pointer;
 }
 
+.eventListTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
+	margin-bottom: 30px;
+}

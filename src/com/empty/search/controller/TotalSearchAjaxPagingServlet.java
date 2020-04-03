@@ -43,12 +43,12 @@ public class TotalSearchAjaxPagingServlet extends HttpServlet {
 		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 		String pageBar = "";
 		if(list.size()>0) {
-			
-			if(cPage<totalPage) {
-				pageBar ="<div class='btnContainer'>" + 
-						"<button name='moreSearch' type='button' onclick='requestData(\""+keyword+"\","+(++cPage)+","+numPerPage+");'><img src='/EMPTY/image/underArrow.png' style='cursor: pointer;'> &nbsp;&nbsp;검색결과 더보기( "+ (cPage-1)*numPerPage+" / "+totalData+" )</button>" + 
-						"</div>";
-			}
+			//페이지바 클릭 사용시 활성화 하기
+//			if(cPage<totalPage) {
+//				pageBar ="<div class='btnContainer'>" + 
+//						"<button name='moreSearch' type='button' onclick='requestData(\""+keyword+"\","+(++cPage)+","+numPerPage+");'><img src='/EMPTY/image/underArrow.png' style='cursor: pointer;'> &nbsp;&nbsp;검색결과 더보기( "+ (cPage-1)*numPerPage+" / "+totalData+" )</button>" + 
+//						"</div>";
+//			}
 			list.add(pageBar);
 			list.add(totalData);
 		}else {

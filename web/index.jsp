@@ -34,9 +34,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
     <link rel="stylesheet" href="css/index.css?ver=0" type="text/css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/login.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css">
     <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap" rel="stylesheet">
     <script src="<%=request.getContextPath()%>/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
@@ -64,6 +64,7 @@
                     <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
                     <p id="notice" class="mainHover"><a href="<%=request.getContextPath()%>/notice">NOTICE</a></p>
                     <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/store/salesView">DAILY SALES</a></p>
                     <p id="service" class="mainHover"><a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a></p>
                 </div>
             </center>

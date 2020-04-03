@@ -24,9 +24,15 @@ public class EventListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member m = (Member) session.getAttribute("loginMember");
-		String id = m.getUserId();
-		boolean flag = new EventService().selectStoreId(id);
+		boolean flag;
+		try {
+			Member m = (Member) session.getAttribute("loginMember");
+			String id = m.getUserId();
+			flag = new EventService().selectStoreId(id);
+		}catch(NullPointerException e) {
+			flag=false;
+		}
+		request.setAttribute("flag", flag);
 		
 		int cPage;
 
@@ -51,27 +57,27 @@ public class EventListServlet extends HttpServlet {
 		String pageBar = "";
 
 		if(pageNo == 1) {
-			pageBar += "<span>[이전]</span>";
+			pageBar += "<span> < 이전 </span>";
 		}else {
-			pageBar += "<a href='" + request.getContextPath() + "/event?cPage=" + (pageNo - 1) + "'>[이전]</a>";					
+			pageBar += "<a href='" + request.getContextPath() + "/event?cPage=" + (pageNo - 1) + "'> < 이전 </a>";					
 		}
 
 		while(!(pageNo > pageEnd||pageNo > totalPage)) {
 			if(pageNo == cPage) {
-				pageBar += "<span>" + pageNo + "</span>";
+				pageBar += "<span> " + pageNo + " </span>";
 			}else {
-				pageBar += "<a href='" + request.getContextPath() + "/event?cPage=" + (pageNo) + "'>" + pageNo + "</a>";
+				pageBar += "<a href='" + request.getContextPath() + "/event?cPage=" + (pageNo) + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
 		}
 
 		if(pageNo > totalPage) {
-			pageBar += "<span>[다음]</span>";
+			pageBar += "<span> 다음 > </span>";
 		}else {
-			pageBar += "<a href='"+request.getContextPath() + "/event?cPage=" + (pageNo) + "'>[다음]</a>";					
+			pageBar += "<a href='"+request.getContextPath() + "/event?cPage=" + (pageNo) + "'> 다음 > </a>";					
 		}
 		
-		request.setAttribute("flag", flag);
+		
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/event/eventList.jsp").forward(request, response);

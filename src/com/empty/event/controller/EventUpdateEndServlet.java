@@ -28,12 +28,12 @@ public class EventUpdateEndServlet extends HttpServlet {
 		String msg = "";//사용자에게 띄울 메세지 내용
 
 		if(result > 0) {
-			msg = "게시물 수정을 성공하였습니다.";
+			msg = "게시물을 수정하였습니다.";
 		}else {
 			msg = "게시물 수정에 실패하였습니다.";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/notice");
+		request.setAttribute("loc", "/event");
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
 	}
