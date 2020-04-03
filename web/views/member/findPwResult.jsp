@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/findPw.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/findPw.css" type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/withdrawal.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/withdrawal.css" type="text/css">
 <%
 	userId =  request.getParameter("userId");
 %>

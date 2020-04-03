@@ -9,7 +9,11 @@
 <center>
 <section>
    <div id="listDiv">
-      <p id="noticeHead">공지사항</p>
+   	<div style="text-align: left; margin-left: 140px; margin-bottom: 40px;">
+      <a href="<%=request.getContextPath()%>/notice" id="noticeBoard" class="noticeHead">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      <p style="display: inline" class="headDiv">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <a href="<%=request.getContextPath()%>/event" id="eventBoard"  class="noticeHead">이벤트</a>
+    </div>
       <%
          if(loginMember != null && loginMember.getUserId().equals("admin")){
       %>
@@ -17,12 +21,11 @@
          <button type="button" id="noticeWriteBtn" onclick="location.replace('<%=request.getContextPath()%>/noticeWrite')">공지사항 작성</button>
       </div>
       <%} %>
-      <hr class="hr">
       <table class="noticeListTbl">
          <thead>
             <tr>
                <th></th>
-               <th>제 목</th>
+               <th id="noticeTitleTd">제 목</th>
                <th>작성자</th>
                <th>등록일</th>
                <th>조회수</th>
@@ -62,9 +65,8 @@
          <form action="<%=request.getContextPath()%>/notice/noticeView" id="linkF">
             <input type="hidden" name="no">
          </form>
-      <hr class="hr">
       <center>
-         <div id="pageBar">
+         <div id="pageBar" style="margin-top: 25px;">
             <%=request.getAttribute("pageBar")%>
          </div>
       </center>

@@ -1,0 +1,60 @@
+body{
+   width: 1366px;
+}
+
+#eventWriteHead{
+   color: #5e64b1;
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+   margin-right: 800px;
+}
+
+#eventWriteTitle{
+	height: 50px;
+	width: 100%;
+}
+
+#eventWriteContent{
+	height: 230px;
+	width: 100%;
+}
+
+#eventWriteDiv{
+   height: auto;
+   text-align: center;
+   margin-top: 70px;
+}
+
+#eventWriteTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
+	height: 300px;
+}
+
+#eventWriteEndBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  rgb(94, 100, 177);
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+#eventWriteCencleBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  tomato;
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+
+
+

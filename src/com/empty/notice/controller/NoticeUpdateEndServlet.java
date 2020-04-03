@@ -28,7 +28,7 @@ public class NoticeUpdateEndServlet extends HttpServlet {
 		String msg = "";//사용자에게 띄울 메세지 내용
 
 		if(result > 0) {
-			msg = "공지사항 수정을 성공하였습니다.";
+			msg = "공지사항을 수정하였습니다.";
 		}else {
 			msg = "공지사항 수정에 실패하였습니다.";
 		}

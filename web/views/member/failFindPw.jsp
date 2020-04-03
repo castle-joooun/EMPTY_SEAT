@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/findId.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/findId.css" type="text/css">
 <div id="findTitle">
 	<h1>
 		<span style="color: rgb(94, 100, 177);">비밀번호 찾기</span>
