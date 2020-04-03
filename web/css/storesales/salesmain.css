@@ -1,0 +1,122 @@
+ol, ul {
+     list-style: none;
+     
+ }
+ a{
+ 	text-decoration: none;
+ }
+ table {
+     border-collapse: collapse;
+     border-spacing: 0;
+ }
+#storeSubMenu{position:relative;}
+  
+ #storeSubMenu a{
+ 	color:black;
+ }
+ #storeSubMenu>ul>li{
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 30px;
+}
+div#storeSubMenu:after{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #efefef;
+    content: "";
+}
+div#storeSubMenu>ul>li>a{
+    font-weight: lighter;
+}
+div#storeSubMenu>ul>li>a>span{
+	display: block;
+    position: relative;
+    padding-bottom: 20px;
+}
+.text-item::after{
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    content: "";
+}
+.subMenuContainer,.contentContainer{padding:1% 10%;}
+#contentContainer{
+	text-align:center;
+}
+#dayContainer>div{
+	display:inline-block;
+	font-size:50px;
+	font-weight:200;
+}
+/* #dayContainer>div:nth-child(2n+1){
+	background:black;
+	
+} */
+#dayContainer>input{
+	display:block;
+}
+#contentContainer img{
+	position:relative;
+	top:8px;
+	margin:0 20px;
+}
+#tableContainer{
+	position:relative;
+	margin-top:100px;
+}
+
+#tableContainer>table{
+	position:relative;
+	left:27%;
+	font-size:20px;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+}
+
+#tableContainer>table td{
+	height:50px;
+}
+#tableContainer>table tr td{
+	border-bottom:1px black dashed;
+}
+#tableContainer>table tr:first-child td{
+	border-bottom:2px solid black;
+}
+#monthTableContainer>table{
+	position:relative;
+	font-size:20px;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+}
+#monthTableContainer>table td{
+	height:30px;
+}
+#monthTableContainer>table tr td{
+	border-bottom:1px black dashed;
+}
+#monthTableContainer>table tr:first-child td{
+	border-bottom:2px solid black;
+	height:50px;
+}
+#monthTableContainer{
+	position:relative;
+	margin-top:100px;
+}
+#monthTableContainer>table tfoot td{
+	border-top:2px solid black;
+	height:50px;
+}
+.down-btn-container button{
+	float:right;
+	border:1px green solid;
+	background:white;
+	height:30px;
+	width:100px;
+}
