@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/findPw.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/findPw.css" type="text/css">
 
 <div id="findTitle">
 	<h1>

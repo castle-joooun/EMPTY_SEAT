@@ -47,7 +47,6 @@ public class NoticeService {
 	public Notice selectNotice(int no, boolean hasRead) {
 		Connection conn = getConnection();
 		Notice n = dao.selectNotice(conn, no, hasRead);
-		System.out.println(n);
 		if(n != null && !hasRead) {
 			int result = dao.updateCount(conn, no);
 			if(result > 0) {

@@ -2,13 +2,13 @@ body{
    width: 1366px;
 }
 
-#noticeViewDiv{
+#eventViewDiv{
    height: auto;
    text-align: center;
    margin-top: 70px;
 }
 
-#noticeViewHead{
+#eventViewHead{
    color: #5e64b1;
    margin-bottom: 40px;
    font-size: 40px;
@@ -17,7 +17,7 @@ body{
    margin-left: 140px;
 }
 
-#noticeWriteBtn{
+#eventWriteBtn{
    background-color: #5e64b1;
    color: white;
    border-radius: 5px;
@@ -40,7 +40,7 @@ tbody>tr>td{
    border-bottom: 1px solid #e6e8eb;
 }
 
-.noticeViewTbl{
+.eventViewTbl{
 	width:80%;
 	border-top:2px solid black;
 	border-bottom:2px solid black;
@@ -49,16 +49,16 @@ tbody>tr>td{
 }
 
 
-.noticeContent{
+.eventContent{
 	height: 300px;
 }
 
-#noticeTitleTd{
+#eventTitleTd{
 	width:60%;
 	color: tomato;
 }
 
-#noticeUpdateBtn{
+#eventUpdateBtn{
     width: 150px;
     height: 40px;
     background-color:  rgb(94, 100, 177);
@@ -69,7 +69,7 @@ tbody>tr>td{
     margin-top: 30px;
 }
 
-#noticeDeleteBtn{
+#eventDeleteBtn{
     width: 150px;
     height: 40px;
     background-color:  tomato;

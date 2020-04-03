@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file = "/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css" type="text/css">
 
     <!--------------------------------------------------------------------------------------------------->
 

@@ -28,10 +28,13 @@
 	</div>
 	<%if(loginMember != null && loginMember.getUserId().equals("admin")){ %>
 	<div>
-		<button id="noticeUpdateBtn" onclick="noticeUpdate()">수  정</button>
-		<button id="noticeDeleteBtn" onclick="noticeDelete()">삭  제</button>
+		<button id="noticeUpdateBtn" onclick="noticeUpdate()">수 정</button>
+		<button id="noticeDeleteBtn" onclick="noticeDelete()">삭 제</button>
 	</div>
 	<%} %>
+	<div style="margin-top: 30px;">
+		<button class="returnBtn" onclick="location.replace('<%=request.getContextPath()%>/notice')">목록으로</button>
+	</div>
 
 </section>
 </center>
@@ -41,6 +44,10 @@
 	}
 	
 	function noticeDelete(){
-		location.replace("<%=request.getContextPath()%>/notice/noticeDelete?no=<%=n.getNoticeNo()%>");
+		if(confirm("게시물을 삭제하시겠습니까?")){
+			location.replace("<%=request.getContextPath()%>/notice/noticeDelete?no=<%=n.getNoticeNo()%>");
+		}else{
+			window.close();
+		}
 	}
 </script>
