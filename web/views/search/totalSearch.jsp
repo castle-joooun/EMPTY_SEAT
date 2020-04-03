@@ -103,9 +103,17 @@ org.jsoup.select.Elements"%>
 
 	<script type="text/javascript" src="js/totalSearch.js?ver=2"></script>
 	<script>
+		var page=1;
 		$(function(){
 			 requestData('<%=searchBox%>',1,5);
 			
+		})
+		$(window).scroll(function(){
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				$("#searchResult").append("<div class='btnContainer'><img src='<%=request.getContextPath()%>/image/loading_bar.gif' style='width:30px;height:30px;'><p> </p></div>");
+				requestData('<%=searchBox%>',(++page),5);
+				$(".btnContainer").hide();
+			}
 		})
 		function requestData(keyword,cPage,numPerPage){
 			$.ajax({
@@ -114,7 +122,7 @@ org.jsoup.select.Elements"%>
 				type:"post",
 				data:{"keyword":keyword,"cPage":cPage,"numPerPage":numPerPage},
 				success:function(data){
-					console.log(data[data.length-1]);
+					
 					
 					if(data.length>1){
 					
@@ -128,13 +136,13 @@ org.jsoup.select.Elements"%>
 					
 						for(let i = 0; i<data.length-2;i++){
 							
-							console.log(data[i]['storeFacility']);
+							
 							var tags = data[i]['storeFacility'].split(", ");
 							var str = "";
 							for(let j=0;j<tags.length;j++){
 								str+="#"+tags[j]+" ";
 							}
-							console.log(str);
+							
 							$("#searchResult").append('<form action="store" method="post" onclick="submit()">'+
 									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/store">'+
 										'<img src="'+data[i]["storeLogo"]+'" alt="" class="resultImg">'+
@@ -152,10 +160,10 @@ org.jsoup.select.Elements"%>
 											'</div>');
 									
 						}
-						$("#searchResult").append(data[data.length-2]);
+						//$("#searchResult").append(data[data.length-2]);더보기 버튼
+						
 					}else{
 						
-						$(".btnContainer").hide();
 						if(cPage==1){
 							$("#noneResult").append(data[0]);
 								
