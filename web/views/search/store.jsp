@@ -415,6 +415,7 @@
  	    			$.ajax({
 	    				url:"<%=request.getContextPath()%>/reservation.do",
 	    				type:"post",
+	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
 	    					"seat":selectedPcSeat, "pay":usePcMoney},
 	    				success:function(data) {
@@ -424,7 +425,7 @@
 		    	    			$(".fullSeat").html("사용중");
 		    	    			$(".reSeat").removeClass("selectSeat");
 		    	    			$(".reSeat").html("");
-		    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+		    	    			$("#userCash").html("data");
 		    	    			$("#reOk").html("다음");
 		    					$("#reCan").html("취소");
 		    	    			$("#reStep1").toggle();

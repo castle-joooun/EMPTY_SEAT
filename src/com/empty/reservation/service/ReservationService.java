@@ -16,12 +16,22 @@ public class ReservationService {
 	
 	public int userPay(String userId, int pay) {
 		Connection conn = getConnection();
+		// 유저 cash 마이너스 해주기.
 		int result = dao.userPay(conn, userId, pay);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		
 		return result;
+	}
+	
+	// 유저 돈 가져오기
+	public int userCash(String userId) {
+		Connection conn = getConnection();
+		int userCash = dao.userCash(conn, userId);
+		close(conn);
+		
+		return userCash;
 	}
 	
 	public String seatList(String storeId) {

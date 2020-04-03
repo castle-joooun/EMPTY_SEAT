@@ -44,6 +44,28 @@ public class ReservationDao {
 		return result;
 	}
 	
+	public int userCash(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("userCash");
+		int userCash = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				userCash = rs.getInt("cash");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return userCash;
+	}
+	
 	public String seatList(Connection conn, String storeId) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("seatList");
