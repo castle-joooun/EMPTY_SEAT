@@ -111,14 +111,15 @@ public class ReservationDao {
 	public int endTime(Connection conn, String storeId, String seat, String time) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("emdTime");
-//		int time2 = Integer.parseInt(time);
+		//String sql = prop.getProperty("endTime");
+		String sql="update store_seat_check set seat_end_time=sysdate + interval '"+time+"' hour where store_id=? and seat_num=?";
+		//		int time2 = Integer.parseInt(time);
 		System.out.println("time :" + time + ",storeId:" + storeId + ",seat:" + seat);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, time);
-			pstmt.setString(2, storeId);
-			pstmt.setString(3, seat);
+			//pstmt.setString(1, time);
+			pstmt.setString(1, storeId);
+			pstmt.setString(2, seat);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

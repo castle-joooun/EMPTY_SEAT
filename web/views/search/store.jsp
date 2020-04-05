@@ -510,7 +510,7 @@
    		}
    	})
    	
-   	<%-- setInterval(function() {
+   	setInterval(function() {
    	   	$.ajax({
    	   		url:"<%=request.getContextPath()%>/reservationCheck",
    	   		type:"post",
@@ -534,7 +534,7 @@
    	   			})
    	   		}
    	   	})
-   	}, 1000) --%>
+   	}, 1000)
     </script>
 
 	
