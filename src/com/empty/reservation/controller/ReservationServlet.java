@@ -55,36 +55,36 @@ public class ReservationServlet extends HttpServlet {
 			System.out.println("돈 가져왔어! : " + userCash);
 		}
 
-//		// 3. 스토어 해당 자리를 변경해준다.
+		// 3. 스토어 해당 자리를 변경해준다.
 //		int changeSeatUse = new ReservationService().changeSeatUse(userId, storeId, seat);
 //		if(changeSeatUse > 0) {
 //			System.out.println("자리 바꼈어!");
 //		}
-//
+
 		// store_seat seat_check 불러오기
-//		String seats = new ReservationService().seatList(storeId);
-//		if (seats!=null) {
-//			System.out.println("시트리스트 불어왔어!");
-//		}
-//
-//		int seatNum = Integer.parseInt(seat);
-//		String[] list = seats.split(",");
-//		list[seatNum-1] = "1";
-//		String tranSeats = "";
-//
-//		for (int i = 0; i < list.length; i++) {
-//			if (i == list.length - 1) {
-//				tranSeats += list[i];
-//			} else {
-//				tranSeats += list[i] + ",";
-//			}
-//		}
-//
-//		// store_seat seat_check 반환하기 (1=사용중)
-//		int useSeat = new ReservationService().inputSeat(storeId, tranSeats);
-//		if (useSeat > 0) {
-//			System.out.println("자리 예약됌!");
-//		}
+		String seats = new ReservationService().seatList(storeId);
+		if (seats!=null) {
+			System.out.println("시트리스트 불어왔어!");
+		}
+
+		int seatNum = Integer.parseInt(seat);
+		String[] list = seats.split(",");
+		list[seatNum-1] = "1";
+		String tranSeats = "";
+
+		for (int i = 0; i < list.length; i++) {
+			if (i == list.length - 1) {
+				tranSeats += list[i];
+			} else {
+				tranSeats += list[i] + ",";
+			}
+		}
+
+		// store_seat seat_check 반환하기 (1=사용중)
+		int useSeat = new ReservationService().inputSeat(storeId, tranSeats);
+		if (useSeat > 0) {
+			System.out.println("자리 예약됌!");
+		}
 
 		// 변환된 시간 해당 자리에 넣기
 		int timeOk = new ReservationService().endTime(storeId, seat, time);

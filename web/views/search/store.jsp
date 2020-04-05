@@ -524,11 +524,11 @@
    	   					$(this).html("사용중\n" + data[seatFullNums]["seatEndTime"]);
    	   					seatFullNums++;
    	   				} else {
-   	   					$(this).removeClass("fullSeat");
    	   					$(this).addClass("emptySeat");
+   	   					$(this).removeClass("fullSeat");
    	   					$(this).html("");
    	   					$(this).append($("<p>").html("사용가능"));
-   	   					$(this).append($("<button>").html(예약하기).addClass("reservationBtn").val(seatEmptyNums));
+   	   					$(this).append($("<button>").html("예약하기").addClass("reservationBtn").val(seatEmptyNums));
    	   				}
    	   				seatEmptyNums++;
    	   			})
