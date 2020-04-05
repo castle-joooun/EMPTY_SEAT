@@ -149,22 +149,28 @@ public class ExelDownServlet extends HttpServlet {
 	    //열시작, 열종료, 행시작, 행종료 (자바배열과 같이 0부터 시작)
 	    cell = row.createCell(0);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("합계");
+	    
 	    cell = row.createCell(1);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(cusnum);
+	    
 	    cell = row.createCell(2);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(net+"원");
+	    cell.setCellValue(cusnum+"명");
+	    
 	    cell = row.createCell(3);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(tax+"원");
+	    cell.setCellValue(net+"원");
+	    
 	    cell = row.createCell(4);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(total+"원");
+	    cell.setCellValue(tax+"원");
+	    
 	    cell = row.createCell(5);
 	    cell.setCellStyle(headStyle);
+	    cell.setCellValue(total+"원");
+	    
+	    
 
 
 

@@ -12,6 +12,14 @@ public class StoreSales {
 	 private int netProfit;
 	 private int tax;
 	 private int totalProfit;
+	 private String sdfDate;
+	 
+	public String getSdfDate() {
+		return sdfDate;
+	}
+	public void setSdfDate(String sdfDate) {
+		this.sdfDate = sdfDate;
+	}
 	public StoreSales() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -80,7 +88,7 @@ public class StoreSales {
 	public String toString() {
 		return "StoreSales [storeId=" + storeId + ", storeName=" + storeName + ", enDate=" + enDate + ", dayOfWeek="
 				+ dayOfWeek + ", customer=" + customer + ", netProfit=" + netProfit + ", tax=" + tax + ", totalProfit="
-				+ totalProfit + "]";
+				+ totalProfit + ", sdfDate=" + sdfDate + "]";
 	}
 	 
 
