@@ -9,6 +9,7 @@ import java.sql.Connection;
 
 import com.empty.cash.model.dao.VinDao;
 import com.empty.member.model.vo.Member;
+import com.empty.member.model.vo.outMoneyDB;
 
 public class VinService {
 	
@@ -43,5 +44,14 @@ public class VinService {
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
+	}
+	
+	public int outMoneyListDB(Member m, int money) {
+		Connection conn=getConnection();
+		int result= vd.outMoneyListDB(conn, m,money);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 }

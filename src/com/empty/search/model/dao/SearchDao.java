@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.empty.member.model.vo.outMoneyDB;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 
@@ -49,7 +50,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getString("store_price")
 						);
 				
 				list.add(s);
@@ -82,7 +84,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getString("store_price")
 						);
 			}
 			
@@ -255,6 +258,34 @@ public class SearchDao {
 		return favoriteSize;
 	}
  	
+	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("outMoneyList");
+		List list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			System.out.println(rs.next());
+			while(rs.next()) {
+				omdb = new outMoneyDB();
+				omdb.setUserId("USER_ID");
+				omdb.setOmNumber("OUTPUT_NUM");
+				omdb.setOmDate(rs.getDate("OMDATE"));
+				omdb.setOmNumber(rs.getString("BANK_NUMBER"));
+				omdb.setOm(rs.getInt("OM"));
+				omdb.setAfterOm(rs.getInt("AFTER_OM"));
+				list.add(omdb);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 }
 
 

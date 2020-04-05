@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.empty.member.model.vo.Member;
+import com.empty.member.model.vo.outMoneyDB;
 import com.empty.search.model.dao.SearchDao;
 
 public class VinDao {
@@ -106,6 +107,26 @@ public class VinDao {
 			pstmt.setInt(1, money);
 			pstmt.setString(2, m.getUserId());
 			pstmt.setString(3, m.getUserId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int outMoneyListDB(Connection conn, Member m, int money) {
+		PreparedStatement pstmt=null;
+		int result = 0;
+		String sql = prop.getProperty("selectOutMoneyList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserId());
+			pstmt.setString(3, "12612318801010기업은행");
+			pstmt.setInt(4, money);
+			pstmt.setInt(5, m.getCash()-money);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

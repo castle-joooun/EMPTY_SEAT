@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.empty.member.model.vo.Member;
+import com.empty.member.model.vo.StoreImg2;
+import com.empty.search.model.vo.Store;
 
 public class MemberDao {
 
@@ -208,8 +210,60 @@ public class MemberDao {
 	
 	public int insertStore(Connection conn, Store s) {
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		int result = 0;
 		String sql = prop.getProperty("insertStore");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s.getStoreId());
+			pstmt.setString(2, s.getStoreName());
+			pstmt.setString(3, s.getStorePhone());
+			pstmt.setString(4, s.getStoreTime());
+			pstmt.setString(5, s.getStoreInfo());
+			pstmt.setString(6, s.getStoreFacility());
+			pstmt.setString(7, s.getStoreAddress());
+			pstmt.setString(8, s.getStoreLogo());
+			pstmt.setString(9, s.getStorePrice());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
+	public int insertStoreImg(Connection conn,String storeImg1,String storeImg2,String storeImg3,String storeImg4,String storeImg5) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("insertStoreImg2");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, storeImg1+","+storeImg2+","+storeImg3+","+storeImg4+","+storeImg5);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public StoreImg2 searchStoreImg(Connection conn, StoreImg2 si) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("searchStoreImg");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				si.setStoreImg(rs.getString("store_img"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return si;
+	}
 }

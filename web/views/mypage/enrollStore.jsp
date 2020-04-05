@@ -19,13 +19,13 @@
 		</div>
 		
 			<div class="upzooinfobox">
-				<table class="upzoomyinfo1">
+				<table class="enrollbox">
 					<tr>
 						<td>
 							매장이름
 						</td>
 						<td>
-							<input type="text" id="storeName">
+							<input type="text" id="storeName" placeholder='PC방이름을 입력해주세요.'>
 						</td>
 					</tr>
 					<tr>
@@ -33,7 +33,7 @@
 							매장 전화번호
 						</td>
 						<td>
-							<input type="text" id="storePhone">
+							<input type="text" id="storePhone" placeholder="000-0000-0000">
 						</td>
 					</tr>
 					<tr>
@@ -51,7 +51,14 @@
 							매장정보
 						</td>
 						<td>
-						 	<input type="text" id="storeInfo">
+						 	<input type="text" id="storeInfo" placeholder=' , 로 구분하여 작성해주세요.'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+							<p>ex)CPU - AMD라이젠7 3700X 3.6GHz, 메인보드 - MSI MPG X570 게이밍 플러스</p>
 						</td>
 					</tr>
 					<tr>
@@ -60,25 +67,25 @@
 						</td>
 						<td>
 							<label for="storeFacirity1">
-								매점<input type="checkbox" name="storeFacirity" id="storeFacirity1" value="매점">
+								매점<input type="checkbox" name="storeFacirity" class="storeFacirity" value="매점">
 							</label>
 							<label for="storeFacirity2">
-								카페<input type="checkbox" name="storeFacirity" id="storeFacirity2" value="카페">
+								카페<input type="checkbox" name="storeFacirity" class="storeFacirity" value="카페">
 							</label>
 							<label for="storeFacirity3">
-								난방시설<input type="checkbox" name="storeFacirity "id="storeFacirity3" value="난방시설">
+								난방시설<input type="checkbox" name="storeFacirity " class="storeFacirity" value="난방시설">
 							</label>
 							<label for="storeFacirity4">
-								공기청정기<input type="checkbox" name="storeFacirity" id="storeFacirity4" value="공기청정기">
+								공기청정기<input type="checkbox" name="storeFacirity"  class="storeFacirity" value="공기청정기">
 							</label>
 							<label for="storeFacirity5">
-								흡연시설<input type="checkbox" name="storeFacirity" id="storeFacirity5" value="흡연시설">
+								흡연시설<input type="checkbox" name="storeFacirity" class="storeFacirity" value="흡연시설">
 							</label>
 							<label for="storeFacirity6">
-								제빙기<input type="checkbox" name="storeFacirity" id="storeFacirity6" value="제빙기">
+								제빙기<input type="checkbox" name="storeFacirity" class="storeFacirity" value="제빙기">
 							</label>
 							<label for="storeFacirity7">
-								주차시설<input type="checkbox" name="storeFacirity" id="storeFacirity7" value="주차시설">
+								주차시설<input type="checkbox" name="storeFacirity" class="storeFacirity" value="주차시설">
 							</label>
 							
 						</td>
@@ -99,7 +106,7 @@
 					</tr>
 						<tr>
 							<td></td>
-							<td id="map" style="width:200px;height:100px;"></td>
+							<td id="map" style="width:300px;height:300px;"></td>
 						</tr>
 					<tr>
 						<td>
@@ -226,10 +233,9 @@
 					var form=$("#frm").serialize();
 					var fileupload=$("#fileupload").val();
 					
-					
 					const fd=new FormData();
 					$.each($("#fileupload")[0].files,function(i,item){
-						fd.append("bs"+i,item);
+						fd.append("empty"+i,item);
 					});
 					
 					$('input[name="storeFacirity"]:checked').each(function(i){//체크된 리스트 저장
@@ -253,16 +259,16 @@
 					
 					$.ajax({
 						url:"<%=request.getContextPath()%>/enroll/store",
-						data:{"storeName":storeName,
+						data:{
+							  "userId":userId,
+							  "storeName":storeName,
 							  "storePhone":storePhone,
 							  "storeTimestart":storeTimestart,
 							  "storeTimeclose":storeTimeclose,
 							  "storeInfo":storeInfo,
+							  "storeFacirity":storeFacirity,
 							  "storeAddress":storeAddress,
 							  "storePrice":storePrice,
-							  "storeFacirity":storeFacirity,
-							  "userId":userId,
-							  "fileupload":fileupload
 						},
 						traditional : true,
 						dataType:"json",

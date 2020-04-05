@@ -17,7 +17,7 @@ public class Store {
 	}
 
 	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
-			String storeFacility, String storeAddress, String storeLogo, int storePrice) {
+			String storeFacility, String storeAddress, String storeLogo, String storePrice) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;

@@ -1,4 +1,4 @@
-package com.empty.cash.controller;
+package com.empty.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.empty.cash.model.service.VinService;
-import com.empty.member.model.vo.Member;
+import org.json.simple.JSONObject;
+
+import com.empty.search.model.vo.Store;
+import com.empty.search.service.SearchService;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CrystalcomServlet
+ * Servlet implementation class PcDBServlet
  */
-@WebServlet("/cash/goOutMoneySV.do")
-public class CrystalcomServlet extends HttpServlet {
+@WebServlet("/mypage/pcdb")
+public class PcDBServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CrystalcomServlet() {
+    public PcDBServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +33,20 @@ public class CrystalcomServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Member m = new Member();
-		int money = Integer.parseInt(request.getParameter("money"));
 		String userId = request.getParameter("userId");
+		Store s= new SearchService().store(userId);
 		
-		m = new VinService().selectUser(m, userId);	   //내정보불러오기
-		new VinService().minusCash(m, money);    //내 db계정 캐시 감소
-		//new VinService().payCharge(m, money );  //출금내역 db에 저장
+		JSONObject jsonObj=new JSONObject();
+		jsonObj=new JSONObject();
+		jsonObj.put("storeName", s.getStoreName());
+		jsonObj.put("storePhone", s.getStorePhone());
+		jsonObj.put("storeTime", s.getStoreTime());
+		jsonObj.put("storeInfo", s.getStoreInfo());
+		jsonObj.put("storeFacility", s.getStoreFacility());
+		jsonObj.put("storeAddress", s.getStoreAddress());
+		jsonObj.put("storePrice", s.getStorePrice());
+		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(jsonObj,response.getWriter());
 	}
 
 	/**

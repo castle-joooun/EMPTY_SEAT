@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.empty.member.model.service.MemberService;
+import com.empty.member.model.vo.StoreImg2;
 import com.empty.search.model.vo.Store;
 
 
@@ -32,19 +33,15 @@ public class EnrollStoreDBgoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String userId = request.getParameter("userId");
 		String storeName = request.getParameter("storeName");
 		String storePhone = request.getParameter("storePhone");
 		String storeTimestart = request.getParameter("storeTimestart");
 		String storeTimeclose = request.getParameter("storeTimeclose");
 		String storeInfo = request.getParameter("storeInfo");
-		String storeAddress = request.getParameter("storeAddress");
-		//int storePrice = Integer.parseInt(request.getParameter("storePrice"));
-		String storePrice = request.getParameter("storePrice");
-		//String storeFacirity =request.getParameter("storeFacirityData");
-		String userId = request.getParameter("userId");
 		String[] storeFacirity = request.getParameterValues("storeFacirity");
-		String fileupload = request.getParameter("fileupload");
-		System.out.println(fileupload);
+		String storeAddress = request.getParameter("storeAddress");
+		String storePrice = request.getParameter("storePrice");
 		System.out.println(storeName);
 		System.out.println(storePhone);
 		System.out.println(storeTimestart);
@@ -57,17 +54,20 @@ public class EnrollStoreDBgoServlet extends HttpServlet {
 		for(int i=0;i<storeFacirity.length;i++) {
 			storeFaciritys +=storeFacirity[i]+",";
 		}
+		StoreImg2 si= new StoreImg2();
+		new MemberService().searchStoreImg(si);
 		Store s = new Store();
+		s.setStoreId(userId);
 		s.setStoreName(storeName);
 		s.setStorePhone(storePhone);
 		s.setStoreTime(storeTimestart+" ~ "+storeTimeclose);
 		s.setStoreInfo(storeInfo);
+		s.setStoreFacility(storeFaciritys);
 		s.setStoreAddress(storeAddress);
 		s.setStorePrice(storePrice);
-		s.setStoreId(userId);
-		s.setStoreFacility(storeFaciritys);
+		s.setStoreLogo(si.getStoreImg());
 		new MemberService().insertStore(s);
-	             
+	             System.out.println("됐누??");
 
 
 	}

@@ -4,7 +4,28 @@
 	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	String msg = (String)request.getAttribute("msg");
+	String loc = (String)request.getAttribute("loc");
 %>
+<script>
+	$(document).ready(function(){
+		var userId="<%=loginMember.getUserId()%>";
+		var cash=0;
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mypage.do", 
+			type:"get",
+			dataType:"json",
+			data:{
+				"userId":userId	
+			},
+			success:function(data){
+				console.log(data['cash']);
+				cash=data['cash'];
+				$(".cashcomp").text("출금가능잔액 : "+cash+"원");
+			}
+		})
+	})
+	</script>
 		<div class="myinfobox">
 			<table>
 				<tr>
@@ -17,8 +38,7 @@
 		<div class="upzooinfobox">
 				<table class="upzoomyinfo1">
 					<tr>
-						<td>
-							출금가능잔액 : <%=loginMember.getCash() %>원
+						<td class="cashcomp">
 						</td>
 					</tr>
 					<tr>
@@ -54,10 +74,25 @@
 				$.ajax({
 					url:"<%=request.getContextPath()%>/cash/goOutMoneySV.do",
 					type:"post",
-					data:{"money":choiceOutMoney,
-						  "userId":userId},
+					data:{
+						  "money":choiceOutMoney,
+						  "userId":userId
+					},
 					dataType:"json",
 					success:function(data){
+						alert(data['msg']);
+						$.ajax({
+							url:"<%=request.getContextPath()%>/mypage/myPageList",
+							type:"get",
+							dataType:"html",
+							success:function(data){
+								$(".alldiv").html(data);		
+								$(".mypagemain1").css({"font-size":"22px"});
+								$(".mypagemain2").css({"font-size":"1.17em"});
+							}
+						})
+					},error:function(data){
+						
 					}
 				})
 			})

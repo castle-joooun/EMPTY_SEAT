@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.empty.cash.model.service.VinService;
+import com.empty.member.model.vo.Member;
+
 /**
  * Servlet implementation class MyPageServlet
  */
 @WebServlet("/mypage/myPageList")
-public class MyPageServlet extends HttpServlet {
+public class MyPageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public MyPageServlet() {
+    public MyPageListServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -26,6 +29,10 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		String userId = request.getParameter("userId");
+//		Member m = new Member();
+//		m = new VinService().selectUser(m,userId);
+//		request.setAttribute("m", m);
 		request.getRequestDispatcher("/views/mypage/mypagelist.jsp").forward(request,response);
 	}
 

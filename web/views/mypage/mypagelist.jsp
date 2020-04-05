@@ -5,6 +5,25 @@
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 %>
+	<script>
+	$(document).ready(function(){
+		var userId="<%=loginMember.getUserId()%>";
+		var cash=0;
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mypage.do", 
+			type:"get",
+			dataType:"json",
+			data:{
+				"userId":userId	
+			},
+			success:function(data){
+				console.log(data['cash']);
+				cash=data['cash'];
+				$("#cashbox").text(cash);
+			}
+		})
+	})
+	</script>
 			<div class="myinfobox">
 			<table>
 				<tr>
@@ -73,8 +92,8 @@
 						<td>
 							캐시
 						</td>
-						<td>
-							<%=loginMember.getCash() %>
+						<td id="cashbox">
+
 						</td>
 						<td>
 							원

@@ -1,9 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57f292cf81a06c030ca86c61e79b1b56"></script>
-	
-	
+<%@ page import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57f292cf81a06c030ca86c61e79b1b56"></script>
+	<script>
+	$(document).ready(function(){
+		var userId="<%=loginMember.getUserId()%>";
+		var cash=0;
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mypage.do", 
+			type:"get",
+			dataType:"json",
+			data:{
+				"userId":userId	
+			},
+			success:function(data){
+				console.log(data['cash']);
+				cash=data['cash'];
+				$("#cashbox").text(cash+"원");
+			}
+		})
+	})
+	$(document).ready(function(){
+		var userId="<%=loginMember.getUserId()%>";
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mypage/pcdb", 
+			type:"get",
+			dataType:"json",
+			data:{
+				"userId":userId	
+			},
+			success:function(data){
+				console.log(data);
+				$("#storeNamebox").text(data['storeName']);
+				$("#storeNumberbox").text(data['storePhone']);
+				$("#storeTimebox").text(data['storeTime']);
+				$("#storecombox").text(data['storeInfo']);
+				$("#storeaddressbox").text(data['storeAddress']);
+				$("#storebudeabox").text(data['storeFacility']);
+			}
+		});
+	});
+	</script>
 <body>
 	<h3 class="mypagemain1">MY PAGE</h3>
 	<h3 class="mypagemain2">USE</h3>
@@ -79,11 +117,8 @@
 						<td>
 							캐시
 						</td>
-						<td>
-							<%=loginMember.getCash() %>
-						</td>
-						<td>
-							원
+						<td id="cashbox">
+						
 						</td>
 						<td>
 							<button class="outmoney">출금</button>
@@ -109,38 +144,59 @@
 			<div class="upzooinfobox">
 				<table class="upzoomyinfo2">
 					<tr>
-						<td rowspan="7" colspan="1">
-							<img alt="image/퓨리.jpg" src="">
-						</td>
-					</tr>
-					<tr>
 						<td>
 							매장이름
+						</td>
+						<td id='storeNamebox'>
+						
+						</td>
+						<td rowspan='7' class='pcmainimgbox'>
+							<img alt="image/퓨리.jpg" src="">
 						</td>
 					</tr>
 					<tr>
 						<td>
 							매장번호
 						</td>
+						<td id="storeNumberbox">
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							매장 영업시간
+						</td>
+						<td id='storeTimebox'>
+						
 						</td>
 					</tr>
 					<tr>
 						<td>
 							컴퓨터 사양
 						</td>
+						<td id='storecombox'>
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							매장 주소
 						</td>
+						<td id='storeaddressbox'>
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							부대시설
+						</td>
+						<td id='storebudeabox'>
+						
+						</td>
+					</tr>
+					<tr>
+						<td>
+						
 						</td>
 					</tr>
 					
@@ -172,6 +228,7 @@
 	});
 	
 	$(function(){
+		var userId="<%=loginMember.getUserId()%>";
 		$(".mypagemain1").click(function(){  //내정보로
 			$.ajax({
 				url:"<%=request.getContextPath()%>/mypage/myPageList",
