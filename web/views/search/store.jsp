@@ -5,7 +5,7 @@
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
 <%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
-<link rel="stylesheet" href="css/store.css?ver=2" type="text/css">
+<link rel="stylesheet" href="css/store.css?ver=0" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
 <img src="image/next.png" alt="" id="next" width="20px">
@@ -88,7 +88,7 @@
 	<div id="viewSeat">
 		<p id="seatInfoText">
 			<!-- 원래는 값 받아와서 넣기 -->
-			빈시트 : 00 꽉시트 : 00
+			빈시트 : <span id="countEmptySeat"></span> 꽉시트 : <span id="countFullSeat"></span>
 		</p>
 		<center>
 			<table>
@@ -100,10 +100,15 @@
 						%>
 								<td></td>
 						<%	} else { %>
+							<%if(useCheck[seatNum-1].equals("0")) {%>
 								<td class="emptySeat seat">
 									<p>사용가능</p>
 									<button type="button" class="reservationBtn" value="<%=seatCheck[(seatNum-1)]%>">예약하기</button>
 								</td>
+							<%} else if(useCheck[seatNum-1].equals("1")){ %>
+								<td class="fullSeat seat">
+								</td>
+							<%} %>
 						<% 	}
 							seatNum++;
 						} 
@@ -220,6 +225,7 @@
 	<%} %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
+	
 		let selectPcRow = 0;
 		let selectPcCol = 0;
 	
@@ -302,8 +308,11 @@
 	    
 	    // 자리보여주기
 	    $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
-	    $(".fullSeat").append($("<p>").html("00:00"));
+	    $("#countEmptySeat").html($(".emptySeat").length);
+	    $("#countFullSeat").html($(".fullSeat").length);
+	    //$(".fullSeat").append($("<p>").html("00:00"));
     
+	    
 	    <% if(loginMember!=null){%>
 	    
 	    var checkOk=0;
@@ -417,20 +426,23 @@
 	    				type:"post",
 	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
-	    					"seat":selectedPcSeat, "pay":usePcMoney},
+	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val()},
 	    				success:function(data) {
+	    					console.log(data);
 		    					alert("성공적으로 예약이 되었습니다.");
-		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("fullSeat");
+		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).
+		    	    			addClass("fullSeat").html("사용중\n" + data["endTime"]);
 		    	    			$(".fullSeat").removeClass("emptySeat");	 
-		    	    			$(".fullSeat").html("사용중");
 		    	    			$(".reSeat").removeClass("selectSeat");
 		    	    			$(".reSeat").html("");
-		    	    			$("#userCash").html("data");
+		    	    			$("#userCash").html(data["userCash"]);
 		    	    			$("#reOk").html("다음");
 		    					$("#reCan").html("취소");
 		    	    			$("#reStep1").toggle();
 		    		    		$("#reStep2").toggle();
 		    					$("#reservation").height("310px");
+		    				    $("#countEmptySeat").html($(".emptySeat").length);
+		    				    $("#countFullSeat").html($(".fullSeat").length);
 		    					console.log(<%=loginMember.getCash()%>);
 	    				},error:(r,e,m)=>{
 	    					console.log(r);
@@ -480,6 +492,49 @@
     $("#ectNum").change(function() {
     	$("#ectTime").val($(this).val());
     })
+    
+   	$.ajax({
+   		url:"<%=request.getContextPath()%>/reservationCheck",
+   		type:"post",
+   		dataType:"json",
+   		data:{"storeId":"<%=s.getStoreId()%>"},
+   		success:function(data) {
+   			var seatNums = 0;
+   			$(".seat").each(function() {
+   				if($(this).hasClass("fullSeat")) {
+   					console.log(data);
+   					$(this).html("사용중\n" + data[seatNums]["seatEndTime"]);
+   					seatNums++;
+   				}
+   			})
+   		}
+   	})
+   	
+   	<%-- setInterval(function() {
+   	   	$.ajax({
+   	   		url:"<%=request.getContextPath()%>/reservationCheck",
+   	   		type:"post",
+   	   		dataType:"json",
+   	   		data:{"storeId":"<%=s.getStoreId()%>"},
+   	   		success:function(data) {
+   	   			var seatFullNums = 0;
+   	   			var seatEmptyNums = 0;
+   	   			$(".seat").each(function() {
+   	   				if($(this).hasClass("fullSeat")) {
+   	   					$(this).html("사용중\n" + data[seatFullNums]["seatEndTime"]);
+   	   					seatFullNums++;
+   	   				} else {
+   	   					$(this).removeClass("fullSeat");
+   	   					$(this).addClass("emptySeat");
+   	   					$(this).html("");
+   	   					$(this).append($("<p>").html("사용가능"));
+   	   					$(this).append($("<button>").html(예약하기).addClass("reservationBtn").val(seatEmptyNums));
+   	   				}
+   	   				seatEmptyNums++;
+   	   			})
+   	   		}
+   	   	})
+   	}, 1000) --%>
     </script>
 
 	

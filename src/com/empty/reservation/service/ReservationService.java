@@ -6,6 +6,7 @@ import static com.empty.common.JDBCTemplate.getConnection;
 import static com.empty.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import com.empty.reservation.model.dao.ReservationDao;
@@ -49,5 +50,57 @@ public class ReservationService {
 		
 		return result;
 	}
+	
+	
+	public int endTime(String storeId, String seat, String time) {
+		Connection conn = getConnection();
+		int result = dao.endTime(conn, storeId, seat, time);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public Date userTime(String storeId, String seat) {
+		Connection conn = getConnection();
+		Date date = dao.userTime(conn, storeId, seat);
+		
+		return date;
+	}
+	
+	public int seatYN(String storeId, String seat) {
+		Connection conn = getConnection();
+		int result = dao.seatYN(conn, storeId, seat);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	public List bringSeat(String storeId, long now) {
+		Connection conn = getConnection();
+		List bringSeat = dao.bringSeat(conn, storeId, now);
+		
+		return bringSeat;
+	}
+	
+	public List<String> checkYN(String storeId, long now) {
+		Connection conn = getConnection();
+		List<String> result = dao.changeYN(conn, storeId, now);
+		
+		return result;
+	}
+	
+	public int changeYN1(String storeId, List<String> list) {
+		Connection conn = getConnection();
+		int result = dao.changeYN1(conn, storeId, list);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+	
 	
 }
