@@ -1,0 +1,17 @@
+#introFirstDiv{
+	position:inline-block;
+	margin-left:300px;
+	margin-top:50px;
+}
+
+#introLogo{
+	position:absolute;
+	top:200px;
+	left:530px;
+	width:300px;
+}
+
+#introText{
+	position:absolute;
+	top:340px;
+}

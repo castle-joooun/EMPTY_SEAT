@@ -59,7 +59,7 @@
 					<a href="<%=request.getContextPath() %>" >MAIN</a>
 				</p>
 				<p id="introduce" class="mainHover">
-					<a href="introduce.html">INTRODUCE</a>
+					<a href="<%=request.getContextPath()%>/views/introduce/introduceMain.jsp">INTRODUCE</a>
 				</p>
 				<p id="notice" class="mainHover">
 					<a href="<%=request.getContextPath()%>/notice">NOTICE</a>

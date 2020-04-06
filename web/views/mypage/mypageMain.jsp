@@ -226,6 +226,8 @@ function requestData2(cPage2,numPerPage2){
 				   $("#mypageMainDiv").html(data);
 				   $("#mypageUseTable").html("");
 				   $(".pageBar").html("");
+				   $("#mypagePayTable").html("");
+				   $(".pageBar2").html("");
 			   }
 		   })
 	   })
