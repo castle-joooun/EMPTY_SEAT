@@ -2,6 +2,11 @@ body{
    width: 1366px;
 }
 
+#notice{
+	border-bottom: 2px solid #ff7531;
+	margin-bottom: 25px;
+}
+
 #eventListDiv{
    height: auto;
    text-align: center;
@@ -32,7 +37,6 @@ body{
    background-color: #5e64b1;
    color: white;
    border-radius: 5px;
-   height: 30px;
    font-size: 18px;
    text-align: left;
    margin-left: 850px;
@@ -59,12 +63,17 @@ tbody>tr>td{
 	width:60%;
 }
 
+#eventTitleTh:hover{
+	text-decoration: underline;
+}
+
 .innerContent{
    color: #ff7531;   
 }
 
 .innerContent:hover{
    cursor: pointer;
+   text-decoration: underline;
 }
 
 .eventListTbl{

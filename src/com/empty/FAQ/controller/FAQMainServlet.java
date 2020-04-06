@@ -54,24 +54,24 @@ public class FAQMainServlet extends HttpServlet {
 		String pageBar="";
 		
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
+			pageBar+="<span> < 이전 </span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo-1)+"'>[이전]</a>";					
+			pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo-1)+"'> < 이전 </a>";					
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo)+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo)+"'> "+pageNo+" </a>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span> 다음 > </span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo)+"'>[다음]</a>";					
+			pageBar+="<a href='"+request.getContextPath()+"/FAQMainServlet?cPage="+(pageNo)+"'> 다음 > </a>";					
 		}
 				
 		request.setAttribute("list",list);

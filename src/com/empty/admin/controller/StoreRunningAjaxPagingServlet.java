@@ -46,15 +46,15 @@ public class StoreRunningAjaxPagingServlet extends HttpServlet {
 			if(pageNo==1) {
 				pageBar+="<span class='nextBtn'style='color:grey'> ◀ 이전 </span>";
 			}else {
-				pageBar+="<a href='javascript:void(0);' onclick='requestStore("+(pageNo-1)+","+numPerPage+");'> ◀ 이전 </a>";
-				pageBar+="<a href='javascript:void(0);' onclick='requestStore("+1+","+numPerPage+");'>  1  </a>";
+				pageBar+="<a href='javascript:void(0);' onclick='runningStore("+(pageNo-1)+","+numPerPage+");'> ◀ 이전 </a>";
+				pageBar+="<a href='javascript:void(0);' onclick='runningStore("+1+","+numPerPage+");'>  1  </a>";
 				pageBar+="<span> ... </span>";
 			}
 			while(!(pageNo>pageEnd||pageNo>totalPage)) {
 				if(pageNo==cPage) {
 					pageBar+="<span class='cPage' style='color:#ff7531'> "+pageNo+" </span>";
 				}else {
-					pageBar+="<a href='javascript:void(0);' onclick='requestStore("+pageNo+","+numPerPage+");'> "+pageNo+" </a>";
+					pageBar+="<a href='javascript:void(0);' onclick='runningStore("+pageNo+","+numPerPage+");'> "+pageNo+" </a>";
 					
 				}
 				pageNo++;
@@ -63,8 +63,8 @@ public class StoreRunningAjaxPagingServlet extends HttpServlet {
 				pageBar+="<span class='nextBtn'style='color:grey'> 다음 ▶ </span>";
 			}else {
 				pageBar+="<span> ... </span>";
-				pageBar+="<a href='javascript:void(0);' onclick='requestStore("+totalPage+","+numPerPage+")'> "+totalPage+" </a>";
-				pageBar+="<a href='javascript:void(0);' onclick='requestStore("+pageNo+","+numPerPage+")'> 다음 ▶ <a>";
+				pageBar+="<a href='javascript:void(0);' onclick='runningStore("+totalPage+","+numPerPage+")'> "+totalPage+" </a>";
+				pageBar+="<a href='javascript:void(0);' onclick='runningStore("+pageNo+","+numPerPage+")'> 다음 ▶ <a>";
 			}
 			list.add(totalMember);
 			list.add(pageBar);

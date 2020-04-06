@@ -13,7 +13,7 @@
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/store/salesView"><span class="text-item">일매출 보기</span></a></li>
 			<li><a href="<%=request.getContextPath()%>/store/monthSalesView"><span>월매출보기</span></a></li>
-			<li><a href="#"><span>스토어 매출보기</span></a></li>
+			
 		</ul>
 	</div>
 	
@@ -21,9 +21,9 @@
 </div>
 <div id="contentContainer">
 	<div id="dayContainer">
-		<div><img src="<%=request.getContextPath()%>/image/leftward.png"></div>
+		<div><img src="<%=request.getContextPath()%>/image/left.png"></div>
 		<div id="dateStyle"><%=date %></div>
-		<div><img src="<%=request.getContextPath()%>/image/rightward.png"></div>
+		<div><img src="<%=request.getContextPath()%>/image/right.png"></div>
 	</div>
 	<div id="tableContainer">
 		<table>

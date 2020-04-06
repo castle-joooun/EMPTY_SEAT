@@ -12,7 +12,7 @@
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/store/salesView"><span>일매출 보기</span></a></li>
 			<li><a href="<%=request.getContextPath()%>/store/monthSalesView"><span class="text-item">월매출보기</span></a></li>
-			<li><a href="#"><span>스토어 매출보기</span></a></li>
+			
 		</ul>
 	</div>
 	<div>
@@ -20,13 +20,16 @@
 </div>
 <div id="contentContainer">
 	<div id="dayContainer">
-		<div><img src="<%=request.getContextPath()%>/image/leftward.png"></div>
+	
+		<div>
+			<button onclick="minusMonth('<%=year%>','<%=month %>')" type="button" ><img src="<%=request.getContextPath()%>/image/left.png"></button>
+		</div>
 		<div id="dateStyle">
 			<%=year+"년 "+month+"월" %>
-			
-			<input type="hidden" name="today" value="<%=year+"-"+month %>">
 		</div>		
-		<div><img src="<%=request.getContextPath()%>/image/rightward.png"></div>
+		<div>
+			<button onclick="plusMonth('<%=year%>','<%=month %>')" type="button"><img src="<%=request.getContextPath()%>/image/right.png"></button>
+		</div>
 	</div>
 	<form action="<%=request.getContextPath() %>/store/monthSalesView" method="post">
 		<input type="month" name="month" id="month">
@@ -106,7 +109,7 @@
 					
 					for(let i = 0;i<data.length;i++){
 						const tr3 =$("<tr>");
-						tr3.append($("<td>").html(data[i]['enDate']));
+						tr3.append($("<td>").html(data[i]['sdfDate']));
 						
 						tr3.append($("<td>").html(data[i]['dayOfWeek']));
 						tr3.append($("<td>").html(data[i]['customer']));
@@ -156,6 +159,42 @@
 		
 	}
 
+	function minusMonth(yearT,monthT){
+		var year=parseInt(yearT);
+		var month=parseInt(monthT);
+		
+	
+		if(month==1){
+			location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+(year-1)+"-12";
+		}else{
+			if(month<11){
+				
+				location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+year+"-0"+(month-1);
+			}else{
+			 location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+year+"-"+(month-1); 
+				
+			}
+		 }
+		
+			
+	}
+	function plusMonth(yearT,monthT){
+		var year=parseInt(yearT);
+		var month=parseInt(monthT);
+		
+		console.log(typeof year);
+		
+		 if(month==12){
+			location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+(year+1)+"-01";
+		}else{
+			if(month<9){
+				location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+year+"-0"+(month+1);
+			}else{
+			 location.href="<%=request.getContextPath() %>/store/monthSalesView?month="+year+"-"+(month+1); 
+				
+			}
+		 }
+	}
 
 </script>
 </body>

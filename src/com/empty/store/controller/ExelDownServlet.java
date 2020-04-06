@@ -1,6 +1,7 @@
 package com.empty.store.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -112,11 +113,12 @@ public class ExelDownServlet extends HttpServlet {
 	        row = sheet.createRow(rowNo++);
 	        cell = row.createCell(0);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(vo.getEnDate());
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	        cell.setCellValue(sdf.format(vo.getEnDate()));
 	        
 	        cell = row.createCell(1);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(vo.getDayOfWeek());
+	        cell.setCellValue(Character.toString(vo.getDayOfWeek()));
 	        
 	        cell = row.createCell(2);
 	        cell.setCellStyle(bodyStyle);
@@ -143,31 +145,38 @@ public class ExelDownServlet extends HttpServlet {
 	    row = sheet.createRow(rowNo++);
 	    
 	    //셀 병합
-	    sheet.addMergedRegion(new CellRangeAddress(0,1,rowNo,rowNo)); 
+	    sheet.addMergedRegion(new CellRangeAddress((rowNo-1),(rowNo-1),0,1)); 
 	    //열시작, 열종료, 행시작, 행종료 (자바배열과 같이 0부터 시작)
 	    cell = row.createCell(0);
 	    cell.setCellStyle(headStyle);
 	    cell.setCellValue("합계");
+	    
 	    cell = row.createCell(1);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(cusnum);
+	    
 	    cell = row.createCell(2);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(net+"원");
+	    cell.setCellValue(cusnum+"명");
+	    
 	    cell = row.createCell(3);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(tax+"원");
+	    cell.setCellValue(net+"원");
+	    
 	    cell = row.createCell(4);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue(total+"원");
+	    cell.setCellValue(tax+"원");
+	    
 	    cell = row.createCell(5);
 	    cell.setCellStyle(headStyle);
+	    cell.setCellValue(total+"원");
+	    
+	    
 
 
 
 	    // 컨텐츠 타입과 파일명 지정
 	    response.setContentType("ms-vnd/excel");
-	    response.setHeader("Content-Disposition", "attachment;filename=매출.xls");
+	    response.setHeader("Content-Disposition", "attachment;filename=sales.xls");
 
 	    // 엑셀 출력
 	    wb.write(response.getOutputStream());

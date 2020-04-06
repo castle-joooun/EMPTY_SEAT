@@ -49,6 +49,7 @@ div#storeSubMenu>ul>li>a>span{
 .subMenuContainer,.contentContainer{padding:1% 10%;}
 #contentContainer{
 	text-align:center;
+	margin-botton:100px;
 }
 #dayContainer>div{
 	display:inline-block;
@@ -61,6 +62,10 @@ div#storeSubMenu>ul>li>a>span{
 } */
 #dayContainer>input{
 	display:block;
+}
+#dayContainer button{
+	border:none;
+	background:none;
 }
 #contentContainer img{
 	position:relative;
