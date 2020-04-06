@@ -18,14 +18,90 @@
 				</tr>
 			</table>
 		</div>
-	
-	<talbe>
-		<tr>
-			<td>
-			
-			</td>
-		</tr>
-	</talbe>
+	<div class="upzooinfobox">
+				<table class="upzoomyinfo1">
+					<tr>
+						<td>
+							아이디
+						</td>
+						<td>
+							<%=loginMember.getUserId() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							비밀번호
+						</td>
+						<td>
+							<input type='text' placeholder='변경할 비밀번호'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							이름
+						</td>
+						<td>
+							<%=loginMember.getUserName() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							이메일
+						</td>
+						<td>
+							<%=loginMember.getEmail() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							핸드폰
+						</td>
+						<td> 
+							<%=loginMember.getPhone() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							주소
+						</td>
+						<td>
+							<input type='text' placeholder='<%=loginMember.getAddress() %>'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							성별
+						</td>
+						<td>
+							<%=loginMember.getGender() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							은행
+						</td>
+						<td>
+							<input type='text' placeholder='<%=loginMember.getAddress() %>'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							계좌번호
+						</td>
+						<td>
+							<input type='text' placeholder='<%=loginMember.getAddress() %>'>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							예금주
+						</td>
+						<td>
+							<input type='text' placeholder='<%=loginMember.getAddress() %>'>
+						</td>
+					</tr>
+				</table>
+			</div>
 	
 	<button class="byevin">탈퇴</button>
 	

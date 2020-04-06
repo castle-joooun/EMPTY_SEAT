@@ -18,10 +18,10 @@
 				console.log(data);
 				const tr=$("<tr>");
 				const tr3=$("<tr>");
-				tr3.append($("<td>").html("출금날짜"));
-				tr3.append($("<td>").html("출금 계좌번호"));
-				tr3.append($("<td>").html("금액"));
-				tr3.append($("<td>").html("출금후 금액"));
+				tr3.append($("<td>").html("출금날짜").css('font-size','17px').css('font-weight','bold'));
+				tr3.append($("<td>").html("출금 계좌번호").css('font-size','17px').css('font-weight','bold'));
+				tr3.append($("<td>").html("금액").css('font-size','17px').css('font-weight','bold'));
+				tr3.append($("<td>").html("출금후 금액").css('font-size','17px').css('font-weight','bold'));
 				tr.append(tr3);
 				for(let i=0;i<data.length;i++){
 					const tr2=$("<tr>");

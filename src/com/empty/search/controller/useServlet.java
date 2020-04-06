@@ -17,6 +17,8 @@ import com.empty.member.model.vo.Member;
 import com.empty.member.model.vo.outMoneyDB;
 import com.empty.search.service.SearchService;
 import com.google.gson.Gson;
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
 
 /**
  * Servlet implementation class useServlet
@@ -43,6 +45,50 @@ public class useServlet extends HttpServlet {
 		outMoneyDB omdb = new outMoneyDB();
 		m = new VinService().selectUser(m,userId);
 		List list =new SearchService().outMoneyList(userId, omdb); 
+		int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int numPerPage=5;
+		List list2=new SearchService().outMoneyList(cPage,numPerPage);
+		int totalBoard=new SearchService().omlCount();
+		
+		int totalPage=(int)Math.ceil((double)totalBoard/numPerPage);
+		
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		String pageBar="";
+		
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo-1)+"'>[이전]</a>";					
+		}
+		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo)+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()+"/board/boardList?cPage="+(pageNo)+"'>[다음]</a>";					
+		}
+				
+		request.setAttribute("list",list);
+		request.setAttribute("pageBar", pageBar);
+		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+		
+		
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(list,response.getWriter());
 	}

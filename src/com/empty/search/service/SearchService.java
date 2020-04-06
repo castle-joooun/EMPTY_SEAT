@@ -3,8 +3,8 @@ package com.empty.search.service;
 import static com.empty.common.JDBCTemplate.close;
 import static com.empty.common.JDBCTemplate.commit;
 import static com.empty.common.JDBCTemplate.rollback;
-
-
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 import static com.empty.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -104,6 +104,13 @@ public class SearchService {
 		List list = dao.outMoneyList(conn, userId, omdb);
 		close(conn);
 		return list;
+	}
+	
+	public int omlCount() {
+		Connection conn=getConnection();
+		int count=dao.omlCount(conn);
+		close(conn);
+		return count;
 	}
 	
 	

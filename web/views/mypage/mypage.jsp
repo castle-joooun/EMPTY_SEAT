@@ -135,7 +135,8 @@
 							매장정보
 						</td>
 						<td>
-							<button class="enrollstore">매장등록</button>
+							<button class="enrollstore" id='crystalstore'>매장수정</button>
+							<button class="enrollstore" id='enrollstore'>매장등록</button>
 						</td>
 					</tr>
 				</table>
@@ -151,7 +152,7 @@
 						
 						</td>
 						<td rowspan='7' class='pcmainimgbox'>
-							<img alt="image/퓨리.jpg" src="">
+							<img alt="/image/퓨리.jpg" src="">
 						</td>
 					</tr>
 					<tr>
@@ -271,9 +272,21 @@
 	})
 	
 	$(function(){
-		$(".enrollstore").click(function(){  //매장등록
+		$("#enrollstore").click(function(){  //매장등록
 			$.ajax({
 				url:"<%=request.getContextPath()%>/mypage/enrollstore.do",
+				type:"get",
+				dataType:"html",
+				success:function(data){
+					$(".alldiv").html(data);
+				}
+			})
+		})
+	})
+	$(function(){
+		$("#crystalstore").click(function(){  //매장수정
+			$.ajax({
+				url:"<%=request.getContextPath()%>/mypage/crystalstore.do",
 				type:"get",
 				dataType:"html",
 				success:function(data){

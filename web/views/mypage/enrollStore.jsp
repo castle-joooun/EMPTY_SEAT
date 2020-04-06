@@ -66,25 +66,25 @@
 							부대시설
 						</td>
 						<td>
-							<label for="storeFacirity1">
+							<label>
 								매점<input type="checkbox" name="storeFacirity" class="storeFacirity" value="매점">
 							</label>
-							<label for="storeFacirity2">
+							<label>
 								카페<input type="checkbox" name="storeFacirity" class="storeFacirity" value="카페">
 							</label>
-							<label for="storeFacirity3">
+							<label>
 								난방시설<input type="checkbox" name="storeFacirity " class="storeFacirity" value="난방시설">
 							</label>
-							<label for="storeFacirity4">
+							<label>
 								공기청정기<input type="checkbox" name="storeFacirity"  class="storeFacirity" value="공기청정기">
 							</label>
-							<label for="storeFacirity5">
+							<label>
 								흡연시설<input type="checkbox" name="storeFacirity" class="storeFacirity" value="흡연시설">
 							</label>
-							<label for="storeFacirity6">
+							<label>
 								제빙기<input type="checkbox" name="storeFacirity" class="storeFacirity" value="제빙기">
 							</label>
-							<label for="storeFacirity7">
+							<label>
 								주차시설<input type="checkbox" name="storeFacirity" class="storeFacirity" value="주차시설">
 							</label>
 							

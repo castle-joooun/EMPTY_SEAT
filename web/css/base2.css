@@ -456,15 +456,17 @@ a{color:#000;}
 .useList{
 	padding-top: 10px;
     padding-bottom: 10px;
-    background: lightsteelblue;
+    background: white;
     margin-top: 10px;
     margin-bottom: 10px;
     width: 966px;
+    font-size: 19px;
+    border: solid 5px lightsteelblue;
 }
 .enrollstore{
 	font-size: 16px;
     position: relative;
-    left: 520px;
+    left: 416px;
     padding-left: 14px;
     padding-right: 14px;
     border: solid 2px lightsteelblue;
@@ -540,13 +542,26 @@ a{color:#000;}
     position: relative;
 }
 .myuseList{
-	    padding-top: 10px;
-    padding-bottom: 10px;
-    background: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
+border: solid 5px lightsteelblue;
     width: 966px;
-    font-size: 19px;
-    border: solid 5px lightsteelblue;
+    position: relative;
+    top: -10px;
+    border-top: solid 0px;
 }
+.useList table tr td{
+	font-size: 19px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: tomato;
+}
+.inmoneyList{
+	border: solid 5px lightsteelblue;
+    width: 966px;
+    position: relative;
+    top: -10px;
+    border-top: solid 0px;
+}
+.inmoneyList table tr td{
+	font-weight: bold;
+    font-size: 17px;
 }

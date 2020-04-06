@@ -99,4 +99,13 @@ public class MemberService {
 		close(conn);
 		return si;
 	}
+	
+	public int updateStore(Store s) {
+		Connection conn = getConnection();
+		int result = dao.updateStore(conn, s);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result; 
+	}
 }

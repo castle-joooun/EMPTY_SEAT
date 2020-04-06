@@ -266,4 +266,26 @@ public class MemberDao {
 		}
 		return si;
 	}
+	
+	public int updateStore(Connection conn, Store s) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateStore");
+		System.out.println(s.getStoreName());
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s.getStoreName());
+			pstmt.setString(2, s.getStorePhone());
+			pstmt.setString(3, s.getStoreTime());
+			pstmt.setString(4, s.getStoreInfo());
+			pstmt.setString(5, s.getStorePrice());
+			pstmt.setString(6, s.getStoreId());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
