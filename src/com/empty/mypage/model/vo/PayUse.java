@@ -1,4 +1,4 @@
-package com.empty.payuse.model.vo;
+package com.empty.mypage.model.vo;
 
 import java.sql.Date;
 
@@ -8,7 +8,7 @@ public class PayUse {
 	private String user_id;
 	private int paymoney;
 	private Date stime;
-	private Date etime;
+	private String store_id;
 	
 	public PayUse() {
 		// TODO Auto-generated constructor stub
@@ -16,13 +16,13 @@ public class PayUse {
 	
 	
 
-	public PayUse(String store_name, String user_id, int paymoney, Date stime, Date etime) {
+	public PayUse(String store_name, String user_id, int paymoney, Date stime, String store_id) {
 		super();
 		this.store_name = store_name;
 		this.user_id = user_id;
 		this.paymoney = paymoney;
 		this.stime = stime;
-		this.etime = etime;
+		this.store_id = store_id;
 	}
 
 
@@ -59,12 +59,16 @@ public class PayUse {
 		this.stime = stime;
 	}
 
-	public Date getEtime() {
-		return etime;
+
+
+	public String getStore_id() {
+		return store_id;
 	}
 
-	public void setEtime(Date etime) {
-		this.etime = etime;
+
+
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 
 
@@ -72,8 +76,14 @@ public class PayUse {
 	@Override
 	public String toString() {
 		return "PayUse [store_name=" + store_name + ", user_id=" + user_id + ", paymoney=" + paymoney + ", stime="
-				+ stime + ", etime=" + etime + "]";
+				+ stime + ", store_id=" + store_id + "]";
 	}
+
+	
+
+
+
+
 	
 	
 	

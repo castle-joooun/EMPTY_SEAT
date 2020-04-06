@@ -8,7 +8,7 @@
 
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/FAQ/FAQview.css?ver=3"
+	href="<%=request.getContextPath()%>/css/FAQ/FAQview.css?ver=4"
 	type="text/css">
 
 

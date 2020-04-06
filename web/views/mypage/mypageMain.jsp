@@ -3,10 +3,12 @@
 <%@ page import="com.empty.member.model.vo.Member"%>
 <%
 	Member m = (Member) request.getAttribute("Member");
+	int cPage =request.getParameter("cPage")==null?1:Integer.parseInt(request.getParameter("cPage"));
+	int numPerPage = request.getParameter("numPerPage")==null?5:Integer.parseInt(request.getParameter("numPerPage"));
 %>
 
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/mypage/mypageMain.css?ver=2"
+	href="<%=request.getContextPath()%>/css/mypage/mypageMain.css?ver=6"
 	type="text/css">
 <%@ include file="/views/common/header.jsp"%>
 
@@ -71,38 +73,129 @@
 		<div class="mypageHeaderDiv">
 			<span class="mypageHeader">사용내역</span>
 		</div>
-		<table id="mypageUseTable">
-
-		</table>
+		<div id="mypageUseTable">
+			
+		</div>
 	</div>
+		<div class="pageBar">
+		
+		</div>
 
 	<div id="mypagePayDiv">
 		<div class="mypageHeaderDiv">
 			<span class="mypageHeader">결제내역</span>
 		</div>
-		<table id="mypagePayTable">
+		<div id="mypagePayTable">
 
-		</table>
+		</div>
+	</div>
+	<div class="pageBar2">
+	
 	</div>
 </section>
 <script>
-$(function(){
+
+//사용내역 페이징
+$(function (){
+	requestData(1,5);
+})
+	
+
+function requestData(cPage,numPerPage){
+/* $(function(){
       $("#mypageUseDiv").click(function(){
-    	  if($("#mypageUseTable").html() == "") {
+    	  
+    	  if($("#mypageUseTable").html() == "") { */
     		  $.ajax({
-    	            url:"<%=request.getContextPath()%>/mypageUse?userId=<%=loginMember.getUserId()%>",
+    	            url:"<%=request.getContextPath()%>/mypageUse",
     	            type:"get",
-    	            dataType:"html",
+    	            dataType:"json",
+    	            data:{"cPage":cPage,"numPerPage":numPerPage,"userId":"<%=loginMember.getUserId()%>"},
     	            success:function(data){
-    	               $("#mypageUseTable").html(data);
-    	            }
+    	            	$("#mypageUseTable").html("");
+    	            	console.log("페이징처리");
+    	            	if(data.length>1){
+    	            		const table=$("<table>");
+    	            		const th=$("<tr>");
+    	            		th.append($("<th>날짜</th>")).append($("<th>매장명</th>")).append($("<th>사용금액</th>"));
+    	            		table.append(th);
+    	            		console.log(data.length);
+    	             	  for(let i=0;i<data.length-1;i++){	
+    	             		  console.log(i);
+    	            		   let tr=$("<tr>");
+    	            		   let td=$("<td>").html(data[i]['sTime']);
+    	            	 	   tr.append(td);
+    	            		   td=$("<td>").html(data[i]['storeName']);
+    	            		   tr.append(td);
+    	            		   td=$("<td>").html(data[i]['payMoney']);
+    	            		   tr.append(td);
+    	            		   table.append(tr);
+    	            		   i==0?table.html(tr):table.append(tr);
+    	               		}
+    	            	   $("#mypageUseTable").append(table);
+    	             	  $(".pageBar").html(data[data.length-1]['pageBar']);
+    	            	}else{
+    	            		$(".pageBar").html(data[0]['msg']);
+    	            	}
+    	            },error:(r,e,m)=>{
+                        console.log(r);
+                        console.log(e);
+                        console.log(m);
+                     }
     	         })
-    	  } else {
+    	  /* } else {
     		  $("#mypageUseTable").html("");
+    		  $(".pageBar").html("");
     	  }
          
-      });         
-   });
+      });        
+   }); */
+};
+
+
+
+//결제내역 페이징
+$(function (){
+	requestData2(1,5);
+})
+function requestData2(cPage2,numPerPage2){
+	    		  $.ajax({
+	    	            url:"<%=request.getContextPath()%>/mypagePay",
+	    	            type:"get",
+	    	            dataType:"json",
+	    	            data:{"cPage2":cPage2,"numPerPage2":numPerPage2,"userId2":"<%=loginMember.getUserId()%>"},
+	    	            success:function(data){
+	    	            	console.log("paycharge");
+	    	            	$("#mypagePayTable").html("");
+	    	            	if(data.length>1){
+	    	            		const table=$("<table>");
+	    	            		const th=$("<tr>");
+	    	            		th.append($("<th>날짜</th>")).append($("<th>결제금액</th>"));
+	    	            		table.append(th);
+	    	            		console.log(data.length);
+	    	             	  for(let i=0;i<data.length-1;i++){	
+	    	             		  console.log(i);
+	    	            		   let tr=$("<tr>");
+	    	            		   let td=$("<td>").html(data[i]['ipDate']);
+	    	            	 	   tr.append(td);
+	    	            		   td=$("<td>").html(data[i]['ipMoney']);
+	    	            		   tr.append(td);
+	    	            		   table.append(tr);
+	    	            		   i==0?table.html(tr):table.append(tr);
+	    	               		}
+	    	            	   $("#mypagePayTable").append(table);
+	    	             	  $(".pageBar2").html(data[data.length-1]['pageBar2']);
+	    	            	}else{
+	    	            		$(".pageBar2").html(data[0]['msg2']);
+	    	            	}
+	    	            },error:(r,e,m)=>{
+	                        console.log(r);
+	                        console.log(e);
+	                        console.log(m);
+	                     }
+	    	         })
+	};
+
    
    $(function(){
       $("#mypagePayDiv").click(function(){
@@ -131,6 +224,8 @@ $(function(){
 				   console.log(data);
 				   $("#mypageMainDiv").html("");
 				   $("#mypageMainDiv").html(data);
+				   $("#mypageUseTable").html("");
+				   $(".pageBar").html("");
 			   }
 		   })
 	   })
@@ -143,4 +238,6 @@ $(function(){
    function deleteMember(){
 		location.replace("<%=request.getContextPath()%>/deleteMember");
 	}
+   
+   
 </script>

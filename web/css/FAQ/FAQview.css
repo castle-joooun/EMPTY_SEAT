@@ -5,6 +5,10 @@
 	width: 700px;
 }
 
+table{
+	border-collapse:collpase;
+}
+
 #FAQ-table tr th,td{
 	border:1px solid lightgray;
 }
