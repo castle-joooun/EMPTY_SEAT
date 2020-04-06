@@ -33,8 +33,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap">
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="<%=request.getContextPath()%>/js/base.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57f292cf81a06c030ca86c61e79b1b56&libraries=services"></script>
 <script>
         onchange
 </script>
@@ -63,7 +65,7 @@
 					<a href="<%=request.getContextPath()%>/notice">NOTICE</a>
 				</p>
 				<p id="myPage" class="mainHover">
-					<a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a>
+					<a href="<%=request.getContextPath()%>/views/mypage/mypage.jsp">MY PAGE</a>
 				</p>
 				
 				<p id="service" class="mainHover">

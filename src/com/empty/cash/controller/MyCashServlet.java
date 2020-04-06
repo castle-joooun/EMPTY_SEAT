@@ -1,4 +1,4 @@
-package com.semi.cash.controller;
+package com.empty.cash.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.model.service.VinService;
-import com.semi.model.vo.VinUser;
 
 /**
  * Servlet implementation class MyCashServlet

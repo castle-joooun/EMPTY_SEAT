@@ -14,12 +14,10 @@ public class Store {
 	private String enrollDate;
 	private int storePrice;
 	
-	
 	public Store() {
 		// TODO Auto-generated constructor stub
 	}
 
-  
 	public String getStoreId() {
 		return storeId;
 	}
