@@ -42,15 +42,21 @@ public class DailySalesAjax extends HttpServlet {
 		System.out.println(sumResult);
 		System.out.println(countCus);
 		System.out.println(storeName);
-		StoreSales s = new StoreSales();
-		s.setCustomer(countCus);
-		int net = sumResult*100/110;
-		int tax = sumResult-net;
-		s.setStoreId(id);
-		s.setNetProfit(net);
-		s.setTax(tax);
-		s.setTotalProfit(sumResult);
-		s.setStoreName(storeName);
+		
+		StoreSales s = null;
+		if(sumResult>0) {
+			s=new StoreSales();
+			s.setCustomer(countCus);
+			int net = sumResult*100/110;
+			int tax = sumResult-net;
+			
+			s.setStoreId(id);
+			s.setNetProfit(net);
+			s.setTax(tax);
+			s.setTotalProfit(sumResult);
+			s.setStoreName(storeName);
+		}
+				
 		
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(s,response.getWriter());

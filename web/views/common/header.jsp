@@ -65,9 +65,19 @@
 				<div id="noticeMenu" style="display: none">
 					<a href="<%=request.getContextPath() %>/event"></a>
 				</div>
-				<p id="myPage" class="mainHover">
-					<a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a>
-				</p>
+				<%if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %>
+                    <p id="myPage" class="mainHover">
+                    	<a href="<%=request.getContextPath()%>/admin">ADMIN PAGE</a>
+                    </p>
+                    <%}else if(loginMember!=null&&loginMember.isUserAppr()){ %>
+                    <p id="myPage" class="mainHover">
+                    	<a href="<%=request.getContextPath()%>/store/main">STORE PAGE</a>
+                    </p>
+                    <%}else if(loginMember!=null&& !loginMember.isUserAppr()) {%>
+                    <p id="myPage" class="mainHover">
+                    	<a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a>
+                    </p>
+                    <%} %>
 				
 				<p id="service" class="mainHover">
 					<a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a>

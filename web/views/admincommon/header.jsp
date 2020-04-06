@@ -29,12 +29,10 @@
             <!-- 상단고정 메뉴바 -->
             <span id="menubar">
                 <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
-                <p id="main" class="mainHover"><a href="<%=request.getContextPath() %>/admin" style="color: #ff7531">MAIN</a></p>
+                <p id="main" class="mainHover"><a href="<%=request.getContextPath() %>/" style="color: #ff7531">MAIN</a></p>
                 <p id="userPage" class="mainHover"><a href="<%=request.getContextPath()%>/admin/manageUser">USER</a></p>
                 <p id="storePage" class="mainHover"><a href="<%=request.getContextPath()%>/admin/manageStore">STORE</a></p>
-                <p id="noticePage" class="mainHover"><a href="service.html">NOTICE</a></p>
-                <p id="" class="mainHover"><a href="myPage.html">COMMUNICATION</a></p>
-             
+                
             </span>
         </center>
 

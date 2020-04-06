@@ -6,8 +6,8 @@
 	String dateYoil = (String)request.getAttribute("dateYoil");
 	String date = (String)request.getAttribute("date");
 	String yoil = (String)request.getAttribute("yoil");
-	String minusDay = (String)request.getAttribute("minusDay");
-	String plusDay = (String)request.getAttribute("plusDay");
+	String minusDate = (String)request.getAttribute("minusDate");
+	String plusDate = (String)request.getAttribute("plusDate");
 %>
 
 <div class="subMenuContainer">
@@ -26,14 +26,14 @@
 	<div id="dayContainer">
 		<div>
 			<form action="<%=request.getContextPath()%>/store/salesView">
-				<input type="hidden" name ="date" value="<%=minusDay%>">
+				<input type="hidden" name ="date" value="<%=minusDate%>">
 				<button><img src="<%=request.getContextPath()%>/image/left.png"></button>
 			</form>
 		</div>
 		<div id="dateStyle"><%=dateYoil %></div>
 		<div>
 			<form action="<%=request.getContextPath()%>/store/salesView">
-				<input type="hidden" name ="date" value="<%=plusDay%>">
+				<input type="hidden" name ="date" value="<%=plusDate%>">
 				<button><img src="<%=request.getContextPath()%>/image/right.png"></button>
 			</form>
 		</div>
@@ -59,7 +59,7 @@
 			data:{"date":date,"storeId":'<%=loginMember.getUserId()%>'},
 			success:function(data){
 				console.log(data);
-				if(data!=""){
+				if(data!=null){
 					const table = $("<table>");
 					table.append($("<tr>").append($("<td colspan='2'>").html(data['storeName'])));
 					table.append($("<tr>").append($("<td>").html("고객수")).append($("<td>").html(data['customer']+"명")));
