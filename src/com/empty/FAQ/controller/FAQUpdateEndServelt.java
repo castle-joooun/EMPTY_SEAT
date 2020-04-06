@@ -34,7 +34,7 @@ public class FAQUpdateEndServelt extends HttpServlet {
 //		String content=request.getParameter("content");
 		
 		int no=Integer.parseInt(request.getParameter("no"));
-		String title=request.getParameter("title");
+		String title=request.getParameter("FAQUpdateTitle");
 		String content=request.getParameter("content");
 		
 		

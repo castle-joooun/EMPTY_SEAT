@@ -27,6 +27,7 @@ public class ReservationService {
 	public String seatList(String storeId) {
 		Connection conn = getConnection();
 		String seats = dao.seatList(conn, storeId);
+		close(conn);
 		return seats;
 	}
 	
