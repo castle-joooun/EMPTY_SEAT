@@ -29,10 +29,14 @@ html{
 
 
 #popMenu{   
-    position: absolute;
-    float:right;
-    left: 1100px;
-    cursor: pointer;
+	position: absolute;
+	float: right;
+	/* position: absolute;
+
+    right:200px;*/
+	/* top:-40px; */
+	left: 1150px;
+	cursor: pointer;
 }
 
 
@@ -354,6 +358,337 @@ a{color:#000;}
 	display:block;
 	 margin: 0px auto;
 }
+    
+=======
+body{
+    width: 1366px;
+    height: auto;
+    margin: 0px;
+}
+html{
+    width: 1366px;
+}
+#mainLogo{
+    position: absolute;
+    left:140px;
+    top:40px;
+    z-index: 3;
+    cursor: pointer;
+}
+#transLogo{
+    position: absolute;
+    left:140px;
+    top:40px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.hover:hover{
+    visibility: hidden;
+    cursor: pointer;
+    transform: 2s;
+}
+
+
+#popMenu{   
+    position: absolute;
+    float:right;
+    left: 1100px;
+    cursor: pointer;
+}
+
+
+#menubar>p>a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#menubar>p>a:hover {
+    color: #ff7531;
+}
+
+#menubar>p{
+    position: relative;
+    top: 60px;
+    left: 25px;
+    margin: 25px;
+    margin-right: 55px;
+    font-size: 15px;
+    display: inline-block;
+    cursor: pointer;
+}
+.mainHover:hover{
+    position: relative;
+    top: 60px;
+    margin-bottom: 22px;
+    font-size: 15px;
+    display: inline-block;
+    cursor: pointer;
+}
+html{
+    width: 1366px;
+    height: auto;
+}
+
+#middle{
+    height: 44px;
+    z-index: 5;
+    background-color: lightsteelblue;
+}
+
+#middleText{
+    color: black;
+    font-weight: 600;
+    margin: 0;
+    padding-left:140px;
+    padding-top: 15px;
+}
+
+.clearr{
+    clear: right;
+}
+
+
+
+/* �꽌釉뚮찓�돱 */
+#subMenu{
+    position: relative;
+    left: 367px;
+    top: -18px;
+    color: white;
+    width: 400px;
+}
+
+#mainSub>span>a {
+    margin-right: 35px;
+    cursor: pointer;
+}
+#mainSub{
+    /* display: inline-block; */
+    display: inline-block;
+}
+
+#mainSub>span>a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+#mainSub>span>a:hover {
+    color: #ff7531;
+}
+
+.subHover>a:hover {
+    color: #ff7531;
+    display:inline;
+    border-bottom:2px solid #ff7531;
+    
+    /* padding-bottom:2px; */
+}
+
+.mainHover>a:hover {
+    color: #ff7531;
+    display:inline;
+    border-bottom:2px solid #ff7531;
+    /* padding-bottom:2px; */
+}
+#baseSubMenu>a {
+    border-bottom: 2px solid #ff7531;
+    /* text-shadow:
+    -1px -1px 3px white,
+    1px -1px 3px white,
+    -1px 1px 3px white,
+    1px 1px 3px white;   */
+}
+
+
+
+/* -------------------------------------------------------------------------------------------- */
+
+
+
+/* 占쎌뿯占쎌젾筌∽옙 占쎈뮞占쏙옙占쎌뵬 */
+.input {
+    width: 100%;
+    height: 40px;
+    padding: 8px 16px;
+    margin: 15px 0 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#login {
+    text-align: center;
+}
+
+/* �뿆�뫁�꺖甕곌쑵�뱣 占쎈뮞占쏙옙占쎌뵬 */
+.buttonStyle{
+    width: 150px;
+    height: 40px;
+    background-color: tomato;
+    font-size: 17px;
+    border: none;
+    color: white;
+}
+
+/* 嚥≪뮄�젃占쎌뵥 甕곌쑵�뱣 占쎈뮞占쏙옙占쎌뵬 */
+#loginBtn{
+    background-color: rgb(94, 100, 177);
+    font-size: 17px;
+    color: white;
+}
+
+/* 占쎌돳占쎌뜚揶쏉옙占쎌뿯 / �④쑴�젟筌≪뼐由� 筌띾뜆�뒭占쎈뮞 占쎌궞�뵳�됥늺 獄쏅쵐夷� */
+.link:hover{
+    text-decoration: underline;
+}
+
+.link{
+    text-decoration: none;
+    float: left;
+    color: gray;
+}
+
+b{
+    float: left;
+}
+
+#msg{
+    display: inline-block;
+}
+
+
+hr {
+    border: 1px solid rgb(94, 100, 177);
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
+#inputData{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+
+/* 筌뤴뫀�뼎筌∽옙 獄쏄퀗瑗� */
+.modal {
+    /* 占쎈떜野꺿뫀�꼦疫뀐옙 */
+    display: none;
+    position: fixed;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* 占쎈뮞占쎄쾿嚥∽옙 占쎌쁽占쎈짗 */
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* 筌뤴뫀�뼎筌∽옙 �굜�꼹�쀯옙�뱜 占쎈뮞占쏙옙占쎌뵬 */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    /* 占쎈퉸占쎄맒占쎈즲 占쎈툧筌띿쉸�뼚�걡占� */
+    height: 450px;
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+/* 캐시 */
+.alldiv{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+.cashTop{
+    height: 130px;
+    border-left: solid 4px lightsteelblue;
+    border-right: solid 4px lightsteelblue; 
+    padding-top:50px;
+}
+.myname{
+	position:relative;
+    font-size: 28px;
+    padding-left:200px;
+    padding-right:100px;
+    display:inline-block;
+}
+.mycash{
+	position:relative;
+	left:-40px;
+    font-size: 28px;
+    display: inline-block;
+}
+.mywon{
+	font-size: 28px;
+	display:inline-block;
+}
+.whatcharge h2{
+	text-align: center;
+	background-color: lightsteelblue;
+	padding-bottom: 0px;
+	color:tomato;
+	height: 50px;
+	padding-top:15px;
+	margin: 0px;
+}
+.chargingmoney{
+	display: inline-block;
+	padding-left:415px;
+	font-size:20px;
+}
+.whatcharge{
+	border-left: solid 4px lightsteelblue;
+    border-right: solid 4px lightsteelblue; 
+    border-bottom: solid 4px lightsteelblue;
+}
+#thisismoney{
+	font-size: 17px;
+}
+.gomoney{
+	position: relative;
+	left:40%;
+	right:50%;
+	font-size:50px;
+	background: lightsteelblue;
+	border-radius: 10px;
+	color:tomato;
+}
+
+
+
+a{color:#000;}
+ 
+.mask{
+    width:100%; 
+    height:100%; 
+    position:fixed; 
+    left:0; 
+    top:0; 
+    z-index:10; 
+    background:#000; 
+    opacity:.5;
+    filter:alpha(opacity=50);
+    }
+.paytag{
+	padding-left:110px;
+	display:inline;
+}
+.robot{
+	padding-top:20px;
+	display:block;
+	 margin: 0px auto;
+}
 
 
 
@@ -558,3 +893,4 @@ border: solid 5px lightsteelblue;
 	font-weight: bold;
     font-size: 17px;
 }
+
