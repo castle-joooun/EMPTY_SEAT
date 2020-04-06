@@ -99,11 +99,10 @@ public class ReservationServlet extends HttpServlet {
 		if (userTime!=null) {
 			System.out.println("가져온 타임 : " + transFormat.format(userTime));
 			long dayTime1 = System.currentTimeMillis();
-			long dayTime2 = userTime.getTime();
+			long dayTime2 = new Date().getTime() + 1000*60*60*24;
 			long nT = (dayTime2 - dayTime1) / (1000 * 60 * 60);
 			long nM = (dayTime2 - dayTime1) % (1000 * 60 * 60) / (1000 * 60);
-			long nS = (dayTime2 - dayTime1) % (1000 * 60 * 60) % (1000 * 60) / (1000);
-			endUserTime = nT + ":" + nM + ":" + nS;
+			endUserTime = nT + "시간 " + nM + "분";
 			
 			System.out.println("가져온시간 - 현재시간 : " + endUserTime);
 		}

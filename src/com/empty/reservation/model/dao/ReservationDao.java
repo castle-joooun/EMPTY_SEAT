@@ -182,8 +182,7 @@ public class ReservationDao {
 				long end = rs.getDate("seat_end_time").getTime();
 				long nT = (end - now) / (1000 * 60 * 60);
 				long nM = (end - now) % (1000 * 60 * 60) / (1000 * 60);
-				long nS = (end - now) % (1000 * 60 * 60) % (1000 * 60) / (1000);
-				String endUserTime = nT + ":" + nM + ":" + nS;
+				String endUserTime = nT + "시간 " + nM + "분";
 
 				Reservation r = new Reservation(rs.getString("store_id"), rs.getString("seat_num"),
 						rs.getString("seat_yn"), endUserTime);

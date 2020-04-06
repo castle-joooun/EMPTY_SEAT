@@ -29,10 +29,14 @@ html{
 
 
 #popMenu{   
-    position: absolute;
-    float:right;
-    left: 1100px;
-    cursor: pointer;
+	position: absolute;
+	float: right;
+	/* position: absolute;
+
+    right:200px;*/
+	/* top:-40px; */
+	left: 1150px;
+	cursor: pointer;
 }
 
 

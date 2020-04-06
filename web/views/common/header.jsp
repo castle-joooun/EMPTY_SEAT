@@ -80,12 +80,14 @@
 			
 			<%
 				if(loginMember != null){ 
-			%>
-				<button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button>
+			%>	
+				<img onclick="location.replace('<%=request.getContextPath()%>/logout')" class="logoutBtn" src="<%=request.getContextPath()%>/image/logout.png"
+					width="30px" style="position: absolute; float: right; left: 1130px; cursor: pointer; top: 33px; z-index:3;">
+				<%-- <button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button> --%>
 			<%
 				}else{
 			%>
-				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/popMenu500.png"
+				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/login.png"
 					width="30px">
 			<%
 				}

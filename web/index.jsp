@@ -33,7 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css?ver=0" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=1" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css">
@@ -76,17 +76,18 @@
 			<%
 				if(loginMember != null){ 
 			%>	
-				<button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button>
+				<img onclick="location.replace('<%=request.getContextPath()%>/logout')" class="logoutBtn" src="<%=request.getContextPath()%>/image/logout-index.png"
+					width="30px">
+				<%-- <button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button> --%>
 			<%
 				}else{
 			%>
-				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/pop-test.png"
+				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/login-index.png"
 					width="30px">
 			<%
 				}
 			%>
 
-	</header>
 	<%if(loginMember == null && msg == null) {%>
 	<div id="openLogin" class="modal">
 		<center>
@@ -199,7 +200,7 @@
                     추가하기
                 </div> -->
                 <div id="favoriteLine">
-                	<form action="store" method="post" onclick="submit()">
+                	<form action="storeView" method="post" onclick="submit()">
 	                    <div class="favoritePc">
 	                    </div>
                     </form>
@@ -293,7 +294,7 @@
 								}
 							}
 		 					for(let i=num; i<6; i++) {
-		 						$(".favoritePc").eq(i).append($("<span>").attr("class","favoriteNone").html("즐겨찾기를\n추가해주세요."));
+		 						$(".favoritePc").eq(i).append($("<span>").attr("class","favoriteNone").html("즐겨찾기를<br>추가해주세요."));
 		 					}
 						}
 					})

@@ -17,7 +17,7 @@ import com.empty.search.service.SearchService;
 /**
  * Servlet implementation class StoreServlet
  */
-@WebServlet("/store")
+@WebServlet("/storeView")
 public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -38,6 +38,7 @@ public class ReservationService {
 	public String seatList(String storeId) {
 		Connection conn = getConnection();
 		String seats = dao.seatList(conn, storeId);
+		close(conn);
 		return seats;
 	}
 	
@@ -65,6 +66,7 @@ public class ReservationService {
 	public Date userTime(String storeId, String seat) {
 		Connection conn = getConnection();
 		Date date = dao.userTime(conn, storeId, seat);
+		close(conn);
 		
 		return date;
 	}
@@ -82,14 +84,14 @@ public class ReservationService {
 	public List bringSeat(String storeId, long now) {
 		Connection conn = getConnection();
 		List bringSeat = dao.bringSeat(conn, storeId, now);
-		
+		close(conn);
 		return bringSeat;
 	}
 	
 	public List<String> checkYN(String storeId, long now) {
 		Connection conn = getConnection();
 		List<String> result = dao.changeYN(conn, storeId, now);
-		
+		close(conn);
 		return result;
 	}
 	
@@ -98,6 +100,7 @@ public class ReservationService {
 		int result = dao.changeYN1(conn, storeId, list);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		
 		return result;
 	}

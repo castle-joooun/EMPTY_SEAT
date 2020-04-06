@@ -143,8 +143,8 @@ org.jsoup.select.Elements"%>
 								str+="#"+tags[j]+" ";
 							}
 							
-							$("#searchResult").append('<form action="store" method="post" onclick="submit()">'+
-									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/store">'+
+							$("#searchResult").append('<form action="storeView" method="post" onclick="submit()">'+
+									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/storeView">'+
 										'<img src="'+data[i]["storeLogo"]+'" alt="" class="resultImg">'+
 										'<div class="resultText">'+
 											'<p class="resultTitle">'+data[i]['storeName']+'</p>'+
