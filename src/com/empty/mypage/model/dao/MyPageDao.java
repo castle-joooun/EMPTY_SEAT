@@ -11,6 +11,8 @@ import java.util.Properties;
 
 import com.empty.member.model.vo.Member;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 
 public class MyPageDao {
 	private Properties prop=new Properties();

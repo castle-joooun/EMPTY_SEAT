@@ -1,25 +1,60 @@
-<!-- FAQwrite Style -->
-
-div#FAQwriteDiv{
-	position:absolute;
-	display:inline-block;
-	margin-top:200px;
-	margin-left:500px;
-	width:800px;
+body{
+   width: 1366px;
 }
 
-#FAQwriteDiv{
-	position:absolute;
-	display:inline-block;
-	margin-top:70px;
-	margin-left:400px;
-	width:800px;
+#FAQWriteHead{
+   color: #5e64b1;
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+   margin-right: 800px;
+}
+
+#FAQWriteTitle{
+	height: 50px;
+	width: 100%;
+}
+
+#FAQWriteContent{
+	height: 230px;
+	width: 100%;
+}
+
+#FAQWriteDiv{
+   height: auto;
+   text-align: center;
+   margin-top: 70px;
+}
+
+#FAQWriteTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
+	height: 300px;
+}
+
+#FAQWriteEndBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  rgb(94, 100, 177);
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+#FAQWriteCencleBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  tomato;
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
 }
 
 
 
-
-
-#FAQwriteSubmit{
-	margin-left:230px;
-}
