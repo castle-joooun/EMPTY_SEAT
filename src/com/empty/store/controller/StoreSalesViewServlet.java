@@ -30,10 +30,35 @@ public class StoreSalesViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Date d = new Date();
-		SimpleDateFormat sdf= new SimpleDateFormat("yy.MM.dd E요일");
-		String date = sdf.format(d);
+		String dateYoil;
+		String date;
+		String yoil;
+		try {
+			date = request.getParameter("date");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date d = sdf.parse(date);
+			sdf = new SimpleDateFormat("yyyy년 MM월 dd일 E요일");
+			dateYoil = sdf.format(d);
+			sdf = new SimpleDateFormat("E");
+			yoil = sdf.format(d);
+			
+		}catch(Exception e) {
+			Date d = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 E요일");
+			dateYoil = sdf.format(d);
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			date = sdf.format(d);
+			sdf = new SimpleDateFormat("E");
+			yoil = sdf.format(d);
+			
+		}
+		
+		
+	
+		
+		request.setAttribute("dateYoil", dateYoil);
 		request.setAttribute("date", date);
+		request.setAttribute("yoil", yoil);
 		request.getRequestDispatcher("/views/storesales/salesmain.jsp").forward(request, response);
 		
 	}
