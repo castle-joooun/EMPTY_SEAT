@@ -34,9 +34,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
     <link rel="stylesheet" href="css/index.css?ver=0" type="text/css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" type="text/css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/choiceSignUp.css" type="text/css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/signUp_terms.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/login.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css">
     <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap" rel="stylesheet">
     <script src="<%=request.getContextPath()%>/js/base.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
@@ -48,7 +48,8 @@
 <body>
     <header>
         <div>
-            <a href="index.jsp">
+            <a href="<%=request.getContextPath()%>">
+
                 <!--로고 변하게 하기 -->
                 <img id="mainLogo" src="image/로고-test.png" width="150px"> <!-- 원래 로고 -->
                 <!-- <img id="transLogo" src="image/빈시트500-1-test.png" width="150px"> -->
@@ -61,8 +62,10 @@
                     <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
                     <p id="main"><a href="<%=request.getContextPath() %>" style="color: white">MAIN</a></p>
                     <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/views/mypage/mypage.jsp">MY PAGE</a></p>
                     <p id="notice" class="mainHover"><a href="<%=request.getContextPath()%>/notice">NOTICE</a></p>
-                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/views/mypage/mypage.jsp">MY PAGE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/store/salesView">DAILY SALES</a></p>
                     <p id="service" class="mainHover"><a href="<%=request.getContextPath()%>/FAQMainServlet">SERVICE</a></p>
                 </div>
             </center>
@@ -110,12 +113,12 @@
 			<div class="container">
 				<ul>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/signUpChoice.jsp">회원가입</a>
+						<a class="link" href="<%=request.getContextPath()%>/signUpChoice">회원가입</a>
 					</li>
 					<br>
 					<li style="list-style: none;">
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기&nbsp;</a>
-						<a class="link" href="<%=request.getContextPath()%>/views/member/findPw.jsp">&nbsp;비밀번호 찾기</a></li>
+						<a class="link" href="<%=request.getContextPath()%>/findIdView">아이디 찾기&nbsp;</a>
+						<a class="link" href="<%=request.getContextPath()%>/findPwView">&nbsp;비밀번호 찾기</a></li>
 					</div>
 				</ul>
 			</div>

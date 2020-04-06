@@ -7,37 +7,30 @@
 
 
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/FAQ/FAQview.css?ver=4"
-	type="text/css">
-
-
-<section id="FAQ-section">
-	<div id="FAQ-container">
-	<h2><%=f.getTitle() %></h2>
-		<table id="FAQ-table">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/FAQ/FAQview.css?ver=3" type="text/css">
+<center>
+<section>
+	<div id="FAQViewDiv">
+		<p id="FAQViewHead"><%=f.getTitle() %></p>
+		<table id="FAQViewTbl">
 			<tr>
 				<th>글번호</th>
-				<td><%=f.getNo()%></td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><%=f.getTitle()%></td>
-			</tr>
-			<tr>
+				<th>제 목</th>
 				<th>작성일</th>
-				<td><%=f.getTime()%></td>
+				<th>조회수</th>
 			</tr>
 			<tr>
-				<th>조회수</th>
+				<td><%=f.getNo()%></td>
+				<td id="FAQTitleTd"><%=f.getTitle()%></td>
+				<td><%=f.getTime()%></td>
 				<td><%=f.getCount()%></td>
 			</tr>
 			<tr>
-				<th>내용</th>
-				<td><%=f.getContent()%></td>
+			</tr>
+			<tr class="FAQContent">
+				<td colspan="4"><%=f.getContent()%></td>
 			</tr>
 		</table>
-
 	</div>
 	<%if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %>
 	<div id="FAQviewBtn">
@@ -45,15 +38,22 @@
 		<button id="FAQdelete" onclick="FAQdelete()">삭제하기</button>
 	</div>
 	<%} %>
+	<div style="margin-top: 30px;">
+		<button class="returnBtn" onclick="location.replace('<%=request.getContextPath()%>/FAQMainServlet')">목록으로</button>
+	</div>
 
 </section>
-
+</center>
 <script>
 	function FAQupdate(){
 		location.replace("<%=request.getContextPath()%>/FAQ/FAQupdate?no=<%=f.getNo()%>");
 	}
 	
 	function FAQdelete(){
-		location.replace("<%=request.getContextPath()%>/FAQ/FAQdelete?no=<%=f.getNo()%>");
+		if(confirm("게시물을 삭제하시겠습니까?")){
+			location.replace("<%=request.getContextPath()%>/FAQ/FAQdelete?no=<%=f.getNo()%>");
+		}else{
+			window.close();
+		}
 	}
 </script>

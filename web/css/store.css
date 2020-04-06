@@ -328,12 +328,14 @@
 
 .fullSeat {
     border: solid 1px #ff7531;
+    color: #ff7531;
+    font-weight: bold;
 }
 
 .emptySeat {
     border: solid 1px #5e64b1;
 }
-.reservationBtn {
+.emptySeat button {
     padding: 0;
     padding: 5px;
     border: 0;
@@ -400,7 +402,7 @@
 
 .reStep {
 	position: relative;
-	top:90px;
+	top:60px;
 	margin: 0 10px 10px 10px;
 	padding: 0;
 	border: solid 1px lightgray;
@@ -447,4 +449,67 @@
 #reStepMini{
 	font-size:10px;
 	color:rgb(80,80,80);
+}
+
+#reStep2{
+	display: none;
+}
+
+#reStep2 p {
+	position:relative;
+	font-size: 15px;
+}
+
+#viewSeat2{
+    display: block;
+    position: relative;
+    /* top: -43px; */
+    margin: 10px;
+    padding: 0;
+    border: solid 1px #dbdbdb;
+    border-top: solid 6px lightsteelblue;
+    padding: 15px;
+    /* margin-left: 15px; */
+    width: 928px;
+    overflow: auto;
+}
+
+#viewSeat2 td p {
+    padding: 0;
+    margin: 5px;
+}
+
+#viewSeat2 td {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#reTitleSeat{
+	position: relative;
+	color:#5e64b1;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+.reSeat{
+	border: solid 1px lightgray;
+	background-color: lightgray;
+}
+
+.selectSeat {
+	background-color: #ff7531;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#stepImg {
+	position: relative;
+	width:500px;
+	top:-15px;
 }

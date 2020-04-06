@@ -14,11 +14,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import com.empty.member.model.vo.outMoneyDB;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 
@@ -55,7 +55,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 				
 				list.add(s);
@@ -67,6 +68,70 @@ public class SearchDao {
 			close(stmt);
 		}
 		return list;
+	}
+	
+	public List<Store> totalSearch(Connection conn, String keyword, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("totalSearch");
+		List <Store> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
+			pstmt.setInt(5,(cPage-1)*numPerPage+1);
+			pstmt.setInt(6,cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Store s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
+						);
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int dataCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("dataCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public Store store(Connection conn, String id) {
@@ -88,7 +153,8 @@ public class SearchDao {
 						rs.getString("store_info"),
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
-						rs.getString("store_logo")
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
 						);
 			}
 			
@@ -215,7 +281,7 @@ public class SearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List list = new ArrayList();
-		String sql = prop.getProperty("favoriteList");
+		String sql = prop.getProperty("store"); //aaaaa
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -260,7 +326,54 @@ public class SearchDao {
 		
 		return favoriteSize;
 	}
- 	
+
+	
+	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("outMoneyList");
+		List list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			System.out.println(rs.next());
+			while(rs.next()) {
+				omdb = new outMoneyDB();
+				omdb.setUserId("USER_ID");
+				omdb.setOmNumber("OUTPUT_NUM");
+				omdb.setOmDate(rs.getDate("OMDATE"));
+				omdb.setOmNumber(rs.getString("BANK_NUMBER"));
+				omdb.setOm(rs.getInt("OM"));
+				omdb.setAfterOm(rs.getInt("AFTER_OM"));
+				list.add(omdb);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int omlCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		String sql=prop.getProperty("omlCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) count=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
+
 //	public List crawl() {
 //		
 //		List list = new ArrayList();
@@ -289,6 +402,7 @@ public class SearchDao {
 //		return list;
 //	}
 	
+
 }
 
 

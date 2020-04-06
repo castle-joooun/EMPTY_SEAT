@@ -5,7 +5,7 @@
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
 <%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
-<link rel="stylesheet" href="css/store.css?ver=1" type="text/css">
+<link rel="stylesheet" href="css/store.css?ver=2" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
 <img src="image/next.png" alt="" id="next" width="20px">
@@ -19,6 +19,7 @@
 	String[] seatCheck = ss.getSeatNum().split(",");
 	String[] useCheck = ss.getSeatCheck().split(",");
 	int seatNum = 1;
+	int seatNum2 = 1;
 %>
 
 
@@ -99,7 +100,10 @@
 						%>
 								<td></td>
 						<%	} else { %>
-								<td class="emptySeat seat"></td>
+								<td class="emptySeat seat">
+									<p>사용가능</p>
+									<button type="button" class="reservationBtn" value="<%=seatCheck[(seatNum-1)]%>">예약하기</button>
+								</td>
 						<% 	}
 							seatNum++;
 						} 
@@ -123,64 +127,102 @@
 			</tr>
 		</table>
 	</div>
-
+	<%if(loginMember!=null){ %>
 	<div id="reservation">
-		<p id="storeReInfo">매장 : <strong><%=s.getStoreName() %></strong></p>
+		<p id="storeReInfo">
+			매장 : <strong><%=s.getStoreName() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			선택자리 : <strong><span id="selectedSeatText"></span></strong>
+		</p>
 		<p id="userInfo">
 			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			빈캐시 : <strong><%=loginMember.getCash() %></strong>
+			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash() %> </span></strong>원
 		</p>
 		<div id="underLine"></div>
 		
 		<center>
 			<div id="reView">
-				<span>이용시간 선택</span>
-				<span>예약내역 확인</span>
-				<span>예약</span>
+				<img id="stepImg" src="image/step1.png" alt="">
 			</div>
 			
-			<div class="reStep">
+			<div id="reStep1" class="reStep">
 				<div class="reStepTitle">
 					<span>이용시간 선택</span>
-					<span id="reStepMini">(1시간당 1,000원)</span>
+					<span id="reStepMini">(1시간당 <%=s.getStorePrice() %>원)</span> <!-- 스토어프라이스로 넣어주기 -->
 				</div>
 				<div class="reStepContent">
 					<label>
-						<input type="radio" name="time" value="1시간">1시간
+						<input type="radio" name="time" value="1">1시간
 					</label>
 					<label>
-						<input type="radio" name="time" value="2시간">2시간
+						<input type="radio" name="time" value="2">2시간
 					</label>
 					<label>
-						<input type="radio" name="time" value="3시간">3시간
+						<input type="radio" name="time" value="3">3시간
 					</label>
 					<label>
-						<input type="radio" name="time" id="ectTime"><input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
+						<input type="radio" name="time" id="ectTime">
+						<input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
 					</label>
 				</div>
 			</div>
-			<%-- <div class="reStep">
+			<div class="reStep" id="reStep2">
 				<div class="reStepTitle">
 					예약내역확인
 				</div>
-				<div id="reStepCon">
-					<span>매장 : <%=s.getStoreName() %></span>
-					<span>매장주소 : <%=s.getStoreAddress() %></span>
-					<span>이용시간 : 0 시간</span>
-					<span>이용금액 : <%=1*1000 %>원</span>
-					<span>결재 후 빈캐시 : 0 빈캐시</span>
+				<div style="position:realtive; display:inline-block; margin-top:15px">
+					<div style="position:relative; display:inline-block; float:left; text-align:right;">
+						<p>매장 :&nbsp;</p>
+						<p>매장운영시간 :&nbsp;</p>
+						<p>현재시간 : &nbsp;<p>
+						<p>이용시간 : &nbsp;</p>
+						<p>이용금액 : &nbsp;</p>
+						<p>결제 후 빈캐시 : &nbsp;</p>
+					</div>
+					<div style="position:relative; display:inline-block; float:left; text-align:left;">
+						<p> <strong><%=s.getStoreName() %></strong></p>
+						<p> <strong><%=s.getStoreTime() %></strong></p>
+						<p> <strong><span id="clock"></span></strong></p>
+						<p> <strong><span id="willUseTime"></span> 시간</strong></p>
+						<p> <strong><span id="willPayMoney"></strong> 원</p> <!-- 스토어프라이스로 넣어주기 -->
+						<p> <strong><span id="afterMoney"></span> 빈캐시</strong></p>
+					</div>
+					<div style="position:relative; display:inline-block; float:left; text-align:right;">
+						<p>매장 주소 : <strong><%=s.getStoreAddress() %></strong></p>
+						<div id="map2" style="position:relative; width:480px;height:150px; left:28px"></div>
+					</div>
+				</div>
+					
+				<div id="viewSeat2">
+					<p id="reTitleSeat">선택하신 자리</p>
+					<table>
+						<%for(int i=1; i<=ss.getRow(); i++) { %>
+							<tr>
+							<%for(int n=1; n<=ss.getCol(); n++) { %>
+								<%if(!seatCheck[seatNum2-1].equals("0")) {%>
+									<td class="reSeat" value="<%=seatNum2%>"></td>
+								<%}else { %>
+									<td></td>
+								<%} %>
+								<%seatNum2++; %>
+							<%} %>
+							</tr>
+						<%} %>
+					</table>
 				</div>
 			</div>
-		</center> --%>
+		</center>
 		
 		<div id="reBtns">
 			<button id="reCan">취소</button>
 			<button id="reOk">다음</button>
 		</div>
 	</div>
-
+	<%} %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
+		let selectPcRow = 0;
+		let selectPcCol = 0;
+	
 	  //즐겨찾기
 	    $("#favorite").click(function () {
 	    	
@@ -194,7 +236,6 @@
 		        } else {
 		        	check = false;
 		        }
-		
 		        
 		        $.ajax({
 		        	url:"<%=request.getContextPath()%>/favorite",
@@ -257,12 +298,193 @@
 	            map.setCenter(coords);
 	        } 
 	    });    
+	     
+	    
+	    // 자리보여주기
+	    $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
+	    $(".fullSeat").append($("<p>").html("00:00"));
+    
+	    <% if(loginMember!=null){%>
+	    
+	    var checkOk=0;
+	    var selectedPcSeat;
+	    
+	 	// 예약하기 띄우기
+	    $(".reservationBtn").click(function() {
+	    	checkOk=0;
+	    	$("#selectedSeatText").html($(this).val());
+	    	selectedPcSeat = $(this).val();
+	    	
+	    	selectPcRow = Math.floor($(this).val() / <%=ss.getCol()%>);
+	    	selectPcCol = $(this).val() % <%=ss.getCol()%>;
+	    	if(selectPcCol == 0) {
+	    		selectPcRow -= 1;
+	    		selectPcCol = <%=ss.getCol()%>;
+	    	}
+	    	
+	    	console.log("로우 : " + selectPcRow + ", 컬 : " + selectPcCol);
+	    	
+	    	$("#viewSeat2").children().eq(1).children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("selectSeat");
+	    	$(".selectSeat").html("선택");
+	    	$("#stepImg").attr("src","image/step1.png");
+	    	$("#reservation").toggle();
+	    })
+	    
+	    <%}else{%>
+	    $(".reservationBtn").click(function() {
+	    	alert('로그인이 필요합니다!');
+	    })
+	    <%}%>
+	    
+	    // 다음/예약하기 버튼 바꾸기
+	 	
+	 	let reservationCheck = false;
+	 	let usePcMoney;
+	    $("#reOk").click(function() {
+	    	if(typeof $('input:radio[name="time"]:checked').val() == 'undefined') {
+	    		alert("이용시간을 선택해주세요.");
+	    	} else if(checkOk == 0 && typeof $('input:radio[name="time"]:checked').val() != 'undefined') {
+	    		$("#reOk").html("예약하기");
+	    		$("#reCan").html("이전");
+	    		
+	    		$("#reStep1").toggle();
+	    		$("#reStep2").toggle();
+	    		
+				console.log($('input:radio[name="time"]:checked').val());
+				
+				let usePcTime = $('input:radio[name="time"]:checked').val();
+				usePcMoney = <%=s.getStorePrice()%> * usePcTime;
+				let afterMoney = <%=loginMember.getCash()%> - usePcMoney;
+				
+				$("#willUseTime").html(usePcTime);
+				$("#willPayMoney").html(usePcMoney);
+				$("#afterMoney").html(afterMoney);
+				
+				if(afterMoney>=0) {
+					reservationCheck = true;
+				}
+	    		
+				$("#stepImg").attr("src","image/step2.png");
+				
+	    		$("#reservation").height("750px");
+	    		
+	    		// 예약하기에서 다시 실행
+	    	    var mapContainer = document.getElementById('map2'), // 지도를 표시할 div 
+	            mapOption = {
+	                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	                level: 3 // 지도의 확대 레벨
+	            };  
+
+	    	    // 지도를 생성합니다    
+	    	    var map = new kakao.maps.Map(mapContainer, mapOption); 
+	    	
+	    	    // 주소-좌표 변환 객체를 생성합니다
+	    	    var geocoder = new kakao.maps.services.Geocoder();
+	    	
+	    	    // 주소로 좌표를 검색합니다
+	    	    geocoder.addressSearch('<%=s.getStoreAddress()%>', function(result, status) {
+	    	
+	    	        // 정상적으로 검색이 완료됐으면 
+	    	         if (status === kakao.maps.services.Status.OK) {
+	    	
+	    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	    	
+	    	            // 결과값으로 받은 위치를 마커로 표시합니다
+	    	            var marker = new kakao.maps.Marker({
+	    	                map: map,
+	    	                position: coords
+	    	            });
+	    	
+	    	            // 인포윈도우로 장소에 대한 설명을 표시합니다
+	    	            var infowindow = new kakao.maps.InfoWindow({
+	    	                content: '<div style="width:150px;text-align:center;padding:6px 0; top:-15px;"><%=s.getStoreName()%></div>'
+	    	            });
+	    	            infowindow.open(map, marker);
+	    	
+	    	            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	    	            map.setCenter(coords);
+	    	        } 
+	    	    });   
+	    		
+	    		checkOk++;
+	    	} else {
+	    		checkOk = 0;
+	    		$("#reservation").toggle();
+	    		console.log("토글이 닫혀서 되는거");
+	    		if(reservationCheck) {
+ 	    			$.ajax({
+	    				url:"<%=request.getContextPath()%>/reservation.do",
+	    				type:"post",
+	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
+	    					"seat":selectedPcSeat, "pay":usePcMoney},
+	    				success:function(data) {
+		    					alert("성공적으로 예약이 되었습니다.");
+		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("fullSeat");
+		    	    			$(".fullSeat").removeClass("emptySeat");	 
+		    	    			$(".fullSeat").html("사용중");
+		    	    			$(".reSeat").removeClass("selectSeat");
+		    	    			$(".reSeat").html("");
+		    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+		    	    			$("#reOk").html("다음");
+		    					$("#reCan").html("취소");
+		    	    			$("#reStep1").toggle();
+		    		    		$("#reStep2").toggle();
+		    					$("#reservation").height("310px");
+		    					console.log(<%=loginMember.getCash()%>);
+	    				},error:(r,e,m)=>{
+	    					console.log(r);
+	    					console.log(e);
+	    					console.log(m);
+	    				}
+	    			})
+	    		} else {
+	    			alert("예약실패(빈캐시부족) : 충전후 이용해주세요.")
+	    			$("#reStep1").toggle();
+		    		$("#reStep2").toggle();
+		    		$("#reOk").html("다음");
+					$("#reCan").html("취소");
+					$("#reservation").height("310px");
+					$(".reSeat").each(function() {
+						if($(this).hasClass("selectSeat")) {
+							$(this).html("");
+							$(this).removeClass("selectSeat");
+						}
+					})
+	    		}
+	    		
+	    	} 
+	    })
+		$("#reCan").click(function() {
+			if(checkOk==0) {
+				$(".reSeat").each(function() {
+					if($(this).hasClass("selectSeat")) {
+						$(this).html("");
+						$(this).removeClass("selectSeat");
+					}
+				})
+				$("#reservation").toggle();
+			} else {
+				$("#reStep1").toggle();
+	    		$("#reStep2").toggle();
+				$("#reOk").html("다음");
+				$("#reCan").html("취소");
+				$("#stepImg").attr("src","image/step1.png");
+				$("#reservation").height("310px");
+				
+				checkOk = 0;
+			}
+		})
+    })
+	  
+    $("#ectNum").change(function() {
+    	$("#ectTime").val($(this).val());
     })
     </script>
 
+	
 </div>
 
-<script src="js/store.js?ver=1"></script>
-<script type="text/javascript" src="js/totalSearch.js"></script>
+<script src="js/store.js?ver=2"></script>
+<script type="text/javascript" src="js/totalSearch.js?ver=0"></script>
 </body>
 </html>

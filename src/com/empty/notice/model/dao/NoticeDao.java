@@ -55,7 +55,7 @@ public class NoticeDao {
 		}
 		return list;
 	}
-	
+
 	public int noticeCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -73,7 +73,7 @@ public class NoticeDao {
 		}
 		return result;
 	}
-	
+
 	public int insertNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -91,5 +91,106 @@ public class NoticeDao {
 		return result;
 	}
 
+	public Notice selectNotice(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectNotice");
+		Notice n = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				n = new Notice();
+				n.setNoticeNo(rs.getInt("NOTICE_NO"));
+				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
+				n.setNoticeWriter(rs.getString("NOTICE_WRITER"));
+				n.setNoticeContent(rs.getString("NOTICE_CONTENT"));
+				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
+				n.setNoticeCount(rs.getInt("NOTICE_COUNT"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return n;
+	}
 
+	public Notice selectNotice(Connection conn, int no, boolean hasRead) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectNotice");
+		Notice n = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n = new Notice();
+				n.setNoticeNo(rs.getInt("NOTICE_NO"));
+				n.setNoticeTitle(rs.getString("NOTICE_TITLE"));
+				n.setNoticeWriter(rs.getString("NOTICE_WRITER"));
+				n.setNoticeContent(rs.getString("NOTICE_CONTENT"));
+				n.setNoticeDate(rs.getDate("NOTICE_DATE"));
+				n.setNoticeCount(rs.getInt("NOTICE_COUNT"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+
+	public int updateCount(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNotice(Connection conn, int no, String title, String content) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteNotice(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

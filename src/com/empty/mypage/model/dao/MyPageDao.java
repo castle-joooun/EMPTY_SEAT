@@ -17,6 +17,8 @@ import com.empty.mypage.model.vo.PayUse;
 import com.empty.mypage.model.dao.MyPageDao;
 import com.empty.mypage.model.vo.InputMoneyList;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 
 public class MyPageDao {
 	private Properties prop=new Properties();

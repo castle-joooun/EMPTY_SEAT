@@ -87,14 +87,15 @@
 					
 					for(let i = 0;i<data.length-2;i++){
 						const tr =$("<tr>");
-					 	tr.append($("<td>").append($("<input>").attr({name:"dataid",type:"checkbox",class:"chkone",value:data[i]['userId'],onclick:"oneCheck();"})));	
+					 	tr.append($("<td>").append($("<input>").attr({name:"dataid",type:"checkbox",class:"chkone",value:data[i]['userId']+", "+data[i]['email'],onclick:"oneCheck();"})));
+					 						
 						tr.append($("<td>").html(data[i]['userId']).addClass("userid_"));
 						tr.append($("<td>").html(data[i]['userName']).addClass("username_"));
 						tr.append($("<td>").html(data[i]['phone']).addClass("phone_"));
 						tr.append($("<td>").html(data[i]['email']).addClass("email_"));
 						tr.append($("<td>").html(data[i]['address']).addClass("address_"));
 						tr.append($("<td>").html(data[i]['enrollDate']).addClass("enrolldate_"));
-						tr.append($("<td>").append($("<button>").addClass("apprBtn_").html("수락하기").attr({type:"button",onclick:"storeAppr();",value:data[i]['userId']})));
+						tr.append($("<td>").append($("<button>").addClass("apprBtn_").html("수락하기").attr({type:"button",onclick:"storeAppr();",value:data[i]['userId']+"|"+data[i]['email']})));
 						i ==0?tbody.html(tr):tbody.append(tr);
 						
 					}
