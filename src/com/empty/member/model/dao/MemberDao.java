@@ -288,4 +288,23 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	public int updateBank(Connection conn,String userId,String bankNumber,String bankMaster,String bank) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateBank");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bank);
+			pstmt.setString(2, bankNumber);
+			pstmt.setString(3, bankMaster);
+			pstmt.setString(4, userId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

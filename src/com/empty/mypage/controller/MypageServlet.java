@@ -37,9 +37,6 @@ public class MypageServlet extends HttpServlet {
 		System.out.println(userId);
 		Member m = new Member();
 		m = new VinService().selectUser(m,userId);
-		System.out.println(m.getUserId());
-		System.out.println(m.getCash());
-		System.out.println("아모고나");
 		
 		JSONObject jsonObj=new JSONObject();
 		jsonObj=new JSONObject();

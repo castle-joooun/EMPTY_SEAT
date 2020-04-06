@@ -32,12 +32,12 @@
 			},
 			success:function(data){
 				console.log(data);
-				$("#storeNamebox").text(data['storeName']);
-				$("#storeNumberbox").text(data['storePhone']);
-				$("#storeTimebox").text(data['storeTime']);
-				$("#storecombox").text(data['storeInfo']);
-				$("#storeaddressbox").text(data['storeAddress']);
-				$("#storebudeabox").text(data['storeFacility']);
+				$("#storeNamebox").text(data['storeName']).css('position','relative').css('left','-340px').css('width','400px');
+				$("#storeNumberbox").text(data['storePhone']).css('position','relative').css('left','-288px');
+				$("#storeTimebox").text(data['storeTime']).css('position','relative').css('left','-283px');
+				$("#storecombox").text(data['storeInfo']).css('position','relative').css('left','-14px');
+				$("#storeaddressbox").text(data['storeAddress']).css('position','relative').css('left','-191px');
+				$("#storebudeabox").text(data['storeFacility']).css('position','relative').css('left','-15px');
 			}
 		});
 	});
@@ -121,6 +121,7 @@
 						
 						</td>
 						<td>
+							<button class="enrollgyoja" style='padding-left:14px;padding-right:14px;'>계좌등록</button>
 							<button class="outmoney">출금</button>
 						</td>
 					</tr>
@@ -254,22 +255,39 @@
 				success:function(data){
 					$(".alldiv").html(data);
 				}
-			})
-		})
-	})
+			});
+		});
+	});
+	
+	$(function(){
+		$(".enrollgyoja").click(function(){  //계좌등록으로
+				$.ajax({
+					url:"<%=request.getContextPath()%>/mypage/enrollgyoja.do",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$(".alldiv").html(data);
+					}
+				});
+		});
+	});
 	
 	$(function(){
 		$(".outmoney").click(function(){  //출금으로
-			$.ajax({
-				url:"<%=request.getContextPath()%>/mypage/outmoney.do",
-				type:"get",
-				dataType:"html",
-				success:function(data){
-					$(".alldiv").html(data);
-				}
-			})
-		})
-	})
+			if(<%=loginMember.getBankNumber()%>!=null){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/mypage/outmoney.do",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$(".alldiv").html(data);
+					}
+				});
+			}else if(<%=loginMember.getBankNumber()%>==null){
+				alert("계좌를 등록해주세요.");
+			}
+		});
+	});
 	
 	$(function(){
 		$("#enrollstore").click(function(){  //매장등록
@@ -280,9 +298,11 @@
 				success:function(data){
 					$(".alldiv").html(data);
 				}
-			})
-		})
-	})
+			});
+		});
+	});
+	
+	
 	$(function(){
 		$("#crystalstore").click(function(){  //매장수정
 			$.ajax({
@@ -292,9 +312,9 @@
 				success:function(data){
 					$(".alldiv").html(data);
 				}
-			})
-		})
-	})
+			});
+		});
+	});
 	
 	</script>
 </body>

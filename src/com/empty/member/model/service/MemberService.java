@@ -108,4 +108,13 @@ public class MemberService {
 		close(conn);
 		return result; 
 	}
+	
+	public int updateBank(String userId,String bankNumber,String bankMaster,String bank) {
+		Connection conn = getConnection();
+		int result = dao.updateBank(conn, userId, bankNumber, bankMaster, bank);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result; 
+	}
 }
