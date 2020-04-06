@@ -10,10 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
 import com.empty.member.model.vo.outMoneyDB;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 
@@ -51,7 +56,7 @@ public class SearchDao {
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
 						rs.getString("store_logo"),
-						rs.getString("store_price")
+						rs.getInt("store_price")
 						);
 				
 				list.add(s);
@@ -63,6 +68,70 @@ public class SearchDao {
 			close(stmt);
 		}
 		return list;
+	}
+	
+	public List<Store> totalSearch(Connection conn, String keyword, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("totalSearch");
+		List <Store> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
+			pstmt.setInt(5,(cPage-1)*numPerPage+1);
+			pstmt.setInt(6,cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Store s = new Store(
+						rs.getString("store_id"),
+						rs.getString("store_name"),
+						rs.getString("store_phone"),
+						rs.getString("store_time"),
+						rs.getString("store_info"),
+						rs.getString("store_facility"),
+						rs.getString("store_address"),
+						rs.getString("store_logo"),
+						rs.getInt("store_price")
+						);
+				
+				list.add(s);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int dataCount(Connection conn, String keyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("dataCount");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,"%"+keyword+"%");
+			pstmt.setString(2,"%"+keyword+"%");
+			pstmt.setString(3,"%"+keyword+"%");
+			pstmt.setString(4,"%"+keyword+"%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public Store store(Connection conn, String id) {
@@ -85,7 +154,7 @@ public class SearchDao {
 						rs.getString("store_facility"),
 						rs.getString("store_address"),
 						rs.getString("store_logo"),
-						rs.getString("store_price")
+						rs.getInt("store_price")
 						);
 			}
 			
@@ -131,11 +200,11 @@ public class SearchDao {
 			if(rs.next()) {
 				ss = new StoreSeat();
 				ss.setStoreId(rs.getString("store_id"));
-				ss.setCol(rs.getInt("store_col"));
-				ss.setRow(rs.getInt("store_row"));
-				ss.setStoreCheck(rs.getString("store_check"));
+				ss.setCol(rs.getInt("seat_col"));
+				ss.setRow(rs.getInt("seat_row"));
+				ss.setSeatNum(rs.getString("seat_num"));
+				ss.setSeatCheck(rs.getString("seat_check"));
 			}
-			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -257,7 +326,8 @@ public class SearchDao {
 		
 		return favoriteSize;
 	}
- 	
+
+	
 	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -303,6 +373,36 @@ public class SearchDao {
 			close(pstmt);
 		}return count;
 	}
+
+//	public List crawl() {
+//		
+//		List list = new ArrayList();
+//		
+//		String url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=게임검색";
+//		Document doc = null;
+//		
+//		try {
+//			doc = Jsoup.connect(url).get();
+//			
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		// 가져올 태그를 가져온다
+//		Elements element = doc.select("ol.realtime_srch");
+//		
+//		Iterator<Element> ie1 = element.select("em.num").iterator();
+//		Iterator<Element> ie2 = element.select("span.tit").iterator();
+//		
+//		while(ie1.hasNext()) {
+//			list.add(ie1.next().text() + "\t" + ie2.next().text());
+//			System.out.println(list.add(ie1.next().text() + "\t" + ie2.next().text()));
+//		}
+//		
+//		return list;
+//	}
+	
+
 }
 
 

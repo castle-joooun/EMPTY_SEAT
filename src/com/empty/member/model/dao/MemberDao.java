@@ -157,7 +157,7 @@ public class MemberDao {
 				m = new Member();
 				m.setUserId(rs.getString("user_id"));
 			}
-		}catch(SQLException e) {
+		}catch(SQLException e) { 
 			e.printStackTrace();
 		}finally {
 			close(rs);

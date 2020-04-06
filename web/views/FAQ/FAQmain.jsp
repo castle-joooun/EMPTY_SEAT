@@ -6,20 +6,29 @@
 %>
 
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/FAQ/FAQmain.css?ver=2" type="text/css" />
-	
-
-<body>
-
-	<div id="board">
-		<table>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/FAQ/FAQmain.css?ver=0" type="text/css" />
+<center>
+<section>
+	<div id="FAQDiv">
+		<div style="text-align: left; margin-left: 140px; margin-bottom: 40px;">
+			<p class="FAQHead">FAQ</p>
+		</div>
+      <%
+         if(loginMember != null && loginMember.getUserId().equals("admin")){
+      %>
+      <div>
+         <button type="button" id="FAQWriteBtn" onclick="location.replace('<%=request.getContextPath()%>/FAQwrite')">FAQ 작성</button>
+      </div>
+      <%}else{ %>
+	  <div style="height: 40px;"></div>
+	  <%} %>
+		<table class="FAQListTbl">
 			<thead>
 				<tr>
-					<th class="tdnum">번호</th>
-					<th class="tdsubject">제목</th>
+					<th class="tdnum">번 호</th>
+					<th id="FAQTitleTh" class="tdsubject">제 목</th>
 					<th class="tddate">작성일</th>
-					<th class="tdcount">조회수</th>
+					<th class="tdcount">조회 수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,9 +43,9 @@
 					for (FAQ f : list) {
 				%>
 				<tr>
-					<td class="FAQList"><%=f.getNo()%></td>
+					<td style="color: blue" class="FAQList"><%=f.getNo()%></td>
 					<td class="FAQList">
-						<span class="link" onclick="fn_link(<%=f.getNo()%>)">
+						<span class="innerContent" onclick="fn_link(<%=f.getNo()%>)">
 							<%=f.getTitle() %>
 							<form action="<%=request.getContextPath() %>/FAQ/FAQView" class="linkFrm">
 								<input type="hidden" name="no" value="<%=f.getNo() %>">
@@ -55,22 +64,12 @@
 		<form action="<%=request.getContextPath()%>/FAQ/FAQView" id="linkF">
 			<input type="hidden" name="no">
 		</form>
-		<div id="pageBar">
+		<div id="pageBar" style="margin-top: 25px;">
 			<%=request.getAttribute("pageBar")%>
 		</div>
-
-		<%if (loginMember!=null&&loginMember.getUserId().equals("admin")) {%>
-		<div id="btnDiv">
-			<input type=button value="글쓰기"
-				onclick="location.replace('<%=request.getContextPath()%>/FAQwrite')"
-				id="writeBtn">
-		</div>
-		<%} %>
-		
 	</div>
-
-
-	<script type="text/javascript" src="js/service.js"></script>
+</section>
+</center>
 	<script>
 		function fn_link(no){
 			$("#linkF>input").val(no);
@@ -79,3 +78,4 @@
 	</script>
 
 </body>
+</html>

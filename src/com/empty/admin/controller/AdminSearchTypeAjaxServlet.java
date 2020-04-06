@@ -19,7 +19,7 @@ import com.empty.member.model.vo.Member;
 /**
  * Servlet implementation class AdminSearchTypeServlet
  */
-@WebServlet("/admin/searchTypeAjax")
+@WebServlet("/admin/user/searchTypeAjax")
 public class AdminSearchTypeAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
