@@ -258,6 +258,35 @@ public class SearchDao {
 		return favoriteSize;
 	}
  	
+	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb,int cPage,int numPerPage) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List list=new ArrayList();
+		String sql=prop.getProperty("selectOML");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				omdb = new outMoneyDB();
+				omdb.setUserId("USER_ID");
+				omdb.setOmNumber("OUTPUT_NUM");
+				omdb.setOmDate(rs.getDate("OMDATE"));
+				omdb.setOmNumber(rs.getString("BANK_NUMBER"));
+				omdb.setOm(rs.getInt("OM"));
+				omdb.setAfterOm(rs.getInt("AFTER_OM"));
+				list.add(omdb);			
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

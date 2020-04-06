@@ -17,8 +17,6 @@ import com.empty.member.model.vo.Member;
 import com.empty.member.model.vo.outMoneyDB;
 import com.empty.search.service.SearchService;
 import com.google.gson.Gson;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
 
 /**
  * Servlet implementation class useServlet
@@ -52,7 +50,7 @@ public class useServlet extends HttpServlet {
 			cPage=1;
 		}
 		int numPerPage=5;
-		List list2=new SearchService().outMoneyList(cPage,numPerPage);
+		List list2=new SearchService().outMoneyList(userId, omdb,cPage,numPerPage);
 		int totalBoard=new SearchService().omlCount();
 		
 		int totalPage=(int)Math.ceil((double)totalBoard/numPerPage);
