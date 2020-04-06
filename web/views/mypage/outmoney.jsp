@@ -35,8 +35,8 @@
 				</tr>
 			</table>
 		</div>
-		<div class="upzooinfobox">
-				<table class="upzoomyinfo1">
+		<div class="outMoneyBox">
+				<table class="cashouputbox">
 					<tr>
 						<td class="cashcomp">
 						</td>

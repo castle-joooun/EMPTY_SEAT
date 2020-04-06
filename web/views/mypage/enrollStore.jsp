@@ -106,7 +106,7 @@
 					</tr>
 						<tr>
 							<td></td>
-							<td id="map" style="width:300px;height:300px;"></td>
+							<td id="map" style="height:300px;"></td>
 						</tr>
 					<tr>
 						<td>

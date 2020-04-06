@@ -19,12 +19,33 @@
 			success:function(data){
 				console.log(data['cash']);
 				cash=data['cash'];
-				$("#cashbox").text(cash);
+				$("#cashbox").text(cash+"원");
 			}
 		})
 	})
+	$(document).ready(function(){
+		var userId="<%=loginMember.getUserId()%>";
+		$.ajax({
+			url:"<%=request.getContextPath()%>/mypage/pcdb", 
+			type:"get",
+			dataType:"json",
+			data:{
+				"userId":userId	
+			},
+			success:function(data){
+				console.log(data);
+				$("#storeNamebox").text(data['storeName']);
+				$("#storeNumberbox").text(data['storePhone']);
+				$("#storeTimebox").text(data['storeTime']);
+				$("#storecombox").text(data['storeInfo']);
+				$("#storeaddressbox").text(data['storeAddress']);
+				$("#storebudeabox").text(data['storeFacility']);
+			}
+		});
+	});
 	</script>
-			<div class="myinfobox">
+<body>
+		<div class="myinfobox">
 			<table>
 				<tr>
 					<td>
@@ -93,10 +114,7 @@
 							캐시
 						</td>
 						<td id="cashbox">
-
-						</td>
-						<td>
-							원
+						
 						</td>
 						<td>
 							<button class="outmoney">출금</button>
@@ -122,38 +140,59 @@
 			<div class="upzooinfobox">
 				<table class="upzoomyinfo2">
 					<tr>
-						<td rowspan="7" colspan="1">
-							<img alt="image/퓨리.jpg" src="">
-						</td>
-					</tr>
-					<tr>
 						<td>
 							매장이름
+						</td>
+						<td id='storeNamebox'>
+						
+						</td>
+						<td rowspan='7' class='pcmainimgbox'>
+							<img alt="image/퓨리.jpg" src="">
 						</td>
 					</tr>
 					<tr>
 						<td>
 							매장번호
 						</td>
+						<td id="storeNumberbox">
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							매장 영업시간
+						</td>
+						<td id='storeTimebox'>
+						
 						</td>
 					</tr>
 					<tr>
 						<td>
 							컴퓨터 사양
 						</td>
+						<td id='storecombox'>
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							매장 주소
 						</td>
+						<td id='storeaddressbox'>
+						
+						</td>
 					</tr>
 					<tr>
 						<td>
 							부대시설
+						</td>
+						<td id='storebudeabox'>
+						
+						</td>
+					</tr>
+					<tr>
+						<td>
+						
 						</td>
 					</tr>
 					

@@ -141,7 +141,7 @@
 				</table>
 				
 			</div>
-			<div class="upzooinfobox">
+			<div class="upzooinfobox1">
 				<table class="upzoomyinfo2">
 					<tr>
 						<td>
