@@ -62,9 +62,6 @@
 				<p id="notice" class="mainHover">
 					<a href="<%=request.getContextPath()%>/notice">NOTICE</a>
 				</p>
-				<div id="noticeMenu" style="display: none">
-					<a href="<%=request.getContextPath() %>/event"></a>
-				</div>
 				<p id="myPage" class="mainHover">
 					<a href="<%=request.getContextPath()%>/mypageMain">MY PAGE</a>
 				</p>

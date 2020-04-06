@@ -10,8 +10,8 @@
 <section>
    <div id="listDiv">
    	<div style="text-align: left; margin-left: 140px; margin-bottom: 40px;">
-      <a href="<%=request.getContextPath()%>/notice" id="noticeBoard" class="noticeHead">공지사항&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <p style="display: inline" class="headDiv">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <a href="<%=request.getContextPath()%>/notice" id="noticeBoard" class="noticeHead" style="color: tomato; border-bottom: 3px solid #5e64b1;">공지사항</a>
+      <p style="display: inline" class="headDiv">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
       <a href="<%=request.getContextPath()%>/event" id="eventBoard"  class="noticeHead">이벤트</a>
     </div>
       <%
@@ -20,7 +20,9 @@
       <div>
          <button type="button" id="noticeWriteBtn" onclick="location.replace('<%=request.getContextPath()%>/noticeWrite')">공지사항 작성</button>
       </div>
-      <%} %>
+      <%}else{ %>
+	  <div style="height: 40px;"></div>
+	  <%} %>
       <table class="noticeListTbl">
          <thead>
             <tr>

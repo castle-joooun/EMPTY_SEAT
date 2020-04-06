@@ -2,6 +2,11 @@ body{
    width: 1366px;
 }
 
+#notice{
+	border-bottom: 2px solid #ff7531;
+	margin-bottom: 25px;
+}
+
 #listDiv{
    height: auto;
    text-align: center;
@@ -32,7 +37,6 @@ body{
    background-color: #5e64b1;
    color: white;
    border-radius: 5px;
-   height: 30px;
    font-size: 18px;
    text-align: left;
    margin-left: 850px;
@@ -62,6 +66,7 @@ tbody>tr>td{
 
 .innerContent:hover{
    cursor: pointer;
+   text-decoration: underline;
 }
 
 .noticeListTbl{
