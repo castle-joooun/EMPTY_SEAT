@@ -44,6 +44,8 @@ Properties prop = new Properties();
 				s.setStoreId(rs.getString("STORE_ID"));
 				s.setStoreName(rs.getString("STORE_NAME"));
 				s.setEnDate(rs.getDate("EN_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+				s.setSdfDate(sdf.format(rs.getDate("EN_DATE")));
 				s.setDayOfWeek(rs.getString("DAY_OF_WEEK").charAt(0));
 				s.setCustomer(rs.getInt("CUSTOMER"));
 				s.setNetProfit(rs.getInt("NET_PROFIT"));
