@@ -17,24 +17,7 @@
 
 
 	<div class="list_btn_area">
-		
-		
-
-
 		<div class="searchDiv">
-			<div>
-				<form>
-					<select name="searchArray" class="searchPeriod" id="">
-						<optgroup label="정렬">
-							<option value="uName">이름 순</option>
-							<option value="lastest">최근 가입순</option>
-							<option value="bestUser">최다 이용 순</option>
-						</optgroup>
-					</select>
-				</form>
-			</div>
-			<div>
-
 				<div class="selectSearchType">
 					<select id="searchType" onchange="choiceType()">
 
@@ -69,10 +52,12 @@
 						</form>
 					</div>
 				</div>
+		</div>
 
-			</div>
-			
-			<div>
+	</div>
+	<div id="primaryContent">
+		<span id="totalSearch"></span>
+		
 				<form>
 					<input type="hidden" name="cPage" value="<%=cPage%>" id="cPage">
 					<select name="numPerPage" id="numPerPage">
@@ -82,12 +67,7 @@
 						<option value="50"<%=numPerPage==50?"selected":"" %>>목록 50개</option>
 					</select>
 				</form>
-			</div>
-		</div>
-
-	</div>
-	<div id="primaryContent">
-
+			
 		<table class="contentTable" summary="">
 
 			<thead>
@@ -178,7 +158,7 @@
 							i==0?attach.html(tr):attach.append(tr);
 
 						}
-						
+						$("#totalSearch").html("검색결과 : "+data[data.length-2]['result']+ "개 입니다.");
 						$(".paging").html(data[data.length-1]['pageBar']);
 						
 					}else{
