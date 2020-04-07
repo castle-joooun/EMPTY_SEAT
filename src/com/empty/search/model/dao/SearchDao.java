@@ -200,6 +200,7 @@ public class SearchDao {
 				ss.setStoreId(rs.getString("store_id"));
 				ss.setCol(rs.getInt("seat_col"));
 				ss.setRow(rs.getInt("seat_row"));
+				ss.setSeatNum(rs.getString("seat_num"));
 				ss.setSeatCheck(rs.getString("seat_check"));
 			}
 		} catch(SQLException e) {
@@ -278,7 +279,7 @@ public class SearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List list = new ArrayList();
-		String sql = prop.getProperty("store"); //aaaaa
+		String sql = prop.getProperty("store"); 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
