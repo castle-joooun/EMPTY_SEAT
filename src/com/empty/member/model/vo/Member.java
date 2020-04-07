@@ -19,7 +19,6 @@ public class Member {
 	private String bankNumber;
 	private String bankMaster;
 	private String status;
-	
 	public Member() {
 		super();
 	}
@@ -63,6 +62,8 @@ public class Member {
 		this.userAppr = userAppr;
 	}
 	
+	
+
 	public Member(String userId, boolean userDiv, String password, String userName, String email, String phone,
 			String address, String gender, int cash, Date enrollDate, boolean userAppr, String bank, String bankNumber,
 			String bankMaster, String status) {
@@ -100,13 +101,6 @@ public class Member {
 		this.bankNumber = bankNumber;
 	}
 
-	public String getBankMaster() {
-		return bankMaster;
-	}
-
-	public void setBankMaster(String bankMaster) {
-		this.bankMaster = bankMaster;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -177,6 +171,29 @@ public class Member {
 	public void setUserAppr(boolean userAppr) {
 		this.userAppr = userAppr;
 	}
+	public String getBank() {
+		return bank;
+	}
+	
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	
+	public String getBankNumber() {
+		return bankNumber;
+	}
+	
+	public void setBankNumber(String bankNumber) {
+		this.bankNumber = bankNumber;
+	}
+	
+	public String getBankMaster() {
+		return bankMaster;
+	}
+	
+	public void setBankMaster(String bankMaster) {
+		this.bankMaster = bankMaster;
+	}
 	
 	public String getStatus() {
 		return status;
@@ -186,7 +203,6 @@ public class Member {
 		this.status = status;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Member [userId=" + userId + ", userDiv=" + userDiv + ", password=" + password + ", userName=" + userName

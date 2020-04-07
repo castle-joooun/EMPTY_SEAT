@@ -7,21 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.empty.member.model.service.MemberService;
-import com.empty.member.model.vo.StoreImg2;
-import com.empty.search.model.vo.Store;
+import com.empty.member.model.vo.Member;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CrystalStoreDBServlet
+ * Servlet implementation class EnrollgyojaGoDB
  */
-@WebServlet("/enroll/crystalstore.do")
-public class CrystalStoreDBServlet extends HttpServlet {
+@WebServlet("/mypage/enrollgyojaGoDB")
+public class EnrollgyojaGoDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CrystalStoreDBServlet() {
+    public EnrollgyojaGoDB() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +32,22 @@ public class CrystalStoreDBServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String userId = request.getParameter("userId");
-		String storeName = request.getParameter("storeName");
-		String storePhone = request.getParameter("storePhone");
-		String storeTimestart = request.getParameter("storeTimestart");
-		String storeTimeclose = request.getParameter("storeTimeclose");
-		String storeInfo = request.getParameter("storeInfo");
-		int storePrice = Integer.parseInt(request.getParameter("storePrice"));
-		System.out.println(storeName);
-		StoreImg2 si= new StoreImg2();
-		new MemberService().searchStoreImg(si);
-		Store s = new Store();
-		s.setStoreId(userId);
-		s.setStoreName(storeName);
-		s.setStorePhone(storePhone);
-		s.setStoreTime(storeTimestart+" ~ "+storeTimeclose);
-		s.setStoreInfo(storeInfo);
-		s.setStorePrice(storePrice);
-		s.setStoreLogo(si.getStoreImg());
-		new MemberService().updateStore(s);
+		String bankNumber = request.getParameter("gyojanumber");
+		String bankMaster = request.getParameter("bankMaster");
+		String bank = request.getParameter("bank");
+		String msg="";
+		int result = new MemberService().updateBank(userId, bankNumber, bankMaster, bank);
+		if(result>0) {
+			msg="계좌등록이 되었습니다.";
+		}else {
+			msg="계좌등록에 실패하였습니다.";
+		}
+		JSONObject jsonObj=new JSONObject();
+		jsonObj=new JSONObject();
+		jsonObj.put("msg", msg);
+		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(jsonObj,response.getWriter());
 	}
 
 	/**
