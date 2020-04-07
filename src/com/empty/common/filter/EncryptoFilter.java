@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 		"SignUp2FinishServlet",
 		"UpdatePasswordServlet",
 		"MyPageUpdateEndServlet",
-		"MyPageWithdrawalServlet"
+		"DeleteMemberEndServlet"
 })
 public class EncryptoFilter implements Filter {
 

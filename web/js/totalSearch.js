@@ -20,7 +20,7 @@ var mainSub = document.getElementById("mainSub");
 // }
 
 
-// 모달창 띄우기
+//모달창 띄우기
 var modal = document.getElementById('id01');
 
 // 모달창 바깥 아무데나 누르면 꺼짐

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.empty.reservation.service.ReservationService;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 import com.empty.search.service.SearchService;
@@ -16,7 +17,7 @@ import com.empty.search.service.SearchService;
 /**
  * Servlet implementation class StoreServlet
  */
-@WebServlet("/store")
+@WebServlet("/storeView")
 public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -49,6 +50,52 @@ public class StoreServlet extends HttpServlet {
 	    
 		List<String> imgs = new SearchService().storeImgs(storeId);
 		System.out.println("imgs : " + imgs);
+		
+		long now = System.currentTimeMillis();
+
+		// 시간의 차이가 -거나 0인것들은 emptySeat로 돌리기 위해
+		// store_seat_check에서 seat_yn의 값을 0으로 수정.
+		// 1. 받아오기
+		List<String> checkYN = new ReservationService().checkYN(storeId, now);
+		if (checkYN.size() != 0) {
+			System.out.println("YN바뀌는 거 있음");
+		}
+
+		// 2-1. store_seat_check에 값 바꿔주기.
+		int changeYN1 = new ReservationService().changeYN1(storeId, checkYN);
+		if (changeYN1 > 0) {
+			System.out.println("store_seat_check 값 바꿈쓰");
+		}
+
+		// 2-2.
+		// store_seat seat_check 불러오기
+		String seats = new ReservationService().seatList(storeId);
+		if (seats != null) {
+			System.out.println("시트리스트 불어왔어! : " + seats);
+		}
+
+		String[] list = seats.split(",");
+		
+		for(int i=0; i<checkYN.size(); i++) {
+			int seatNum = Integer.parseInt(checkYN.get(i));
+			list[seatNum - 1] = "0";
+		}
+		String tranSeats = "";
+
+		for (int i = 0; i < list.length; i++) {
+			if (i == list.length - 1) {
+				tranSeats += list[i];
+			} else {
+				tranSeats += list[i] + ",";
+			}
+		}
+
+
+		// store_seat seat_check 반환하기 (1=사용중)
+		int useSeat = new ReservationService().inputSeat(storeId, tranSeats);
+		if (useSeat > 0) {
+			System.out.println("자리 비워줌!!");
+		}
 		
 		StoreSeat ss = new SearchService().storeSeat(storeId);
 		System.out.println("storeSeat : " + ss);

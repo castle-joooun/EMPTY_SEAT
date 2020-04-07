@@ -100,6 +100,7 @@ public class MemberDao {
 				m.setBank(rs.getString("bank"));
 				m.setBankNumber(rs.getString("bank_number"));
 				m.setBankMaster(rs.getString("bank_master"));
+				m.setStatus(rs.getString("status"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

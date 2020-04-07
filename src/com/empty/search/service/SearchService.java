@@ -3,6 +3,7 @@ package com.empty.search.service;
 import static com.empty.common.JDBCTemplate.close;
 import static com.empty.common.JDBCTemplate.commit;
 import static com.empty.common.JDBCTemplate.rollback;
+
 import static com.empty.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -23,7 +24,20 @@ public class SearchService {
 		close(conn);
 		return list;
 	}
+	public List<Store> totalSearch(String keyword,int cPage,int numPerPage){
+		Connection conn = getConnection();
+		List<Store> list = dao.totalSearch(conn, keyword,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
 	
+	
+	public int dataCount(String keyword) {
+		Connection conn = getConnection();
+		int result = dao.dataCount(conn,keyword);
+		close(conn);
+		return result;
+	}
 	public Store store(String id) {
 		Connection conn = getConnection();
 		Store s = dao.store(conn, id);
@@ -96,17 +110,10 @@ public class SearchService {
 		close(conn);
 		return favoriteSize;
 	}
-	
+
 	public List outMoneyList(String userId, outMoneyDB omdb) {
 		Connection conn = getConnection();
 		List list = dao.outMoneyList(conn, userId, omdb);
-		close(conn);
-		return list;
-	}
-	
-	public List outMoneyList(String userId, outMoneyDB omdb,int cPage,int numPerPage) {
-		Connection conn = getConnection();
-		List list = dao.outMoneyList(conn, userId, omdb,cPage,numPerPage);
 		close(conn);
 		return list;
 	}
@@ -118,12 +125,6 @@ public class SearchService {
 		return count;
 	}
 	
-	public Store crystalstore(String userId) {
-		Connection conn = getConnection();
-		Store s = dao.crystalstore(conn, userId);
-		close(conn);
-		return s;
-	}
 	
 	
 	
