@@ -6,6 +6,7 @@
 <%@ page
 	import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
+
 <link rel="stylesheet" href="css/store.css?ver=0" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
@@ -21,6 +22,9 @@
 	String[] useCheck = ss.getSeatCheck().split(",");
 	int seatNum = 1;
 	int seatNum2 = 1;
+	
+
+
 %>
 
 
@@ -132,7 +136,7 @@
 		</center>
 	</div>
 
-	<div id="comment">
+<!-- 	<div id="comment">
 		<table>
 			<tr>
 				<th>댓글</th>
@@ -143,7 +147,13 @@
 				<td><button id="commentBtn">등록</button></td>
 			</tr>
 		</table>
-	</div>
+	</div> -->
+
+<!--  댓글  -->
+
+<%@ include file="/views/comment/comment.jsp" %>
+
+
 	<%
 		if (loginMember != null) {
 	%>

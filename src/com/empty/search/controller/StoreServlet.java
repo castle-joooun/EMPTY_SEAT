@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.empty.comment.model.service.CommentService;
+import com.empty.comment.model.vo.Comment;
 import com.empty.reservation.service.ReservationService;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
@@ -48,6 +50,8 @@ public class StoreServlet extends HttpServlet {
 		// getParameter로 받는거 3개.
 		// storeId, userId, searchText
 	    
+		List<Comment>commentList= new CommentService().selectComment(); //임시
+		
 		List<String> imgs = new SearchService().storeImgs(storeId);
 		System.out.println("imgs : " + imgs);
 		
@@ -115,6 +119,9 @@ public class StoreServlet extends HttpServlet {
 			request.setAttribute("storeSeat", ss);
 			request.setAttribute("searchText", searchText);
 			request.setAttribute("url", favoriteUrl);
+			
+			request.setAttribute("commentList", commentList);//임시로
+			
 			request.getRequestDispatcher("/views/search/store.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/views/search/noneSearch.jsp").forward(request, response);
