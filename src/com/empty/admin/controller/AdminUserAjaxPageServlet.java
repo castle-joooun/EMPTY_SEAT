@@ -101,9 +101,13 @@ public class AdminUserAjaxPageServlet extends HttpServlet {
 				jo.put("address",m.getAddress());
 				jo.put("enrolldate",date);
 				ja.add(jo);
+				
 			}
 			//pagebar add
 			JSONObject obj=new JSONObject();
+			obj.put("result", totalMember);
+			ja.add(obj);
+			obj=new JSONObject();
 			obj.put("pageBar", pageBar);
 			ja.add(obj);
 			

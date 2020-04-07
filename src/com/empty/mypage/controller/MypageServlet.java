@@ -37,13 +37,12 @@ public class MypageServlet extends HttpServlet {
 		System.out.println(userId);
 		Member m = new Member();
 		m = new VinService().selectUser(m,userId);
-		System.out.println(m.getUserId());
-		System.out.println(m.getCash());
-		System.out.println("아모고나");
 		
 		JSONObject jsonObj=new JSONObject();
 		jsonObj=new JSONObject();
 		jsonObj.put("cash",m.getCash());
+		jsonObj.put("bankNumber",m.getBankNumber());
+		
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(jsonObj,response.getWriter());
 	}
