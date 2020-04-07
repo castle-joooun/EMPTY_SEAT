@@ -1,302 +1,64 @@
-body {
-	width: 1366px;
-	height: auto;
-	margin: 0px;
-}
-
-#mainLogo {
-	position: absolute;
-	left: 140px;
-	top: 40px;
-	z-index: 3;
-	cursor: pointer;
-}
-
-#transLogo {
-	position: absolute;
-	left: 140px;
-	top: 40px;
-	z-index: 1;
-	cursor: pointer;
-}
-
-.hover:hover {
-	visibility: hidden;
-	cursor: pointer;
-	transform: 2s;
-}
-
-#popMenu { /*�뙘硫붾돱 �슦痢≪긽�떒 怨좎젙*/
-	float: right;
-	/* position: absolute;
-    right:200px;*/
-	top: -40px;
-	cursor: pointer;
-}
-
-#menubar>p>a {
-	color: black;
-	text-decoration: none;
-	font-weight: 600;
-}
-
-#menubar>p>a:hover {
-	color: #ff7531;
-}
-
-#menubar>p {
-	position: relative;
-	top: 60px;
-	left: 25px;
-	margin: 25px;
-	margin-right: 55px;
-	font-size: 15px;
-	display: inline-block;
-	cursor: pointer;
-}
-
-.mainHover:hover {
-	position: relative;
-	top: 60px;
-	margin-bottom: 22px;
-	font-size: 15px;
-	display: inline-block;
-	cursor: pointer;
-}
-
-#middle {
-	position: relative;
-	
-	right: 0px;
-	left: 0px;
-	z-index: 5;
-	background-color: lightsteelblue;
-}
-
-
-
-.clearr {
-	clear: right;
-}
-
-/* �꽌釉뚮찓�돱 */
-#subMenu {
-	position: absolute;
-	top: 8px;
-	left: 365px;
-	color: white;
-}
-
-#mainSub>span>a {
-	margin-right: 35px;
-	cursor: pointer;
-}
-
-#mainSub {
-	/* display: inline-block; */
-	display: inline-block;
-}
-
-#mainSub>span>a {
-	text-decoration: none;
-	color: white;
-	font-weight: 600;
-}
-
-#mainSub>span>a:hover {
-	color: #ff7531;
-}
-
-.subHover>a:hover {
-	color: #ff7531;
-	display: inline;
-	border-bottom: 2px solid #ff7531;
-
-	/* padding-bottom:2px; */
-}
-
-.mainHover>a:hover {
-	color: #ff7531;
-	display: inline;
-	border-bottom: 2px solid #ff7531;
-	/* padding-bottom:2px; */
-}
-
-#baseSubMenu>a {
-	border-bottom: 2px solid #ff7531;
-	/* text-shadow:
-    -1px -1px 3px white,
-    1px -1px 3px white,
-    -1px 1px 3px white,
-    1px 1px 3px white;   */
-}
-/* -------------------------------------------------------------------------------------------- */
-
-/* �엯�젰李� �뒪���씪 */
-input[type=text], input[type=password] {
-	width: 100%;
-	height: 40px;
-	padding: 8px 16px;
-	margin: 15px 0 15px;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-}
-
-/* 踰꾪듉 �뒪���씪 */
-/* button {
-    background-color: rgb(94, 100, 177);
-    color: white;
-    font-size: 20px;
-    padding: 10px 10px ;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-} */
-button:hover {
-	opacity: 0.8;
-}
-
-#login {
-	text-align: center;
-}
-
-/* 痍⑥냼踰꾪듉 �뒪���씪 */
-.buttonStyle {
-	width: 150px;
-	height: 40px;
-	background-color: tomato;
-	font-size: 17px;
-	border: none;
-	color: white;
-	cursor: pointer;
-}
-
-/* 濡쒓렇�씤 踰꾪듉 �뒪���씪 */
-.buttonStyle[type="submit"] {
-	background-color: rgb(94, 100, 177);
-	font-size: 17px;
-	color: white;
-}
-
-/* �쉶�썝媛��엯 / 怨꾩젙李얘린 留덉슦�뒪 �삱由щ㈃ 諛묒쨪 */
-.link:hover {
-	text-decoration: underline;
-}
-
-a {
-	text-decoration: none;
-	color: gray;
-}
-
-
-#msg {
-	display: inline-block;
-}
-
-hr {
-	border: 1px solid rgb(94, 100, 177);
-	margin-bottom: 5%;
-	margin-top: 3%;
-}
-
-#inputData {
-	padding-left: 30px;
-	padding-right: 30px;
-	padding-bottom: 5px;
-}
-
-/* 紐⑤떖李� 諛곌꼍 */
-.modal {
-	/* �닲寃⑤넃湲� */
-	display: none;
-	position: fixed;
-	z-index: 6;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	/* �뒪�겕濡� �옄�룞 */
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* 紐⑤떖李� 肄섑뀗�듃 �뒪���씪 */
-.modal-content {
-	position: relative;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	/* �빐�긽�룄 �븞留욎떠遊� */
-	height: 400px;
-	width: 350px;
-	top: 150px;
-	padding-top: 15px;
-}
-
-/* openLogin */
-#openLogin {
-	width: 1366px;
-}
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
-
-/* 硫붿씤 硫붾돱�뱾 �씠由� 諛붾�뚯＜湲� */
 #service {
 	border-bottom: 2px solid #ff7531;
 	margin-bottom: 25px;
 }
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------- */
-#board {
-	position: relative;
-	margin-left: 370px;
-	margin-top: 50px;
-	width: 700px;
+body{
+   width: 1366px;
 }
 
-#board>table {
-	width: 700px;
-	text-align: center;
+#FAQDiv{
+   height: auto;
+   text-align: center;
+   margin-top: 70px;
 }
 
-th {
-	border-top: 3px solid rgb(94, 100, 177);;
-	border-bottom: 1px solid black;
-	line-height: 30px;
+.FAQHead{
+   color: #5e64b1;
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+   text-decoration: none;
 }
 
-.tdnum {
-	width: 50px;
+#FAQWriteBtn{
+   background-color: #5e64b1;
+   color: white;
+   border-radius: 5px;
+   font-size: 18px;
+   text-align: left;
+   margin-left: 850px;
+   margin-bottom: 10px;
+   border: none;
 }
 
-.tdsubject {
-	width: 450px;
-	text-align: center;
+thead>tr>th{
+   border-bottom: 1px solid #e6e8eb;
+   padding: 10px 7px;
 }
 
-.tddate {
-	width: 100px;
+tbody>tr>td{
+   padding: 10px 7px;
+   border-bottom: 1px solid #e6e8eb;
 }
 
-td>a {
-	padding-left: 20px;
+#FAQTitleTh{
+	width:60%;
 }
 
-.FAQList {
-	border-bottom: 1px solid lightgray;
-	text-align: center;
+.innerContent{
+   color: #ff7531;   
 }
 
-#pageBar {
-	text-align: center;
-	line-height: 50px;
+.innerContent:hover{
+   cursor: pointer;
+   text-decoration: underline;
 }
 
-#btnDiv {
-	text-align: center;
-}
-
-td span{
-	cursor:pointer;
+.FAQListTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
 }

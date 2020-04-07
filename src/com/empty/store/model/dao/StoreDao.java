@@ -1,15 +1,19 @@
 package com.empty.store.model.dao;
 
+import static com.empty.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import static com.empty.common.JDBCTemplate.close;
+
 import com.empty.admin.model.dao.AdminDao;
 import com.empty.store.model.vo.StoreSales;
 
@@ -40,6 +44,8 @@ Properties prop = new Properties();
 				s.setStoreId(rs.getString("STORE_ID"));
 				s.setStoreName(rs.getString("STORE_NAME"));
 				s.setEnDate(rs.getDate("EN_DATE"));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+				s.setSdfDate(sdf.format(rs.getDate("EN_DATE")));
 				s.setDayOfWeek(rs.getString("DAY_OF_WEEK").charAt(0));
 				s.setCustomer(rs.getInt("CUSTOMER"));
 				s.setNetProfit(rs.getInt("NET_PROFIT"));

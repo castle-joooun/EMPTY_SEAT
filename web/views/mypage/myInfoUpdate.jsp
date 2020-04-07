@@ -5,6 +5,7 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
 
 %>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/myInfoUpdate.css" type="text/css">
 
 <h1>MY PAGE</h1>
 	<div class="mypageHeaderDiv">
@@ -47,10 +48,10 @@
 			</tr>
 			<tr>
 				<th>회원탈퇴</th>
-				<td><input type="button" value="회원탈퇴"></td>
+				<td><input type="button" value="회원탈퇴" onclick="deleteMember()"></td>
 			</tr>
 		</table>
-		<input type="submit" value="수정완료" style="margin-left:300px">
+		<input type="submit" id="myInfoSubmitBtn" value="수정완료">
 		<input type="button" value="취소" onclick="infoUpdateBackBtn()">
 	</form>
 	

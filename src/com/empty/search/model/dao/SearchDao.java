@@ -14,11 +14,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import com.empty.member.model.vo.outMoneyDB;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
 
@@ -281,7 +281,7 @@ public class SearchDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List list = new ArrayList();
-		String sql = prop.getProperty("favoriteList");
+		String sql = prop.getProperty("store"); //aaaaa
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -328,7 +328,52 @@ public class SearchDao {
 	}
 
 	
- 	
+	public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("outMoneyList");
+		List list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			System.out.println(rs.next());
+			while(rs.next()) {
+				omdb = new outMoneyDB();
+				omdb.setUserId("USER_ID");
+				omdb.setOmNumber("OUTPUT_NUM");
+				omdb.setOmDate(rs.getDate("OMDATE"));
+				omdb.setOmNumber(rs.getString("BANK_NUMBER"));
+				omdb.setOm(rs.getInt("OM"));
+				omdb.setAfterOm(rs.getInt("AFTER_OM"));
+				list.add(omdb);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int omlCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		String sql=prop.getProperty("omlCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) count=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
+
 //	public List crawl() {
 //		
 //		List list = new ArrayList();
@@ -357,6 +402,7 @@ public class SearchDao {
 //		return list;
 //	}
 	
+
 }
 
 
