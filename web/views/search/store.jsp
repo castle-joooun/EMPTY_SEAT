@@ -443,7 +443,11 @@
 	    				type:"post",
 	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
+<<<<<<< HEAD
+	    					"seat":selectedPcSeat, "pay":usePcMoney , "storeName":"<%=s.getStoreName()%>"},
+=======
 	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val()},
+>>>>>>> branch 'shinhyun' of https://github.com/ique-coder/EMPTY_SEAT
 	    				success:function(data) {
 	    					console.log(data);
 		    					alert("성공적으로 예약이 되었습니다.");
