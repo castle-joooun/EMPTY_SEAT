@@ -18,6 +18,7 @@
 				console.log(data['cash']);
 				cash=data['cash'];
 				$("#cashbox").text(cash+"원");
+				var bankNumber=data['bankNumber'];
 			}
 		})
 	})
@@ -41,10 +42,11 @@
 			}
 		});
 	});
+	
 	</script>
 <body>
 	<h3 class="mypagemain1">MY PAGE</h3>
-	<h3 class="mypagemain2">USE</h3>
+	<h3 class="mypagemain2"><a href="<%=request.getContextPath()%>/use/useList">USE</a></h3>
 	
 	
 	<div class="alldiv clearl">
@@ -214,7 +216,7 @@
 	
 	
 	<script>
-	$(function(){
+	<%-- $(function(){
 		$(".mypagemain2").click(function(){ //사용내역으로
 			$.ajax({
 				url:"<%=request.getContextPath()%>/mypage/myUse.do", 
@@ -227,7 +229,7 @@
 				}
 			})
 		});			
-	});
+	}); 폐기--%>
 	
 	$(function(){
 		var userId="<%=loginMember.getUserId()%>";
@@ -274,6 +276,7 @@
 	
 	$(function(){
 		$(".outmoney").click(function(){  //출금으로
+			console.log(<%=loginMember.getBankNumber()%>);
 			if(<%=loginMember.getBankNumber()%>!=null){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/mypage/outmoney.do",

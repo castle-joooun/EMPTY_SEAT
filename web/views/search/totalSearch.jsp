@@ -143,8 +143,13 @@ org.jsoup.select.Elements"%>
 								str+="#"+tags[j]+" ";
 							}
 							
+<<<<<<< HEAD
 							$("#searchResult").append('<form action="storeView" method="post" onclick="submit()">'+
 									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/storeView">'+
+=======
+							$("#searchResult").append('<form action="store" method="post" onclick="submit()">'+
+									'<div class="result resultShadow" id="store" onclick="location.href=<%=request.getContextPath()%>/store">'+
+>>>>>>> branch 'jinhyuk' of https://github.com/ique-coder/EMPTY_SEAT.git
 										'<img src="'+data[i]["storeLogo"]+'" alt="" class="resultImg">'+
 										'<div class="resultText">'+
 											'<p class="resultTitle">'+data[i]['storeName']+'</p>'+

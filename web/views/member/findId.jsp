@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/findId.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/findId.css" type="text/css">
 <%
 	userId = (String)request.getAttribute("userId");
 %>

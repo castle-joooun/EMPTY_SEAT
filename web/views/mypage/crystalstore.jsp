@@ -26,13 +26,15 @@ $(document).ready(function(){
 				var restoreTimeS = $("<input>").attr('type','time').attr('id','storeTimes').attr('value',data['storeTimes']);
 				var restoreTimeE = $("<input>").attr('type','time').attr('id','storeTimee').attr('value',data['storeTimee']);
 				var restorestorePrice = $("<input>").attr('type','text').attr('id','storePrice').attr('value',data['storePrice']);
-				$('#crystalstoreNamebox').append(restoreNAme);
-				$('#crystalstoreNumberbox').append(restoreNumber);
-				$('#crystalstoreInfobox').append(restorecom);
-				$('#crystalstoreTimebox').append(restoreTimeS);
-				$('#crystalstoreTimebox').append($("<p>").text(" ~ ").css("display","inline"));
-				$('#crystalstoreTimebox').append(restoreTimeE);
-				$('#crystalstorePricebox').append(restorestorePrice);
+				$('#crystalstoreNamebox').html(restoreNAme);
+				$('#crystalstoreNumberbox').html(restoreNumber);
+				$('#crystalstoreInfobox').html(restorecom);
+				$('#crystalstoreTimebox').html(restoreTimeS.append($("<p>").text(" ~ ").css("display","inline")).append(restoreTimeE));
+				console.log(restoreTimeS.append($("<p>").text(" ~ ").css("display","inline")).append(restoreTimeE));
+				//$('#crystalstoreTimebox').html(restoreTimeS);
+				//$('#crystalstoreTimebox').html($("<p>").text(" ~ ").css("display","inline"));
+				//$('#crystalstoreTimebox').html(restoreTimeE);
+				$('#crystalstorePricebox').html(restorestorePrice);
 			}
 		});
 	});

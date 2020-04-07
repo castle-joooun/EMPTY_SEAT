@@ -1,27 +1,77 @@
-#FAQ-section{
-	position: relative;
-	margin-left: 370px;
-	margin-top: 50px;
-	width: 700px;
+body{
+   width: 1366px;
 }
 
-#FAQ-table tr th,td{
-	border:1px solid lightgray;
+#FAQViewDiv{
+   height: auto;
+   text-align: center;
+   margin-top: 70px;
 }
 
-#FAQ-table tr th{
-	width:100px;
+#FAQViewHead{
+   color: #5e64b1;
+   margin-bottom: 40px;
+   font-size: 40px;
+   font-weight: bolder;
+   text-align: left;
+   margin-left: 140px;
 }
 
-#FAQ-table tr td{
-	width:500px;
+thead>tr>th{
+   border-bottom: 1px solid #e6e8eb;
 }
 
-#FAQ-table tr:nth-child(5){
-	height:300px;
+tbody>tr>td{
+   padding: 10px 7px;
+   border-bottom: 1px solid #e6e8eb;
 }
 
-#FAQviewBtn{
-	margin-top:30px;
-	margin-left:230px;
+#FAQViewTbl{
+	width:80%;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	position:relative;
+	left:10%;
+}
+
+
+.FAQContent{
+	height: 300px;
+}
+
+#FAQTitleTd{
+	width:60%;
+	color: tomato;
+}
+
+#FAQupdate{
+    width: 150px;
+    height: 40px;
+    background-color:  rgb(94, 100, 177);
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+#FAQdelete{
+    width: 150px;
+    height: 40px;
+    background-color:  tomato;
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+
+.returnBtn{
+    width: 150px;
+    height: 40px;
+    background-color:  rgb(94, 100, 177);
+    font-size: 20px;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    margin-top: 30px;
 }

@@ -19,14 +19,8 @@ menubarMain.onclick = function () {
 	mainSub.toggle
 }
 
-//모달창 바깥 아무데나 누르면 꺼짐  안됨;
-document.onclick = function (event) {
-	var modal = document.getElementById('openLogin');
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-}
 
+// 엔터키
 function enterkey(){
 	if(window.event.keyCode == 13){
 		if(document.getElementById("uId").value != "" && document.getElementById("pw").value != ""){

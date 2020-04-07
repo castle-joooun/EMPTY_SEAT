@@ -117,6 +117,7 @@
 						
 						</td>
 						<td>
+							<button class="enrollgyoja" style='padding-left:14px;padding-right:14px;'>계좌등록</button>
 							<button class="outmoney">출금</button>
 						</td>
 					</tr>
@@ -255,16 +256,34 @@
 	
 	$(function(){
 		$(".outmoney").click(function(){  //출금으로
-			$.ajax({
-				url:"<%=request.getContextPath()%>/mypage/outmoney.do",
-				type:"get",
-				dataType:"html",
-				success:function(data){
-					$(".alldiv").html(data);
-				}
-			})
-		})
-	})
+			console.log(<%=loginMember.getBankNumber()%>);
+			if(<%=loginMember.getBankNumber()%>!=null){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/mypage/outmoney.do",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$(".alldiv").html(data);
+					}
+				});
+			}else if(<%=loginMember.getBankNumber()%>==null){
+				alert("계좌를 등록해주세요.");
+			}
+		});
+	});
+	
+	$(function(){
+		$(".enrollgyoja").click(function(){  //계좌등록으로
+				$.ajax({
+					url:"<%=request.getContextPath()%>/mypage/enrollgyoja.do",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$(".alldiv").html(data);
+					}
+				});
+		});
+	});
 	
 	$(function(){
 		$("#enrollstore").click(function(){  //매장등록

@@ -2,6 +2,7 @@ package com.empty.member.model.service;
 import static com.empty.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.empty.member.model.dao.MemberDao;
 import com.empty.member.model.vo.Member;
@@ -116,5 +117,19 @@ public class MemberService {
 		else rollback(conn);
 		close(conn);
 		return result; 
+	}
+	
+	public List selectUseList(int cPage, int numPerPage) {
+		Connection conn=getConnection();
+		List list=dao.selectUseList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public int useListCount() {
+	Connection conn=getConnection();
+	int count=dao.useListCount(conn);
+	close(conn);
+	return count;
 	}
 }

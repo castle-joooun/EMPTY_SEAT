@@ -10,24 +10,12 @@ public class Store {
 	private String storeFacility;
 	private String storeAddress;
 	private String storeLogo;
-	private String storePrice;
+	private String email;
+	private String enrollDate;
+	private int storePrice;
 	
 	public Store() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
-			String storeFacility, String storeAddress, String storeLogo, String storePrice) {
-		super();
-		this.storeId = storeId;
-		this.storeName = storeName;
-		this.storePhone = storePhone;
-		this.storeTime = storeTime;
-		this.storeInfo = storeInfo;
-		this.storeFacility = storeFacility;
-		this.storeAddress = storeAddress;
-		this.storeLogo = storeLogo;
-		this.storePrice = storePrice;
 	}
 
 	public String getStoreId() {
@@ -94,14 +82,81 @@ public class Store {
 		this.storeLogo = storeLogo;
 	}
 
-	public String getStorePrice() {
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEnrollDate() {
+		return enrollDate;
+	}
+
+	public void setEnrollDate(String enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+	
+	public int getStorePrice() {
 		return storePrice;
 	}
 
-	public void setStorePrice(String storePrice) {
+	public void setStorePrice(int storePrice) {
 		this.storePrice = storePrice;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storePhone=" + storePhone + ", storeTime="
+				+ storeTime + ", storeInfo=" + storeInfo + ", storeFacility=" + storeFacility + ", storeAddress="
+				+ storeAddress + ", storeLogo=" + storeLogo + ", email=" + email + ", enrollDate=" + enrollDate + "]";
+	}
+
+	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
+			String storeFacility, String storeAddress, String storeLogo,int storePrice) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeTime = storeTime;
+		this.storeInfo = storeInfo;
+		this.storeFacility = storeFacility;
+		this.storeAddress = storeAddress;
+		this.storeLogo = storeLogo;
+		this.storePrice = storePrice;
+	}
+	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
+			String storeFacility, String storeAddress, String storeLogo, String email, String enrollDate) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeTime = storeTime;
+		this.storeInfo = storeInfo;
+		this.storeFacility = storeFacility;
+		this.storeAddress = storeAddress;
+		this.storeLogo = storeLogo;
+		this.email = email;
+		this.enrollDate = enrollDate;
+	}
+
+	public Store(String storeId, String storeName, String storePhone, String storeTime, String storeInfo,
+			String storeFacility, String storeAddress, String storeLogo, String email, String enrollDate,
+			int storePrice) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storePhone = storePhone;
+		this.storeTime = storeTime;
+		this.storeInfo = storeInfo;
+		this.storeFacility = storeFacility;
+		this.storeAddress = storeAddress;
+		this.storeLogo = storeLogo;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.storePrice = storePrice;
+	}
 	
 	
 /*    STORE_ID VARCHAR2(40) PRIMARY KEY,

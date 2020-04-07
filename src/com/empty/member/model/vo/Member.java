@@ -44,8 +44,6 @@ public class Member {
 		this.address = address;
 		this.gender = gender;
 	}
-	
-
 
 	public Member(String userId, boolean userDiv, String password, String userName, String email, String phone,
 			String address, String gender, int cash, Date enrollDate, boolean userAppr) {
@@ -82,8 +80,8 @@ public class Member {
 		this.userAppr = userAppr;
 		this.bank = bank;
 		this.bankNumber = bankNumber;
-		this.bankMaster = bankMaster;
 	}
+
 
 	public String getUserId() {
 		return userId;

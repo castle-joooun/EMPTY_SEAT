@@ -56,7 +56,7 @@ public class SearchDao {
 						s.setStoreFacility(rs.getString("store_facility"));
 						s.setStoreAddress(rs.getString("store_address"));
 						s.setStoreLogo(rs.getString("store_logo"));
-						s.setStorePrice(rs.getString("store_price"));
+						s.setStorePrice(rs.getInt("store_price"));
 				
 				list.add(s);
 			}
@@ -93,7 +93,7 @@ public class SearchDao {
 				s.setStoreFacility(rs.getString("store_facility"));
 				s.setStoreAddress(rs.getString("store_address"));
 				s.setStoreLogo(rs.getString("store_logo"));
-				s.setStorePrice(rs.getString("store_price"));
+				s.setStorePrice(rs.getInt("store_price"));
 		
 				
 				list.add(s);
@@ -153,7 +153,7 @@ public class SearchDao {
 				s.setStoreFacility(rs.getString("store_facility"));
 				s.setStoreAddress(rs.getString("store_address"));
 				s.setStoreLogo(rs.getString("store_logo"));
-				s.setStorePrice(rs.getString("store_price"));
+				s.setStorePrice(rs.getInt("store_price"));
 			}
 			
 		} catch(SQLException e) {
@@ -200,7 +200,7 @@ public class SearchDao {
 				ss.setStoreId(rs.getString("store_id"));
 				ss.setCol(rs.getInt("seat_col"));
 				ss.setRow(rs.getInt("seat_row"));
-				ss.setStoreCheck(rs.getString("seat_check"));
+				ss.setSeatCheck(rs.getString("seat_check"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -420,7 +420,7 @@ public class SearchDao {
 				s.setStoreFacility(rs.getString("store_facility"));
 				s.setStoreAddress(rs.getString("store_address"));
 				s.setStoreLogo(rs.getString("store_logo"));
-				s.setStorePrice(rs.getString("store_price"));
+				s.setStorePrice(rs.getInt("store_price"));
 			}
 			
 		} catch(SQLException e) {
@@ -432,7 +432,147 @@ public class SearchDao {
 		
 		return s;
 	}
-
+	
+	/*
+	 * public List<Store> totalSearch(Connection conn, String keyword, int cPage,
+	 * int numPerPage) { PreparedStatement pstmt = null; ResultSet rs = null; String
+	 * sql = prop.getProperty("totalSearch"); List <Store> list = new ArrayList();
+	 * try { pstmt = conn.prepareStatement(sql); pstmt.setString(1,"%"+keyword+"%");
+	 * pstmt.setString(2,"%"+keyword+"%"); pstmt.setString(3,"%"+keyword+"%");
+	 * pstmt.setString(4,"%"+keyword+"%"); pstmt.setInt(5,(cPage-1)*numPerPage+1);
+	 * pstmt.setInt(6,cPage*numPerPage); rs = pstmt.executeQuery(); while(rs.next())
+	 * { Store s = new Store( rs.getString("store_id"), rs.getString("store_name"),
+	 * rs.getString("store_phone"), rs.getString("store_time"),
+	 * rs.getString("store_info"), rs.getString("store_facility"),
+	 * rs.getString("store_address"), rs.getString("store_logo"),
+	 * rs.getInt("store_price") );
+	 * 
+	 * list.add(s); } }catch(SQLException e) { e.printStackTrace(); } finally {
+	 * close(rs); close(pstmt); }
+	 * 
+	 * return list; }
+	 * 
+	 * public int dataCount(Connection conn, String keyword) { PreparedStatement
+	 * pstmt = null; ResultSet rs = null; String sql =
+	 * prop.getProperty("dataCount"); int result = 0; try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1,"%"+keyword+"%");
+	 * pstmt.setString(2,"%"+keyword+"%"); pstmt.setString(3,"%"+keyword+"%");
+	 * pstmt.setString(4,"%"+keyword+"%");
+	 * 
+	 * rs = pstmt.executeQuery(); if(rs.next()) { result = rs.getInt(1); }
+	 * }catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); } return result; }
+	 * 
+	 * public Store store(Connection conn, String id) { PreparedStatement pstmt =
+	 * null; Store s = null; ResultSet rs = null; String sql =
+	 * prop.getProperty("store"); try { pstmt = conn.prepareStatement(sql);
+	 * pstmt.setString(1, id); rs = pstmt.executeQuery();
+	 * 
+	 * if(rs.next()) { s = new Store( rs.getString("store_id"),
+	 * rs.getString("store_name"), rs.getString("store_phone"),
+	 * rs.getString("store_time"), rs.getString("store_info"),
+	 * rs.getString("store_facility"), rs.getString("store_address"),
+	 * rs.getString("store_logo"), rs.getInt("store_price") ); }
+	 * 
+	 * } catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); }
+	 * 
+	 * return s; }
+	 * 
+	 * public List<String> storeImgs(Connection conn, String id) { PreparedStatement
+	 * pstmt = null; List<String> imgs = new ArrayList(); ResultSet rs = null;
+	 * String sql = prop.getProperty("storeImgs"); try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, id); rs =
+	 * pstmt.executeQuery(); while(rs.next()) { imgs.add(rs.getString("store_img"));
+	 * } } catch(SQLException e) { e.printStackTrace(); } finally { close(pstmt); }
+	 * return imgs; }
+	 * 
+	 * public StoreSeat storeSeat(Connection conn, String id) { PreparedStatement
+	 * pstmt = null; StoreSeat ss = null; ResultSet rs = null; String sql =
+	 * prop.getProperty("storeSeat"); try { pstmt = conn.prepareStatement(sql);
+	 * pstmt.setString(1, id); rs = pstmt.executeQuery(); if(rs.next()) { ss = new
+	 * StoreSeat(); ss.setStoreId(rs.getString("store_id"));
+	 * ss.setCol(rs.getInt("seat_col")); ss.setRow(rs.getInt("seat_row"));
+	 * ss.setSeatNum(rs.getString("seat_num"));
+	 * ss.setSeatCheck(rs.getString("seat_check")); } } catch(SQLException e) {
+	 * e.printStackTrace(); } finally { close(rs); close(pstmt); }
+	 * 
+	 * return ss; }
+	 * 
+	 * public int storeFavoriteInsert(Connection conn, String userId, String
+	 * storeLogo, String storeId, String storeName) { PreparedStatement pstmt =
+	 * null; int result = 0; String sql = prop.getProperty("storeFavoriteInsert");
+	 * try { pstmt = conn.prepareStatement(sql); pstmt.setString(1, userId);
+	 * pstmt.setString(2, storeLogo); pstmt.setString(3, storeId);
+	 * pstmt.setString(4, storeName); result = pstmt.executeUpdate(); }
+	 * catch(SQLException e) { e.printStackTrace(); } finally { close(pstmt); }
+	 * 
+	 * return result; }
+	 * 
+	 * public int storeFavoriteDelete(Connection conn, String userId, String
+	 * storeId) { PreparedStatement pstmt = null; int result = 0; String sql =
+	 * prop.getProperty("storeFavoriteDelete"); try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, userId); pstmt.setString(2,
+	 * storeId); result = pstmt.executeUpdate(); } catch(SQLException e) {
+	 * e.printStackTrace(); } finally { close(pstmt); }
+	 * 
+	 * return result; }
+	 * 
+	 * public int storeFavoriteCheck(Connection conn, String userId, String storeId)
+	 * { PreparedStatement pstmt = null; int result = 0; String sql =
+	 * prop.getProperty("storeFavoriteCheck"); ResultSet rs = null; try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, userId); pstmt.setString(2,
+	 * storeId); rs = pstmt.executeQuery(); if(rs.next()) { result = 1; } }
+	 * catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); }
+	 * 
+	 * return result;
+	 * 
+	 * }
+	 * 
+	 * public List favoriteList(Connection conn, String userId) { PreparedStatement
+	 * pstmt = null; ResultSet rs = null; List list = new ArrayList(); String sql =
+	 * prop.getProperty("store"); //aaaaa try { pstmt = conn.prepareStatement(sql);
+	 * pstmt.setString(1, userId); rs = pstmt.executeQuery(); while(rs.next()) {
+	 * List list2 = new ArrayList(); rs.getString("USER_ID");
+	 * list2.add(rs.getString("STORE_LOGO")); list2.add(rs.getString("STORE_ID"));
+	 * list2.add(rs.getString("STORE_NAME")); list.add(list2); } }
+	 * catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); }
+	 * 
+	 * return list;
+	 * 
+	 * }
+	 * 
+	 * public int favoriteSize(Connection conn, String userId) { PreparedStatement
+	 * pstmt = null; ResultSet rs = null; String sql =
+	 * prop.getProperty("favoriteList"); int favoriteSize = 0; try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, userId); rs =
+	 * pstmt.executeQuery(); while(rs.next()) { favoriteSize++; } }
+	 * catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); }
+	 * 
+	 * return favoriteSize; }
+	 * 
+	 * 
+	 * public List outMoneyList(Connection conn,String userId, outMoneyDB omdb) {
+	 * PreparedStatement pstmt = null; ResultSet rs = null; String sql =
+	 * prop.getProperty("outMoneyList"); List list = new ArrayList(); try { pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, userId); rs =
+	 * pstmt.executeQuery(); System.out.println(rs.next()); while(rs.next()) { omdb
+	 * = new outMoneyDB(); omdb.setUserId("USER_ID");
+	 * omdb.setOmNumber("OUTPUT_NUM"); omdb.setOmDate(rs.getDate("OMDATE"));
+	 * omdb.setOmNumber(rs.getString("BANK_NUMBER")); omdb.setOm(rs.getInt("OM"));
+	 * omdb.setAfterOm(rs.getInt("AFTER_OM")); list.add(omdb); } }
+	 * catch(SQLException e) { e.printStackTrace(); } finally { close(rs);
+	 * close(pstmt); } return list; }
+	 * 
+	 * public int omlCount(Connection conn) { PreparedStatement pstmt=null;
+	 * ResultSet rs=null; int count=0; String sql=prop.getProperty("omlCount"); try
+	 * { pstmt=conn.prepareStatement(sql); rs=pstmt.executeQuery(); if(rs.next())
+	 * count=rs.getInt(1); }catch(SQLException e) { e.printStackTrace(); }finally {
+	 * close(rs); close(pstmt); }return count; }
+	 */
 //	public List crawl() {
 //		
 //		List list = new ArrayList();

@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp"%>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/findPw.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/findPw.css" type="text/css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/withdrawal.css" type="text/css">
+	href="<%=request.getContextPath()%>/css/member/withdrawal.css" type="text/css">
 <%
-	userId = (String) request.getAttribute("userId");
+	userId =  request.getParameter("userId");
 %>
 
 <div id="findTitle">
@@ -20,9 +20,6 @@
 	<form id="findPw" action="<%=request.getContextPath()%>/updatePassword"
 		method="POST">
 		<div id="tab-2" class="tab-content">
-			<%
-				if (userId != null) {
-			%>
 			<input style="display: none" name="id" value="<%=userId%>" />
 			<div class="textInfor">
 				<h3 class="h3">
@@ -49,20 +46,6 @@
 	</form>
 	<div>
 		<button class="findBtn" onclick="resetPw();">비밀번호 변경</button>
-	</div>
-	<%
-		} else {
-	%>
-	<h2 class="h3">일치하는 정보가 없습니다.</h2>
-	<div>
-		<button class="findBtn" type="button"
-			onclick="location.href='<%=request.getContextPath()%>/views/member/findId.jsp'">아이디
-			찾기</button>
-		<button class="findBtn" type="button"
-			onclick="location.href='<%=request.getContextPath()%>'">홈으로</button>
-		<%
-			}
-		%>
 	</div>
 </div>
 
