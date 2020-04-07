@@ -33,7 +33,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>빈시트-pc방 자리찾기</title>
-    <link rel="stylesheet" href="css/index.css?ver=0" type="text/css">
+    <link rel="stylesheet" href="css/index.css?ver=1" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/login.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/choiceSignUp.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/member/signUp_terms.css">
@@ -61,8 +61,10 @@
                 <div id="menubar">
                     <!-- main페이지이면 main의 mainHover을 빼준다! ------------------------------------------------------------------->
                     <p id="main"><a href="<%=request.getContextPath() %>" style="color: white">MAIN</a></p>
-                    <p id="introduce" class="mainHover"><a href="introduce.html">INTRODUCE</a></p>
+                    <p id="introduce" class="mainHover"><a href="<%=request.getContextPath()%>/views/introduce/introduceMain.jsp">INTRODUCE</a></p>
+                    <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/views/mypage/mypage.jsp">MY PAGE</a></p>
                     <p id="notice" class="mainHover"><a href="<%=request.getContextPath()%>/notice">NOTICE</a></p>
+
                     <%if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %>
                     <p id="myPage" class="mainHover"><a href="<%=request.getContextPath()%>/admin">ADMIN PAGE</a></p>
                     <%}else if(loginMember!=null&&loginMember.isUserAppr()){ %>
@@ -81,17 +83,18 @@
 			<%
 				if(loginMember != null){ 
 			%>	
-				<button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button>
+				<img onclick="location.replace('<%=request.getContextPath()%>/logout')" class="logoutBtn" src="<%=request.getContextPath()%>/image/logout-index.png"
+					width="30px">
+				<%-- <button type="button" class="logoutBtn" onclick="location.replace('<%=request.getContextPath()%>/logout')">로그아웃</button> --%>
 			<%
 				}else{
 			%>
-				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/pop-test.png"
+				<img onclick="document.getElementById('openLogin').style.display='block'" id="popMenu" src="<%=request.getContextPath()%>/image/login-index.png"
 					width="30px">
 			<%
 				}
 			%>
 
-	</header>
 	<%if(loginMember == null && msg == null) {%>
 	<div id="openLogin" class="modal">
 		<center>
@@ -204,7 +207,7 @@
                     추가하기
                 </div> -->
                 <div id="favoriteLine">
-                	<form action="store" method="post" onclick="submit()">
+                	<form action="storeView" method="post" onclick="submit()">
 	                    <div class="favoritePc">
 	                    </div>
                     </form>
@@ -298,7 +301,7 @@
 								}
 							}
 		 					for(let i=num; i<6; i++) {
-		 						$(".favoritePc").eq(i).append($("<span>").attr("class","favoriteNone").html("즐겨찾기를\n추가해주세요."));
+		 						$(".favoritePc").eq(i).append($("<span>").attr("class","favoriteNone").html("즐겨찾기를<br>추가해주세요."));
 		 					}
 						}
 					})

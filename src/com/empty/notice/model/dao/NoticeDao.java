@@ -30,8 +30,7 @@ public class NoticeDao {
 	public List<Notice> searchNotice(Connection conn, int cPage, int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-//		String sql = prop.getProperty("searchNotice");
-		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC)A) WHERE RNUM BETWEEN ? AND ?";
+		String sql = prop.getProperty("searchNotice");
 		List<Notice> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(sql);

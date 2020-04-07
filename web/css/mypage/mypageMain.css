@@ -5,7 +5,7 @@ section#mypageMainSection{
 }
 
 table#mypageMainTable{
-	border:1px solid black;
+	/* border:1px solid black; */
 	border-collapse:collapse;
 	width:700px;
 }
@@ -33,38 +33,51 @@ table#mypageMainTable td{
 	cursor:pointer;
 }
 
-#mypagePayTable{
-	border:1px solid black;
+#mypagePayTable table{
 	border-collapse:collapse;
 	width:700px;
 }
 
-table#mypagePayTable tr{
+#mypagePayTable table tr{
 	height:40px;
-	border-bottom: 1px solid black;
+	
+	
 }
 
-table#mypagePayTable td{
-	width:150px;
+#mypagePayTable table td{
 	text-align:center;
+	border-bottom: 1px solid black;
 }
 
 .mypageHeaderBtn{
 	float:right;
 }
 
-#mypageUseTable{
-	border:1px solid black;
+#mypageUseTable table{
 	border-collapse:collapse;
+	width:700px;
+	/* border:1px solid black; */
+}
+
+
+
+#mypageUseTable table td{
+	height:40px;
+	width:150px;
+	border-bottom: 1px solid black;
+	text-align:center;
+}
+
+.pageBar{
+	text-align:center;
 	width:700px;
 }
 
-table#mypageUseTable tr{
-	height:40px;
-	border-bottom: 1px solid black;
+.pageBar2{
+	text-align:center;
+	width:700px;
 }
 
-table#mypageUseTable td{
-	width:150px;
-	text-align:center;
+a{
+	text-decoration:none;
 }

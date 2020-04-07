@@ -37,7 +37,7 @@ html {
 
     right:200px;*/
 	/* top:-40px; */
-	left: 1100px;
+	left: 1150px;
 	cursor: pointer;
 }
 
@@ -159,16 +159,6 @@ html {
 	box-sizing: border-box;
 }
 
-/* 踰꾪듉 �뒪���씪 */
-/* button {
-    background-color: rgb(94, 100, 177);
-    color: white;
-    font-size: 20px;
-    padding: 10px 10px ;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-} */
 #openLogin button:hover {
 	opacity: 0.8;
 }
