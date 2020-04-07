@@ -416,7 +416,7 @@
 	    				url:"<%=request.getContextPath()%>/reservation.do",
 	    				type:"post",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
-	    					"seat":selectedPcSeat, "pay":usePcMoney},
+	    					"seat":selectedPcSeat, "pay":usePcMoney , "storeName":"<%=s.getStoreName()%>"},
 	    				success:function(data) {
 		    					alert("성공적으로 예약이 되었습니다.");
 		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("fullSeat");

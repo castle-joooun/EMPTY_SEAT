@@ -82,6 +82,29 @@ public class ReservationDao {
 		
 		return result;
 	}
+
+	public int updatePayUse(Connection conn, String storeName, String userId, int pay, String storeId) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		String sql=prop.getProperty("updatePayUse");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, storeName);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, pay);
+			pstmt.setString(4, storeId);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+		
+	}
 	
 	
 }

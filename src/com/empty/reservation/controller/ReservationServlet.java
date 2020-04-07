@@ -33,6 +33,10 @@ public class ReservationServlet extends HttpServlet {
 		String storeId = request.getParameter("storeId");
 		int seat = Integer.parseInt(request.getParameter("seat")) -1;
 		int pay = Integer.parseInt(request.getParameter("pay"));
+		String storeName = request.getParameter("storeName");
+		
+		//pay_use테이블 업데이트
+		
 		
 		int userPay = new ReservationService().userPay(userId, pay);
 		if(userPay>0) {
@@ -57,8 +61,16 @@ public class ReservationServlet extends HttpServlet {
 		}
 		
 		int useSeat = new ReservationService().inputSeat(storeId, tranSeats);
+		
 		if(useSeat>0) {
 			System.out.println("자리 예약됌!");
+			//시트에 업데이트 성공하면 pay_use테이블에 업데이트
+			int payUse = new ReservationService().updatePayUse(storeName,userId,pay,storeId);
+			
+			if(payUse>0) {
+				System.out.println("사용내역에 업데이트 완료");
+			}
+			
 		}
 		
 		System.out.println("실행됐어!!");
