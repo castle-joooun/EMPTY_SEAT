@@ -3,13 +3,14 @@ package com.empty.search.service;
 import static com.empty.common.JDBCTemplate.close;
 import static com.empty.common.JDBCTemplate.commit;
 import static com.empty.common.JDBCTemplate.rollback;
-
-
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 import static com.empty.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
 
+import com.empty.member.model.vo.outMoneyDB;
 import com.empty.search.model.dao.SearchDao;
 import com.empty.search.model.vo.Store;
 import com.empty.search.model.vo.StoreSeat;
@@ -111,12 +112,20 @@ public class SearchService {
 		return favoriteSize;
 	}
 
+	public List outMoneyList(String userId, outMoneyDB omdb) {
+		Connection conn = getConnection();
+		List list = dao.outMoneyList(conn, userId, omdb);
+		close(conn);
+		return list;
+	}
 	
+	public int omlCount() {
+		Connection conn=getConnection();
+		int count=dao.omlCount(conn);
+		close(conn);
+		return count;
+	}
 	
-//	public List crawl() {
-//		List list = dao.crawl();
-//		return list;
-//	}
 	
 	
 	

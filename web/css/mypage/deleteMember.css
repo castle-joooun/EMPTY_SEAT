@@ -1,0 +1,36 @@
+#deleteMemberMainDiv{
+	margin-left:370px;
+	margin-top:50px;
+	width:670px;
+}
+
+#deleteMemberHeader{
+	background-color:rgb(176,196,222);
+	
+}
+
+#deleteMemberTable{
+	border-collapse:collapse;
+}
+
+#deleteMemberTable tr{
+	height:40px;
+	border-top:2px solid rgb(176,196,222);
+	border-bottom:2px solid rgb(176,196,222);
+}
+
+#deleteMemberTable th{
+	background-color:rgb(222,222,222);
+	width: 150px;
+	border-collapse:collapse;
+}
+
+#deleteMemberTable tr td{
+	width:500px;
+	padding-left:20px;
+}
+
+#deleteMemberBtn{
+	margin-top:30px;
+	margin-left:300px;
+}

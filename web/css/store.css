@@ -354,7 +354,7 @@
 /* 예약창 */
 #reservation{
 	position: absolute;
-    display: inline-block;
+    display: none;
     width: 1000px;
     height: 310px;
     right: 47px;

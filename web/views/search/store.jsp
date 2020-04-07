@@ -3,9 +3,10 @@
 
 <%@ include file="storeBaseTop.jsp"%>
 <%@ page import="com.empty.search.model.vo.Store, java.util.List"%>
-<%@ page import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
+<%@ page
+	import="com.empty.search.model.vo.StoreSeat, com.empty.member.model.vo.Member"%>
 
-<link rel="stylesheet" href="css/store.css?ver=2" type="text/css">
+<link rel="stylesheet" href="css/store.css?ver=0" type="text/css">
 
 <img src="image/back.png" alt="" id="back" width="20px">
 <img src="image/next.png" alt="" id="next" width="20px">
@@ -28,8 +29,7 @@
 		<li id="imgSlide">
 			<%
 				for (String str : imgs) {
-			%> <img src="<%=str%>" alt=""
-			class="interior"> <%
+			%> <img src="<%=str%>" alt="" class="interior"> <%
  	}
  %>
 		</li>
@@ -42,7 +42,7 @@
 		<center>
 			<div id="storeTitleBox">
 				<p id="storeTitle"><%=s.getStoreName()%></p>
-				<img src="<%=request.getAttribute("url") %>" alt="" id="favorite">
+				<img src="<%=request.getAttribute("url")%>" alt="" id="favorite">
 			</div>
 		</center>
 		<!-- <img > -->
@@ -63,21 +63,19 @@
 				</div>
 				<div id="storePc">
 					<span class="storeInfoBasicMajor">PC정보 : </span>
-					<sapn class="storeInfoBasicMinor"> 
-					<%
- 						for (String str : info) {
- 					%>
-					<%=str%><br>
+					<sapn class="storeInfoBasicMinor"> <%
+ 	for (String str : info) {
+ %> <%=str%><br>
 					<%
 						}
 					%> </sapn>
 				</div>
 			</div>
 			<div id="storeInfoMap">
-				<span class="storeInfoBasicMajor">주소 : </span> 
-				<span class="storeInfoBasicMinor"><%=s.getStoreAddress()%></span>
+				<span class="storeInfoBasicMajor">주소 : </span> <span
+					class="storeInfoBasicMinor"><%=s.getStoreAddress()%></span>
 				<!-- 주소API 넣기 -->
-				<div id="map" style="width:480px;height:300px;"></div>
+				<div id="map" style="width: 480px; height: 300px;"></div>
 			</div>
 		</div>
 
@@ -88,28 +86,47 @@
 	<div id="viewSeat">
 		<p id="seatInfoText">
 			<!-- 원래는 값 받아와서 넣기 -->
-			빈시트 : 00 꽉시트 : 00
+			빈시트 : <span id="countEmptySeat"></span> 꽉시트 : <span
+				id="countFullSeat"></span>
 		</p>
 		<center>
 			<table>
-				<%for(int i=1; i<=ss.getRow(); i++) {%>
-					<tr>
-						<%
-						for(int n=1; n<=ss.getCol(); n++) {
-							if(seatCheck[(seatNum-1)].equals("0")) {
-						%>
-								<td></td>
-						<%	} else { %>
-								<td class="emptySeat seat">
-									<p>사용가능</p>
-									<button type="button" class="reservationBtn" value="<%=seatCheck[(seatNum-1)]%>">예약하기</button>
-								</td>
-						<% 	}
-							seatNum++;
-						} 
-						%>
-					</tr>
-				<%} %>
+				<%
+					for (int i = 1; i <= ss.getRow(); i++) {
+				%>
+				<tr>
+					<%
+						for (int n = 1; n <= ss.getCol(); n++) {
+								if (seatCheck[(seatNum - 1)].equals("0")) {
+					%>
+					<td></td>
+					<%
+						} else {
+					%>
+					<%
+						if (useCheck[seatNum - 1].equals("0")) {
+					%>
+					<td class="emptySeat seat">
+						<p>사용가능</p>
+						<button type="button" class="reservationBtn"
+							value="<%=seatCheck[(seatNum - 1)]%>">예약하기</button>
+					</td>
+					<%
+						} else if (useCheck[seatNum - 1].equals("1")) {
+					%>
+					<td class="fullSeat seat"></td>
+					<%
+						}
+					%>
+					<%
+						}
+								seatNum++;
+							}
+					%>
+				</tr>
+				<%
+					}
+				%>
 			</table>
 
 		</center>
@@ -127,99 +144,136 @@
 			</tr>
 		</table>
 	</div>
-	<%if(loginMember!=null){ %>
+	<%
+		if (loginMember != null) {
+	%>
 	<div id="reservation">
 		<p id="storeReInfo">
-			매장 : <strong><%=s.getStoreName() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			매장 : <strong><%=s.getStoreName()%></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			선택자리 : <strong><span id="selectedSeatText"></span></strong>
 		</p>
 		<p id="userInfo">
-			ID : <strong><%=loginMember.getUserId() %></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash() %> </span></strong>원
+			ID : <strong><%=loginMember.getUserId()%></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash()%>
+			</span></strong>원
 		</p>
 		<div id="underLine"></div>
-		
+
 		<center>
 			<div id="reView">
 				<img id="stepImg" src="image/step1.png" alt="">
 			</div>
-			
+
 			<div id="reStep1" class="reStep">
 				<div class="reStepTitle">
-					<span>이용시간 선택</span>
-					<span id="reStepMini">(1시간당 <%=s.getStorePrice() %>원)</span> <!-- 스토어프라이스로 넣어주기 -->
+					<span>이용시간 선택</span> <span id="reStepMini">(1시간당 <%=s.getStorePrice()%>원)
+					</span>
+					<!-- 스토어프라이스로 넣어주기 -->
 				</div>
 				<div class="reStepContent">
-					<label>
-						<input type="radio" name="time" value="1">1시간
-					</label>
-					<label>
-						<input type="radio" name="time" value="2">2시간
-					</label>
-					<label>
-						<input type="radio" name="time" value="3">3시간
-					</label>
-					<label>
-						<input type="radio" name="time" id="ectTime">
-						<input id="ectNum" type="text" style="padding:0; margin:0; display:inline-block; width:30px; text-align:center;">시간
+					<label> <input type="radio" name="time" value="1">1시간
+					</label> <label> <input type="radio" name="time" value="2">2시간
+					</label> <label> <input type="radio" name="time" value="3">3시간
+					</label> <label> <input type="radio" name="time" id="ectTime">
+						<input id="ectNum" type="text"
+						style="padding: 0; margin: 0; display: inline-block; width: 30px; text-align: center;">시간
 					</label>
 				</div>
 			</div>
 			<div class="reStep" id="reStep2">
-				<div class="reStepTitle">
-					예약내역확인
-				</div>
-				<div style="position:realtive; display:inline-block; margin-top:15px">
-					<div style="position:relative; display:inline-block; float:left; text-align:right;">
+				<div class="reStepTitle">예약내역확인</div>
+				<div
+					style="position: realtive; display: inline-block; margin-top: 15px">
+					<div
+						style="position: relative; display: inline-block; float: left; text-align: right;">
 						<p>매장 :&nbsp;</p>
 						<p>매장운영시간 :&nbsp;</p>
-						<p>현재시간 : &nbsp;<p>
+						<p>현재시간 : &nbsp;
+						<p>
 						<p>이용시간 : &nbsp;</p>
 						<p>이용금액 : &nbsp;</p>
 						<p>결제 후 빈캐시 : &nbsp;</p>
 					</div>
-					<div style="position:relative; display:inline-block; float:left; text-align:left;">
-						<p> <strong><%=s.getStoreName() %></strong></p>
-						<p> <strong><%=s.getStoreTime() %></strong></p>
-						<p> <strong><span id="clock"></span></strong></p>
-						<p> <strong><span id="willUseTime"></span> 시간</strong></p>
-						<p> <strong><span id="willPayMoney"></strong> 원</p> <!-- 스토어프라이스로 넣어주기 -->
-						<p> <strong><span id="afterMoney"></span> 빈캐시</strong></p>
+					<div
+						style="position: relative; display: inline-block; float: left; text-align: left;">
+						<p>
+							<strong><%=s.getStoreName()%></strong>
+						</p>
+						<p>
+							<strong><%=s.getStoreTime()%></strong>
+						</p>
+						<p>
+							<strong><span id="clock"></span></strong>
+						</p>
+						<p>
+							<strong><span id="willUseTime"></span> 시간</strong>
+						</p>
+						<p>
+							<strong><span id="willPayMoney"></strong> 원
+						</p>
+						<!-- 스토어프라이스로 넣어주기 -->
+						<p>
+							<strong><span id="afterMoney"></span> 빈캐시</strong>
+						</p>
 					</div>
-					<div style="position:relative; display:inline-block; float:left; text-align:right;">
-						<p>매장 주소 : <strong><%=s.getStoreAddress() %></strong></p>
-						<div id="map2" style="position:relative; width:480px;height:150px; left:28px"></div>
+					<div
+						style="position: relative; display: inline-block; float: left; text-align: right;">
+						<p>
+							매장 주소 : <strong><%=s.getStoreAddress()%></strong>
+						</p>
+						<div id="map2"
+							style="position: relative; width: 480px; height: 150px; left: 28px"></div>
 					</div>
 				</div>
-					
+
 				<div id="viewSeat2">
 					<p id="reTitleSeat">선택하신 자리</p>
 					<table>
-						<%for(int i=1; i<=ss.getRow(); i++) { %>
-							<tr>
-							<%for(int n=1; n<=ss.getCol(); n++) { %>
-								<%if(!seatCheck[seatNum2-1].equals("0")) {%>
-									<td class="reSeat" value="<%=seatNum2%>"></td>
-								<%}else { %>
-									<td></td>
-								<%} %>
-								<%seatNum2++; %>
-							<%} %>
-							</tr>
-						<%} %>
+						<%
+							for (int i = 1; i <= ss.getRow(); i++) {
+						%>
+						<tr>
+							<%
+								for (int n = 1; n <= ss.getCol(); n++) {
+							%>
+							<%
+								if (!seatCheck[seatNum2 - 1].equals("0")) {
+							%>
+							<td class="reSeat" value="<%=seatNum2%>"></td>
+							<%
+								} else {
+							%>
+							<td></td>
+							<%
+								}
+							%>
+							<%
+								seatNum2++;
+							%>
+							<%
+								}
+							%>
+						</tr>
+						<%
+							}
+						%>
 					</table>
 				</div>
 			</div>
 		</center>
-		
+
 		<div id="reBtns">
 			<button id="reCan">취소</button>
 			<button id="reOk">다음</button>
 		</div>
 	</div>
-	<%} %>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
+	<%
+		}
+	%>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f47dde95b7968538cbb3ad2e6003356&libraries=services"></script>
 	<script>
+	
 		let selectPcRow = 0;
 		let selectPcCol = 0;
 	
@@ -227,7 +281,7 @@
 	    $("#favorite").click(function () {
 	    	
 	    	
-	    	if(<%=loginMember!=null%>) {
+	    	if(<%=loginMember != null%>) {
 	    		
 		    	var check;
 		    	
@@ -240,7 +294,7 @@
 		        $.ajax({
 		        	url:"<%=request.getContextPath()%>/favorite",
 		        	type:"post",
-		        	data:{"check":check, "userId":"<%=loginMember!=null?loginMember.getUserId():""%>", "storeId":"<%=s.getStoreId()%>"},
+		        	data:{"check":check, "userId":"<%=loginMember != null ? loginMember.getUserId() : ""%>", "storeId":"<%=s.getStoreId()%>"},
 		        	success:function(data) {
 		        		console.log(data);
 		        		if(data==6) {
@@ -302,39 +356,11 @@
 	    
 	    // 자리보여주기
 	    $(".fullSeat").append($("<p>").html("사용중").css("color", "#ff7531"));
-	    $(".fullSeat").append($("<p>").html("00:00"));
+	    $("#countEmptySeat").html($(".emptySeat").length);
+	    $("#countFullSeat").html($(".fullSeat").length);
+	    //$(".fullSeat").append($("<p>").html("00:00"));
     
-	    <% if(loginMember!=null){%>
 	    
-	    var checkOk=0;
-	    var selectedPcSeat;
-	    
-	 	// 예약하기 띄우기
-	    $(".reservationBtn").click(function() {
-	    	checkOk=0;
-	    	$("#selectedSeatText").html($(this).val());
-	    	selectedPcSeat = $(this).val();
-	    	
-	    	selectPcRow = Math.floor($(this).val() / <%=ss.getCol()%>);
-	    	selectPcCol = $(this).val() % <%=ss.getCol()%>;
-	    	if(selectPcCol == 0) {
-	    		selectPcRow -= 1;
-	    		selectPcCol = <%=ss.getCol()%>;
-	    	}
-	    	
-	    	console.log("로우 : " + selectPcRow + ", 컬 : " + selectPcCol);
-	    	
-	    	$("#viewSeat2").children().eq(1).children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("selectSeat");
-	    	$(".selectSeat").html("선택");
-	    	$("#stepImg").attr("src","image/step1.png");
-	    	$("#reservation").toggle();
-	    })
-	    
-	    <%}else{%>
-	    $(".reservationBtn").click(function() {
-	    	alert('로그인이 필요합니다!');
-	    })
-	    <%}%>
 	    
 	    // 다음/예약하기 버튼 바꾸기
 	 	
@@ -415,21 +441,25 @@
  	    			$.ajax({
 	    				url:"<%=request.getContextPath()%>/reservation.do",
 	    				type:"post",
+	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
-	    					"seat":selectedPcSeat, "pay":usePcMoney},
+	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val()},
 	    				success:function(data) {
+	    					console.log(data);
 		    					alert("성공적으로 예약이 되었습니다.");
-		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("fullSeat");
+		    	    			$("#viewSeat").children().eq(1).children().children().children().eq(selectPcRow).children().eq(selectPcCol-1).
+		    	    			addClass("fullSeat").html("사용중<br>" + data["endTime"]);
 		    	    			$(".fullSeat").removeClass("emptySeat");	 
-		    	    			$(".fullSeat").html("사용중");
 		    	    			$(".reSeat").removeClass("selectSeat");
 		    	    			$(".reSeat").html("");
-		    	    			$("#userCash").html("<%=loginMember.getCash()%>");
+		    	    			$("#userCash").html(data["userCash"]);
 		    	    			$("#reOk").html("다음");
 		    					$("#reCan").html("취소");
 		    	    			$("#reStep1").toggle();
 		    		    		$("#reStep2").toggle();
 		    					$("#reservation").height("310px");
+		    				    $("#countEmptySeat").html($(".emptySeat").length);
+		    				    $("#countFullSeat").html($(".fullSeat").length);
 		    					console.log(<%=loginMember.getCash()%>);
 	    				},error:(r,e,m)=>{
 	    					console.log(r);
@@ -462,6 +492,8 @@
 						$(this).removeClass("selectSeat");
 					}
 				})
+				checkOk=0;
+	    		selectedPcSeat=0;
 				$("#reservation").toggle();
 			} else {
 				$("#reStep1").toggle();
@@ -479,9 +511,108 @@
     $("#ectNum").change(function() {
     	$("#ectTime").val($(this).val());
     })
+    
+   	$.ajax({
+   		url:"<%=request.getContextPath()%>/reservationCheck",
+   		type:"post",
+   		dataType:"json",
+   		data:{"storeId":"<%=s.getStoreId()%>"},
+   		success:function(data) {
+   			var seatNums = 0;
+   			$(".seat").each(function() {
+   				if($(this).hasClass("fullSeat")) {
+   					console.log(data);
+   					$(this).html("사용중<br>" + data[seatNums]["seatEndTime"]);
+   					seatNums++;
+   				}
+   			})
+   		}
+   	})
+   	
+   	setInterval(function() {
+   	   	$.ajax({
+   	   		url:"<%=request.getContextPath()%>/reservationCheck",
+   	   		type:"post",
+   	   		dataType:"json",
+   	   		data:{"storeId":"<%=s.getStoreId()%>"},
+   	   		success:function(data) {
+   	   			var seatFullNums = 0;
+   	   			$(".seat").each(function() {
+   	   				if($(this).hasClass("fullSeat")) {
+   	   					console.log(data);
+   	   					console.log(data[seatFullNums]);
+   	   					console.log("seatFullNums : " + seatFullNums);
+   	   					$(this).html("사용중<br>" + data[seatFullNums]["seatEndTime"]);
+   	   					seatFullNums++;
+   	   				} else {
+   	   					$(this).addClass("emptySeat");
+   	   					$(this).removeClass("fullSeat");
+   	   					$(this).html("");
+   	   					$(this).append($("<p>").html("사용가능"));
+   	   					$(this).append($("<button>").html("예약하기").addClass("reservationBtn"));
+   	   				}
+   	   			})
+   	   			let colCount = 1;
+   	   			$("#viewSeat table td").each(function() {
+   	   				if($("#viewSeat table td button").hasClass("reservationBtn")) {
+   	   					$(this).children().eq(1).val(colCount);
+   	   					console.log($(this).children().eq(1));
+   	   				}
+   	   				colCount++;
+   	   				console.log(colCount);
+   	   			})
+   	   		}
+   	   	})
+   	}, 60000)
+	  
+   	
+   		var intervalCount = 0;
+<%if (loginMember != null) {%>
+	    
+		var checkOk=0;
+ 		var selectedPcSeat=0;
+	    
+	 	// 예약하기 띄우기
+	    $(document).on("click",".reservationBtn",function() {
+	    	checkOk=0;
+	 	    selectedPcSeat=0;
+	 		selectPcCol=0;
+	 	  	selectPcRow=0;
+	    	$("#selectedSeatText").html($(this).val());
+	    	selectedPcSeat = $(this).val();
+	    	console.log("$(this).val() : " + $(this).val())
+	    	selectPcRow = Math.floor($(this).val() / <%=ss.getCol()%>);
+	    	selectPcCol = $(this).val() % <%=ss.getCol()%>;
+	    	
+	    	console.log($(this).val());
+
+/* 			if(intervalCount != 0) {
+				selectPcCol += $(".fullSeat").length;
+			} */
+	    	
+	    	if(selectPcCol == 0) {
+	    		selectPcRow -= 1;
+	    	}
+	    	
+	    	
+	    	
+	    	console.log("로우 : " + selectPcRow + ", 컬 : " + selectPcCol);
+	    	
+	    	$("#viewSeat2").children().eq(1).children().children().eq(selectPcRow).children().eq(selectPcCol-1).addClass("selectSeat");
+	    	$(".selectSeat").html("선택");
+	    	$("#stepImg").attr("src","image/step1.png");
+	    	$("#reservation").toggle();
+	    })
+	    
+	    <%} else {%>
+	    $(".reservationBtn").click(function() {
+	    	alert('로그인이 필요합니다!');
+	    })
+	    <%}%>
+	    
     </script>
 
-	
+
 </div>
 
 <script src="js/store.js?ver=2"></script>

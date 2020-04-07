@@ -26,9 +26,11 @@ body{
 
 #popMenu{   /*팝메뉴 우측상단 고정*/
     position: absolute;
-    bottom: 30px;
-    right: 150px;
+    /* bottom: 30px; */
+    left: 1130px;
     cursor: pointer;
+    top: 33px;
+    z-index: 3;
 }
 
 /* -------------------------------------------------------------------------------------------- */
@@ -178,7 +180,7 @@ header{
     width: 600px;
     /* text-align: center; */
     border: solid 3px rgb(94, 100, 177);
-    z-index: 5;
+    z-index: 1;
     box-shadow: 5px 5px 10px lightgray;
     outline: none;
 }
@@ -192,11 +194,15 @@ header{
     background-color: rgb(94, 100, 177);
     outline: none;
     color: #ffffff;
-    z-index: 6;
+    z-index: 2;
     cursor: pointer;
 }
 
 #searchBoxGra {
     position: relative;
     left: 260px;
+}
+
+.logoutBtn {
+	top:50px;
 }

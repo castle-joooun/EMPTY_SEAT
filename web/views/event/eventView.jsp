@@ -42,7 +42,7 @@
 	<div style="margin-top: 30px;">
 		<button class="returnBtn" onclick="location.replace('<%=request.getContextPath()%>/event')">목록으로</button>
 	</div>
-
+	
 </section>
 </center>
 <script>
