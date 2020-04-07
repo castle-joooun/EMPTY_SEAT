@@ -363,9 +363,9 @@
 	    
 	    
 	    // 다음/예약하기 버튼 바꾸기
-	 	
 	 	let reservationCheck = false;
 	 	let usePcMoney;
+	 	<% if(loginMember!=null) { %>
 	    $("#reOk").click(function() {
 	    	if(typeof $('input:radio[name="time"]:checked').val() == 'undefined') {
 	    		alert("이용시간을 선택해주세요.");
@@ -442,7 +442,7 @@
 	    				url:"<%=request.getContextPath()%>/reservation.do",
 	    				type:"post",
 	    				dataType:"json",
-	    				data:{"userId":"<%=loginMember.getUserId()%>", "storeId":"<%=s.getStoreId()%>",
+	    				data:{"userId":"<%=loginMember.getUserId()!=null?loginMember.getUserId():""%>", "storeId":"<%=s.getStoreId()%>",
 	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val()},
 	    				success:function(data) {
 	    					console.log(data);
@@ -484,6 +484,7 @@
 	    		
 	    	} 
 	    })
+	    <%}%>
 		$("#reCan").click(function() {
 			if(checkOk==0) {
 				$(".reSeat").each(function() {
@@ -615,7 +616,7 @@
 
 </div>
 
-<script src="js/store.js?ver=2"></script>
-<script type="text/javascript" src="js/totalSearch.js?ver=0"></script>
+<script src="js/store.js?ver=1"></script>
+<script type="text/javascript" src="js/totalSearch.js?ver=1"></script>
 </body>
 </html>

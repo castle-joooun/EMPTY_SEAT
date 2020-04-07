@@ -101,7 +101,7 @@ public class StoreServlet extends HttpServlet {
 		System.out.println("storeSeat : " + ss);
 		
 		// 즐겨찾기 되어 있는지 확인
-		String favoriteUrl = new SearchService().storeFavoriteCheck(userId, storeId);
+		String favoriteUrl = userId.equals("")?"image/favorite-empty.png":new SearchService().storeFavoriteCheck(userId, storeId);
 		if(favoriteUrl.equals("image/favorite-use.png")) {
 			System.out.println("해당 스토어에 즐겨찾기 등록되어 있음");			
 		} else {
