@@ -154,8 +154,7 @@
 		</p>
 		<p id="userInfo">
 			ID : <strong><%=loginMember.getUserId()%></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash()%>
-			</span></strong>원
+			빈캐시 : <strong><span id="userCash"><%=loginMember.getCash()%></span></strong>원
 		</p>
 		<div id="underLine"></div>
 
@@ -443,7 +442,7 @@
 	    				type:"post",
 	    				dataType:"json",
 	    				data:{"userId":"<%=loginMember.getUserId()!=null?loginMember.getUserId():""%>", "storeId":"<%=s.getStoreId()%>",
-	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val()},
+	    					"seat":selectedPcSeat, "pay":usePcMoney, "time":$('input:radio[name="time"]:checked').val(), "storeName":"<%=s.getStoreName()%>"},
 	    				success:function(data) {
 	    					console.log(data);
 		    					alert("성공적으로 예약이 되었습니다.");
@@ -453,6 +452,7 @@
 		    	    			$(".reSeat").removeClass("selectSeat");
 		    	    			$(".reSeat").html("");
 		    	    			$("#userCash").html(data["userCash"]);
+		    	    			console.log(data["userCash"]);
 		    	    			$("#reOk").html("다음");
 		    					$("#reCan").html("취소");
 		    	    			$("#reStep1").toggle();
@@ -529,7 +529,7 @@
    			})
    		}
    	})
-   	
+   	<%-- 
    	setInterval(function() {
    	   	$.ajax({
    	   		url:"<%=request.getContextPath()%>/reservationCheck",
@@ -564,7 +564,7 @@
    	   			})
    	   		}
    	   	})
-   	}, 60000)
+   	}, 60000) --%>
 	  
    	
    		var intervalCount = 0;
