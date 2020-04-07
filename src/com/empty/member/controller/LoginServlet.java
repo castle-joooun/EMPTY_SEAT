@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		String msg = "";
 		HttpSession session = request.getSession();
 		
-		if(m != null) {
+		if(m != null && m.getStatus().equals("Y")) {
 			session.setAttribute("loginMember", m);
 			Cookie mem = new Cookie("loginMember", userId);
 			mem.setMaxAge(7*24*60*60);
