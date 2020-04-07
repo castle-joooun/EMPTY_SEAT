@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.empty.payuse.model.vo.*,java.util.List" %>
+<%@ page import="com.empty.mypage.model.vo.*,java.util.List" %>
 <% PayUse p=(PayUse)request.getAttribute("PayUse"); %>
 <%@ page
 	import="com.empty.member.model.vo.Member,com.empty.common.listener.SessionCheckListener"%>

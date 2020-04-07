@@ -105,8 +105,12 @@ public class AdminSearchTypeAjaxServlet extends HttpServlet {
 			}
 			//pagebar add
 			JSONObject obj=new JSONObject();
+			obj.put("result", totalMember);
+			ja.add(obj);
+			obj=new JSONObject();
 			obj.put("pageBar", pageBar);
 			ja.add(obj);
+			
 		}else {
 			//검색 결과가 없을 때
 			JSONObject obj=new JSONObject();
