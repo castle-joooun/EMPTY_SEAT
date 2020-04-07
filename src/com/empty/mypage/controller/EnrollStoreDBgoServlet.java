@@ -41,6 +41,7 @@ public class EnrollStoreDBgoServlet extends HttpServlet {
 		String storeInfo = request.getParameter("storeInfo");
 		String[] storeFacirity = request.getParameterValues("storeFacirity");
 		String storeAddress = request.getParameter("storeAddress");
+		String fileupload = request.getParameter("fileupload");
 		int storePrice = Integer.parseInt(request.getParameter("storePrice"));
 		System.out.println(storeName);
 		System.out.println(storePhone);

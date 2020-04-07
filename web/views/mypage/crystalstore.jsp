@@ -23,17 +23,12 @@ $(document).ready(function(){
 				var restorecom = $("<input>").attr('type','text').attr('id','storeInfo').attr('value',data['storeInfo']);
 				var restoreaddress = $("<input>").attr('type','text').attr('id','storeAddress').attr('value',data['storeAddress']);
 				var restorebudea = $("<input>").attr('type','checkbox').attr('id','storeFacility').attr('checked',data['storeFacility']);
-				var restoreTimeS = $("<input>").attr('type','time').attr('id','storeTimes').attr('value',data['storeTimes']);
-				var restoreTimeE = $("<input>").attr('type','time').attr('id','storeTimee').attr('value',data['storeTimee']);
 				var restorestorePrice = $("<input>").attr('type','text').attr('id','storePrice').attr('value',data['storePrice']);
+				$("#1").attr('type','time').attr('id','storeTimes').attr('value',data['storeTimes']);
+				$("#2").attr('type','time').attr('id','storeTimee').attr('value',data['storeTimee']);
 				$('#crystalstoreNamebox').html(restoreNAme);
 				$('#crystalstoreNumberbox').html(restoreNumber);
 				$('#crystalstoreInfobox').html(restorecom);
-				$('#crystalstoreTimebox').html(restoreTimeS.append($("<p>").text(" ~ ").css("display","inline")).append(restoreTimeE));
-				console.log(restoreTimeS.append($("<p>").text(" ~ ").css("display","inline")).append(restoreTimeE));
-				//$('#crystalstoreTimebox').html(restoreTimeS);
-				//$('#crystalstoreTimebox').html($("<p>").text(" ~ ").css("display","inline"));
-				//$('#crystalstoreTimebox').html(restoreTimeE);
 				$('#crystalstorePricebox').html(restorestorePrice);
 			}
 		});
@@ -72,7 +67,7 @@ $(document).ready(function(){
 							영업시간
 						</td>
 						<td id='crystalstoreTimebox'>
-						
+							<input id='1'> ~ <input id='2'>
 						</td>
 					</tr>
 					<tr>
