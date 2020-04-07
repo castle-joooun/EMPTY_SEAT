@@ -10,9 +10,9 @@
 
 		<div id="storeSubMenu">
 			<ul>
-				<li><a href="<%=request.getContextPath() %>/admin/manageStore"><span class="text-item">스토어 이용현황</span></a></li>
+				<li><a href="<%=request.getContextPath() %>/admin/manageStore"><span class="">스토어 이용현황</span></a></li>
 				<li><a href="<%=request.getContextPath()%>/admin/store/requestStoreList"><span class="text-item">스토어 신청현황</span></a></li>
-				<li><a href="#"><span class="text-item">스토어 매출보기</span></a></li>
+				<li><a href="#"><span class="">스토어 매출보기</span></a></li>
 			</ul>
 		</div>
 		
