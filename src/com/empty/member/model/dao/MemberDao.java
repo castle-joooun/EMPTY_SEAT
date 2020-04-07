@@ -94,6 +94,7 @@ public class MemberDao {
 				m.setCash(rs.getInt("cash"));
 				m.setEnrollDate(rs.getDate("enrolldate"));
 				m.setUserAppr(rs.getBoolean("user_appr"));
+				m.setStatus(rs.getString("status"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -222,7 +223,7 @@ public class MemberDao {
 			pstmt.setString(6, s.getStoreFacility());
 			pstmt.setString(7, s.getStoreAddress());
 			pstmt.setString(8, s.getStoreLogo());
-			pstmt.setString(9, s.getStorePrice());
+			pstmt.setInt(9, s.getStorePrice());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -278,7 +279,7 @@ public class MemberDao {
 			pstmt.setString(2, s.getStorePhone());
 			pstmt.setString(3, s.getStoreTime());
 			pstmt.setString(4, s.getStoreInfo());
-			pstmt.setString(5, s.getStorePrice());
+			pstmt.setInt(5, s.getStorePrice());
 			pstmt.setString(6, s.getStoreId());
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
