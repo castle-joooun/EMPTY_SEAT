@@ -103,7 +103,7 @@ public class ReservationServlet extends HttpServlet {
 	      if (userTime!=null) {
 	         System.out.println("가져온 타임 : " + transFormat.format(userTime));
 	         long dayTime1 = System.currentTimeMillis();
-	         long dayTime2 = new Date().getTime() + 1000*60*60*24;
+	         long dayTime2 = userTime.getTime();
 	         long nT = (dayTime2 - dayTime1) / (1000 * 60 * 60);
 	         long nM = (dayTime2 - dayTime1) % (1000 * 60 * 60) / (1000 * 60);
 	         endUserTime = nT + "시간 " + nM + "분";
@@ -118,6 +118,7 @@ public class ReservationServlet extends HttpServlet {
 	      }
 
 	      System.out.println("실행됐어!!");
+	      System.out.println("사용후 금액! : " + userCash);
 
 	      JSONObject jo = new JSONObject();
 	      jo.put("userCash", userCash);
